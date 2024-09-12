@@ -1,0 +1,132 @@
+{
+    "selected_units": {
+        "Allied": {
+            "Infantry": {
+                "GI": true
+            },
+            "Structure": {
+                "Allied Power Plant": true
+            },
+            "Tank": {
+                "Grizzly Tank": true
+            },
+            "Naval": {
+                "Agis Cruiser": false
+            },
+            "Aircraft": {}
+        },
+        "Soviet": {
+            "Infantry": {
+                "Desolator": false
+            },
+            "Structure": {
+                "Soviet Barracks": true
+            },
+            "Tank": {
+                "Rhino Tank": true
+            },
+            "Naval": {
+                "Dreadnought": false
+            },
+            "Aircraft": {}
+        },
+        "Yuri": {
+            "Infantry": {
+                "Initiate": true
+            },
+            "Structure": {
+                "Yuri War Factory": false
+            },
+            "Tank": {
+                "Gattling Tank": true
+            },
+            "Naval": {
+                "Boomer Sub": false
+            },
+            "Aircraft": {}
+        }
+    },
+    "units": {
+        "Allied": {
+            "Infantry": [
+                {
+                    "name": "GI",
+                    "image": "cameos/png/gi.png"
+                }
+            ],
+            "Structure": [
+                {
+                    "name": "Allied Power Plant",
+                    "image": "cameos/png/Allied Power Plant.png"
+                }
+            ],
+            "Tank": [
+                {
+                    "name": "Grizzly Tank",
+                    "image": "cameos/png/Grizzly.png"
+                }
+            ],
+            "Naval": [
+                {
+                    "name": "Agis Cruiser",
+                    "image": "cameos/png/Agis Cruiser.png"
+                }
+            ],
+            "Aircraft": []
+        },
+        "Soviet": {
+            "Infantry": [
+                {
+                    "name": "Desolator",
+                    "image": "cameos/png/Desolator.png"
+                }
+            ],
+            "Structure": [
+                {
+                    "name": "Soviet Barracks",
+                    "image": "cameos/png/Soviet Barracks.png"
+                }
+            ],
+            "Tank": [
+                {
+                    "name": "Rhino Tank",
+                    "image": "cameos/png/rhino.png"
+                }
+            ],
+            "Naval": [
+                {
+                    "name": "Dreadnought",
+                    "image": "cameos/png/Dread.png"
+                }
+            ],
+            "Aircraft": []
+        },
+        "Yuri": {
+            "Infantry": [
+                {
+                    "name": "Initiate",
+                    "image": "cameos/png/Initiate.png"
+                }
+            ],
+            "Structure": [
+                {
+                    "name": "Yuri War Factory",
+                    "image": "cameos/png/Yuri WF.png"
+                }
+            ],
+            "Tank": [
+                {
+                    "name": "Gattling Tank",
+                    "image": "cameos/png/Gattling Tank.png"
+                }
+            ],
+            "Naval": [
+                {
+                    "name": "Boomer Sub",
+                    "image": "cameos/png/Boomer.png"
+                }
+            ],
+            "Aircraft": []
+        }
+    }
+}
