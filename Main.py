@@ -10,7 +10,7 @@ from PySide6.QtCore import QTimer
 from PySide6.QtWidgets import QApplication, QWidget, QPushButton, QCheckBox, QVBoxLayout, QMainWindow, QLabel, QSpinBox
 
 from DataTracker import ResourceWindow
-from Player import GameData, initialize_players
+from Player import GameData, initialize_players_after_loading, detect_if_game_is_loaded
 from UnitCounter import UnitWindow
 from UnitSelectionWindow import UnitSelectionWindow
 
@@ -80,13 +80,7 @@ def create_players():
     game_data = GameData()
 
     # Loop until the game process is detected
-    print("Waiting for the game to start...")
-    while True:
-        pid = find_pid_by_name("gamemd-spawn.exe")
-        if pid is not None:
-            break
-
-        time.sleep(1)
+    pid = find_game_process()
 
     # Obtain the process handle
     process_handle = ctypes.windll.kernel32.OpenProcess(
@@ -98,7 +92,12 @@ def create_players():
 
     # Loop until at least one valid player is detected
     while True:
-        valid_player_count = initialize_players(game_data, process_handle)
+        while True:
+            if find_game_process and detect_if_game_is_loaded(process_handle):
+                break
+            print("Waiting for the game to load...")
+            time.sleep(1)
+        valid_player_count = initialize_players_after_loading(game_data, process_handle)
         if valid_player_count > 0:
             break
         print("Waiting for at least one valid player...")
@@ -116,6 +115,7 @@ def find_game_process():
             break
         time.sleep(1)
     print("Game detected")
+    return pid
 
 
 def find_pid_by_name(name):
@@ -153,11 +153,20 @@ def update_huds():
 # Background thread to continuously update player data
 # TODO this thread needs to exit as soon as the game closes
 def continuous_data_update():
+    run_create_players_in_background()
+
     while True:
+        if find_pid_by_name("gamemd-spawn.exe") is None:
+            print("Game process ended.")
+            break
+
         for player in players:
             player.update_dynamic_data()
         time.sleep(1)
 
+    ctypes.windll.kernel32.CloseHandle(process_handle)
+    print("Waiting for the game to start again...")
+    continuous_data_update()
 
 # Function to toggle HUD visibility (show/hide all HUDs)
 hud_visible = True
@@ -299,7 +308,7 @@ if __name__ == '__main__':
     control_panel.show()
 
     # Start the player creation in a background thread, so it doesn't block the UI
-    threading.Thread(target=run_create_players_in_background, daemon=True).start()
+    # threading.Thread(target=run_create_players_in_background, daemon=True).start()
 
     # Start the background thread to update player data
     thread = threading.Thread(target=continuous_data_update, daemon=True)

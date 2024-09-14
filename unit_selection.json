@@ -45,7 +45,9 @@
         },
         "Yuri": {
             "Infantry": {
-                "Initiate": false
+                "Initiate": true,
+                "Virus": true,
+                "Yuri Clone": true
             },
             "Structure": {
                 "Yuri War Factory": false
