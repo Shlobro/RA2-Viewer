@@ -2,10 +2,10 @@
     "selected_units": {
         "Allied": {
             "Infantry": {
-                "GI": true,
-                "Allied Dog": true,
-                "GGI": true,
-                "Allied Engineer": true,
+                "GI": false,
+                "Allied Dog": false,
+                "GGI": false,
+                "Allied Engineer": false,
                 "Chrono Legionnaire": false,
                 "Spy": false,
                 "Rocketeer": false,
@@ -14,18 +14,18 @@
             },
             "Structure": {
                 "Allied Power Plant": true,
-                "Allied Barracks": true
+                "Allied Barracks": false
             },
             "Tank": {
-                "Grizzly": true,
-                "IFV": true
+                "Grizzly": false,
+                "IFV": false
             },
             "Naval": {
                 "Agis Cruiser": false
             },
             "Aircraft": {
-                "Black Eagle": true,
-                "Harrier": true
+                "Black Eagle": false,
+                "Harrier": false
             }
         },
         "Soviet": {

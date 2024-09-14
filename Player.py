@@ -80,7 +80,7 @@ tank_offsets = {
     0x114: "Mastermind", 0x118: "Disc", 0x120: "Robot Tank",
 }
 
-building_offsets = {
+structure_offsets = {
     0x0: "Allied Power Plant", 0x4: "Allied Ore Refinery", 0x8: "Allied Con Yard", 0xc: "Allied Barracks",
     0x14: "Allied service Depot", 0x18: "Allied Battle Lab", 0x1c: "Allied War Factory", 0x24: "Tesla Reactor",
     0x28: "Sov Battle lab", 0x2c: "sov barracks", 0x34: "Sov Radar", 0x38: "Soviet War Factory",
@@ -125,6 +125,7 @@ class Player:
         self.infantry_counts = {}
         self.tank_counts = {}
         self.building_counts = {}
+        self.aircraft_counts = {}
 
         # Initialize pointers for arrays
         self.unit_array_ptr = None
@@ -230,12 +231,12 @@ class Player:
         if self.building_array_ptr == 0:
             self.initialize_pointers()
         else:
-            self.building_counts = self.read_and_store_inf_units_buildings(building_offsets, self.building_array_ptr)
+            self.building_counts = self.read_and_store_inf_units_buildings(structure_offsets, self.building_array_ptr)
 
-        if self.building_array_ptr == 0:
+        if self.aircraft_array_ptr == 0:
             self.initialize_pointers()
         else:
-            self.building_counts = self.read_and_store_inf_units_buildings(aircraft_offsets, self.aircraft_array_ptr)
+            self.aircraft_counts = self.read_and_store_inf_units_buildings(aircraft_offsets, self.aircraft_array_ptr)
 
 
 

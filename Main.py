@@ -308,7 +308,7 @@ if __name__ == '__main__':
     # Start a timer to periodically update the HUDs
     timer = QTimer()
     timer.timeout.connect(update_huds)
-    timer.start(1000)
+    timer.start(100) # TODO 
 
     # Run the application's event loop (starts the GUI and keeps it responsive)
     app.exec()

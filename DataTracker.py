@@ -56,6 +56,7 @@ class ResourceWindow(QMainWindow):
         self.show()
 
     def update_labels(self):
+        #print("Updating the data Label")
         """Update the money and power values."""
         self.money_widget.update_data(self.player.balance)
         self.power_widget.update_data(self.player.power)

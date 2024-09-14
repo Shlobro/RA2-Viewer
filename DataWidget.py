@@ -1,4 +1,6 @@
-from PySide6.QtCore import Qt
+from time import sleep
+
+from PySide6.QtCore import Qt, QTimer
 from PySide6.QtGui import QPixmap, QColor, QPainter, QFont
 from PySide6.QtWidgets import QWidget, QLabel, QHBoxLayout
 
@@ -8,6 +10,7 @@ class DataWidget(QWidget):
         self.size = size
         self.image_path = image_path
         self.image_color = image_color
+        self.value = 0
 
         # Create the layout
         layout = QHBoxLayout(self)
@@ -87,10 +90,38 @@ class DataWidget(QWidget):
         self.data_label.adjustSize()
 
     def update_data(self, new_data):
-        """Update the data shown in the widget."""
-        self.data_label.setText(str(new_data))
-        self.data_label.adjustSize()
-        self.adjust_size()
+        """Update the data shown in the widget with smooth transitions."""
+        # Cancel any ongoing updates if a new one comes in
+        if hasattr(self, 'timer') and self.timer.isActive():
+            self.timer.stop()  # Stop the current timer if it's running
+
+        #print(f"Updating data from {self.value} to {new_data}")
+
+        # Determine step direction (up or down)
+        self.step = 1 if self.value < new_data else -1
+        self.target_value = new_data
+
+        # Create or restart a QTimer for smooth updates
+        self.timer = QTimer(self)
+        self.timer.timeout.connect(self.smooth_update)
+
+        # Start the timer, adjust the interval (in milliseconds) for smoother or faster updates
+        self.timer.start(1)  # Adjust the interval as needed (50ms = 20 updates per second)
+
+    def smooth_update(self):
+        """Smoothly update the data by incrementing/decrementing the value."""
+        if self.value != self.target_value:
+            # Update the value by step
+            self.value += self.step
+
+            # Update the label with the new value
+            self.data_label.setText(str(self.value))
+            self.data_label.adjustSize()
+            self.adjust_size()
+
+        # Stop the timer when the target value is reached
+        if self.value == self.target_value:
+            self.timer.stop()
 
     def adjust_size(self):
         """Recalculate the widget size based on the image and text."""

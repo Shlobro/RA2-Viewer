@@ -124,7 +124,7 @@ class UnitWindow(QMainWindow):
             return self.player.infantry_counts.get(unit_name, 0)
         elif unit_type == 'Tank':
             return self.player.tank_counts.get(unit_name, 0)
-        elif unit_type == 'Building':
+        elif unit_type == 'Structure':
             return self.player.building_counts.get(unit_name, 0)
         else:
             # Unknown unit type, return 0 as default
