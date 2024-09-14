@@ -4,6 +4,20 @@ from PySide6.QtGui import QPixmap, QFont
 from PySide6.QtWidgets import QMainWindow, QFrame, QVBoxLayout, QHBoxLayout, QLabel
 from DataWidget import DataWidget
 
+faction_to_flag = {
+    "British": "RA2_Flag_Britain.png",
+    "Confederation": "RA2_Flag_Cuba.png",
+    "Germans": "RA2_Flag_Germany.png",
+    "Arabs": "RA2_Flag_Iraq.png",
+    "French": "RA2_Flag_France.png",
+    "Alliance": "RA2_Flag_Korea.png",
+    "Africans": "RA2_Flag_Libya.png",
+    "Russians": "RA2_Flag_Russia.png",
+    "Americans": "RA2_Flag_USA.png",
+    "YuriCountry": "RA2_Yuricountry.png"
+}
+
+
 class ResourceWindow(QMainWindow):
     def __init__(self, player, player_count, hud_positions):
         super().__init__()
@@ -18,6 +32,7 @@ class ResourceWindow(QMainWindow):
         self.setAttribute(Qt.WA_TranslucentBackground)
 
         self.make_hud_movable(player_count, hud_positions)
+        self.widgetList = []
 
         resource_frame = QFrame(self)
         layout = QVBoxLayout(resource_frame)
@@ -30,6 +45,18 @@ class ResourceWindow(QMainWindow):
         # Create a modern, sleek font for power
         power_font = QFont("Impact", 18, QFont.Bold)  # Strong and bold font for power
 
+        username_font = QFont("Roboto", 16, QFont.Bold)  # Change the font size and weight as needed
+
+        self.username_and_faction = DataWidget(
+            image_path="Flags/PNG/" + faction_to_flag[player.country_name.value.decode('utf-8')],
+            data=self.player.username.value,
+            image_color=None,
+            text_color=player.color,
+            size=self.size,
+            font=username_font  # Apply the custom font for the username
+        )
+        self.widgetList.append(self.username_and_faction)
+
         # Create DataWidget for money with the custom money font
         self.money_widget = DataWidget(
             image_path='dollar.png',
@@ -40,6 +67,7 @@ class ResourceWindow(QMainWindow):
             font=money_font  # Apply the custom font for money
         )
         layout.addWidget(self.money_widget)
+        self.widgetList.append(self.money_widget)
 
         # Create DataWidget for power with the custom power font
         self.power_widget = DataWidget(
@@ -50,13 +78,17 @@ class ResourceWindow(QMainWindow):
             size=self.size,
             font=power_font  # Apply the custom font for power
         )
-        layout.addWidget(self.power_widget)
-        layout.addWidget(self.power_widget)
+        self.widgetList.append(self.power_widget)
+
+
+
+        for widget in self.widgetList:
+            layout.addWidget(widget)
 
         self.show()
 
     def update_labels(self):
-        #print("Updating the data Label")
+        # print("Updating the data Label")
         """Update the money and power values."""
         self.money_widget.update_data(self.player.balance)
         self.power_widget.update_data(self.player.power)
@@ -117,9 +149,8 @@ class ResourceWindow(QMainWindow):
 
     def update_all_data_size(self, new_size):
         """Resize all DataWidgets in this ResourceWindow."""
-        self.money_widget.update_data_size(new_size)  # Resize money widget
-        self.power_widget.update_data_size(new_size)  # Resize power widget
+        for widget in self.widgetList:
+            widget.update_data_size(new_size)
 
         # Ensure the window resizes accordingly
         self.setFixedSize(self.sizeHint())  # Update the window size
-

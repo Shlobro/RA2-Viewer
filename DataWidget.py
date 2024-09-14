@@ -1,6 +1,6 @@
 from time import sleep
 
-from PySide6.QtCore import Qt, QTimer
+from PySide6.QtCore import Qt, QTimer, QPropertyAnimation
 from PySide6.QtGui import QPixmap, QColor, QPainter, QFont
 from PySide6.QtWidgets import QWidget, QLabel, QHBoxLayout
 
@@ -89,6 +89,8 @@ class DataWidget(QWidget):
         self.data_label.setFont(font)
         self.data_label.adjustSize()
 
+    from PySide6.QtCore import QPropertyAnimation
+
     def update_data(self, new_data):
         """Update the data shown in the widget with smooth transitions."""
         # Cancel any ongoing updates if a new one comes in
@@ -98,7 +100,9 @@ class DataWidget(QWidget):
         #print(f"Updating data from {self.value} to {new_data}")
 
         # Determine step direction (up or down)
+
         self.step = 1 if self.value < new_data else -1
+
         self.target_value = new_data
 
         # Create or restart a QTimer for smooth updates
@@ -122,6 +126,24 @@ class DataWidget(QWidget):
         # Stop the timer when the target value is reached
         if self.value == self.target_value:
             self.timer.stop()
+
+    # this works really well but does not reach persice numbers after updates for some reason
+    # def update_data(self, new_data):
+    #     """Smoothly update the data using QPropertyAnimation."""
+    #
+    #     self.animation = QPropertyAnimation(self, b"value")
+    #     self.animation.setDuration(500)  # Duration of the animation in milliseconds
+    #     self.animation.setStartValue(self.value)
+    #     self.animation.setEndValue(new_data)
+    #     self.animation.valueChanged.connect(self.on_value_changed)
+    #     self.animation.start()
+    #
+    # def on_value_changed(self, value):
+    #     """Update the data label with the animated value."""
+    #     self.value = value
+    #     self.data_label.setText(str(int(value)))  # Display the integer value
+    #     self.data_label.adjustSize()
+    #     self.adjust_size()
 
     def adjust_size(self):
         """Recalculate the widget size based on the image and text."""

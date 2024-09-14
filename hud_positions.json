@@ -21,7 +21,7 @@
             }
         }
     },
-    "data_counter_size": 27,
+    "data_counter_size": 50,
     "unit_counter_size": 85,
     "1": {
         "2": {
@@ -44,6 +44,16 @@
             "resource": {
                 "x": 2114,
                 "y": 78
+            }
+        },
+        "3": {
+            "unit": {
+                "x": 300,
+                "y": 300
+            },
+            "resource": {
+                "x": 1136,
+                "y": 361
             }
         }
     }
