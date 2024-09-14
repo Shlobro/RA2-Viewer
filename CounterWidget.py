@@ -11,7 +11,7 @@ class CounterWidget(QLabel):
         self.size = size
         self.setFixedSize(size, size)  # Fixed size for the image and count display
 
-        # Set size policy to ensure tight fitting
+        # Set size policy to ensure tight-fitting
         self.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
 
     def paintEvent(self, event):
