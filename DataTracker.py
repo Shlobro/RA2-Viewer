@@ -12,7 +12,7 @@ class ResourceWindow(QMainWindow):
         self.size = hud_positions.get('data_counter_size', 16)  # Default size is 100 if not present
 
         # Get the initial position of the Resource HUD
-        pos = self.get_default_position(player.player_id, 'resource', player_count, hud_positions)
+        pos = self.get_default_position(player.index, 'resource', player_count, hud_positions)
         self.setGeometry(pos['x'], pos['y'], 250, 100)
         self.setWindowFlags(Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint | Qt.X11BypassWindowManagerHint)
         self.setAttribute(Qt.WA_TranslucentBackground)
@@ -33,7 +33,7 @@ class ResourceWindow(QMainWindow):
         # Create DataWidget for money with the custom money font
         self.money_widget = DataWidget(
             image_path='dollar.png',
-            data=self.player.money,
+            data=self.player.balance,
             image_color=Qt.green,
             text_color=Qt.green,
             size=self.size,
@@ -57,8 +57,12 @@ class ResourceWindow(QMainWindow):
 
     def update_labels(self):
         """Update the money and power values."""
-        self.money_widget.update_data(self.player.money)
+        self.money_widget.update_data(self.player.balance)
         self.power_widget.update_data(self.player.power)
+        if self.player.power < 0:
+            self.power_widget.update_color(Qt.red, Qt.red)
+        else:
+            self.power_widget.update_color(Qt.yellow, Qt.yellow)
 
     # Other methods (make_hud_movable, get_default_position, etc.) remain the same
 
@@ -74,7 +78,7 @@ class ResourceWindow(QMainWindow):
                 x = event.globalX() - self.offset.x()
                 y = event.globalY() - self.offset.y()
                 self.move(x, y)
-                self.update_hud_position(self.player.player_id, 'resource', x, y, player_count, hud_positions)
+                self.update_hud_position(self.player.index, 'resource', x, y, player_count, hud_positions)
 
         self.mousePressEvent = mouse_press_event
         self.mouseMoveEvent = mouse_move_event

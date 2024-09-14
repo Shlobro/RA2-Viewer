@@ -3,9 +3,12 @@ import psutil
 import time
 from ctypes import wintypes
 
+from PySide6.QtGui import QColor
+
 MAXPLAYERS = 8
 INVALIDCLASS = 0xffffffff
 INFOFFSET = 0x557c
+AIRCRAFTOFFSET = 0x5590
 
 ALLIDOGOFFSET = 0x1c
 SOVDOGOFFSET = 0x9
@@ -56,7 +59,6 @@ SQUIDOFFSET = 0x18
 CVOFFSET = 0x0d  # aircraft carrier
 DREADNOUGHTOFFSET = 0x16  # SOV
 
-
 # Define the mappings of offsets to unit, infantry, and building names
 infantry_offsets = {
     0x0: "GI", 0x4: "conscript", 0x8: "tesla trooper", 0xc: "Allied Engineer", 0x10: "Rocketeer",
@@ -67,8 +69,8 @@ infantry_offsets = {
 }
 
 tank_offsets = {
-    0x0: "Allied MCV", 0x4: "war miner", 0x8: "Apoc", 0x10: "Soviet Amphibious Transport", 0xc: "rhino tank",
-    0x24: "Grizzly tank", 0x34: "Aircraft Carrier", 0x38: "V3 Rocket Launcher", 0x3c: "Kirov",
+    0x0: "Allied MCV", 0x4: "war miner", 0x8: "Apoc", 0x10: "Soviet Amphibious Transport", 0xc: "Rhino Tank",
+    0x24: "Grizzly", 0x34: "Aircraft Carrier", 0x38: "V3 Rocket Launcher", 0x3c: "Kirov",
     0x40: "terror drone", 0x44: "flak track", 0x48: "Destroyer", 0x4c: "Typhoon attack sub", 0x50: "Aegis Cruiser",
     0x54: "Allied Amphibious Transport", 0x58: "Dreadnought", 0x5c: "NightHawk Transport", 0x60: "Squid",
     0x64: "Dolphin", 0x68: "Soviet MCV", 0x6c: "Tank Destroyer", 0x7c: "Lasher", 0x84: "Chrono Miner",
@@ -80,8 +82,8 @@ tank_offsets = {
 
 building_offsets = {
     0x0: "Allied Power Plant", 0x4: "Allied Ore Refinery", 0x8: "Allied Con Yard", 0xc: "Allied Barracks",
-    0x14: "Allied service Depot", 0x18: "Allied Battle Lab", 0x1c: "Allied War Factory", 0x24: "tesla reactor",
-    0x28: "Sov Battle lab", 0x2c: "sov barracks", 0x34: "Sov Radar", 0x38: "Sov War Factory",
+    0x14: "Allied service Depot", 0x18: "Allied Battle Lab", 0x1c: "Allied War Factory", 0x24: "Tesla Reactor",
+    0x28: "Sov Battle lab", 0x2c: "sov barracks", 0x34: "Sov Radar", 0x38: "Soviet War Factory",
     0x3c: "Sov Ore Ref", 0x48: "Yuri Radar", 0x50: "Sentry Gun", 0x54: "Patriot Missile",
     0x5c: "Allied Naval Yard", 0x60: "Iron Curtain", 0x64: "sov con yard", 0x68: "Sov Service Depot",
     0x6c: "Chrono Sphere", 0x74: "Weather Controller", 0xd4: "Tesla Coil", 0xd8: "Nuclear Missile Launcher",
@@ -93,6 +95,12 @@ building_offsets = {
     0x4e0: "Genetic Mutator", 0x4ec: "Psychic dominator", 0x558: "Tank Bunker", 0x590: "Robot Control Center",
     0x594: "Slave Miner Deployed", 0x59c: "Battle Bunker",
 }
+
+aircraft_offsets = {
+    0x4: "Harrier",
+    0x1c: "Black Eagle"
+}
+
 
 class Player:
     def __init__(self, index, process_handle, real_class_base):
@@ -111,6 +119,7 @@ class Player:
         self.spent_credit = 0
         self.power_output = 0
         self.power_drain = 0
+        self.power = self.power_output - self.power_drain
 
         # Store the counts of units, infantry, and buildings
         self.infantry_counts = {}
@@ -121,6 +130,7 @@ class Player:
         self.unit_array_ptr = None
         self.building_array_ptr = None
         self.infantry_array_ptr = None
+        self.aircraft_array_ptr = None
 
         # Initialize the pointers by reading memory
         self.initialize_pointers()
@@ -132,21 +142,27 @@ class Player:
         tank_ptr_address = self.real_class_base + tank_offset
         tank_ptr_data = read_process_memory(self.process_handle, tank_ptr_address, 4)
         if tank_ptr_data:
-            self.unit_array_ptr = int.from_bytes(tank_ptr_data, byteorder='little')
+            self.unit_array_ptr = ctypes.c_uint32.from_buffer_copy(tank_ptr_data).value
 
         # Step 2: Read the pointer to the buildings array (use the BUILDINGOFFSET)
         building_offset = BUILDINGOFFSET
         building_ptr_address = self.real_class_base + building_offset
         building_ptr_data = read_process_memory(self.process_handle, building_ptr_address, 4)
         if building_ptr_data:
-            self.building_array_ptr = int.from_bytes(building_ptr_data, byteorder='little')
+            self.building_array_ptr = ctypes.c_uint32.from_buffer_copy(building_ptr_data).value
 
         # Step 3: Read the pointer to the infantry array (use the INFOFFSET)
         infantry_offset = INFOFFSET
         infantry_ptr_address = self.real_class_base + infantry_offset
         infantry_ptr_data = read_process_memory(self.process_handle, infantry_ptr_address, 4)
         if infantry_ptr_data:
-            self.infantry_array_ptr = int.from_bytes(infantry_ptr_data, byteorder='little')
+            self.infantry_array_ptr = ctypes.c_uint32.from_buffer_copy(infantry_ptr_data).value
+
+        aircraft_offset = AIRCRAFTOFFSET
+        aircraft_ptr_address = self.real_class_base + aircraft_offset
+        aircraft_ptr_data = read_process_memory(self.process_handle, aircraft_ptr_address, 4)
+        if aircraft_ptr_data:
+            self.aircraft_array_ptr = ctypes.c_uint32.from_buffer_copy(aircraft_ptr_data).value
 
     def read_and_store_inf_units_buildings(self, category_dict, array_ptr):
         """ Helper method to read memory and store values for infantry, tanks, or buildings. """
@@ -198,20 +214,34 @@ class Player:
         if power_drain_data:
             self.power_drain = ctypes.c_uint32.from_buffer_copy(power_drain_data).value
 
+        self.power = self.power_output - self.power_drain
         # Update infantry, tank, and building counts
-        self.infantry_counts = self.read_and_store_inf_units_buildings(infantry_offsets, self.infantry_array_ptr)
-        self.tank_counts = self.read_and_store_inf_units_buildings(tank_offsets, self.unit_array_ptr)
-        self.building_counts = self.read_and_store_inf_units_buildings(building_offsets, self.building_array_ptr)
 
+        if self.infantry_array_ptr == 0:
+            self.initialize_pointers()
+        else:
+            self.infantry_counts = self.read_and_store_inf_units_buildings(infantry_offsets, self.infantry_array_ptr)
 
+        if self.unit_array_ptr == 0:
+            self.initialize_pointers()
+        else:
+            self.tank_counts = self.read_and_store_inf_units_buildings(tank_offsets, self.unit_array_ptr)
 
+        if self.building_array_ptr == 0:
+            self.initialize_pointers()
+        else:
+            self.building_counts = self.read_and_store_inf_units_buildings(building_offsets, self.building_array_ptr)
+
+        if self.building_array_ptr == 0:
+            self.initialize_pointers()
+        else:
+            self.building_counts = self.read_and_store_inf_units_buildings(aircraft_offsets, self.aircraft_array_ptr)
 
 
 
 class GameData:
     def __init__(self):
         self.players = []
-        self.currentGameRunning = False
 
     def add_player(self, player):
         self.players.append(player)
@@ -242,41 +272,51 @@ def read_process_memory(process_handle, address, size):
             time.sleep(1)
             return None
         else:
-            raise
+            print(f"Failed to read memory: {e}")
+            return None
 
 
 # Define the mapping of color scheme values to actual color names
 COLOR_SCHEME_MAPPING = {
-    3: "Yellow",
-    5: "White",
-    7: "Grey",
-    11: "Red",
-    13: "Orange",
-    15: "Pink",
-    17: "Purple",
-    21: "Blue",
-    25: "Cyan",
-    29: "Green"
+    3: QColor("yellow"),
+    5: QColor("white"),
+    7: QColor("gray"),
+    11: QColor("red"),
+    13: QColor("orange"),
+    15: QColor("pink"),
+    17: QColor("purple"),
+    21: QColor("blue"),
+    25: QColor("cyan"),
+    29: QColor("green"),
 }
 
 
 # Function to convert color scheme number to color name
-def get_color_name(color_scheme):
-    return COLOR_SCHEME_MAPPING.get(color_scheme, "Unknown")
+def get_color(color_scheme):
+    """Returns a QColor object based on the color scheme value."""
+    return COLOR_SCHEME_MAPPING.get(color_scheme, QColor("black"))
 
 
 # Modify the initialize_game_data function to convert and store the color names
 def initialize_players(game_data, process_handle):
-    fixedPoint = 0xa8b230
+    game_data.players.clear()
+    fixedPoint = 0xa8b230  # this is where the pointer
     classBaseArrayPtr = 0xa8022c
 
-    fixedPointValue = ctypes.c_uint32.from_buffer_copy(
-        read_process_memory(process_handle, fixedPoint, 4)).value
+    fixedPointData = read_process_memory(process_handle, fixedPoint, 4)
+    if fixedPointData is None:
+        print("Error: Failed to read memory at fixedPoint.")
+        return 0  # Exit the player initialization early
+
+    fixedPointValue = ctypes.c_uint32.from_buffer_copy(fixedPointData).value
+
     classBaseArray = ctypes.c_uint32.from_buffer_copy(
         read_process_memory(process_handle, classBaseArrayPtr, 4)).value
 
     classbasearray = fixedPointValue + 1120 * 4
     valid_player_count = 0
+
+
 
     for i in range(MAXPLAYERS):
         memory_data = read_process_memory(process_handle, classbasearray, 4)
@@ -297,7 +337,7 @@ def initialize_players(game_data, process_handle):
 
             realClassBase = ctypes.c_uint32.from_buffer_copy(realClassBaseData).value
 
-            player = Player(i, process_handle, realClassBase)
+            player = Player(i + 1, process_handle, realClassBase)
 
             # Set the color
             colorPtr = realClassBase + COLORSCHEMEOFFSET
@@ -306,7 +346,7 @@ def initialize_players(game_data, process_handle):
                 print(f"Skipping color assignment for player {i} due to incomplete memory read.")
                 continue
             color_scheme_value = ctypes.c_uint32.from_buffer_copy(color_data).value
-            player.color = get_color_name(color_scheme_value)
+            player.color = get_color(color_scheme_value)
             print(f"Player {i} colorScheme {player.color}")
 
             # Set the country name
@@ -354,6 +394,10 @@ def ra2_main():
         # Obtain the process handle
         process_handle = ctypes.windll.kernel32.OpenProcess(
             wintypes.DWORD(0x0010 | 0x0020 | 0x0008 | 0x0010), False, pid)
+
+        if not process_handle:
+            print("Error: Failed to obtain process handle.")
+            return  # Exit or handle the error gracefully
 
         # Loop until at least one valid player is detected
         while True:

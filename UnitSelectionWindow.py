@@ -1,8 +1,8 @@
 import json
 import os
 
-from PySide6.QtGui import QPixmap
-from PySide6.QtWidgets import QMainWindow, QWidget, QTabWidget, QVBoxLayout, QGridLayout, QPushButton, QLabel, QCheckBox
+from PySide6.QtGui import QPixmap, QImage
+from PySide6.QtWidgets import QMainWindow, QWidget, QTabWidget, QVBoxLayout, QGridLayout, QPushButton, QLabel
 from PySide6.QtCore import Qt
 
 class UnitSelectionWindow(QMainWindow):
@@ -50,43 +50,48 @@ class UnitSelectionWindow(QMainWindow):
         unit_types = ['Infantry', 'Structure', 'Tank', 'Naval', 'Aircraft']
         for unit_type in unit_types:
             sub_tab = QWidget()
-            sub_layout = QVBoxLayout(sub_tab)  # Use QVBoxLayout for vertical alignment
+            sub_layout = QGridLayout(sub_tab)  # Use QGridLayout for grid arrangement
             sub_layout.setAlignment(Qt.AlignTop)  # Align everything at the top of the tab
 
             # Check if there are any units defined for this faction and unit type
             units = self.units_data.get(faction, {}).get(unit_type, [])
 
             # Only add the units that have been defined (otherwise keep the tab empty)
+            row = 0
+            col = 0
             for unit in units:
                 if 'name' not in unit:
                     continue  # Skip invalid entries
 
-                # Create a vertical layout for each unit (checkbox over image)
+                # Create a vertical layout for each unit (image acts as checkbox)
                 unit_layout = QVBoxLayout()
                 unit_layout.setAlignment(Qt.AlignTop | Qt.AlignHCenter)
 
-                # Create checkbox and align it over the image
-                checkbox = QCheckBox()
-                checkbox.setChecked(self.is_unit_selected(faction, unit_type, unit['name']))
-
-                # Correctly capture faction, unit_type, and unit name in the lambda
-                checkbox.stateChanged.connect(
-                    lambda state, f=faction, ut=unit_type, u=unit['name']: self.toggle_unit_selection(f, ut, u, state)
-                )
-
-                # Load image and set it in a label
+                # Create image label and set it as clickable
                 image_label = QLabel()
                 image_path = unit.get('image', '')  # Ensure image path is available
                 pixmap = QPixmap(image_path)
                 if not pixmap.isNull():
                     image_label.setPixmap(pixmap.scaled(50, 50, Qt.KeepAspectRatio))
 
-                # Add checkbox and image to the unit's layout
-                unit_layout.addWidget(checkbox, alignment=Qt.AlignHCenter)
+                # Set selection state and connect click event
+                is_selected = self.is_unit_selected(faction, unit_type, unit['name'])
+                self.update_image_selection(image_label, is_selected)
+
+                # Add event handling to the label
+                image_label.mousePressEvent = lambda event, f=faction, ut=unit_type, u=unit['name'], label=image_label: self.toggle_unit_selection(f, ut, u, label)
+
+                # Add the image label to the unit's layout
                 unit_layout.addWidget(image_label, alignment=Qt.AlignHCenter)
 
-                # Add the unit layout to the tab layout
-                sub_layout.addLayout(unit_layout)
+                # Add the unit layout to the grid layout
+                sub_layout.addLayout(unit_layout, row, col)
+
+                # Update row and column for the grid (e.g., 3 columns per row)
+                col += 1
+                if col >= 3:  # You can adjust the number of columns here
+                    col = 0
+                    row += 1
 
             sub_tab_widget.addTab(sub_tab, unit_type)
 
@@ -94,15 +99,41 @@ class UnitSelectionWindow(QMainWindow):
         """Check if a unit is already selected."""
         return self.selected_units.get(faction, {}).get(unit_type, {}).get(unit, False)
 
-    def toggle_unit_selection(self, faction, unit_type, unit, state):
-        """Update the selected_units based on checkbox state."""
+    def toggle_unit_selection(self, faction, unit_type, unit, label):
+        """Toggle unit selection and update the appearance."""
+        current_state = self.is_unit_selected(faction, unit_type, unit)
+        new_state = not current_state
+
+        # Update the selection status
         if faction not in self.selected_units:
             self.selected_units[faction] = {}
         if unit_type not in self.selected_units[faction]:
             self.selected_units[faction][unit_type] = {}
 
-        # Ensure the unit is updated correctly, not added as a new entry
-        self.selected_units[faction][unit_type][unit] = bool(state)
+        self.selected_units[faction][unit_type][unit] = new_state
+
+        # Update the image appearance
+        self.update_image_selection(label, new_state)
+
+    def update_image_selection(self, label, is_selected):
+        """Update the image appearance based on whether it's selected or not."""
+        pixmap = label.pixmap()
+        if pixmap is not None:
+            # Convert pixmap to QImage to modify brightness
+            image = pixmap.toImage()
+
+            # Modify the image to be lighter or darker
+            for x in range(image.width()):
+                for y in range(image.height()):
+                    color = image.pixelColor(x, y)
+                    if is_selected:
+                        color = color.lighter(150)  # Make it lighter
+                    else:
+                        color = color.darker(150)  # Make it darker
+                    image.setPixelColor(x, y, color)
+
+            # Set the modified image back to the label
+            label.setPixmap(QPixmap.fromImage(image))
 
     def load_selected_units(self):
         """Load the selected units from the JSON file."""
@@ -133,4 +164,3 @@ class UnitSelectionWindow(QMainWindow):
     def save_and_close(self):
         self.save_selected_units()
         self.close()
-

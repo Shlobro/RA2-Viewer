@@ -95,3 +95,32 @@ class DataWidget(QWidget):
     def adjust_size(self):
         """Recalculate the widget size based on the image and text."""
         self.setFixedSize(self.icon_label.width() + self.data_label.width() + 1, max(self.icon_label.height(), self.data_label.height()))
+
+    def update_color(self, new_image_color=None, new_text_color=None):
+        """Update the color of the image and the text."""
+
+        # Update the image color if a new one is provided
+        if new_image_color is not None:
+            self.image_color = new_image_color
+
+            # Reload the image with the new color
+            pixmap = QPixmap(self.image_path).scaled(self.size, self.size, Qt.KeepAspectRatio, Qt.SmoothTransformation)
+            colored_pixmap = QPixmap(pixmap.size())
+            colored_pixmap.fill(Qt.transparent)
+            painter = QPainter(colored_pixmap)
+            painter.setCompositionMode(QPainter.CompositionMode_Source)
+            painter.drawPixmap(0, 0, pixmap)
+            painter.setCompositionMode(QPainter.CompositionMode_SourceIn)
+            painter.fillRect(colored_pixmap.rect(), QColor(self.image_color))
+            painter.end()
+
+            self.icon_label.setPixmap(colored_pixmap)
+            self.icon_label.setFixedSize(colored_pixmap.size())
+
+        # Update the text color if a new one is provided
+        if new_text_color is not None:
+            self.data_label.setStyleSheet(f"color: {QColor(new_text_color).name()}; margin-top: -2px;")
+            self.data_label.adjustSize()
+
+        # Recalculate the widget size after recoloring
+        self.adjust_size()
