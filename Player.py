@@ -314,6 +314,7 @@ def initialize_players(game_data, process_handle):
     classBaseArray = ctypes.c_uint32.from_buffer_copy(
         read_process_memory(process_handle, classBaseArrayPtr, 4)).value
 
+    # classbasearray is a pointer to the array where all the player data pointers are
     classbasearray = fixedPointValue + 1120 * 4
     valid_player_count = 0
 

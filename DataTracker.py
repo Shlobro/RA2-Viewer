@@ -47,7 +47,7 @@ class ResourceWindow(QMainWindow):
 
         username_font = QFont("Roboto", 16, QFont.Bold)  # Change the font size and weight as needed
 
-        self.username_and_faction = DataWidget(
+        self.name_widget = DataWidget(
             image_path="Flags/PNG/" + faction_to_flag[player.country_name.value.decode('utf-8')],
             data=self.player.username.value,
             image_color=None,
@@ -55,7 +55,7 @@ class ResourceWindow(QMainWindow):
             size=self.size,
             font=username_font  # Apply the custom font for the username
         )
-        self.widgetList.append(self.username_and_faction)
+        self.widgetList.append(self.name_widget)
 
         # Create DataWidget for money with the custom money font
         self.money_widget = DataWidget(

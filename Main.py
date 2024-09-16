@@ -182,6 +182,11 @@ class ControlPanel(QMainWindow):
         selection_button.clicked.connect(self.open_unit_selection)
         layout.addWidget(selection_button)
 
+        self.name_checkbox = QCheckBox("Show Name")
+        self.name_checkbox.setChecked(True)
+        self.name_checkbox.stateChanged.connect(self.toggle_name)
+        layout.addWidget(self.name_checkbox)
+
         self.money_checkbox = QCheckBox("Show Money")
         self.money_checkbox.setChecked(True)
         self.money_checkbox.stateChanged.connect(self.toggle_money)
@@ -204,12 +209,12 @@ class ControlPanel(QMainWindow):
         layout.addWidget(self.counter_size_spinbox)
 
         # Add QSpinBox for resizing the ResourceWindow (DataWindow)
-        self.data_size_label = QLabel("Set Data Window Size: (10 - 50)")
+        self.data_size_label = QLabel("Set Data Window Size: (10 - 100)")
         layout.addWidget(self.data_size_label)
 
         data_size = hud_positions.get('data_counter_size', 16)  # Default to 16 for data windows
         self.data_size_spinbox = QSpinBox()
-        self.data_size_spinbox.setRange(10, 50)
+        self.data_size_spinbox.setRange(10, 100)
         self.data_size_spinbox.setValue(data_size)
         self.data_size_spinbox.valueChanged.connect(self.update_data_window_size)
         layout.addWidget(self.data_size_spinbox)
@@ -252,6 +257,21 @@ class ControlPanel(QMainWindow):
         if self.unit_selection_window is None or not self.unit_selection_window.isVisible():
             self.unit_selection_window = UnitSelectionWindow('unit_selection.json')
             self.unit_selection_window.show()
+
+
+    # Method to toggle the visibility of Money
+    def toggle_name(self, state):
+        # Update the hud_positions dictionary for future HUDs
+        hud_positions['show_name'] = (state == 2)
+        print(f"Updated show money state in hud_positions: {hud_positions['show_name']}")
+
+        # If HUD windows exist, toggle visibility of the money widget
+        if hud_windows:
+            for _, name_window in hud_windows:
+                if state == 2:
+                    name_window.name_widget.show()
+                else:
+                    name_window.name_widget.hide()
 
     # Method to toggle the visibility of Money
     def toggle_money(self, state):
