@@ -63,9 +63,9 @@ DREADNOUGHTOFFSET = 0x16  # SOV
 infantry_offsets = {
     0x0: "GI", 0x4: "conscript", 0x8: "tesla trooper", 0xc: "Allied Engineer", 0x10: "Rocketeer",
     0x14: "Navy Seal", 0x18: "Yuri Clone", 0x1c: "Ivan", 0x20: "Desolator", 0x24: "sov dog",
-    0x3c: "Chrono legionnaire", 0x40: "Spy", 0x50: "Yuri Prime", 0x54: "Sniper", 0x60: "Tanya",
+    0x3c: "Chrono Legionnaire", 0x40: "Spy", 0x50: "Yuri Prime", 0x54: "Sniper", 0x60: "Tanya",
     0x6c: "sov engi", 0x68: "Terrorist", 0x70: "Allied Dog", 0xb4: "Yuri Engineer",
-    0xb8: "Guardian GI", 0xbc: "Initiate", 0xc0: "Boris", 0xc4: "Brute", 0xc8: "Virus",
+    0xb8: "GGI", 0xbc: "Initiate", 0xc0: "Boris", 0xc4: "Brute", 0xc8: "Virus",
 }
 
 tank_offsets = {

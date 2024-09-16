@@ -4,9 +4,9 @@
             "Infantry": {
                 "GI": false,
                 "Allied Dog": false,
-                "GGI": false,
+                "GGI": true,
                 "Allied Engineer": false,
-                "Chrono Legionnaire": false,
+                "Chrono Legionnaire": true,
                 "Spy": false,
                 "Rocketeer": false,
                 "Tanya": false,
@@ -14,18 +14,42 @@
             },
             "Structure": {
                 "Allied Power Plant": false,
-                "Allied Barracks": false
+                "Allied Barracks": false,
+                "SpySat": false,
+                "Allied Naval Yard": false,
+                "Chronoshpere": false,
+                "Allied Service Depot": false,
+                "Gap Generator": false,
+                "Grand Cannon": false,
+                "Ore Purifier": false,
+                "Allied AFC": false,
+                "American AFC": false,
+                "PillBox": false,
+                "Allied Battle Lab": false,
+                "Robot Control Center": false,
+                "Allied Ore Refinery": false,
+                "Weather Controller": false,
+                "Allied War Factory": true
             },
             "Tank": {
                 "Grizzly": false,
-                "IFV": false
+                "IFV": false,
+                "Chrono Miner": false,
+                "Battle Fortress": false,
+                "Allied MCV": false,
+                "Allied Amphibious Transport": false,
+                "Prism Tank": false,
+                "Tank Destroyer": false,
+                "Robot Tank": false,
+                "NightHawk Transport": false,
+                "Mirage Tank": false
             },
             "Naval": {
-                "Agis Cruiser": true,
-                "Aircraft Carrier": true,
-                "Destroyer": true,
-                "Dolphin": true,
-                "Allied Amphibious Transport": true
+                "Agis Cruiser": false,
+                "Aircraft Carrier": false,
+                "Destroyer": false,
+                "Dolphin": false,
+                "Allied Amphibious Transport": false
             },
             "Aircraft": {
                 "Black Eagle": false,
@@ -34,8 +58,14 @@
         },
         "Soviet": {
             "Infantry": {
-                "Desolator": false,
-                "conscript": false
+                "Desolator": true,
+                "conscript": true,
+                "Boris": true,
+                "Flak Trooper": true,
+                "Soviet Engineer": true,
+                "Soviet Dog": true,
+                "Ivan": true,
+                "Terrorist": true
             },
             "Structure": {
                 "Soviet Barracks": false
@@ -44,10 +74,10 @@
                 "Rhino Tank": false
             },
             "Naval": {
-                "Dreadnought": true,
-                "Squid": true,
-                "Typhoon attack sub": true,
-                "Sea Scorpion": true
+                "Dreadnought": false,
+                "Squid": false,
+                "Typhoon attack sub": false,
+                "Sea Scorpion": false
             },
             "Aircraft": {}
         },
@@ -55,7 +85,10 @@
             "Infantry": {
                 "Initiate": true,
                 "Virus": true,
-                "Yuri Clone": true
+                "Yuri Clone": true,
+                "Yuri Engineer": true,
+                "Yuri Prime": true,
+                "Brute": true
             },
             "Structure": {
                 "Yuri War Factory": false
@@ -173,6 +206,10 @@
                 {
                     "name": "Weather Controller",
                     "image": "cameos/png/Weather Controller.png"
+                },
+                {
+                    "name": "Allied War Factory",
+                    "image": "cameos/png/Allied War Factory.png"
                 }
             ],
             "Tank": [
