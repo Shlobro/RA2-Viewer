@@ -179,6 +179,8 @@ class Player:
         return counts
 
     def update_dynamic_data(self):
+        # print("Updating...")
+
         # Balance
         balance_ptr = self.real_class_base + BALANCEOFFSET
         balance_data = read_process_memory(self.process_handle, balance_ptr, 4)
@@ -260,6 +262,9 @@ def find_pid_by_name(name):
 
 
 def read_process_memory(process_handle, address, size):
+    pid = find_pid_by_name("gamemd-spawn.exe")
+    if pid is None:
+        return None
     buffer = ctypes.create_string_buffer(size)
     bytesRead = ctypes.c_size_t()
     try:
@@ -298,7 +303,7 @@ def get_color(color_scheme):
     return COLOR_SCHEME_MAPPING.get(color_scheme, QColor("black"))
 
 
-def detect_if_game_is_loaded(process_handle):
+def detect_if_all_players_are_loaded(process_handle):
     """Wait for Player 0's MCV to be detected before proceeding with the full initialization."""
     fixedPoint = 0xa8b230  # this is where the pointer
     classBaseArrayPtr = 0xa8022c
@@ -310,39 +315,41 @@ def detect_if_game_is_loaded(process_handle):
 
     fixedPointValue = ctypes.c_uint32.from_buffer_copy(fixedPointData).value
     classBaseArray = ctypes.c_uint32.from_buffer_copy(read_process_memory(process_handle, classBaseArrayPtr, 4)).value
-    classBasePlayer0 = fixedPointValue + 1120 * 4  # Address for Player 0's class base
+    classBasePlayer = fixedPointValue + 1120 * 4  # Address for Player 0's class base
 
-    # Read Player 0's real class base pointer
-    player0_data = read_process_memory(process_handle, classBasePlayer0, 4)
-    if player0_data is None:
-        print("Skipping Player 0 due to incomplete memory read.")
-        return False
+    for i in range(MAXPLAYERS):
+        # Read Player 0's real class base pointer
+        player_data = read_process_memory(process_handle, classBasePlayer, 4)
+        classBasePlayer += 4
+        if player_data is None:
+            print("Skipping Player 0 due to incomplete memory read.")
+            continue
 
-    classBasePtr = ctypes.c_uint32.from_buffer_copy(player0_data).value
-    if classBasePtr == INVALIDCLASS:
-        print("Skipping Player 0 not fully initialized yet.")
-        return False
+        classBasePtr = ctypes.c_uint32.from_buffer_copy(player_data).value
+        if classBasePtr == INVALIDCLASS:
+            print("Skipping Player 0 not fully initialized yet.")
+            continue
 
-    realClassBasePtr = classBasePtr * 4 + classBaseArray
-    realClassBaseData = read_process_memory(process_handle, realClassBasePtr, 4)
-    if realClassBaseData is None:
-        return False  # Memory not ready
+        realClassBasePtr = classBasePtr * 4 + classBaseArray
+        realClassBaseData = read_process_memory(process_handle, realClassBasePtr, 4)
+        if realClassBaseData is None:
+            continue  # Memory not ready
 
-    realClassBase = ctypes.c_uint32.from_buffer_copy(realClassBaseData).value
+        realClassBase = ctypes.c_uint32.from_buffer_copy(realClassBaseData).value
 
-    # offsets of loading
-    loaded = 0
-    right_values = {0x551c: 66, 0x5778: 0, 0x57ac: 90}
-    for offset, value in right_values.items():
-        ptr = realClassBase + offset
-        data = read_process_memory(process_handle, ptr, 4)
-        if data and int.from_bytes(data, byteorder='little') == value:
-            loaded += 1
+        # offsets of loading
+        loaded = 0
+        right_values = {0x551c: 66, 0x5778: 0, 0x57ac: 90}
+        for offset, value in right_values.items():
+            ptr = realClassBase + offset
+            data = read_process_memory(process_handle, ptr, 4)
+            if data and int.from_bytes(data, byteorder='little') == value:
+                loaded += 1
 
 
-    if loaded == 3:
-        print("Players loaded. Proceeding with players initialization.")
-        return True
+        if loaded == 3:
+            print("Players loaded. Proceeding with players initialization.")
+            return True
 
     return False
 
@@ -365,12 +372,13 @@ def initialize_players_after_loading(game_data, process_handle):
 
     for i in range(MAXPLAYERS):
         memory_data = read_process_memory(process_handle, classbasearray, 4)
+        classbasearray += 4
+
         if memory_data is None:
             print(f"Skipping player {i} due to incomplete memory read.")
             continue
 
         classBasePtr = ctypes.c_uint32.from_buffer_copy(memory_data).value
-        classbasearray += 4
         if classBasePtr != INVALIDCLASS:
             valid_player_count += 1
             realClassBasePtr = classBasePtr * 4 + classBaseArray
@@ -446,7 +454,7 @@ def ra2_main():
 
         # Wait for Player 0's MCV to be detected
         while True:
-            if detect_if_game_is_loaded(process_handle):
+            if detect_if_all_players_are_loaded(process_handle):
                 break
             print("Waiting for the game to load...")
             time.sleep(1)

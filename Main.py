@@ -10,7 +10,7 @@ from PySide6.QtCore import QTimer
 from PySide6.QtWidgets import QApplication, QWidget, QPushButton, QCheckBox, QVBoxLayout, QMainWindow, QLabel, QSpinBox
 
 from DataTracker import ResourceWindow
-from Player import GameData, initialize_players_after_loading, detect_if_game_is_loaded
+from Player import GameData, initialize_players_after_loading, detect_if_all_players_are_loaded
 from UnitCounter import UnitWindow
 from UnitSelectionWindow import UnitSelectionWindow
 
@@ -93,7 +93,7 @@ def create_players():
     # Loop until at least one valid player is detected
     while True:
         while True:
-            if find_game_process and detect_if_game_is_loaded(process_handle):
+            if find_game_process and detect_if_all_players_are_loaded(process_handle):
                 break
             print("Waiting for the game to load...")
             time.sleep(1)
@@ -159,6 +159,8 @@ def continuous_data_update():
         if find_pid_by_name("gamemd-spawn.exe") is None:
             print("Game process ended.")
             break
+        # else:
+            # print("the game is still running.")
 
         for player in players:
             player.update_dynamic_data()
@@ -167,6 +169,7 @@ def continuous_data_update():
     ctypes.windll.kernel32.CloseHandle(process_handle)
     print("Waiting for the game to start again...")
     continuous_data_update()
+    return
 
 # Function to toggle HUD visibility (show/hide all HUDs)
 hud_visible = True
