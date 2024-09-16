@@ -63,7 +63,7 @@ class UnitWindow(QMainWindow):
             return self.player.infantry_counts.get('Slave Miner Deployed', 0) + self.player.infantry_counts.get('Slave miner undeployed', 0)
         elif unit_type == 'Infantry':
             return self.player.infantry_counts.get(unit_name, 0)
-        elif unit_type == 'Tank' or 'Naval':
+        elif unit_type == 'Tank' or unit_type == 'Naval':
             return self.player.tank_counts.get(unit_name, 0)
         elif unit_type == 'Building':
             return self.player.building_counts.get(unit_name, 0)
@@ -122,7 +122,7 @@ class UnitWindow(QMainWindow):
 
         if unit_type == 'Infantry':
             return self.player.infantry_counts.get(unit_name, 0)
-        elif unit_type == 'Tank':
+        elif unit_type == 'Tank' or unit_type == 'Naval':
             return self.player.tank_counts.get(unit_name, 0)
         elif unit_type == 'Structure':
             return self.player.building_counts.get(unit_name, 0)

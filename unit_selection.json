@@ -13,7 +13,7 @@
                 "Navy Seal": false
             },
             "Structure": {
-                "Allied Power Plant": true,
+                "Allied Power Plant": false,
                 "Allied Barracks": false
             },
             "Tank": {
@@ -21,7 +21,11 @@
                 "IFV": false
             },
             "Naval": {
-                "Agis Cruiser": false
+                "Agis Cruiser": true,
+                "Aircraft Carrier": true,
+                "Destroyer": true,
+                "Dolphin": true,
+                "Allied Amphibious Transport": true
             },
             "Aircraft": {
                 "Black Eagle": false,
@@ -30,7 +34,8 @@
         },
         "Soviet": {
             "Infantry": {
-                "Desolator": false
+                "Desolator": false,
+                "conscript": false
             },
             "Structure": {
                 "Soviet Barracks": false
@@ -39,7 +44,10 @@
                 "Rhino Tank": false
             },
             "Naval": {
-                "Dreadnought": false
+                "Dreadnought": true,
+                "Squid": true,
+                "Typhoon attack sub": true,
+                "Sea Scorpion": true
             },
             "Aircraft": {}
         },
