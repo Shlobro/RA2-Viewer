@@ -2,15 +2,15 @@
     "selected_units": {
         "Allied": {
             "Infantry": {
-                "GI": false,
-                "Allied Dog": false,
+                "GI": true,
+                "Allied Dog": true,
                 "GGI": true,
-                "Allied Engineer": false,
+                "Allied Engineer": true,
                 "Chrono Legionnaire": true,
-                "Spy": false,
-                "Rocketeer": false,
-                "Tanya": false,
-                "Navy Seal": false
+                "Spy": true,
+                "Rocketeer": true,
+                "Tanya": true,
+                "Navy Seal": true
             },
             "Structure": {
                 "Allied Power Plant": false,
@@ -68,7 +68,8 @@
                 "Terrorist": true
             },
             "Structure": {
-                "Soviet Barracks": false
+                "Soviet Barracks": false,
+                "Battle Bunker": false
             },
             "Tank": {
                 "Rhino Tank": false

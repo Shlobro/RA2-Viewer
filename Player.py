@@ -133,6 +133,14 @@ class Player:
         self.infantry_array_ptr = None
         self.aircraft_array_ptr = None
 
+        # TODO lets try and add the test case
+        self.test_addresses = {
+            "infantry": self.real_class_base + 0x0b30,
+            "unit": self.real_class_base + 0x1338,
+            "building": self.real_class_base + 0x1b40,
+            "aircraft": self.real_class_base + 0x328
+        }
+
         # Initialize the pointers by reading memory
         self.initialize_pointers()
 
@@ -165,7 +173,7 @@ class Player:
         if aircraft_ptr_data:
             self.aircraft_array_ptr = ctypes.c_uint32.from_buffer_copy(aircraft_ptr_data).value
 
-    def read_and_store_inf_units_buildings(self, category_dict, array_ptr):
+    def read_and_store_inf_units_buildings(self, category_dict, array_ptr, count_type):
         """ Helper method to read memory and store values for infantry, tanks, or buildings. """
         if array_ptr is None:
             return {}
@@ -173,9 +181,19 @@ class Player:
         counts = {}
         for offset, name in category_dict.items():
             specific_address = array_ptr + offset
+            test_address = self.test_addresses[count_type] + offset
+
             count_data = read_process_memory(self.process_handle, specific_address, 4)
-            if count_data:
-                counts[name] = int.from_bytes(count_data, byteorder='little')
+            test_data = read_process_memory(self.process_handle, test_address, 4)
+
+            if count_data and test_address:
+                count = int.from_bytes(count_data, byteorder='little')
+                test = int.from_bytes(test_data, byteorder='little')
+                if count <= test:
+                    counts[name] = count
+                else:
+                    counts[name] = 0
+
         return counts
 
     def update_dynamic_data(self):
@@ -223,22 +241,22 @@ class Player:
         if self.infantry_array_ptr == 0:
             self.initialize_pointers()
         else:
-            self.infantry_counts = self.read_and_store_inf_units_buildings(infantry_offsets, self.infantry_array_ptr)
+            self.infantry_counts = self.read_and_store_inf_units_buildings(infantry_offsets, self.infantry_array_ptr, "infantry")
 
         if self.unit_array_ptr == 0:
             self.initialize_pointers()
         else:
-            self.tank_counts = self.read_and_store_inf_units_buildings(tank_offsets, self.unit_array_ptr)
+            self.tank_counts = self.read_and_store_inf_units_buildings(tank_offsets, self.unit_array_ptr, "unit")
 
         if self.building_array_ptr == 0:
             self.initialize_pointers()
         else:
-            self.building_counts = self.read_and_store_inf_units_buildings(structure_offsets, self.building_array_ptr)
+            self.building_counts = self.read_and_store_inf_units_buildings(structure_offsets, self.building_array_ptr, "building")
 
         if self.aircraft_array_ptr == 0:
             self.initialize_pointers()
         else:
-            self.aircraft_counts = self.read_and_store_inf_units_buildings(aircraft_offsets, self.aircraft_array_ptr)
+            self.aircraft_counts = self.read_and_store_inf_units_buildings(aircraft_offsets, self.aircraft_array_ptr, "aircraft")
 
 
 

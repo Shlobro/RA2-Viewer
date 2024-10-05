@@ -2,27 +2,27 @@
     "2": {
         "1": {
             "unit": {
-                "x": 0,
-                "y": 196
+                "x": 2473,
+                "y": 228
             },
             "resource": {
-                "x": 0,
-                "y": 109
+                "x": 32,
+                "y": 39
             }
         },
         "2": {
             "unit": {
-                "x": 0,
-                "y": 196
+                "x": 2418,
+                "y": 226
             },
             "resource": {
-                "x": 0,
-                "y": 107
+                "x": 2164,
+                "y": 30
             }
         }
     },
-    "data_counter_size": 50,
-    "unit_counter_size": 85,
+    "data_counter_size": 36,
+    "unit_counter_size": 53,
     "1": {
         "2": {
             "unit": {
@@ -38,12 +38,12 @@
             "x": 100,
             "y": 100,
             "unit": {
-                "x": 2187,
-                "y": 186
+                "x": 2133,
+                "y": 253
             },
             "resource": {
-                "x": 1944,
-                "y": 115
+                "x": 2068,
+                "y": 92
             }
         },
         "3": {
@@ -140,5 +140,6 @@
         }
     },
     "show_money": true,
-    "show_power": true
+    "show_power": true,
+    "show_name": true
 }
