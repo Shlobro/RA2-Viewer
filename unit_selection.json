@@ -5,16 +5,16 @@
                 "GI": true,
                 "Allied Dog": true,
                 "GGI": true,
-                "Allied Engineer": true,
-                "Chrono Legionnaire": true,
-                "Spy": true,
-                "Rocketeer": true,
-                "Tanya": true,
-                "Navy Seal": true
+                "Allied Engineer": false,
+                "Chrono Legionnaire": false,
+                "Spy": false,
+                "Rocketeer": false,
+                "Tanya": false,
+                "Navy Seal": false
             },
             "Structure": {
-                "Allied Power Plant": false,
-                "Allied Barracks": false,
+                "Allied Power Plant": true,
+                "Allied Barracks": true,
                 "SpySat": false,
                 "Allied Naval Yard": false,
                 "Chronoshpere": false,
@@ -32,13 +32,13 @@
                 "Allied War Factory": true
             },
             "Tank": {
-                "Grizzly": false,
-                "IFV": false,
+                "Grizzly": true,
+                "IFV": true,
                 "Chrono Miner": false,
                 "Battle Fortress": false,
                 "Allied MCV": false,
                 "Allied Amphibious Transport": false,
-                "Prism Tank": false,
+                "Prism Tank": true,
                 "Tank Destroyer": false,
                 "Robot Tank": false,
                 "NightHawk Transport": false,
@@ -58,27 +58,33 @@
         },
         "Soviet": {
             "Infantry": {
-                "Desolator": true,
+                "Desolator": false,
                 "conscript": true,
-                "Boris": true,
-                "Flak Trooper": true,
+                "Boris": false,
+                "Flak Trooper": false,
                 "Soviet Engineer": true,
-                "Soviet Dog": true,
-                "Ivan": true,
-                "Terrorist": true
+                "Soviet Dog": false,
+                "Ivan": false,
+                "Terrorist": false
             },
             "Structure": {
-                "Soviet Barracks": false,
-                "Battle Bunker": false
+                "Soviet Barracks": true,
+                "Battle Bunker": false,
+                "Soviet War Factory": true,
+                "Sov Ore Ref": true
             },
             "Tank": {
-                "Rhino Tank": false
+                "Rhino Tank": true,
+                "Apoc": true,
+                "Terror Drone": true,
+                "Siege Chopper": true,
+                "Kirov": true
             },
             "Naval": {
-                "Dreadnought": false,
-                "Squid": false,
-                "Typhoon attack sub": false,
-                "Sea Scorpion": false
+                "Dreadnought": true,
+                "Squid": true,
+                "Typhoon attack sub": true,
+                "Sea Scorpion": true
             },
             "Aircraft": {}
         },

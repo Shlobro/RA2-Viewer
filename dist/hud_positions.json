@@ -1,4 +1,26 @@
 {
-    "unit_counter_size": 100,
-    "data_counter_size": 16
+    "unit_counter_size": 92,
+    "data_counter_size": 33,
+    "2": {
+        "1": {
+            "unit": {
+                "x": 77,
+                "y": 204
+            },
+            "resource": {
+                "x": 73,
+                "y": 79
+            }
+        },
+        "2": {
+            "unit": {
+                "x": 2219,
+                "y": 195
+            },
+            "resource": {
+                "x": 2235,
+                "y": 54
+            }
+        }
+    }
 }

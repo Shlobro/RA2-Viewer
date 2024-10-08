@@ -4,15 +4,15 @@ import os
 import threading
 import time
 from ctypes import wintypes
-
+import traceback
 import psutil
-from PySide6.QtCore import QTimer
 from PySide6.QtWidgets import QApplication, QWidget, QPushButton, QCheckBox, QVBoxLayout, QMainWindow, QLabel, QSpinBox
-
+from PySide6.QtCore import QObject, Signal
 from DataTracker import ResourceWindow
 from Player import GameData, initialize_players_after_loading, detect_if_all_players_are_loaded
 from UnitCounter import UnitWindow
 from UnitSelectionWindow import UnitSelectionWindow
+from PySide6.QtCore import QThread
 
 # Global variable for player count (default 2 players)
 player_count = 0
@@ -21,11 +21,15 @@ hud_position_file = 'hud_positions.json'
 # List to store player objects
 players = []
 hud_windows = []  # List to store HUDWindow objects
-
+data_lock = threading.Lock()
 
 # Update the create_hud_windows function to create both Unit and Resource windows
 def create_hud_windows():
     global hud_windows
+    # Close any existing HUD windows
+    for unit_window, resource_window in hud_windows:
+        unit_window.close()
+        resource_window.close()
     hud_windows = []
 
     if len(players) == 0:
@@ -37,6 +41,7 @@ def create_hud_windows():
         unit_window = UnitWindow(player, len(players), hud_positions)
         resource_window = ResourceWindow(player, len(players), hud_positions)
         hud_windows.append((unit_window, resource_window))
+
 
 
 # Load HUD positions from file if it exists, otherwise create default
@@ -74,48 +79,17 @@ def save_hud_positions():
         json.dump(hud_positions, file, indent=4)
 
 
-def create_players():
-    global players, game_data, process_handle  # TODO if gameData has players why do you have a global list as well
-    players.clear()
-    game_data = GameData()
 
-    # Loop until the game process is detected
-    pid = find_game_process()
-
-    # Obtain the process handle
-    process_handle = ctypes.windll.kernel32.OpenProcess(
-        wintypes.DWORD(0x0010 | 0x0020 | 0x0008 | 0x0010), False, pid)
-
-    if not process_handle:
-        print("Error: Failed to obtain process handle.")
-        return  # Exit or handle the error gracefully
-
-    # Loop until at least one valid player is detected
-    while True:
-        while True:
-            if find_game_process and detect_if_all_players_are_loaded(process_handle):
-                break
-            print("Waiting for the game to load...")
-            time.sleep(1)
-        valid_player_count = initialize_players_after_loading(game_data, process_handle)
-        if valid_player_count > 0:
-            break
-        print("Waiting for at least one valid player...")
-        time.sleep(1)
-
-    players = game_data.players
-    return player_count
-
-
-def find_game_process():
+def find_game_process(stop_event):
     print("Waiting for the game to start...")
-    while True:
+    while not stop_event.is_set():
         pid = find_pid_by_name("gamemd-spawn.exe")
         if pid is not None:
-            break
+            print("Game detected")
+            return pid
         time.sleep(1)
-    print("Game detected")
-    return pid
+    return None  # Return None if stop event is set
+
 
 
 def find_pid_by_name(name):
@@ -125,51 +99,19 @@ def find_pid_by_name(name):
     return None
 
 
-# Function to update both Unit and Resource HUDs with player data
 def update_huds():
-    # print("Entered the update_huds function")
-    global hud_windows
-    global players
-    if find_pid_by_name("gamemd-spawn.exe") is not None:
-        # print("The update_huds function has detected the game is open")
-        if len(players) != 0:
-            # print(f"The update_huds function has detected {len(players)} players")
-            if len(hud_windows) == 0:
-                # print("Attempting to create HUDs")
-                create_hud_windows()  # After players are created, you can set up HUD windows in the main thread
-            else:
-                # print("Updating values in the huds")
-                for unit_window, resource_window in hud_windows:
-                    unit_window.update_labels()  # Update the unit count (e.g., Rhino tanks)
-                    resource_window.update_labels()  # Update money and power
-    else:
-        # print("The update_huds function has detected the game is closed")
-        for unit_window, resource_window in hud_windows:
-            unit_window.hide()  # Update the unit count (e.g., Rhino tanks)
-            resource_window.hide()  # Update money and power
-        hud_windows = []
+    with data_lock:
+        if len(hud_windows) == 0:
+            return  # No HUDs to update
+        try:
+            for unit_window, resource_window in hud_windows:
+                unit_window.update_labels()
+                resource_window.update_labels()
+        except Exception as e:
+            print(f"Exception in update_huds: {e}")
+            traceback.print_exc()
 
 
-# Background thread to continuously update player data
-# TODO this thread needs to exit as soon as the game closes
-def continuous_data_update():
-    run_create_players_in_background()
-
-    while True:
-        if find_pid_by_name("gamemd-spawn.exe") is None:
-            print("Game process ended.")
-            break
-        # else:
-            # print("the game is still running.")
-
-        for player in players:
-            player.update_dynamic_data()
-        time.sleep(1)
-
-    ctypes.windll.kernel32.CloseHandle(process_handle)
-    print("Waiting for the game to start again...")
-    continuous_data_update()
-    return
 
 # Function to toggle HUD visibility (show/hide all HUDs)
 hud_visible = True
@@ -177,8 +119,15 @@ hud_visible = True
 
 # Handle closing the application
 def on_closing():
+    print("Closing application...")
     save_hud_positions()
+    # Signal the thread to stop
+    data_update_thread.stop_event.set()
+    # Wait for the thread to finish
+    data_update_thread.wait()
+    print("Data update thread has finished.")
     app.quit()
+
 
 
 class ControlPanel(QMainWindow):
@@ -318,32 +267,166 @@ class ControlPanel(QMainWindow):
 hud_positions = load_hud_positions()
 
 
-def run_create_players_in_background():
-    print("Attempting to create Players now")
-    create_players()
+def run_create_players_in_background(stop_event):
+    global players, game_data, process_handle
+
+    players.clear()
+    game_data = GameData()
+
+    # Find the game process
+    pid = find_game_process(stop_event)
+    if pid is None or stop_event.is_set():
+        return None  # Game process not found or stop event set
+
+    # Obtain the process handle
+    process_handle = ctypes.windll.kernel32.OpenProcess(
+        wintypes.DWORD(0x0010 | 0x0020 | 0x0008 | 0x0010), False, pid)
+
+    if not process_handle:
+        print("Error: Failed to obtain process handle.")
+        return None
+
+    game_process = psutil.Process(pid)
+
+    try:
+        # Wait until players are loaded
+        while not detect_if_all_players_are_loaded(process_handle):
+            if stop_event.is_set():
+                return None
+            if not game_process.is_running():
+                print("Game process exited before players were loaded.")
+                # Close the process handle
+                ctypes.windll.kernel32.CloseHandle(process_handle)
+                process_handle = None
+                return None
+            time.sleep(1)
+
+        # Initialize players after loading
+        valid_player_count = initialize_players_after_loading(game_data, process_handle)
+        if valid_player_count > 0:
+            players = game_data.players
+            return game_process  # Return the game_process object
+        else:
+            print("No valid players found.")
+            return None
+    except Exception as e:
+        print(f"Exception in run_create_players_in_background: {e}")
+        traceback.print_exc()
+        return None
+
+
+
+
+def game_started_handler():
+    print("Game started handler called")
+    with data_lock:
+        if len(players) == 0:
+            print("No valid players found. HUD will not be displayed.")
+            return
+        # Create HUD windows
+        create_hud_windows()
+        for unit_window, resource_window in hud_windows:
+            unit_window.show()
+            resource_window.show()
+
+def game_stopped_handler():
+    print("Game stopped handler called")
+    with data_lock:
+        for unit_window, resource_window in hud_windows:
+            unit_window.close()  # Close the windows
+            resource_window.close()
+        hud_windows.clear()
+        players.clear()
+
+
+
+
+class DataUpdateThread(QThread):
+    update_signal = Signal()
+    game_started = Signal()
+    game_stopped = Signal()
+
+    def __init__(self):
+        super().__init__()
+        self.stop_event = threading.Event()
+
+    def run(self):
+        global process_handle  # Ensure process_handle is accessible
+        try:
+            while not self.stop_event.is_set():
+                print("Waiting for the game to start and players to load...")
+                game_process = run_create_players_in_background(self.stop_event)
+                if game_process is None:
+                    if self.stop_event.is_set():
+                        print("Stop event set. Exiting thread.")
+                        break
+                    time.sleep(1)
+                    continue  # Retry if the game process is not found
+
+                # Emit game_started signal now that players are initialized
+                self.game_started.emit()
+
+                while game_process.is_running() and not self.stop_event.is_set():
+                    with data_lock:
+                        try:
+                            for player in players:
+                                player.update_dynamic_data()
+                            self.update_signal.emit()  # Emit signal after data update
+                        except Exception as e:
+                            print(f"Exception during updating player data: {e}")
+                            traceback.print_exc()
+                            break  # Exit the loop
+                    time.sleep(1)
+
+                if self.stop_event.is_set():
+                    print("Stop event set during game loop. Exiting thread.")
+                    break
+
+                # Game has ended
+                self.game_stopped.emit()  # Emit game_stopped signal
+                print("Game process ended.")
+
+                # Close process_handle
+                with data_lock:
+                    if process_handle:
+                        ctypes.windll.kernel32.CloseHandle(process_handle)
+                        process_handle = None
+                time.sleep(1)
+        except Exception as e:
+            print(f"Error in DataUpdateThread: {e}")
+            traceback.print_exc()
+        finally:
+            with data_lock:
+                if process_handle:
+                    ctypes.windll.kernel32.CloseHandle(process_handle)
+                    process_handle = None
+            print("Data update thread has exited.")
 
 
 # Main application loop
 if __name__ == '__main__':
     app = QApplication([])
 
+    # hud_updater = HUDUpdater()  # Remove this line
+
     control_panel = ControlPanel()
     control_panel.show()
 
-    # Start the player creation in a background thread, so it doesn't block the UI
-    # threading.Thread(target=run_create_players_in_background, daemon=True).start()
+    # Start the background thread
+    data_update_thread = DataUpdateThread()
 
-    # Start the background thread to update player data
-    thread = threading.Thread(target=continuous_data_update, daemon=True)
-    thread.start()
+    # Connect signals from data_update_thread
+    data_update_thread.update_signal.connect(update_huds)
+    data_update_thread.game_started.connect(game_started_handler)
+    data_update_thread.game_stopped.connect(game_stopped_handler)
 
-    # Start a timer to periodically update the HUDs
-    timer = QTimer()
-    timer.timeout.connect(update_huds)
-    timer.start(100) # TODO 
+    data_update_thread.start()
 
-    # Run the application's event loop (starts the GUI and keeps it responsive)
     app.exec()
 
-    # Save HUD positions on exit
+    # On application exit
+    data_update_thread.stop_event.set()
+    data_update_thread.quit()
+    data_update_thread.wait()
     save_hud_positions()
+
