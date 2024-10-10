@@ -2,13 +2,13 @@
     "selected_units": {
         "Allied": {
             "Infantry": {
-                "GI": true,
+                "GI": false,
                 "Allied Dog": true,
-                "GGI": true,
+                "GGI": false,
                 "Allied Engineer": false,
                 "Chrono Legionnaire": false,
                 "Spy": false,
-                "Rocketeer": false,
+                "Rocketeer": true,
                 "Tanya": false,
                 "Navy Seal": false
             },
@@ -32,73 +32,114 @@
                 "Allied War Factory": true
             },
             "Tank": {
-                "Grizzly": false,
-                "IFV": false,
-                "Chrono Miner": false,
+                "Grizzly": true,
+                "IFV": true,
+                "Chrono Miner": true,
                 "Battle Fortress": false,
                 "Allied MCV": false,
                 "Allied Amphibious Transport": false,
-                "Prism Tank": false,
+                "Prism Tank": true,
                 "Tank Destroyer": false,
                 "Robot Tank": false,
                 "NightHawk Transport": false,
-                "Mirage Tank": false
+                "Mirage Tank": true
             },
             "Naval": {
                 "Agis Cruiser": false,
-                "Aircraft Carrier": false,
-                "Destroyer": false,
-                "Dolphin": false,
+                "Aircraft Carrier": true,
+                "Destroyer": true,
+                "Dolphin": true,
                 "Allied Amphibious Transport": false
             },
             "Aircraft": {
-                "Black Eagle": false,
-                "Harrier": false
+                "Black Eagle": true,
+                "Harrier": true
             }
         },
         "Soviet": {
             "Infantry": {
-                "Desolator": true,
-                "conscript": true,
-                "Boris": true,
-                "Flak Trooper": true,
-                "Soviet Engineer": true,
+                "Desolator": false,
+                "conscript": false,
+                "Boris": false,
+                "Flak Trooper": false,
+                "Soviet Engineer": false,
                 "Soviet Dog": true,
-                "Ivan": true,
-                "Terrorist": true
+                "Ivan": false,
+                "Terrorist": false
             },
             "Structure": {
                 "Soviet Barracks": false,
-                "Battle Bunker": false
+                "Battle Bunker": false,
+                "Soviet War Factory": true,
+                "Sov Ore Ref": false,
+                "Flak Cannon": false,
+                "Iron Curtain": false,
+                "Sentry Gun": false,
+                "Industrial Plant": false,
+                "Nuclear Missile Launcher": false,
+                "Sov Radar": false,
+                "Nuclear Reactor": false,
+                "Tesla Reactor": false,
+                "Sov Service Depot": false,
+                "Sov Naval Yard": false,
+                "Tesla Coil": false
             },
             "Tank": {
-                "Rhino Tank": false
+                "Rhino Tank": true,
+                "Apoc": false,
+                "Terror Drone": true,
+                "Siege Chopper": false,
+                "Kirov": false,
+                "War Miner": true,
+                "V3 Rocket Launcher": false,
+                "Soviet MCV": false,
+                "Demolition truck": false
             },
             "Naval": {
-                "Dreadnought": false,
-                "Squid": false,
-                "Typhoon attack sub": false,
+                "Dreadnought": true,
+                "Squid": true,
+                "Typhoon attack sub": true,
                 "Sea Scorpion": false
             },
             "Aircraft": {}
         },
         "Yuri": {
             "Infantry": {
-                "Initiate": true,
-                "Virus": true,
-                "Yuri Clone": true,
-                "Yuri Engineer": true,
-                "Yuri Prime": true,
+                "Initiate": false,
+                "Virus": false,
+                "Yuri Clone": false,
+                "Yuri Engineer": false,
+                "Yuri Prime": false,
                 "Brute": true
             },
             "Structure": {
-                "Yuri War Factory": false
+                "Yuri War Factory": true,
+                "Yuri Barracks": false,
+                "Cloning Vats": false,
+                "Tank Bunker": false,
+                "Gattling Cannon": false,
+                "Grinder": false,
+                "Yuri Radar": false,
+                "Psychic Tower": false,
+                "Psychic dominator": false,
+                "Yuri Battle Lab": false,
+                "Bio Reactor": false,
+                "Slave Miner Deployed": true,
+                "Yuri Naval Yard": false
             },
             "Tank": {
-                "Gattling Tank": false
+                "Gattling Tank": true,
+                "Chaos Drone": false,
+                "Disc": true,
+                "Magnetron": true,
+                "Mastermind": true,
+                "Lasher": true,
+                "Yuri Amphibious Transport": false,
+                "Yuri MCV": false
             },
             "Naval": {
-                "Boomer Sub": false
+                "Boomer Sub": true,
+                "Yuri Amphibious Transport": false
             },
             "Aircraft": {}
         }
@@ -229,10 +270,6 @@
                 {
                     "name": "IFV",
                     "image": "cameos/png/IFV.png"
-                },
-                {
-                    "name": "Allied Amphibious Transport",
-                    "image": "cameos/png/Allied Amphibious Transport.png"
                 },
                 {
                     "name": "Allied MCV",
@@ -437,6 +474,10 @@
                     "image": "cameos/png/Squid.png"
                 },
                 {
+                    "name": "Soviet Amphibious Transport",
+                    "image": "cameos/png/Soviet Amphibious Transport.png"
+                },
+                {
                     "name": "Typhoon attack sub",
                     "image": "cameos/png/Typhoon attack sub.png"
                 },
@@ -501,7 +542,7 @@
                 },
                 {
                     "name": "Yuri Radar",
-                    "image": "cameos/png/Tank Bunker.png"
+                    "image": "cameos/png/Yuri Radar.png"
                 },
                 {
                     "name": "Psychic Tower",
@@ -552,14 +593,6 @@
                 {
                     "name": "Magnetron",
                     "image": "cameos/png/Magnetron.png"
-                },
-                {
-                    "name": "Slave miner undeployed",
-                    "image": "cameos/png/Slave miner undeployed.png"
-                },
-                {
-                    "name": "Yuri Amphibious Transport",
-                    "image": "cameos/png/Yuri Amphibious Transport.png"
                 },
                 {
                     "name": "Yuri MCV",

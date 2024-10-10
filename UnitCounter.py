@@ -5,6 +5,7 @@ from CounterWidget import CounterWidget
 
 from PySide6.QtWidgets import QVBoxLayout
 
+
 class UnitWindow(QMainWindow):
     def __init__(self, player, player_count, hud_pos, unit_json_file="unit_selection.json"):
         super().__init__()
@@ -60,7 +61,9 @@ class UnitWindow(QMainWindow):
         """Determine the unit type and retrieve the unit count from the relevant section."""
 
         if unit_name == 'Slave Miner Deployed' or unit_name == 'Slave miner undeployed':
-            return self.player.infantry_counts.get('Slave Miner Deployed', 0) + self.player.infantry_counts.get('Slave miner undeployed', 0)
+            print(unit_name)
+            return self.player.building_counts.get('Slave Miner Deployed', 0) + self.player.player.tank_counts.get(
+                'Slave miner undeployed', 0)
         elif unit_type == 'Infantry':
             return self.player.infantry_counts.get(unit_name, 0)
         elif unit_type == 'Tank' or unit_type == 'Naval':
@@ -114,8 +117,7 @@ class UnitWindow(QMainWindow):
             counter_widget.update_count(unit_count)
             if 0 < unit_count < 500:
                 counter_widget.show()
-            else:
-                counter_widget.hide()
+
 
     def get_unit_count(self, unit_type, unit_name):
         """Determine the unit type and retrieve the unit count from the relevant section."""

@@ -35,7 +35,7 @@ class CounterWidget(QLabel):
         painter.drawPixmap(x_offset, y_offset, scaled_pixmap)
 
         # Set the font for the text (scaling based on size)
-        painter.setFont(QFont("Arial", int(self.size / 5), QFont.Bold))
+        painter.setFont(QFont("Arial", int(self.size / 4), QFont.Bold))
 
         # Draw the black outline by slightly offsetting the text in multiple directions
         painter.setPen(Qt.black)  # Set the pen to black for the outline
@@ -48,7 +48,7 @@ class CounterWidget(QLabel):
 
         # Draw the rounded colored frame around the scaled image
         pen = QPen(self.color)  # Use the passed color for the frame
-        pen.setWidth(int(self.size / 25))  # Set the width of the frame
+        pen.setWidth(int(self.size / 20))  # Set the width of the frame
         painter.setPen(pen)
 
         # Draw a rounded rectangle around the actual image size
