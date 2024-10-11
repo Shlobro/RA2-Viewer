@@ -1,8 +1,8 @@
 import json
 from PySide6.QtCore import Qt
-from PySide6.QtWidgets import QMainWindow, QFrame, QVBoxLayout
+from PySide6.QtWidgets import QMainWindow, QFrame, QVBoxLayout, QWidget, QHBoxLayout
 from CounterWidget import CounterWidget
-
+import logging
 from PySide6.QtWidgets import QVBoxLayout
 
 
@@ -11,32 +11,56 @@ class UnitWindow(QMainWindow):
         super().__init__()
         self.player = player
         self.player_count = player_count
-        self.unit_json_file = unit_json_file  # Reference to the JSON file for unit selection
+        self.unit_json_file = unit_json_file
+        self.layout_type = hud_pos.get('unit_layout', 'Vertical')  # Default to Vertical layout
+        self.size = hud_pos.get('unit_counter_size', 100)
 
-        # Use the global size from hud_positions
-        self.size = hud_pos.get('unit_counter_size', 100)  # Default size is 100 if not present
-
-        # Get the initial position of the Unit HUD
+        # Set window geometry and flags
         pos = self.get_default_position(player.index, 'unit', hud_pos)
-        self.setGeometry(pos['x'], pos['y'], 120, 120)  # Set window size
+        self.setGeometry(pos['x'], pos['y'], 120, 120)
         self.setWindowFlags(Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint | Qt.X11BypassWindowManagerHint)
         self.setAttribute(Qt.WA_TranslucentBackground)
 
         self.make_hud_movable(hud_pos)
 
-        unit_frame = QFrame(self)
-        self.layout = QVBoxLayout(unit_frame)  # Use a vertical layout for stacking counters vertically
-        self.layout.setSpacing(0)  # Ensure no space between widgets
-        self.layout.setContentsMargins(0, 0, 0, 0)  # No margins around the edges
+        # Create the unit frame and apply the correct layout
+        self.unit_frame = QFrame(self)
+        self.set_layout(self.layout_type)
 
         # List to hold all the counters
         self.counters = []
-
-        # Dynamically load selected units from JSON and create counters
         self.load_selected_units_and_create_counters()
 
-        self.setCentralWidget(unit_frame)
+        self.setCentralWidget(self.unit_frame)
         self.show()
+
+    def set_layout(self, layout_type):
+        """Set the layout based on the provided layout type."""
+        self.layout = QVBoxLayout(self.unit_frame) if layout_type == 'Vertical' else QHBoxLayout(self.unit_frame)
+        self.layout.setSpacing(0)
+        self.layout.setContentsMargins(0, 0, 0, 0)
+
+
+    def update_layout(self, layout_type):
+        """Update the layout dynamically without deleting widgets."""
+        if self.layout_type != layout_type:
+            self.layout_type = layout_type
+
+            # Create a new layout without resetting widgets
+            new_layout = QVBoxLayout() if layout_type == 'Vertical' else QHBoxLayout()
+            new_layout.setSpacing(0)
+            new_layout.setContentsMargins(0, 0, 0, 0)
+
+            # Move existing widgets to the new layout
+            for counter_widget in self.counters:
+                self.layout.removeWidget(counter_widget)  # Remove from the old layout
+                new_layout.addWidget(counter_widget)  # Add to the new layout
+
+            # Replace the old layout with the new one
+            QWidget().setLayout(self.layout)  # Detach the old layout from the frame
+            self.unit_frame.setLayout(new_layout)  # Apply the new layout to the unit frame
+            self.layout = new_layout  # Update the reference to the new layout
+            self.updateGeometry()  # Force the window to update its geometry
 
     def load_selected_units_and_create_counters(self):
         """Load selected units from JSON and create CounterWidgets for them."""
@@ -46,14 +70,13 @@ class UnitWindow(QMainWindow):
             for unit_type, units in unit_types.items():
                 for unit_name, is_selected in units.items():
                     if is_selected:
-                        # Determine where to fetch the unit count based on unit type
                         unit_count = self.get_unit_count(unit_type, unit_name)
                         unit_image_path = self.get_unit_image_path(faction, unit_type, unit_name)
 
-                        # Create the CounterWidget for the selected unit
                         unit_counter = CounterWidget(unit_count, unit_image_path, self.player.color, self.size)
                         unit_counter.hide()
-                        # Add the widget to the vertical layout
+
+                        # Add the widget to the current layout
                         self.layout.addWidget(unit_counter)
                         self.counters.append(unit_counter)
 
@@ -61,7 +84,6 @@ class UnitWindow(QMainWindow):
         """Determine the unit type and retrieve the unit count from the relevant section."""
 
         if unit_name == 'Slave Miner Deployed' or unit_name == 'Slave miner undeployed':
-            print(unit_name)
             return self.player.building_counts.get('Slave Miner Deployed', 0) + self.player.player.tank_counts.get(
                 'Slave miner undeployed', 0)
         elif unit_type == 'Infantry':
@@ -99,9 +121,7 @@ class UnitWindow(QMainWindow):
         """Update the size of all CounterWidgets in the UnitWindow."""
         self.size = new_size  # Update the stored size for the window
         for counter_widget in self.counters:
-            counter_widget.setFixedSize(new_size, new_size)  # Resize each CounterWidget
-            counter_widget.size = new_size  # Update size attribute
-            counter_widget.update()  # Redraw the widget with the new size
+            counter_widget.update_size(new_size)  # Resize each CounterWidget dynamically
 
         # Ensure the layout tightly packs the widgets after resizing
         self.layout.setSizeConstraint(QVBoxLayout.SetFixedSize)
@@ -117,20 +137,30 @@ class UnitWindow(QMainWindow):
             counter_widget.update_count(unit_count)
             if 0 < unit_count < 500:
                 counter_widget.show()
-
+                self.update_all_counters_size(self.size)
 
     def get_unit_count(self, unit_type, unit_name):
         """Determine the unit type and retrieve the unit count from the relevant section."""
 
-        if unit_type == 'Infantry':
-            return self.player.infantry_counts.get(unit_name, 0)
-        elif unit_type == 'Tank' or unit_type == 'Naval':
-            return self.player.tank_counts.get(unit_name, 0)
-        elif unit_type == 'Structure':
-            return self.player.building_counts.get(unit_name, 0)
-        else:
-            # Unknown unit type, return 0 as default
-            return 0
+        # Check if the player or its counts are None (game may have ended)
+        if self.player is None:
+            logging.warning("The game ended while retrieving unit counts.")
+            return 0  # Return 0 or any other default value
+
+        try:
+            if unit_type == 'Infantry':
+                return self.player.infantry_counts.get(unit_name, 0)
+            elif unit_type == 'Tank' or unit_type == 'Naval':
+                return self.player.tank_counts.get(unit_name, 0)
+            elif unit_type == 'Structure':
+                return self.player.building_counts.get(unit_name, 0)
+            else:
+                # Unknown unit type, return 0 as default
+                return 0
+        except AttributeError as e:
+            logging.error(f"Error retrieving unit count: {e}")
+            logging.warning("Game likely ended while retrieving unit counts.")
+            return 0  # Return a default value to avoid further errors
 
     def get_unit_names_and_types(self):
         """

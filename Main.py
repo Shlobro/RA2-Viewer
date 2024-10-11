@@ -12,7 +12,7 @@ from ctypes import wintypes
 import psutil
 from PySide6.QtWidgets import (
     QApplication, QWidget, QPushButton, QCheckBox, QVBoxLayout,
-    QMainWindow, QLabel, QSpinBox
+    QMainWindow, QLabel, QSpinBox, QComboBox
 )
 from PySide6.QtCore import QObject, Signal, QThread, Qt
 
@@ -54,7 +54,7 @@ def load_hud_positions():
     hud_positions.setdefault('show_name', True)
     hud_positions.setdefault('show_money', True)
     hud_positions.setdefault('show_power', True)
-
+    hud_positions.setdefault('unit_layout', 'Vertical')  # Default to Vertical layout
 
 # Save HUD positions and settings to file
 def save_hud_positions():
@@ -124,7 +124,7 @@ def run_create_players_in_background(stop_event):
                 ctypes.windll.kernel32.CloseHandle(process_handle)
                 process_handle = None
                 return None
-            time.sleep(1)
+            QThread.msleep(1000)  # NOTE
 
         # Initialize players after loading
         valid_player_count = initialize_players_after_loading(game_data, process_handle)
@@ -132,7 +132,7 @@ def run_create_players_in_background(stop_event):
             players = game_data.players
             return game_process  # Return the game_process object
         else:
-            logging.info("No valid players found.")
+            logging.warning("No valid players found.")
             return None
     except Exception as e:
         logging.error(f"Exception in run_create_players_in_background: {e}")
@@ -190,6 +190,7 @@ def game_started_handler():
 # Handler for when the game stops
 def game_stopped_handler():
     logging.info("Game stopped handler called")
+    save_hud_positions()
     for unit_window, resource_window in hud_windows:
         unit_window.close()
         resource_window.close()
@@ -224,18 +225,31 @@ class ControlPanel(QMainWindow):
         selection_button.clicked.connect(self.open_unit_selection)
         layout.addWidget(selection_button)
 
+        # Layout toggle (horizontal or vertical)
+        self.layout_label = QLabel("Select Layout:")
+        layout.addWidget(self.layout_label)
+
+        self.layout_combo = QComboBox()
+        self.layout_combo.addItems(["Vertical", "Horizontal"])
+        layout_type = hud_positions.get('unit_layout', 'Vertical')  # Default to Vertical
+        self.layout_combo.setCurrentText(layout_type)  # Set saved or default layout
+        self.layout_combo.currentTextChanged.connect(self.update_layout)
+        layout.addWidget(self.layout_combo)
+
+        # NOTE we got rid of the default values since we create them when we load the json file
+
         self.name_checkbox = QCheckBox("Show Name")
-        self.name_checkbox.setChecked(hud_positions.get('show_name', True))
+        self.name_checkbox.setChecked(hud_positions.get('show_name'))
         self.name_checkbox.stateChanged.connect(self.toggle_name)
         layout.addWidget(self.name_checkbox)
 
         self.money_checkbox = QCheckBox("Show Money")
-        self.money_checkbox.setChecked(hud_positions.get('show_money', True))
+        self.money_checkbox.setChecked(hud_positions.get('show_money'))
         self.money_checkbox.stateChanged.connect(self.toggle_money)
         layout.addWidget(self.money_checkbox)
 
         self.power_checkbox = QCheckBox("Show Power")
-        self.power_checkbox.setChecked(hud_positions.get('show_power', True))
+        self.power_checkbox.setChecked(hud_positions.get('show_power'))
         self.power_checkbox.stateChanged.connect(self.toggle_power)
         layout.addWidget(self.power_checkbox)
 
@@ -243,7 +257,7 @@ class ControlPanel(QMainWindow):
         self.size_label = QLabel("Set Unit Window Size: (25 - 250)")
         layout.addWidget(self.size_label)
 
-        counter_size = hud_positions.get('unit_counter_size', 100)
+        counter_size = hud_positions.get('unit_counter_size')
         self.counter_size_spinbox = QSpinBox()
         self.counter_size_spinbox.setRange(25, 250)
         self.counter_size_spinbox.setValue(counter_size)
@@ -254,7 +268,7 @@ class ControlPanel(QMainWindow):
         self.data_size_label = QLabel("Set Data Window Size: (10 - 100)")
         layout.addWidget(self.data_size_label)
 
-        data_size = hud_positions.get('data_counter_size', 16)
+        data_size = hud_positions.get('data_counter_size')
         self.data_size_spinbox = QSpinBox()
         self.data_size_spinbox.setRange(10, 100)
         self.data_size_spinbox.setValue(data_size)
@@ -271,6 +285,18 @@ class ControlPanel(QMainWindow):
 
         # Store the reference to the UnitSelectionWindow here
         self.unit_selection_window = None
+
+    def update_layout(self, layout_type):
+        """Update the layout of the UnitWindow between vertical and horizontal."""
+        hud_positions['unit_layout'] = layout_type
+        logging.info(f"Updated layout to: {layout_type}")
+
+        # If HUD windows exist, update their layouts as well
+        if hud_windows:
+            for unit_window, _ in hud_windows:
+                unit_window.update_layout(layout_type)
+        else:
+            logging.info("HUD windows do not exist yet, storing the layout for later.")
 
     def update_unit_window_size(self):
         new_size = self.counter_size_spinbox.value()
@@ -299,44 +325,32 @@ class ControlPanel(QMainWindow):
             logging.info("Opening Unit Selection window")
             self.unit_selection_window.show()
 
+    # NOTE merged the toggle functions into one function
+
+
     # Method to toggle the visibility of Name
+    def toggle_hud_element(self, element, widget_name, state):
+        hud_positions[element] = (state == 2)
+        logging.info(f"Toggled {element} state to: {hud_positions[element]}")
+
+        # If HUD windows exist, toggle visibility of the specified widget
+        if hud_windows:
+            for _, resource_window in hud_windows:
+                widget = getattr(resource_window, widget_name)
+                if state == 2:
+                    widget.show()
+                else:
+                    widget.hide()
+
+    # Then you can call this method for different elements
     def toggle_name(self, state):
-        hud_positions['show_name'] = (state == 2)
-        logging.info(f"Toggled show name state to: {hud_positions['show_name']}")
+        self.toggle_hud_element('show_name', 'name_widget', state)
 
-        # If HUD windows exist, toggle visibility of the name widget
-        if hud_windows:
-            for _, resource_window in hud_windows:
-                if state == 2:
-                    resource_window.name_widget.show()
-                else:
-                    resource_window.name_widget.hide()
-
-    # Method to toggle the visibility of Money
     def toggle_money(self, state):
-        hud_positions['show_money'] = (state == 2)
-        logging.info(f"Toggled show money state to: {hud_positions['show_money']}")
+        self.toggle_hud_element('show_money', 'money_widget', state)
 
-        # If HUD windows exist, toggle visibility of the money widget
-        if hud_windows:
-            for _, resource_window in hud_windows:
-                if state == 2:
-                    resource_window.money_widget.show()
-                else:
-                    resource_window.money_widget.hide()
-
-    # Method to toggle the visibility of Power
     def toggle_power(self, state):
-        hud_positions['show_power'] = (state == 2)
-        logging.info(f"Toggled show power state to: {hud_positions['show_power']}")
-
-        # If HUD windows exist, toggle visibility of the power widget
-        if hud_windows:
-            for _, resource_window in hud_windows:
-                if state == 2:
-                    resource_window.power_widget.show()
-                else:
-                    resource_window.power_widget.hide()
+        self.toggle_hud_element('show_power', 'power_widget', state)
 
 
 # Thread to continuously update player data

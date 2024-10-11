@@ -1,6 +1,6 @@
 from PySide6.QtGui import QPixmap, QPainter, QFont, QPen, QColor
 from PySide6.QtWidgets import QLabel, QSizePolicy
-from PySide6.QtCore import Qt
+from PySide6.QtCore import Qt, QRect
 
 class CounterWidget(QLabel):
     def __init__(self, count, image_path, color=Qt.red, size=100, parent=None):
@@ -9,52 +9,54 @@ class CounterWidget(QLabel):
         self.image_path = image_path
         self.color = self._convert_to_qcolor(color)  # Convert color to QColor
         self.size = size
-        self.setFixedSize(size, size)  # Fixed size for the image and count display
-
-        # Set size policy to ensure tight-fitting
         self.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
+
+        # Load the image and scale it dynamically
+        self.update_image_size()
+
+    def update_image_size(self):
+        """Dynamically load and scale the image based on the desired size."""
+        pixmap = QPixmap(self.image_path)
+        self.scaled_pixmap = pixmap.scaled(self.size, self.size, Qt.KeepAspectRatio, Qt.SmoothTransformation)
+        self.setFixedSize(self.scaled_pixmap.size())  # Adjust widget size to match the image
 
     def paintEvent(self, event):
         painter = QPainter(self)
 
-        # Load the image and ensure it keeps its aspect ratio
-        pixmap = QPixmap(self.image_path)
-
-        # Calculate the scaled pixmap with aspect ratio maintained
-        scaled_pixmap = pixmap.scaled(self.size, self.size, Qt.KeepAspectRatio, Qt.SmoothTransformation)
-
-        # Get the actual size of the scaled pixmap
-        scaled_width = scaled_pixmap.width()
-        scaled_height = scaled_pixmap.height()
-
-        # Calculate where to draw the image within the widget (center the image)
-        x_offset = (self.width() - scaled_width) // 2  # Use self.width() instead of fixed size
-        y_offset = (self.height() - scaled_height) // 2  # Use self.height() instead of fixed size
-
         # Draw the image
-        painter.drawPixmap(x_offset, y_offset, scaled_pixmap)
+        painter.drawPixmap(0, 0, self.scaled_pixmap)
 
-        # Set the font for the text (scaling based on size)
-        painter.setFont(QFont("Arial", int(self.size / 4), QFont.Bold))
+        # Set the font for the text to take about 1/4th of the widget
+        font_size = int(self.size / 3)  # Text should take up about 25% of the widget
+        painter.setFont(QFont("Arial", font_size, QFont.Bold))
 
-        # Draw the black outline by slightly offsetting the text in multiple directions
+        # Define dynamic padding based on widget size
+        padding_x = max(5, int(self.size * 0.05))  # Slightly larger padding for bigger widgets
+        padding_y = max(5, int(self.size * 0.05))  # Slightly larger padding for bigger widgets
+
+        # Calculate the x and y position for the bottom-left corner
+        text_x = padding_x
+        text_y = self.height() - padding_y
+
+        # Draw the black outline for the text with thicker borders
         painter.setPen(Qt.black)  # Set the pen to black for the outline
-        for dx, dy in [(-1, -1), (-1, 1), (1, -1), (1, 1)]:
-            painter.drawText(self.rect().adjusted(dx, dy, dx, dy), Qt.AlignCenter, str(self.count))
+        outline_thickness = 2  # Thicker outline
+        for dx in range(-outline_thickness, outline_thickness + 1):
+            for dy in range(-outline_thickness, outline_thickness + 1):
+                if dx != 0 or dy != 0:
+                    painter.drawText(text_x + dx, text_y + dy, str(self.count))
 
         # Draw the white text on top
-        painter.setPen(Qt.white)  # Set white text color
-        painter.drawText(self.rect(), Qt.AlignCenter, str(self.count))  # Draw the actual text
+        painter.setPen(Qt.white)
+        painter.drawText(text_x, text_y, str(self.count))
 
-        # Draw the rounded colored frame around the scaled image
-        pen = QPen(self.color)  # Use the passed color for the frame
+        # Draw the colored frame around the image
+        pen = QPen(self.color)
         pen.setWidth(int(self.size / 20))  # Set the width of the frame
         painter.setPen(pen)
 
-        # Draw a rounded rectangle around the actual image size
-        radius = min(scaled_width, scaled_height) / 8  # Adjust radius for the rounded corners
-        painter.drawRoundedRect(x_offset, y_offset, scaled_width, scaled_height, radius,
-                                radius)  # Draw the rounded rectangle
+        # Draw a rounded rectangle around the image
+        painter.drawRoundedRect(0, 0, self.scaled_pixmap.width(), self.scaled_pixmap.height(), 10, 10)
 
     def update_count(self, new_count):
         self.count = new_count
@@ -63,6 +65,12 @@ class CounterWidget(QLabel):
     def update_color(self, new_color):
         self.color = QColor(new_color)
         self.update()  # Redraw the widget with the updated color
+
+    def update_size(self, new_size):
+        """Dynamically update the widget and image size."""
+        self.size = new_size
+        self.update_image_size()
+        self.update()  # Redraw the widget with the updated size
 
     def _convert_to_qcolor(self, color):
         """
@@ -75,4 +83,4 @@ class CounterWidget(QLabel):
             return QColor(*color)  # Convert RGB tuple (R, G, B) to QColor
         elif isinstance(color, str):
             if color.startswith('#'):
-                return QColor(color)  # Handle hex string (e.g., '#
+                return QColor(color)  # Handle hex string (e.g., '#000000')

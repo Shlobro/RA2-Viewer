@@ -65,14 +65,14 @@ DREADNOUGHTOFFSET = 0x16  # SOV
 # Define the mappings of offsets to unit, infantry, and building names
 infantry_offsets = {
     0x0: "GI", 0x4: "conscript", 0x8: "tesla trooper", 0xc: "Allied Engineer", 0x10: "Rocketeer",
-    0x14: "Navy Seal", 0x18: "Yuri Clone", 0x1c: "Ivan", 0x20: "Desolator", 0x24: "sov dog",
+    0x14: "Navy Seal", 0x18: "Yuri Clone", 0x1c: "Ivan", 0x20: "Desolator", 0x24: "Soviet Dog",
     0x3c: "Chrono Legionnaire", 0x40: "Spy", 0x50: "Yuri Prime", 0x54: "Sniper", 0x60: "Tanya",
     0x6c: "sov engi", 0x68: "Terrorist", 0x70: "Allied Dog", 0xb4: "Yuri Engineer",
     0xb8: "GGI", 0xbc: "Initiate", 0xc0: "Boris", 0xc4: "Brute", 0xc8: "Virus",
 }
 
 tank_offsets = {
-    0x0: "Allied MCV", 0x4: "war miner", 0x8: "Apoc", 0x10: "Soviet Amphibious Transport", 0xc: "Rhino Tank",
+    0x0: "Allied MCV", 0x4: "War Miner", 0x8: "Apoc", 0x10: "Soviet Amphibious Transport", 0xc: "Rhino Tank",
     0x24: "Grizzly", 0x34: "Aircraft Carrier", 0x38: "V3 Rocket Launcher", 0x3c: "Kirov",
     0x40: "terror drone", 0x44: "flak track", 0x48: "Destroyer", 0x4c: "Typhoon attack sub", 0x50: "Aegis Cruiser",
     0x54: "Allied Amphibious Transport", 0x58: "Dreadnought", 0x5c: "NightHawk Transport", 0x60: "Squid",
@@ -189,27 +189,33 @@ class Player:
         logging.debug(f"Initialized aircraft array pointer: {self.aircraft_array_ptr}")
 
     def read_and_store_inf_units_buildings(self, category_dict, array_ptr, count_type):
-        """ Helper method to read memory and store values for infantry, tanks, or buildings. """
-        if array_ptr is None:
-            return {}
+        try:
+            """ Helper method to read memory and store values for infantry, tanks, or buildings. """
+            if array_ptr is None:
+                return {}
 
-        counts = {}
-        for offset, name in category_dict.items():
-            specific_address = array_ptr + offset
-            test_address = self.test_addresses[count_type] + offset
+            counts = {}
+            for offset, name in category_dict.items():
+                specific_address = array_ptr + offset
+                test_address = self.test_addresses[count_type] + offset
 
-            count_data = read_process_memory(self.process_handle, specific_address, 4)
-            test_data = read_process_memory(self.process_handle, test_address, 4)
+                count_data = read_process_memory(self.process_handle, specific_address, 4)
+                test_data = read_process_memory(self.process_handle, test_address, 4)
 
-            if count_data and test_address:
-                count = int.from_bytes(count_data, byteorder='little')
-                test = int.from_bytes(test_data, byteorder='little')
-                if count <= test:
-                    counts[name] = count
-                else:
-                    counts[name] = 0
+                if count_data and test_address:
+                    count = int.from_bytes(count_data, byteorder='little')
+                    test = int.from_bytes(test_data, byteorder='little')
+                    if count <= test:
+                        counts[name] = count
+                    else:
+                        counts[name] = 0
 
-        return counts
+            return counts
+        except ProcessExitedException:
+            raise  # Propagate the exception to be handled by the caller
+        except Exception as e:
+            logging.error(f"Exception in read_and_store_inf_units_buildings for player {self.username.value}: {e}")
+            traceback.print_exc()
 
     def update_dynamic_data(self):
         try:
