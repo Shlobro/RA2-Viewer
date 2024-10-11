@@ -16,7 +16,7 @@ def setup_logging(log_to_console=False):
         console_handler.setFormatter(logging.Formatter(log_format))
 
         logging.basicConfig(
-            level=logging.DEBUG,  # Adjust the level as needed
+            level=logging.INFO,  # Adjust the level as needed
             handlers=[console_handler],
             format=log_format
         )

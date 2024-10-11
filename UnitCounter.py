@@ -80,21 +80,6 @@ class UnitWindow(QMainWindow):
                         self.layout.addWidget(unit_counter)
                         self.counters.append(unit_counter)
 
-    def get_unit_count(self, unit_type, unit_name):
-        """Determine the unit type and retrieve the unit count from the relevant section."""
-
-        if unit_name == 'Slave Miner Deployed' or unit_name == 'Slave miner undeployed':
-            return self.player.building_counts.get('Slave Miner Deployed', 0) + self.player.player.tank_counts.get(
-                'Slave miner undeployed', 0)
-        elif unit_type == 'Infantry':
-            return self.player.infantry_counts.get(unit_name, 0)
-        elif unit_type == 'Tank' or unit_type == 'Naval':
-            return self.player.tank_counts.get(unit_name, 0)
-        elif unit_type == 'Building':
-            return self.player.building_counts.get(unit_name, 0)
-        else:
-            # Unknown unit type, return 0 as default
-            return 0
 
     def get_unit_image_path(self, faction, unit_type, unit_name):
         """Fetch the image path for a given unit based on faction, unit type, and unit name."""
@@ -129,6 +114,7 @@ class UnitWindow(QMainWindow):
 
     def update_labels(self):
         """Loop through all counters and update the corresponding unit counts."""
+        logging.debug("updating all unit counters")
         for counter_widget, (unit_name, unit_type) in zip(self.counters, self.get_unit_names_and_types()):
             # Get the latest unit count based on unit type
             unit_count = self.get_unit_count(unit_type, unit_name)
@@ -156,7 +142,14 @@ class UnitWindow(QMainWindow):
             elif unit_type == 'Tank' or unit_type == 'Naval':
                 return self.player.tank_counts.get(unit_name, 0)
             elif unit_type == 'Structure':
-                return self.player.building_counts.get(unit_name, 0)
+                if unit_name == 'Slave Miner Deployed' or unit_name == 'Slave miner undeployed':
+                    return self.player.building_counts.get('Slave Miner Deployed', 0) + self.player.tank_counts.get(
+                        'Slave miner undeployed', 0)
+                elif unit_name == 'Allied AFC':
+                    return self.player.building_counts.get('Allied AFC', 0) + self.player.building_counts.get(
+                        'American AFC', 0)
+                else:
+                    return self.player.building_counts.get(unit_name, 0)
             else:
                 # Unknown unit type, return 0 as default
                 return 0

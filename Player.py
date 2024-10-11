@@ -202,14 +202,15 @@ class Player:
                 count_data = read_process_memory(self.process_handle, specific_address, 4)
                 test_data = read_process_memory(self.process_handle, test_address, 4)
 
-                if count_data and test_address:
+                if count_data and test_data:  # Check if both are not None
                     count = int.from_bytes(count_data, byteorder='little')
                     test = int.from_bytes(test_data, byteorder='little')
                     if count <= test:
                         counts[name] = count
                     else:
                         counts[name] = 0
-
+                else:
+                    logging.warning(f"Failed to read memory for {name}, count_data or test_data is None.")
             return counts
         except ProcessExitedException:
             raise  # Propagate the exception to be handled by the caller

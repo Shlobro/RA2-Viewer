@@ -23,7 +23,6 @@
                 "Grand Cannon": false,
                 "Ore Purifier": false,
                 "Allied AFC": false,
-                "American AFC": false,
                 "PillBox": false,
                 "Allied Battle Lab": false,
                 "Robot Control Center": false,
@@ -224,10 +223,6 @@
                 {
                     "name": "PillBox",
                     "image": "cameos/png/PillBox.png"
-                },
-                {
-                    "name": "American AFC",
-                    "image": "cameos/png/American AFC.png"
                 },
                 {
                     "name": "Allied AFC",
