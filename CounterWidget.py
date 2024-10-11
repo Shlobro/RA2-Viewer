@@ -52,7 +52,7 @@ class CounterWidget(QLabel):
 
         # Draw the colored frame around the image
         pen = QPen(self.color)
-        pen.setWidth(int(self.size / 20))  # Set the width of the frame
+        pen.setWidth(int(self.size / 15))  # Set the width of the frame
         painter.setPen(pen)
 
         # Draw a rounded rectangle around the image

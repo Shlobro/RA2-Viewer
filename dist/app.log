@@ -8264,3 +8264,938 @@
 2024-10-11 14:14:27,578 - INFO - Game process exited before players were loaded.
 2024-10-11 14:14:28,588 - INFO - Waiting for the game to start and players to load...
 2024-10-11 14:14:28,588 - INFO - Waiting for the game to start...
+2024-10-11 14:17:19,554 - INFO - Game detected
+2024-10-11 14:17:19,554 - WARNING - Memory read incomplete. Game might still be loading.
+2024-10-11 14:17:19,554 - WARNING - Skipping Player 0 due to incomplete memory read.
+2024-10-11 14:17:19,554 - WARNING - Memory read incomplete. Game might still be loading.
+2024-10-11 14:17:19,554 - WARNING - Skipping Player 0 due to incomplete memory read.
+2024-10-11 14:17:19,554 - WARNING - Memory read incomplete. Game might still be loading.
+2024-10-11 14:17:19,554 - WARNING - Skipping Player 0 due to incomplete memory read.
+2024-10-11 14:17:19,554 - WARNING - Memory read incomplete. Game might still be loading.
+2024-10-11 14:17:19,554 - WARNING - Skipping Player 0 due to incomplete memory read.
+2024-10-11 14:17:19,554 - WARNING - Memory read incomplete. Game might still be loading.
+2024-10-11 14:17:19,554 - WARNING - Skipping Player 0 due to incomplete memory read.
+2024-10-11 14:17:19,554 - WARNING - Memory read incomplete. Game might still be loading.
+2024-10-11 14:17:19,554 - WARNING - Skipping Player 0 due to incomplete memory read.
+2024-10-11 14:17:19,554 - WARNING - Memory read incomplete. Game might still be loading.
+2024-10-11 14:17:19,554 - WARNING - Skipping Player 0 due to incomplete memory read.
+2024-10-11 14:17:19,554 - WARNING - Memory read incomplete. Game might still be loading.
+2024-10-11 14:17:19,554 - WARNING - Skipping Player 0 due to incomplete memory read.
+2024-10-11 14:17:20,561 - WARNING - Memory read incomplete. Game might still be loading.
+2024-10-11 14:17:20,561 - WARNING - Skipping Player 0 due to incomplete memory read.
+2024-10-11 14:17:20,561 - WARNING - Memory read incomplete. Game might still be loading.
+2024-10-11 14:17:20,561 - WARNING - Skipping Player 0 due to incomplete memory read.
+2024-10-11 14:17:20,561 - WARNING - Memory read incomplete. Game might still be loading.
+2024-10-11 14:17:20,561 - WARNING - Skipping Player 0 due to incomplete memory read.
+2024-10-11 14:17:20,561 - WARNING - Memory read incomplete. Game might still be loading.
+2024-10-11 14:17:20,561 - WARNING - Skipping Player 0 due to incomplete memory read.
+2024-10-11 14:17:20,561 - WARNING - Memory read incomplete. Game might still be loading.
+2024-10-11 14:17:20,561 - WARNING - Skipping Player 0 due to incomplete memory read.
+2024-10-11 14:17:20,561 - WARNING - Memory read incomplete. Game might still be loading.
+2024-10-11 14:17:20,561 - WARNING - Skipping Player 0 due to incomplete memory read.
+2024-10-11 14:17:20,561 - WARNING - Memory read incomplete. Game might still be loading.
+2024-10-11 14:17:20,561 - WARNING - Skipping Player 0 due to incomplete memory read.
+2024-10-11 14:17:20,561 - WARNING - Memory read incomplete. Game might still be loading.
+2024-10-11 14:17:20,561 - WARNING - Skipping Player 0 due to incomplete memory read.
+2024-10-11 14:17:21,576 - WARNING - Memory read incomplete. Game might still be loading.
+2024-10-11 14:17:21,576 - WARNING - Skipping Player 0 due to incomplete memory read.
+2024-10-11 14:17:21,576 - WARNING - Memory read incomplete. Game might still be loading.
+2024-10-11 14:17:21,576 - WARNING - Skipping Player 0 due to incomplete memory read.
+2024-10-11 14:17:21,576 - WARNING - Memory read incomplete. Game might still be loading.
+2024-10-11 14:17:21,576 - WARNING - Skipping Player 0 due to incomplete memory read.
+2024-10-11 14:17:21,576 - WARNING - Memory read incomplete. Game might still be loading.
+2024-10-11 14:17:21,577 - WARNING - Skipping Player 0 due to incomplete memory read.
+2024-10-11 14:17:21,577 - WARNING - Memory read incomplete. Game might still be loading.
+2024-10-11 14:17:21,577 - WARNING - Skipping Player 0 due to incomplete memory read.
+2024-10-11 14:17:21,577 - WARNING - Memory read incomplete. Game might still be loading.
+2024-10-11 14:17:21,577 - WARNING - Skipping Player 0 due to incomplete memory read.
+2024-10-11 14:17:21,577 - WARNING - Memory read incomplete. Game might still be loading.
+2024-10-11 14:17:21,577 - WARNING - Skipping Player 0 due to incomplete memory read.
+2024-10-11 14:17:21,577 - WARNING - Memory read incomplete. Game might still be loading.
+2024-10-11 14:17:21,577 - WARNING - Skipping Player 0 due to incomplete memory read.
+2024-10-11 14:17:22,590 - WARNING - Memory read incomplete. Game might still be loading.
+2024-10-11 14:17:22,590 - ERROR - Failed to read memory at fixedPoint.
+2024-10-11 14:17:22,595 - INFO - Game process exited before players were loaded.
+2024-10-11 14:17:23,604 - INFO - Waiting for the game to start and players to load...
+2024-10-11 14:17:23,604 - INFO - Waiting for the game to start...
+2024-10-11 14:17:33,704 - INFO - Game detected
+2024-10-11 14:17:33,704 - INFO - Skipping Player 0 as not fully initialized yet.
+2024-10-11 14:17:33,705 - INFO - Skipping Player 0 as not fully initialized yet.
+2024-10-11 14:17:33,705 - INFO - Skipping Player 0 as not fully initialized yet.
+2024-10-11 14:17:33,705 - INFO - Skipping Player 0 as not fully initialized yet.
+2024-10-11 14:17:33,705 - INFO - Skipping Player 0 as not fully initialized yet.
+2024-10-11 14:17:33,705 - INFO - Skipping Player 0 as not fully initialized yet.
+2024-10-11 14:17:34,706 - INFO - Skipping Player 0 as not fully initialized yet.
+2024-10-11 14:17:34,706 - INFO - Skipping Player 0 as not fully initialized yet.
+2024-10-11 14:17:34,706 - INFO - Skipping Player 0 as not fully initialized yet.
+2024-10-11 14:17:34,706 - INFO - Skipping Player 0 as not fully initialized yet.
+2024-10-11 14:17:34,706 - INFO - Skipping Player 0 as not fully initialized yet.
+2024-10-11 14:17:34,706 - INFO - Skipping Player 0 as not fully initialized yet.
+2024-10-11 14:17:35,720 - INFO - Skipping Player 0 as not fully initialized yet.
+2024-10-11 14:17:35,720 - INFO - Skipping Player 0 as not fully initialized yet.
+2024-10-11 14:17:35,720 - INFO - Skipping Player 0 as not fully initialized yet.
+2024-10-11 14:17:35,720 - INFO - Skipping Player 0 as not fully initialized yet.
+2024-10-11 14:17:35,720 - INFO - Skipping Player 0 as not fully initialized yet.
+2024-10-11 14:17:35,720 - INFO - Skipping Player 0 as not fully initialized yet.
+2024-10-11 14:17:36,732 - INFO - Players loaded. Proceeding with players initialization.
+2024-10-11 14:17:36,732 - DEBUG - Initialized unit array pointer: 283615008
+2024-10-11 14:17:36,732 - DEBUG - Initialized building array pointer: 302030504
+2024-10-11 14:17:36,732 - DEBUG - Initialized infantry array pointer: 0
+2024-10-11 14:17:36,732 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 14:17:36,733 - INFO - Player 0 colorScheme: PySide6.QtGui.QColor.fromRgbF(1.000000, 0.752941, 0.796078, 1.000000)
+2024-10-11 14:17:36,733 - INFO - Player 0 country name: Americans
+2024-10-11 14:17:36,733 - INFO - Player 0 name: Computer
+2024-10-11 14:17:36,733 - DEBUG - Initialized unit array pointer: 283619168
+2024-10-11 14:17:36,733 - DEBUG - Initialized building array pointer: 315632648
+2024-10-11 14:17:36,733 - DEBUG - Initialized infantry array pointer: 0
+2024-10-11 14:17:36,733 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 14:17:36,733 - INFO - Player 1 colorScheme: PySide6.QtGui.QColor.fromRgbF(1.000000, 0.000000, 0.000000, 1.000000)
+2024-10-11 14:17:36,733 - INFO - Player 1 country name: Confederation
+2024-10-11 14:17:36,733 - INFO - Player 1 name: Computer
+2024-10-11 14:17:36,733 - INFO - Number of valid players: 2
+2024-10-11 14:17:36,733 - DEBUG - Updating dynamic data for player 1
+2024-10-11 14:17:36,733 - INFO - Game started handler called
+2024-10-11 14:17:36,733 - DEBUG - Player 1 balance: 50079
+2024-10-11 14:17:36,733 - INFO - Creating HUD for Computer with color PySide6.QtGui.QColor.fromRgbF(1.000000, 0.752941, 0.796078, 1.000000)
+2024-10-11 14:17:36,733 - DEBUG - Player 1 spent credit: 1
+2024-10-11 14:17:36,734 - DEBUG - Player 1 is_winner: False
+2024-10-11 14:17:36,734 - DEBUG - Player 1 is_loser: False
+2024-10-11 14:17:36,734 - DEBUG - Player 1 power output: 200
+2024-10-11 14:17:36,734 - DEBUG - Player 1 power drain: 0
+2024-10-11 14:17:36,734 - DEBUG - Player 1 total power: 200
+2024-10-11 14:17:36,734 - DEBUG - Initialized unit array pointer: 283615008
+2024-10-11 14:17:36,734 - DEBUG - Initialized building array pointer: 302030504
+2024-10-11 14:17:36,734 - DEBUG - Initialized infantry array pointer: 0
+2024-10-11 14:17:36,734 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 14:17:36,736 - DEBUG - Initialized unit array pointer: 283615008
+2024-10-11 14:17:36,736 - DEBUG - Initialized building array pointer: 302030504
+2024-10-11 14:17:36,736 - DEBUG - Initialized infantry array pointer: 0
+2024-10-11 14:17:36,736 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 14:17:36,736 - DEBUG - Updating dynamic data for player 2
+2024-10-11 14:17:36,736 - DEBUG - Player 2 balance: 50080
+2024-10-11 14:17:36,736 - DEBUG - Player 2 spent credit: 0
+2024-10-11 14:17:36,736 - DEBUG - Player 2 is_winner: False
+2024-10-11 14:17:36,737 - DEBUG - Player 2 is_loser: False
+2024-10-11 14:17:36,737 - DEBUG - Player 2 power output: 200
+2024-10-11 14:17:36,737 - DEBUG - Player 2 power drain: 0
+2024-10-11 14:17:36,737 - DEBUG - Player 2 total power: 200
+2024-10-11 14:17:36,737 - DEBUG - Initialized unit array pointer: 283619168
+2024-10-11 14:17:36,737 - DEBUG - Initialized building array pointer: 315632648
+2024-10-11 14:17:36,737 - DEBUG - Initialized infantry array pointer: 0
+2024-10-11 14:17:36,737 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 14:17:36,738 - DEBUG - Initialized unit array pointer: 283619168
+2024-10-11 14:17:36,739 - DEBUG - Initialized building array pointer: 315632648
+2024-10-11 14:17:36,739 - DEBUG - Initialized infantry array pointer: 0
+2024-10-11 14:17:36,739 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 14:17:36,809 - INFO - Creating HUD for Computer with color PySide6.QtGui.QColor.fromRgbF(1.000000, 0.000000, 0.000000, 1.000000)
+2024-10-11 14:17:37,743 - DEBUG - Updating dynamic data for player 1
+2024-10-11 14:17:37,743 - DEBUG - Player 1 balance: 49889
+2024-10-11 14:17:37,743 - DEBUG - Player 1 spent credit: 971
+2024-10-11 14:17:37,743 - DEBUG - Player 1 is_winner: False
+2024-10-11 14:17:37,743 - DEBUG - Player 1 is_loser: False
+2024-10-11 14:17:37,743 - DEBUG - Player 1 power output: 350
+2024-10-11 14:17:37,743 - DEBUG - Player 1 power drain: 0
+2024-10-11 14:17:37,743 - DEBUG - Player 1 total power: 350
+2024-10-11 14:17:37,743 - DEBUG - Initialized unit array pointer: 283615008
+2024-10-11 14:17:37,743 - DEBUG - Initialized building array pointer: 302030504
+2024-10-11 14:17:37,743 - DEBUG - Initialized infantry array pointer: 0
+2024-10-11 14:17:37,743 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 14:17:37,744 - DEBUG - Initialized unit array pointer: 283615008
+2024-10-11 14:17:37,744 - DEBUG - Initialized building array pointer: 302030504
+2024-10-11 14:17:37,744 - DEBUG - Initialized infantry array pointer: 0
+2024-10-11 14:17:37,744 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 14:17:37,744 - DEBUG - Updating dynamic data for player 2
+2024-10-11 14:17:37,744 - DEBUG - Player 2 balance: 49890
+2024-10-11 14:17:37,744 - DEBUG - Player 2 spent credit: 970
+2024-10-11 14:17:37,744 - DEBUG - Player 2 is_winner: False
+2024-10-11 14:17:37,744 - DEBUG - Player 2 is_loser: False
+2024-10-11 14:17:37,744 - DEBUG - Player 2 power output: 350
+2024-10-11 14:17:37,744 - DEBUG - Player 2 power drain: 0
+2024-10-11 14:17:37,744 - DEBUG - Player 2 total power: 350
+2024-10-11 14:17:37,744 - DEBUG - Initialized unit array pointer: 283619168
+2024-10-11 14:17:37,744 - DEBUG - Initialized building array pointer: 315632648
+2024-10-11 14:17:37,744 - DEBUG - Initialized infantry array pointer: 0
+2024-10-11 14:17:37,745 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 14:17:37,745 - DEBUG - Initialized unit array pointer: 283619168
+2024-10-11 14:17:37,745 - DEBUG - Initialized building array pointer: 315632648
+2024-10-11 14:17:37,745 - DEBUG - Initialized infantry array pointer: 0
+2024-10-11 14:17:37,745 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 14:17:38,746 - DEBUG - Updating dynamic data for player 1
+2024-10-11 14:17:38,746 - DEBUG - Player 1 balance: 49685
+2024-10-11 14:17:38,746 - DEBUG - Player 1 spent credit: 1775
+2024-10-11 14:17:38,746 - DEBUG - Player 1 is_winner: False
+2024-10-11 14:17:38,746 - DEBUG - Player 1 is_loser: False
+2024-10-11 14:17:38,746 - DEBUG - Player 1 power output: 350
+2024-10-11 14:17:38,746 - DEBUG - Player 1 power drain: 10
+2024-10-11 14:17:38,746 - DEBUG - Player 1 total power: 340
+2024-10-11 14:17:38,746 - DEBUG - Initialized unit array pointer: 283615008
+2024-10-11 14:17:38,746 - DEBUG - Initialized building array pointer: 302030504
+2024-10-11 14:17:38,746 - DEBUG - Initialized infantry array pointer: 0
+2024-10-11 14:17:38,746 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 14:17:38,747 - DEBUG - Initialized unit array pointer: 283615008
+2024-10-11 14:17:38,747 - DEBUG - Initialized building array pointer: 302030504
+2024-10-11 14:17:38,747 - DEBUG - Initialized infantry array pointer: 0
+2024-10-11 14:17:38,747 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 14:17:38,747 - DEBUG - Updating dynamic data for player 2
+2024-10-11 14:17:38,747 - DEBUG - Player 2 balance: 49686
+2024-10-11 14:17:38,747 - DEBUG - Player 2 spent credit: 1774
+2024-10-11 14:17:38,747 - DEBUG - Player 2 is_winner: False
+2024-10-11 14:17:38,747 - DEBUG - Player 2 is_loser: False
+2024-10-11 14:17:38,747 - DEBUG - Player 2 power output: 350
+2024-10-11 14:17:38,747 - DEBUG - Player 2 power drain: 10
+2024-10-11 14:17:38,747 - DEBUG - Player 2 total power: 340
+2024-10-11 14:17:38,747 - DEBUG - Initialized unit array pointer: 283619168
+2024-10-11 14:17:38,747 - DEBUG - Initialized building array pointer: 315632648
+2024-10-11 14:17:38,747 - DEBUG - Initialized infantry array pointer: 0
+2024-10-11 14:17:38,747 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 14:17:38,748 - DEBUG - Initialized unit array pointer: 283619168
+2024-10-11 14:17:38,748 - DEBUG - Initialized building array pointer: 315632648
+2024-10-11 14:17:38,748 - DEBUG - Initialized infantry array pointer: 0
+2024-10-11 14:17:38,748 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 14:17:39,749 - DEBUG - Updating dynamic data for player 1
+2024-10-11 14:17:39,749 - DEBUG - Player 1 balance: 49519
+2024-10-11 14:17:39,749 - DEBUG - Player 1 spent credit: 2661
+2024-10-11 14:17:39,749 - DEBUG - Player 1 is_winner: False
+2024-10-11 14:17:39,749 - DEBUG - Player 1 is_loser: False
+2024-10-11 14:17:39,749 - DEBUG - Player 1 power output: 350
+2024-10-11 14:17:39,749 - DEBUG - Player 1 power drain: 45
+2024-10-11 14:17:39,749 - DEBUG - Player 1 total power: 305
+2024-10-11 14:17:39,749 - DEBUG - Initialized unit array pointer: 283615008
+2024-10-11 14:17:39,749 - DEBUG - Initialized building array pointer: 302030504
+2024-10-11 14:17:39,749 - DEBUG - Initialized infantry array pointer: 0
+2024-10-11 14:17:39,749 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 14:17:39,750 - DEBUG - Initialized unit array pointer: 283615008
+2024-10-11 14:17:39,750 - DEBUG - Initialized building array pointer: 302030504
+2024-10-11 14:17:39,750 - DEBUG - Initialized infantry array pointer: 0
+2024-10-11 14:17:39,750 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 14:17:39,750 - DEBUG - Updating dynamic data for player 2
+2024-10-11 14:17:39,750 - DEBUG - Player 2 balance: 49720
+2024-10-11 14:17:39,750 - DEBUG - Player 2 spent credit: 2460
+2024-10-11 14:17:39,750 - DEBUG - Player 2 is_winner: False
+2024-10-11 14:17:39,750 - DEBUG - Player 2 is_loser: False
+2024-10-11 14:17:39,750 - DEBUG - Player 2 power output: 350
+2024-10-11 14:17:39,750 - DEBUG - Player 2 power drain: 45
+2024-10-11 14:17:39,750 - DEBUG - Player 2 total power: 305
+2024-10-11 14:17:39,750 - DEBUG - Initialized unit array pointer: 283619168
+2024-10-11 14:17:39,750 - DEBUG - Initialized building array pointer: 315632648
+2024-10-11 14:17:39,750 - DEBUG - Initialized infantry array pointer: 0
+2024-10-11 14:17:39,750 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 14:17:39,751 - DEBUG - Initialized unit array pointer: 283619168
+2024-10-11 14:17:39,751 - DEBUG - Initialized building array pointer: 315632648
+2024-10-11 14:17:39,751 - DEBUG - Initialized infantry array pointer: 0
+2024-10-11 14:17:39,751 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 14:17:40,752 - DEBUG - Updating dynamic data for player 1
+2024-10-11 14:17:40,752 - DEBUG - Player 1 balance: 50123
+2024-10-11 14:17:40,752 - DEBUG - Player 1 spent credit: 3107
+2024-10-11 14:17:40,752 - DEBUG - Player 1 is_winner: False
+2024-10-11 14:17:40,752 - DEBUG - Player 1 is_loser: False
+2024-10-11 14:17:40,752 - DEBUG - Player 1 power output: 350
+2024-10-11 14:17:40,752 - DEBUG - Player 1 power drain: 45
+2024-10-11 14:17:40,752 - DEBUG - Player 1 total power: 305
+2024-10-11 14:17:40,752 - DEBUG - Initialized unit array pointer: 283615008
+2024-10-11 14:17:40,752 - DEBUG - Initialized building array pointer: 302030504
+2024-10-11 14:17:40,752 - DEBUG - Initialized infantry array pointer: 0
+2024-10-11 14:17:40,752 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 14:17:40,753 - DEBUG - Initialized unit array pointer: 283615008
+2024-10-11 14:17:40,753 - DEBUG - Initialized building array pointer: 302030504
+2024-10-11 14:17:40,753 - DEBUG - Initialized infantry array pointer: 0
+2024-10-11 14:17:40,753 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 14:17:40,753 - DEBUG - Updating dynamic data for player 2
+2024-10-11 14:17:40,753 - DEBUG - Player 2 balance: 50354
+2024-10-11 14:17:40,753 - DEBUG - Player 2 spent credit: 2876
+2024-10-11 14:17:40,753 - DEBUG - Player 2 is_winner: False
+2024-10-11 14:17:40,753 - DEBUG - Player 2 is_loser: False
+2024-10-11 14:17:40,753 - DEBUG - Player 2 power output: 350
+2024-10-11 14:17:40,753 - DEBUG - Player 2 power drain: 45
+2024-10-11 14:17:40,753 - DEBUG - Player 2 total power: 305
+2024-10-11 14:17:40,753 - DEBUG - Initialized unit array pointer: 283619168
+2024-10-11 14:17:40,753 - DEBUG - Initialized building array pointer: 315632648
+2024-10-11 14:17:40,753 - DEBUG - Initialized infantry array pointer: 0
+2024-10-11 14:17:40,753 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 14:17:40,754 - DEBUG - Initialized unit array pointer: 283619168
+2024-10-11 14:17:40,754 - DEBUG - Initialized building array pointer: 315632648
+2024-10-11 14:17:40,754 - DEBUG - Initialized infantry array pointer: 0
+2024-10-11 14:17:40,754 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 14:17:41,755 - DEBUG - Updating dynamic data for player 1
+2024-10-11 14:17:41,755 - DEBUG - Player 1 balance: 50592
+2024-10-11 14:17:41,755 - DEBUG - Player 1 spent credit: 3658
+2024-10-11 14:17:41,755 - DEBUG - Player 1 is_winner: False
+2024-10-11 14:17:41,755 - DEBUG - Player 1 is_loser: False
+2024-10-11 14:17:41,755 - DEBUG - Player 1 power output: 350
+2024-10-11 14:17:41,756 - DEBUG - Player 1 power drain: 45
+2024-10-11 14:17:41,756 - DEBUG - Player 1 total power: 305
+2024-10-11 14:17:41,756 - DEBUG - Initialized unit array pointer: 283615008
+2024-10-11 14:17:41,757 - DEBUG - Initialized building array pointer: 302030504
+2024-10-11 14:17:41,757 - DEBUG - Initialized infantry array pointer: 0
+2024-10-11 14:17:41,757 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 14:17:41,757 - DEBUG - Initialized unit array pointer: 283615008
+2024-10-11 14:17:41,757 - DEBUG - Initialized building array pointer: 302030504
+2024-10-11 14:17:41,757 - DEBUG - Initialized infantry array pointer: 0
+2024-10-11 14:17:41,757 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 14:17:41,757 - DEBUG - Updating dynamic data for player 2
+2024-10-11 14:17:41,757 - DEBUG - Player 2 balance: 50300
+2024-10-11 14:17:41,757 - DEBUG - Player 2 spent credit: 3950
+2024-10-11 14:17:41,757 - DEBUG - Player 2 is_winner: False
+2024-10-11 14:17:41,758 - DEBUG - Player 2 is_loser: False
+2024-10-11 14:17:41,758 - DEBUG - Player 2 power output: 350
+2024-10-11 14:17:41,758 - DEBUG - Player 2 power drain: 95
+2024-10-11 14:17:41,758 - DEBUG - Player 2 total power: 255
+2024-10-11 14:17:41,758 - DEBUG - Initialized unit array pointer: 283619168
+2024-10-11 14:17:41,758 - DEBUG - Initialized building array pointer: 315632648
+2024-10-11 14:17:41,758 - DEBUG - Initialized infantry array pointer: 283597584
+2024-10-11 14:17:41,758 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 14:17:41,758 - DEBUG - Initialized unit array pointer: 283619168
+2024-10-11 14:17:41,758 - DEBUG - Initialized building array pointer: 315632648
+2024-10-11 14:17:41,758 - DEBUG - Initialized infantry array pointer: 283597584
+2024-10-11 14:17:41,758 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 14:17:42,759 - DEBUG - Updating dynamic data for player 1
+2024-10-11 14:17:42,759 - DEBUG - Player 1 balance: 50273
+2024-10-11 14:17:42,759 - DEBUG - Player 1 spent credit: 4967
+2024-10-11 14:17:42,759 - DEBUG - Player 1 is_winner: False
+2024-10-11 14:17:42,759 - DEBUG - Player 1 is_loser: False
+2024-10-11 14:17:42,759 - DEBUG - Player 1 power output: 350
+2024-10-11 14:17:42,760 - DEBUG - Player 1 power drain: 45
+2024-10-11 14:17:42,760 - DEBUG - Player 1 total power: 305
+2024-10-11 14:17:42,760 - DEBUG - Initialized unit array pointer: 283615008
+2024-10-11 14:17:42,760 - DEBUG - Initialized building array pointer: 302030504
+2024-10-11 14:17:42,760 - DEBUG - Initialized infantry array pointer: 283665776
+2024-10-11 14:17:42,760 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 14:17:42,760 - DEBUG - Initialized unit array pointer: 283615008
+2024-10-11 14:17:42,760 - DEBUG - Initialized building array pointer: 302030504
+2024-10-11 14:17:42,760 - DEBUG - Initialized infantry array pointer: 283665776
+2024-10-11 14:17:42,760 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 14:17:42,761 - DEBUG - Updating dynamic data for player 2
+2024-10-11 14:17:42,761 - DEBUG - Player 2 balance: 49537
+2024-10-11 14:17:42,761 - DEBUG - Player 2 spent credit: 5703
+2024-10-11 14:17:42,761 - DEBUG - Player 2 is_winner: False
+2024-10-11 14:17:42,761 - DEBUG - Player 2 is_loser: False
+2024-10-11 14:17:42,761 - DEBUG - Player 2 power output: 350
+2024-10-11 14:17:42,761 - DEBUG - Player 2 power drain: 95
+2024-10-11 14:17:42,761 - DEBUG - Player 2 total power: 255
+2024-10-11 14:17:42,762 - DEBUG - Initialized unit array pointer: 283619168
+2024-10-11 14:17:42,762 - DEBUG - Initialized building array pointer: 315632648
+2024-10-11 14:17:42,762 - DEBUG - Initialized infantry array pointer: 283641536
+2024-10-11 14:17:42,762 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 14:17:43,762 - DEBUG - Updating dynamic data for player 1
+2024-10-11 14:17:43,762 - DEBUG - Player 1 balance: 49729
+2024-10-11 14:17:43,762 - DEBUG - Player 1 spent credit: 6381
+2024-10-11 14:17:43,762 - DEBUG - Player 1 is_winner: False
+2024-10-11 14:17:43,763 - DEBUG - Player 1 is_loser: False
+2024-10-11 14:17:43,763 - DEBUG - Player 1 power output: 350
+2024-10-11 14:17:43,763 - DEBUG - Player 1 power drain: 45
+2024-10-11 14:17:43,763 - DEBUG - Player 1 total power: 305
+2024-10-11 14:17:43,764 - DEBUG - Initialized unit array pointer: 283615008
+2024-10-11 14:17:43,764 - DEBUG - Initialized building array pointer: 302030504
+2024-10-11 14:17:43,764 - DEBUG - Initialized infantry array pointer: 283579376
+2024-10-11 14:17:43,764 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 14:17:43,764 - DEBUG - Updating dynamic data for player 2
+2024-10-11 14:17:43,764 - DEBUG - Player 2 balance: 49152
+2024-10-11 14:17:43,764 - DEBUG - Player 2 spent credit: 6958
+2024-10-11 14:17:43,764 - DEBUG - Player 2 is_winner: False
+2024-10-11 14:17:43,764 - DEBUG - Player 2 is_loser: False
+2024-10-11 14:17:43,764 - DEBUG - Player 2 power output: 350
+2024-10-11 14:17:43,764 - DEBUG - Player 2 power drain: 170
+2024-10-11 14:17:43,764 - DEBUG - Player 2 total power: 180
+2024-10-11 14:17:43,765 - DEBUG - Initialized unit array pointer: 283619168
+2024-10-11 14:17:43,765 - DEBUG - Initialized building array pointer: 315632648
+2024-10-11 14:17:43,765 - DEBUG - Initialized infantry array pointer: 283641536
+2024-10-11 14:17:43,765 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 14:17:44,765 - DEBUG - Updating dynamic data for player 1
+2024-10-11 14:17:44,765 - DEBUG - Player 1 balance: 49061
+2024-10-11 14:17:44,765 - DEBUG - Player 1 spent credit: 7979
+2024-10-11 14:17:44,765 - DEBUG - Player 1 is_winner: False
+2024-10-11 14:17:44,766 - DEBUG - Player 1 is_loser: False
+2024-10-11 14:17:44,766 - DEBUG - Player 1 power output: 350
+2024-10-11 14:17:44,766 - DEBUG - Player 1 power drain: 70
+2024-10-11 14:17:44,766 - DEBUG - Player 1 total power: 280
+2024-10-11 14:17:44,766 - DEBUG - Initialized unit array pointer: 283615008
+2024-10-11 14:17:44,767 - DEBUG - Initialized building array pointer: 302030504
+2024-10-11 14:17:44,767 - DEBUG - Initialized infantry array pointer: 283579376
+2024-10-11 14:17:44,767 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 14:17:44,767 - DEBUG - Updating dynamic data for player 2
+2024-10-11 14:17:44,767 - DEBUG - Player 2 balance: 49280
+2024-10-11 14:17:44,767 - DEBUG - Player 2 spent credit: 7760
+2024-10-11 14:17:44,767 - DEBUG - Player 2 is_winner: False
+2024-10-11 14:17:44,767 - DEBUG - Player 2 is_loser: False
+2024-10-11 14:17:44,767 - DEBUG - Player 2 power output: 350
+2024-10-11 14:17:44,767 - DEBUG - Player 2 power drain: 170
+2024-10-11 14:17:44,767 - DEBUG - Player 2 total power: 180
+2024-10-11 14:17:44,768 - DEBUG - Initialized unit array pointer: 283619168
+2024-10-11 14:17:44,768 - DEBUG - Initialized building array pointer: 315632648
+2024-10-11 14:17:44,768 - DEBUG - Initialized infantry array pointer: 283641536
+2024-10-11 14:17:44,768 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 14:17:45,769 - DEBUG - Updating dynamic data for player 1
+2024-10-11 14:17:45,769 - DEBUG - Player 1 balance: 48454
+2024-10-11 14:17:45,769 - DEBUG - Player 1 spent credit: 9396
+2024-10-11 14:17:45,769 - DEBUG - Player 1 is_winner: False
+2024-10-11 14:17:45,769 - DEBUG - Player 1 is_loser: False
+2024-10-11 14:17:45,769 - DEBUG - Player 1 power output: 350
+2024-10-11 14:17:45,769 - DEBUG - Player 1 power drain: 70
+2024-10-11 14:17:45,769 - DEBUG - Player 1 total power: 280
+2024-10-11 14:17:45,770 - DEBUG - Initialized unit array pointer: 283615008
+2024-10-11 14:17:45,770 - DEBUG - Initialized building array pointer: 302030504
+2024-10-11 14:17:45,770 - DEBUG - Initialized infantry array pointer: 283579376
+2024-10-11 14:17:45,770 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 14:17:45,770 - DEBUG - Updating dynamic data for player 2
+2024-10-11 14:17:45,770 - DEBUG - Player 2 balance: 49412
+2024-10-11 14:17:45,770 - DEBUG - Player 2 spent credit: 8438
+2024-10-11 14:17:45,770 - DEBUG - Player 2 is_winner: False
+2024-10-11 14:17:45,770 - DEBUG - Player 2 is_loser: False
+2024-10-11 14:17:45,770 - DEBUG - Player 2 power output: 350
+2024-10-11 14:17:45,770 - DEBUG - Player 2 power drain: 170
+2024-10-11 14:17:45,770 - DEBUG - Player 2 total power: 180
+2024-10-11 14:17:45,771 - DEBUG - Initialized unit array pointer: 283619168
+2024-10-11 14:17:45,771 - DEBUG - Initialized building array pointer: 315632648
+2024-10-11 14:17:45,771 - DEBUG - Initialized infantry array pointer: 283641536
+2024-10-11 14:17:45,771 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 14:17:46,772 - DEBUG - Updating dynamic data for player 1
+2024-10-11 14:17:46,772 - DEBUG - Player 1 balance: 47776
+2024-10-11 14:17:46,772 - DEBUG - Player 1 spent credit: 10974
+2024-10-11 14:17:46,772 - DEBUG - Player 1 is_winner: False
+2024-10-11 14:17:46,772 - DEBUG - Player 1 is_loser: False
+2024-10-11 14:17:46,772 - DEBUG - Player 1 power output: 350
+2024-10-11 14:17:46,772 - DEBUG - Player 1 power drain: 70
+2024-10-11 14:17:46,772 - DEBUG - Player 1 total power: 280
+2024-10-11 14:17:46,773 - DEBUG - Initialized unit array pointer: 283615008
+2024-10-11 14:17:46,773 - DEBUG - Initialized building array pointer: 302030504
+2024-10-11 14:17:46,773 - DEBUG - Initialized infantry array pointer: 283579376
+2024-10-11 14:17:46,773 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 14:17:46,773 - DEBUG - Updating dynamic data for player 2
+2024-10-11 14:17:46,773 - DEBUG - Player 2 balance: 49487
+2024-10-11 14:17:46,773 - DEBUG - Player 2 spent credit: 9263
+2024-10-11 14:17:46,773 - DEBUG - Player 2 is_winner: False
+2024-10-11 14:17:46,773 - DEBUG - Player 2 is_loser: False
+2024-10-11 14:17:46,773 - DEBUG - Player 2 power output: 350
+2024-10-11 14:17:46,773 - DEBUG - Player 2 power drain: 170
+2024-10-11 14:17:46,773 - DEBUG - Player 2 total power: 180
+2024-10-11 14:17:46,774 - DEBUG - Initialized unit array pointer: 283619168
+2024-10-11 14:17:46,774 - DEBUG - Initialized building array pointer: 315632648
+2024-10-11 14:17:46,774 - DEBUG - Initialized infantry array pointer: 283641536
+2024-10-11 14:17:46,774 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 14:17:47,774 - DEBUG - Updating dynamic data for player 1
+2024-10-11 14:17:47,774 - DEBUG - Player 1 balance: 47679
+2024-10-11 14:17:47,774 - DEBUG - Player 1 spent credit: 11221
+2024-10-11 14:17:47,774 - DEBUG - Player 1 is_winner: False
+2024-10-11 14:17:47,774 - DEBUG - Player 1 is_loser: False
+2024-10-11 14:17:47,774 - DEBUG - Player 1 power output: 350
+2024-10-11 14:17:47,775 - DEBUG - Player 1 power drain: 70
+2024-10-11 14:17:47,775 - DEBUG - Player 1 total power: 280
+2024-10-11 14:17:47,776 - DEBUG - Initialized unit array pointer: 283615008
+2024-10-11 14:17:47,776 - DEBUG - Initialized building array pointer: 302030504
+2024-10-11 14:17:47,776 - DEBUG - Initialized infantry array pointer: 283579376
+2024-10-11 14:17:47,776 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 14:17:47,776 - DEBUG - Updating dynamic data for player 2
+2024-10-11 14:17:47,776 - DEBUG - Player 2 balance: 49550
+2024-10-11 14:17:47,776 - DEBUG - Player 2 spent credit: 9350
+2024-10-11 14:17:47,776 - DEBUG - Player 2 is_winner: False
+2024-10-11 14:17:47,776 - DEBUG - Player 2 is_loser: False
+2024-10-11 14:17:47,776 - DEBUG - Player 2 power output: 350
+2024-10-11 14:17:47,776 - DEBUG - Player 2 power drain: 245
+2024-10-11 14:17:47,776 - DEBUG - Player 2 total power: 105
+2024-10-11 14:17:47,777 - DEBUG - Initialized unit array pointer: 283619168
+2024-10-11 14:17:47,777 - DEBUG - Initialized building array pointer: 315632648
+2024-10-11 14:17:47,777 - DEBUG - Initialized infantry array pointer: 283641536
+2024-10-11 14:17:47,777 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 14:17:48,777 - DEBUG - Updating dynamic data for player 1
+2024-10-11 14:17:48,777 - DEBUG - Player 1 balance: 47679
+2024-10-11 14:17:48,777 - DEBUG - Player 1 spent credit: 11221
+2024-10-11 14:17:48,777 - DEBUG - Player 1 is_winner: False
+2024-10-11 14:17:48,777 - DEBUG - Player 1 is_loser: False
+2024-10-11 14:17:48,777 - DEBUG - Player 1 power output: 350
+2024-10-11 14:17:48,777 - DEBUG - Player 1 power drain: 70
+2024-10-11 14:17:48,777 - DEBUG - Player 1 total power: 280
+2024-10-11 14:17:48,778 - DEBUG - Initialized unit array pointer: 283615008
+2024-10-11 14:17:48,778 - DEBUG - Initialized building array pointer: 302030504
+2024-10-11 14:17:48,778 - DEBUG - Initialized infantry array pointer: 283579376
+2024-10-11 14:17:48,778 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 14:17:48,778 - DEBUG - Updating dynamic data for player 2
+2024-10-11 14:17:48,779 - DEBUG - Player 2 balance: 49550
+2024-10-11 14:17:48,779 - DEBUG - Player 2 spent credit: 9350
+2024-10-11 14:17:48,779 - DEBUG - Player 2 is_winner: False
+2024-10-11 14:17:48,779 - DEBUG - Player 2 is_loser: False
+2024-10-11 14:17:48,779 - DEBUG - Player 2 power output: 350
+2024-10-11 14:17:48,779 - DEBUG - Player 2 power drain: 245
+2024-10-11 14:17:48,779 - DEBUG - Player 2 total power: 105
+2024-10-11 14:17:48,779 - DEBUG - Initialized unit array pointer: 283619168
+2024-10-11 14:17:48,779 - DEBUG - Initialized building array pointer: 315632648
+2024-10-11 14:17:48,779 - DEBUG - Initialized infantry array pointer: 283641536
+2024-10-11 14:17:48,780 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 14:17:49,780 - DEBUG - Updating dynamic data for player 1
+2024-10-11 14:17:49,780 - DEBUG - Player 1 balance: 47679
+2024-10-11 14:17:49,780 - DEBUG - Player 1 spent credit: 11221
+2024-10-11 14:17:49,780 - DEBUG - Player 1 is_winner: False
+2024-10-11 14:17:49,780 - DEBUG - Player 1 is_loser: False
+2024-10-11 14:17:49,780 - DEBUG - Player 1 power output: 350
+2024-10-11 14:17:49,780 - DEBUG - Player 1 power drain: 70
+2024-10-11 14:17:49,781 - DEBUG - Player 1 total power: 280
+2024-10-11 14:17:49,781 - DEBUG - Initialized unit array pointer: 283615008
+2024-10-11 14:17:49,781 - DEBUG - Initialized building array pointer: 302030504
+2024-10-11 14:17:49,781 - DEBUG - Initialized infantry array pointer: 283579376
+2024-10-11 14:17:49,781 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 14:17:49,781 - DEBUG - Updating dynamic data for player 2
+2024-10-11 14:17:49,781 - DEBUG - Player 2 balance: 49550
+2024-10-11 14:17:49,781 - DEBUG - Player 2 spent credit: 9350
+2024-10-11 14:17:49,781 - DEBUG - Player 2 is_winner: False
+2024-10-11 14:17:49,781 - DEBUG - Player 2 is_loser: False
+2024-10-11 14:17:49,782 - DEBUG - Player 2 power output: 350
+2024-10-11 14:17:49,782 - DEBUG - Player 2 power drain: 245
+2024-10-11 14:17:49,782 - DEBUG - Player 2 total power: 105
+2024-10-11 14:17:49,782 - DEBUG - Initialized unit array pointer: 283619168
+2024-10-11 14:17:49,782 - DEBUG - Initialized building array pointer: 315632648
+2024-10-11 14:17:49,782 - DEBUG - Initialized infantry array pointer: 283641536
+2024-10-11 14:17:49,782 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 14:17:50,783 - DEBUG - Updating dynamic data for player 1
+2024-10-11 14:17:50,783 - DEBUG - Player 1 balance: 47679
+2024-10-11 14:17:50,783 - DEBUG - Player 1 spent credit: 11221
+2024-10-11 14:17:50,783 - DEBUG - Player 1 is_winner: False
+2024-10-11 14:17:50,783 - DEBUG - Player 1 is_loser: False
+2024-10-11 14:17:50,783 - DEBUG - Player 1 power output: 350
+2024-10-11 14:17:50,783 - DEBUG - Player 1 power drain: 70
+2024-10-11 14:17:50,784 - DEBUG - Player 1 total power: 280
+2024-10-11 14:17:50,784 - DEBUG - Initialized unit array pointer: 0
+2024-10-11 14:17:50,784 - DEBUG - Initialized building array pointer: 0
+2024-10-11 14:17:50,784 - DEBUG - Initialized infantry array pointer: 0
+2024-10-11 14:17:50,784 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 14:17:50,784 - DEBUG - Updating dynamic data for player 2
+2024-10-11 14:17:50,784 - DEBUG - Player 2 balance: 49550
+2024-10-11 14:17:50,784 - DEBUG - Player 2 spent credit: 9350
+2024-10-11 14:17:50,784 - DEBUG - Player 2 is_winner: False
+2024-10-11 14:17:50,785 - DEBUG - Player 2 is_loser: False
+2024-10-11 14:17:50,785 - DEBUG - Player 2 power output: 350
+2024-10-11 14:17:50,785 - DEBUG - Player 2 power drain: 245
+2024-10-11 14:17:50,785 - DEBUG - Player 2 total power: 105
+2024-10-11 14:17:50,785 - DEBUG - Initialized unit array pointer: 0
+2024-10-11 14:17:50,785 - DEBUG - Initialized building array pointer: 0
+2024-10-11 14:17:50,785 - DEBUG - Initialized infantry array pointer: 0
+2024-10-11 14:17:50,785 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 14:17:51,790 - INFO - Game process has ended.
+2024-10-11 14:17:51,791 - INFO - Emitted game_stopped signal.
+2024-10-11 14:17:51,791 - INFO - Game stopped handler called
+2024-10-11 14:17:52,791 - INFO - Waiting for the game to start and players to load...
+2024-10-11 14:17:52,791 - INFO - Waiting for the game to start...
+2024-10-11 15:27:01,435 - INFO - Game detected
+2024-10-11 15:27:01,435 - WARNING - Memory read incomplete. Game might still be loading.
+2024-10-11 15:27:01,435 - WARNING - Memory read incomplete. Game might still be loading.
+2024-10-11 15:27:01,435 - WARNING - Memory read incomplete. Game might still be loading.
+2024-10-11 15:27:01,435 - WARNING - Memory read incomplete. Game might still be loading.
+2024-10-11 15:27:01,435 - WARNING - Memory read incomplete. Game might still be loading.
+2024-10-11 15:27:01,436 - WARNING - Memory read incomplete. Game might still be loading.
+2024-10-11 15:27:01,436 - WARNING - Memory read incomplete. Game might still be loading.
+2024-10-11 15:27:01,436 - WARNING - Memory read incomplete. Game might still be loading.
+2024-10-11 15:27:02,443 - INFO - Skipping Player 0 as not fully initialized yet.
+2024-10-11 15:27:02,443 - INFO - Skipping Player 0 as not fully initialized yet.
+2024-10-11 15:27:02,443 - INFO - Skipping Player 0 as not fully initialized yet.
+2024-10-11 15:27:02,443 - INFO - Skipping Player 0 as not fully initialized yet.
+2024-10-11 15:27:02,443 - INFO - Skipping Player 0 as not fully initialized yet.
+2024-10-11 15:27:02,443 - INFO - Skipping Player 0 as not fully initialized yet.
+2024-10-11 15:27:02,444 - INFO - Skipping Player 0 as not fully initialized yet.
+2024-10-11 15:27:03,457 - INFO - Skipping Player 0 as not fully initialized yet.
+2024-10-11 15:27:03,457 - INFO - Skipping Player 0 as not fully initialized yet.
+2024-10-11 15:27:03,457 - INFO - Skipping Player 0 as not fully initialized yet.
+2024-10-11 15:27:03,457 - INFO - Skipping Player 0 as not fully initialized yet.
+2024-10-11 15:27:03,457 - INFO - Skipping Player 0 as not fully initialized yet.
+2024-10-11 15:27:03,457 - INFO - Skipping Player 0 as not fully initialized yet.
+2024-10-11 15:27:03,457 - INFO - Skipping Player 0 as not fully initialized yet.
+2024-10-11 15:27:04,470 - INFO - Players loaded. Proceeding with players initialization.
+2024-10-11 15:27:04,470 - DEBUG - Initialized unit array pointer: 284825456
+2024-10-11 15:27:04,470 - DEBUG - Initialized building array pointer: 0
+2024-10-11 15:27:04,470 - DEBUG - Initialized infantry array pointer: 0
+2024-10-11 15:27:04,470 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 15:27:04,470 - INFO - Player 0 colorScheme: PySide6.QtGui.QColor.fromRgbF(0.000000, 0.501961, 0.000000, 1.000000)
+2024-10-11 15:27:04,470 - INFO - Player 0 country name: French
+2024-10-11 15:27:04,470 - INFO - Player 0 name: QWERTYUIOP{}
+2024-10-11 15:27:04,470 - INFO - Number of valid players: 1
+2024-10-11 15:27:04,470 - DEBUG - Updating dynamic data for player 1
+2024-10-11 15:27:04,471 - INFO - Game started handler called
+2024-10-11 15:27:04,471 - DEBUG - Player 1 balance: 100000
+2024-10-11 15:27:04,471 - INFO - Creating HUD for QWERTYUIOP{} with color PySide6.QtGui.QColor.fromRgbF(0.000000, 0.501961, 0.000000, 1.000000)
+2024-10-11 15:27:04,471 - DEBUG - Player 1 spent credit: 0
+2024-10-11 15:27:04,471 - DEBUG - Player 1 is_winner: False
+2024-10-11 15:27:04,471 - DEBUG - Player 1 is_loser: False
+2024-10-11 15:27:04,471 - DEBUG - Player 1 power output: 0
+2024-10-11 15:27:04,471 - DEBUG - Player 1 power drain: 0
+2024-10-11 15:27:04,471 - DEBUG - Player 1 total power: 0
+2024-10-11 15:27:04,471 - DEBUG - Initialized unit array pointer: 284825456
+2024-10-11 15:27:04,471 - DEBUG - Initialized building array pointer: 0
+2024-10-11 15:27:04,471 - DEBUG - Initialized infantry array pointer: 0
+2024-10-11 15:27:04,471 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 15:27:04,472 - DEBUG - Initialized unit array pointer: 284825456
+2024-10-11 15:27:04,472 - DEBUG - Initialized building array pointer: 0
+2024-10-11 15:27:04,472 - DEBUG - Initialized infantry array pointer: 0
+2024-10-11 15:27:04,472 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 15:27:04,472 - DEBUG - Initialized unit array pointer: 284825456
+2024-10-11 15:27:04,472 - DEBUG - Initialized building array pointer: 0
+2024-10-11 15:27:04,472 - DEBUG - Initialized infantry array pointer: 0
+2024-10-11 15:27:04,472 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 15:27:05,480 - DEBUG - Updating dynamic data for player 1
+2024-10-11 15:27:05,480 - DEBUG - Player 1 balance: 100000
+2024-10-11 15:27:05,480 - DEBUG - Player 1 spent credit: 0
+2024-10-11 15:27:05,480 - DEBUG - Player 1 is_winner: False
+2024-10-11 15:27:05,480 - DEBUG - Player 1 is_loser: False
+2024-10-11 15:27:05,480 - DEBUG - Player 1 power output: 0
+2024-10-11 15:27:05,481 - DEBUG - Player 1 power drain: 0
+2024-10-11 15:27:05,481 - DEBUG - Player 1 total power: 0
+2024-10-11 15:27:05,481 - DEBUG - Initialized unit array pointer: 50244816
+2024-10-11 15:27:05,481 - DEBUG - Initialized building array pointer: 314367560
+2024-10-11 15:27:05,481 - DEBUG - Initialized infantry array pointer: 0
+2024-10-11 15:27:05,481 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 15:27:05,481 - DEBUG - Initialized unit array pointer: 50244816
+2024-10-11 15:27:05,481 - DEBUG - Initialized building array pointer: 314367560
+2024-10-11 15:27:05,481 - DEBUG - Initialized infantry array pointer: 0
+2024-10-11 15:27:05,481 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 15:27:06,482 - DEBUG - Updating dynamic data for player 1
+2024-10-11 15:27:06,482 - DEBUG - Player 1 balance: 100000
+2024-10-11 15:27:06,482 - DEBUG - Player 1 spent credit: 0
+2024-10-11 15:27:06,482 - DEBUG - Player 1 is_winner: False
+2024-10-11 15:27:06,482 - DEBUG - Player 1 is_loser: False
+2024-10-11 15:27:06,482 - DEBUG - Player 1 power output: 0
+2024-10-11 15:27:06,483 - DEBUG - Player 1 power drain: 0
+2024-10-11 15:27:06,483 - DEBUG - Player 1 total power: 0
+2024-10-11 15:27:06,483 - DEBUG - Initialized unit array pointer: 50244816
+2024-10-11 15:27:06,483 - DEBUG - Initialized building array pointer: 314367560
+2024-10-11 15:27:06,483 - DEBUG - Initialized infantry array pointer: 0
+2024-10-11 15:27:06,483 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 15:27:06,483 - DEBUG - Initialized unit array pointer: 50244816
+2024-10-11 15:27:06,483 - DEBUG - Initialized building array pointer: 314367560
+2024-10-11 15:27:06,483 - DEBUG - Initialized infantry array pointer: 0
+2024-10-11 15:27:06,483 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 15:27:07,484 - DEBUG - Updating dynamic data for player 1
+2024-10-11 15:27:07,484 - DEBUG - Player 1 balance: 99580
+2024-10-11 15:27:07,484 - DEBUG - Player 1 spent credit: 420
+2024-10-11 15:27:07,484 - DEBUG - Player 1 is_winner: False
+2024-10-11 15:27:07,484 - DEBUG - Player 1 is_loser: False
+2024-10-11 15:27:07,484 - DEBUG - Player 1 power output: 0
+2024-10-11 15:27:07,484 - DEBUG - Player 1 power drain: 0
+2024-10-11 15:27:07,484 - DEBUG - Player 1 total power: 0
+2024-10-11 15:27:07,484 - DEBUG - Initialized unit array pointer: 50244816
+2024-10-11 15:27:07,484 - DEBUG - Initialized building array pointer: 314367560
+2024-10-11 15:27:07,484 - DEBUG - Initialized infantry array pointer: 0
+2024-10-11 15:27:07,484 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 15:27:07,485 - DEBUG - Initialized unit array pointer: 50244816
+2024-10-11 15:27:07,485 - DEBUG - Initialized building array pointer: 314367560
+2024-10-11 15:27:07,485 - DEBUG - Initialized infantry array pointer: 0
+2024-10-11 15:27:07,485 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 15:27:08,486 - DEBUG - Updating dynamic data for player 1
+2024-10-11 15:27:08,486 - DEBUG - Player 1 balance: 99200
+2024-10-11 15:27:08,486 - DEBUG - Player 1 spent credit: 800
+2024-10-11 15:27:08,486 - DEBUG - Player 1 is_winner: False
+2024-10-11 15:27:08,486 - DEBUG - Player 1 is_loser: False
+2024-10-11 15:27:08,486 - DEBUG - Player 1 power output: 0
+2024-10-11 15:27:08,486 - DEBUG - Player 1 power drain: 0
+2024-10-11 15:27:08,486 - DEBUG - Player 1 total power: 0
+2024-10-11 15:27:08,486 - DEBUG - Initialized unit array pointer: 50244816
+2024-10-11 15:27:08,486 - DEBUG - Initialized building array pointer: 314367560
+2024-10-11 15:27:08,486 - DEBUG - Initialized infantry array pointer: 0
+2024-10-11 15:27:08,486 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 15:27:08,487 - DEBUG - Initialized unit array pointer: 50244816
+2024-10-11 15:27:08,487 - DEBUG - Initialized building array pointer: 314367560
+2024-10-11 15:27:08,487 - DEBUG - Initialized infantry array pointer: 0
+2024-10-11 15:27:08,487 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 15:27:09,487 - DEBUG - Updating dynamic data for player 1
+2024-10-11 15:27:09,487 - DEBUG - Player 1 balance: 99200
+2024-10-11 15:27:09,487 - DEBUG - Player 1 spent credit: 800
+2024-10-11 15:27:09,487 - DEBUG - Player 1 is_winner: False
+2024-10-11 15:27:09,487 - DEBUG - Player 1 is_loser: False
+2024-10-11 15:27:09,488 - DEBUG - Player 1 power output: 200
+2024-10-11 15:27:09,488 - DEBUG - Player 1 power drain: 0
+2024-10-11 15:27:09,488 - DEBUG - Player 1 total power: 200
+2024-10-11 15:27:09,488 - DEBUG - Initialized unit array pointer: 50244816
+2024-10-11 15:27:09,488 - DEBUG - Initialized building array pointer: 314367560
+2024-10-11 15:27:09,488 - DEBUG - Initialized infantry array pointer: 0
+2024-10-11 15:27:09,488 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 15:27:09,488 - DEBUG - Initialized unit array pointer: 50244816
+2024-10-11 15:27:09,488 - DEBUG - Initialized building array pointer: 314367560
+2024-10-11 15:27:09,488 - DEBUG - Initialized infantry array pointer: 0
+2024-10-11 15:27:09,488 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 15:27:10,489 - DEBUG - Updating dynamic data for player 1
+2024-10-11 15:27:10,489 - DEBUG - Player 1 balance: 99200
+2024-10-11 15:27:10,489 - DEBUG - Player 1 spent credit: 800
+2024-10-11 15:27:10,489 - DEBUG - Player 1 is_winner: False
+2024-10-11 15:27:10,489 - DEBUG - Player 1 is_loser: False
+2024-10-11 15:27:10,489 - DEBUG - Player 1 power output: 200
+2024-10-11 15:27:10,489 - DEBUG - Player 1 power drain: 0
+2024-10-11 15:27:10,489 - DEBUG - Player 1 total power: 200
+2024-10-11 15:27:10,490 - DEBUG - Initialized unit array pointer: 50244816
+2024-10-11 15:27:10,490 - DEBUG - Initialized building array pointer: 314367560
+2024-10-11 15:27:10,490 - DEBUG - Initialized infantry array pointer: 0
+2024-10-11 15:27:10,490 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 15:27:10,490 - DEBUG - Initialized unit array pointer: 50244816
+2024-10-11 15:27:10,490 - DEBUG - Initialized building array pointer: 314367560
+2024-10-11 15:27:10,490 - DEBUG - Initialized infantry array pointer: 0
+2024-10-11 15:27:10,490 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 15:27:11,491 - DEBUG - Updating dynamic data for player 1
+2024-10-11 15:27:11,491 - DEBUG - Player 1 balance: 99200
+2024-10-11 15:27:11,491 - DEBUG - Player 1 spent credit: 800
+2024-10-11 15:27:11,491 - DEBUG - Player 1 is_winner: False
+2024-10-11 15:27:11,491 - DEBUG - Player 1 is_loser: False
+2024-10-11 15:27:11,491 - DEBUG - Player 1 power output: 200
+2024-10-11 15:27:11,491 - DEBUG - Player 1 power drain: 0
+2024-10-11 15:27:11,491 - DEBUG - Player 1 total power: 200
+2024-10-11 15:27:11,491 - DEBUG - Initialized unit array pointer: 50244816
+2024-10-11 15:27:11,491 - DEBUG - Initialized building array pointer: 314367560
+2024-10-11 15:27:11,491 - DEBUG - Initialized infantry array pointer: 0
+2024-10-11 15:27:11,491 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 15:27:11,492 - DEBUG - Initialized unit array pointer: 50244816
+2024-10-11 15:27:11,492 - DEBUG - Initialized building array pointer: 314367560
+2024-10-11 15:27:11,492 - DEBUG - Initialized infantry array pointer: 0
+2024-10-11 15:27:11,492 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 15:27:12,493 - DEBUG - Updating dynamic data for player 1
+2024-10-11 15:27:12,493 - DEBUG - Player 1 balance: 99200
+2024-10-11 15:27:12,493 - DEBUG - Player 1 spent credit: 800
+2024-10-11 15:27:12,493 - DEBUG - Player 1 is_winner: False
+2024-10-11 15:27:12,493 - DEBUG - Player 1 is_loser: False
+2024-10-11 15:27:12,493 - DEBUG - Player 1 power output: 200
+2024-10-11 15:27:12,493 - DEBUG - Player 1 power drain: 0
+2024-10-11 15:27:12,493 - DEBUG - Player 1 total power: 200
+2024-10-11 15:27:12,493 - DEBUG - Initialized unit array pointer: 50244816
+2024-10-11 15:27:12,493 - DEBUG - Initialized building array pointer: 314367560
+2024-10-11 15:27:12,493 - DEBUG - Initialized infantry array pointer: 0
+2024-10-11 15:27:12,493 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 15:27:12,494 - DEBUG - Initialized unit array pointer: 50244816
+2024-10-11 15:27:12,494 - DEBUG - Initialized building array pointer: 314367560
+2024-10-11 15:27:12,494 - DEBUG - Initialized infantry array pointer: 0
+2024-10-11 15:27:12,494 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 15:27:13,494 - DEBUG - Updating dynamic data for player 1
+2024-10-11 15:27:13,494 - DEBUG - Player 1 balance: 99200
+2024-10-11 15:27:13,494 - DEBUG - Player 1 spent credit: 800
+2024-10-11 15:27:13,494 - DEBUG - Player 1 is_winner: False
+2024-10-11 15:27:13,494 - DEBUG - Player 1 is_loser: False
+2024-10-11 15:27:13,494 - DEBUG - Player 1 power output: 200
+2024-10-11 15:27:13,494 - DEBUG - Player 1 power drain: 0
+2024-10-11 15:27:13,495 - DEBUG - Player 1 total power: 200
+2024-10-11 15:27:13,495 - DEBUG - Initialized unit array pointer: 50244816
+2024-10-11 15:27:13,495 - DEBUG - Initialized building array pointer: 314367560
+2024-10-11 15:27:13,495 - DEBUG - Initialized infantry array pointer: 0
+2024-10-11 15:27:13,495 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 15:27:13,495 - DEBUG - Initialized unit array pointer: 50244816
+2024-10-11 15:27:13,495 - DEBUG - Initialized building array pointer: 314367560
+2024-10-11 15:27:13,495 - DEBUG - Initialized infantry array pointer: 0
+2024-10-11 15:27:13,495 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 15:27:14,496 - DEBUG - Updating dynamic data for player 1
+2024-10-11 15:27:14,496 - DEBUG - Player 1 balance: 99200
+2024-10-11 15:27:14,496 - DEBUG - Player 1 spent credit: 800
+2024-10-11 15:27:14,496 - DEBUG - Player 1 is_winner: False
+2024-10-11 15:27:14,496 - DEBUG - Player 1 is_loser: False
+2024-10-11 15:27:14,496 - DEBUG - Player 1 power output: 200
+2024-10-11 15:27:14,497 - DEBUG - Player 1 power drain: 0
+2024-10-11 15:27:14,497 - DEBUG - Player 1 total power: 200
+2024-10-11 15:27:14,497 - DEBUG - Initialized unit array pointer: 50244816
+2024-10-11 15:27:14,497 - DEBUG - Initialized building array pointer: 314367560
+2024-10-11 15:27:14,497 - DEBUG - Initialized infantry array pointer: 0
+2024-10-11 15:27:14,497 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 15:27:14,497 - DEBUG - Initialized unit array pointer: 50244816
+2024-10-11 15:27:14,497 - DEBUG - Initialized building array pointer: 314367560
+2024-10-11 15:27:14,497 - DEBUG - Initialized infantry array pointer: 0
+2024-10-11 15:27:14,497 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 15:27:15,498 - DEBUG - Updating dynamic data for player 1
+2024-10-11 15:27:15,498 - DEBUG - Player 1 balance: 99200
+2024-10-11 15:27:15,498 - DEBUG - Player 1 spent credit: 800
+2024-10-11 15:27:15,498 - DEBUG - Player 1 is_winner: False
+2024-10-11 15:27:15,498 - DEBUG - Player 1 is_loser: False
+2024-10-11 15:27:15,498 - DEBUG - Player 1 power output: 200
+2024-10-11 15:27:15,498 - DEBUG - Player 1 power drain: 0
+2024-10-11 15:27:15,498 - DEBUG - Player 1 total power: 200
+2024-10-11 15:27:15,498 - DEBUG - Initialized unit array pointer: 50244816
+2024-10-11 15:27:15,499 - DEBUG - Initialized building array pointer: 314367560
+2024-10-11 15:27:15,499 - DEBUG - Initialized infantry array pointer: 0
+2024-10-11 15:27:15,499 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 15:27:15,499 - DEBUG - Initialized unit array pointer: 50244816
+2024-10-11 15:27:15,499 - DEBUG - Initialized building array pointer: 314367560
+2024-10-11 15:27:15,499 - DEBUG - Initialized infantry array pointer: 0
+2024-10-11 15:27:15,499 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 15:27:16,500 - DEBUG - Updating dynamic data for player 1
+2024-10-11 15:27:16,500 - DEBUG - Player 1 balance: 99200
+2024-10-11 15:27:16,500 - DEBUG - Player 1 spent credit: 800
+2024-10-11 15:27:16,500 - DEBUG - Player 1 is_winner: False
+2024-10-11 15:27:16,500 - DEBUG - Player 1 is_loser: False
+2024-10-11 15:27:16,500 - DEBUG - Player 1 power output: 200
+2024-10-11 15:27:16,500 - DEBUG - Player 1 power drain: 0
+2024-10-11 15:27:16,500 - DEBUG - Player 1 total power: 200
+2024-10-11 15:27:16,500 - DEBUG - Initialized unit array pointer: 50244816
+2024-10-11 15:27:16,500 - DEBUG - Initialized building array pointer: 314367560
+2024-10-11 15:27:16,500 - DEBUG - Initialized infantry array pointer: 0
+2024-10-11 15:27:16,500 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 15:27:16,501 - DEBUG - Initialized unit array pointer: 50244816
+2024-10-11 15:27:16,501 - DEBUG - Initialized building array pointer: 314367560
+2024-10-11 15:27:16,501 - DEBUG - Initialized infantry array pointer: 0
+2024-10-11 15:27:16,501 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 15:27:17,501 - DEBUG - Updating dynamic data for player 1
+2024-10-11 15:27:17,501 - DEBUG - Player 1 balance: 99200
+2024-10-11 15:27:17,501 - DEBUG - Player 1 spent credit: 800
+2024-10-11 15:27:17,501 - DEBUG - Player 1 is_winner: False
+2024-10-11 15:27:17,501 - DEBUG - Player 1 is_loser: False
+2024-10-11 15:27:17,501 - DEBUG - Player 1 power output: 200
+2024-10-11 15:27:17,501 - DEBUG - Player 1 power drain: 0
+2024-10-11 15:27:17,501 - DEBUG - Player 1 total power: 200
+2024-10-11 15:27:17,502 - DEBUG - Initialized unit array pointer: 50244816
+2024-10-11 15:27:17,502 - DEBUG - Initialized building array pointer: 314367560
+2024-10-11 15:27:17,502 - DEBUG - Initialized infantry array pointer: 0
+2024-10-11 15:27:17,502 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 15:27:17,502 - DEBUG - Initialized unit array pointer: 50244816
+2024-10-11 15:27:17,502 - DEBUG - Initialized building array pointer: 314367560
+2024-10-11 15:27:17,502 - DEBUG - Initialized infantry array pointer: 0
+2024-10-11 15:27:17,502 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 15:27:18,503 - DEBUG - Updating dynamic data for player 1
+2024-10-11 15:27:18,503 - DEBUG - Player 1 balance: 99200
+2024-10-11 15:27:18,503 - DEBUG - Player 1 spent credit: 800
+2024-10-11 15:27:18,503 - DEBUG - Player 1 is_winner: False
+2024-10-11 15:27:18,503 - DEBUG - Player 1 is_loser: False
+2024-10-11 15:27:18,503 - DEBUG - Player 1 power output: 200
+2024-10-11 15:27:18,503 - DEBUG - Player 1 power drain: 0
+2024-10-11 15:27:18,503 - DEBUG - Player 1 total power: 200
+2024-10-11 15:27:18,503 - DEBUG - Initialized unit array pointer: 50244816
+2024-10-11 15:27:18,503 - DEBUG - Initialized building array pointer: 314367560
+2024-10-11 15:27:18,503 - DEBUG - Initialized infantry array pointer: 0
+2024-10-11 15:27:18,503 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 15:27:18,504 - DEBUG - Initialized unit array pointer: 50244816
+2024-10-11 15:27:18,504 - DEBUG - Initialized building array pointer: 314367560
+2024-10-11 15:27:18,504 - DEBUG - Initialized infantry array pointer: 0
+2024-10-11 15:27:18,504 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 15:27:19,505 - DEBUG - Updating dynamic data for player 1
+2024-10-11 15:27:19,505 - DEBUG - Player 1 balance: 99200
+2024-10-11 15:27:19,505 - DEBUG - Player 1 spent credit: 800
+2024-10-11 15:27:19,505 - DEBUG - Player 1 is_winner: False
+2024-10-11 15:27:19,505 - DEBUG - Player 1 is_loser: False
+2024-10-11 15:27:19,505 - DEBUG - Player 1 power output: 200
+2024-10-11 15:27:19,505 - DEBUG - Player 1 power drain: 0
+2024-10-11 15:27:19,505 - DEBUG - Player 1 total power: 200
+2024-10-11 15:27:19,505 - DEBUG - Initialized unit array pointer: 50244816
+2024-10-11 15:27:19,505 - DEBUG - Initialized building array pointer: 314367560
+2024-10-11 15:27:19,505 - DEBUG - Initialized infantry array pointer: 0
+2024-10-11 15:27:19,505 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 15:27:19,506 - DEBUG - Initialized unit array pointer: 50244816
+2024-10-11 15:27:19,506 - DEBUG - Initialized building array pointer: 314367560
+2024-10-11 15:27:19,506 - DEBUG - Initialized infantry array pointer: 0
+2024-10-11 15:27:19,506 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 15:27:20,506 - DEBUG - Updating dynamic data for player 1
+2024-10-11 15:27:20,506 - DEBUG - Player 1 balance: 99200
+2024-10-11 15:27:20,506 - DEBUG - Player 1 spent credit: 800
+2024-10-11 15:27:20,506 - DEBUG - Player 1 is_winner: False
+2024-10-11 15:27:20,506 - DEBUG - Player 1 is_loser: False
+2024-10-11 15:27:20,506 - DEBUG - Player 1 power output: 200
+2024-10-11 15:27:20,506 - DEBUG - Player 1 power drain: 0
+2024-10-11 15:27:20,507 - DEBUG - Player 1 total power: 200
+2024-10-11 15:27:20,507 - DEBUG - Initialized unit array pointer: 50244816
+2024-10-11 15:27:20,507 - DEBUG - Initialized building array pointer: 314367560
+2024-10-11 15:27:20,507 - DEBUG - Initialized infantry array pointer: 0
+2024-10-11 15:27:20,507 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 15:27:20,507 - DEBUG - Initialized unit array pointer: 50244816
+2024-10-11 15:27:20,507 - DEBUG - Initialized building array pointer: 314367560
+2024-10-11 15:27:20,507 - DEBUG - Initialized infantry array pointer: 0
+2024-10-11 15:27:20,507 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 15:27:21,508 - DEBUG - Updating dynamic data for player 1
+2024-10-11 15:27:21,508 - DEBUG - Player 1 balance: 99200
+2024-10-11 15:27:21,508 - DEBUG - Player 1 spent credit: 800
+2024-10-11 15:27:21,508 - DEBUG - Player 1 is_winner: False
+2024-10-11 15:27:21,508 - DEBUG - Player 1 is_loser: False
+2024-10-11 15:27:21,508 - DEBUG - Player 1 power output: 200
+2024-10-11 15:27:21,508 - DEBUG - Player 1 power drain: 0
+2024-10-11 15:27:21,508 - DEBUG - Player 1 total power: 200
+2024-10-11 15:27:21,508 - DEBUG - Initialized unit array pointer: 50244816
+2024-10-11 15:27:21,508 - DEBUG - Initialized building array pointer: 314367560
+2024-10-11 15:27:21,508 - DEBUG - Initialized infantry array pointer: 0
+2024-10-11 15:27:21,508 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 15:27:21,509 - DEBUG - Initialized unit array pointer: 50244816
+2024-10-11 15:27:21,509 - DEBUG - Initialized building array pointer: 314367560
+2024-10-11 15:27:21,509 - DEBUG - Initialized infantry array pointer: 0
+2024-10-11 15:27:21,509 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 15:27:22,510 - DEBUG - Updating dynamic data for player 1
+2024-10-11 15:27:22,510 - DEBUG - Player 1 balance: 99200
+2024-10-11 15:27:22,510 - DEBUG - Player 1 spent credit: 800
+2024-10-11 15:27:22,510 - DEBUG - Player 1 is_winner: False
+2024-10-11 15:27:22,510 - DEBUG - Player 1 is_loser: False
+2024-10-11 15:27:22,510 - DEBUG - Player 1 power output: 200
+2024-10-11 15:27:22,510 - DEBUG - Player 1 power drain: 0
+2024-10-11 15:27:22,510 - DEBUG - Player 1 total power: 200
+2024-10-11 15:27:22,510 - DEBUG - Initialized unit array pointer: 50244816
+2024-10-11 15:27:22,510 - DEBUG - Initialized building array pointer: 314367560
+2024-10-11 15:27:22,510 - DEBUG - Initialized infantry array pointer: 0
+2024-10-11 15:27:22,510 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 15:27:22,511 - DEBUG - Initialized unit array pointer: 50244816
+2024-10-11 15:27:22,511 - DEBUG - Initialized building array pointer: 314367560
+2024-10-11 15:27:22,511 - DEBUG - Initialized infantry array pointer: 0
+2024-10-11 15:27:22,511 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 15:27:23,512 - DEBUG - Updating dynamic data for player 1
+2024-10-11 15:27:23,512 - DEBUG - Player 1 balance: 99200
+2024-10-11 15:27:23,512 - DEBUG - Player 1 spent credit: 800
+2024-10-11 15:27:23,512 - DEBUG - Player 1 is_winner: False
+2024-10-11 15:27:23,512 - DEBUG - Player 1 is_loser: False
+2024-10-11 15:27:23,512 - DEBUG - Player 1 power output: 200
+2024-10-11 15:27:23,512 - DEBUG - Player 1 power drain: 0
+2024-10-11 15:27:23,512 - DEBUG - Player 1 total power: 200
+2024-10-11 15:27:23,512 - DEBUG - Initialized unit array pointer: 50244816
+2024-10-11 15:27:23,512 - DEBUG - Initialized building array pointer: 314367560
+2024-10-11 15:27:23,512 - DEBUG - Initialized infantry array pointer: 0
+2024-10-11 15:27:23,512 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 15:27:23,513 - DEBUG - Initialized unit array pointer: 50244816
+2024-10-11 15:27:23,513 - DEBUG - Initialized building array pointer: 314367560
+2024-10-11 15:27:23,513 - DEBUG - Initialized infantry array pointer: 0
+2024-10-11 15:27:23,513 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 15:27:24,514 - DEBUG - Updating dynamic data for player 1
+2024-10-11 15:27:24,514 - DEBUG - Player 1 balance: 99200
+2024-10-11 15:27:24,514 - DEBUG - Player 1 spent credit: 800
+2024-10-11 15:27:24,514 - DEBUG - Player 1 is_winner: False
+2024-10-11 15:27:24,514 - DEBUG - Player 1 is_loser: False
+2024-10-11 15:27:24,514 - DEBUG - Player 1 power output: 200
+2024-10-11 15:27:24,514 - DEBUG - Player 1 power drain: 0
+2024-10-11 15:27:24,514 - DEBUG - Player 1 total power: 200
+2024-10-11 15:27:24,514 - DEBUG - Initialized unit array pointer: 50244816
+2024-10-11 15:27:24,514 - DEBUG - Initialized building array pointer: 314367560
+2024-10-11 15:27:24,514 - DEBUG - Initialized infantry array pointer: 0
+2024-10-11 15:27:24,514 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 15:27:24,515 - DEBUG - Initialized unit array pointer: 50244816
+2024-10-11 15:27:24,515 - DEBUG - Initialized building array pointer: 314367560
+2024-10-11 15:27:24,515 - DEBUG - Initialized infantry array pointer: 0
+2024-10-11 15:27:24,515 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 15:27:25,515 - DEBUG - Updating dynamic data for player 1
+2024-10-11 15:27:25,515 - DEBUG - Player 1 balance: 99200
+2024-10-11 15:27:25,515 - DEBUG - Player 1 spent credit: 800
+2024-10-11 15:27:25,515 - DEBUG - Player 1 is_winner: False
+2024-10-11 15:27:25,515 - DEBUG - Player 1 is_loser: False
+2024-10-11 15:27:25,515 - DEBUG - Player 1 power output: 200
+2024-10-11 15:27:25,515 - DEBUG - Player 1 power drain: 0
+2024-10-11 15:27:25,515 - DEBUG - Player 1 total power: 200
+2024-10-11 15:27:25,516 - DEBUG - Initialized unit array pointer: 50244816
+2024-10-11 15:27:25,516 - DEBUG - Initialized building array pointer: 314367560
+2024-10-11 15:27:25,516 - DEBUG - Initialized infantry array pointer: 0
+2024-10-11 15:27:25,516 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 15:27:25,516 - DEBUG - Initialized unit array pointer: 50244816
+2024-10-11 15:27:25,516 - DEBUG - Initialized building array pointer: 314367560
+2024-10-11 15:27:25,516 - DEBUG - Initialized infantry array pointer: 0
+2024-10-11 15:27:25,516 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 15:27:26,517 - DEBUG - Updating dynamic data for player 1
+2024-10-11 15:27:26,517 - DEBUG - Player 1 balance: 99200
+2024-10-11 15:27:26,517 - DEBUG - Player 1 spent credit: 800
+2024-10-11 15:27:26,517 - DEBUG - Player 1 is_winner: False
+2024-10-11 15:27:26,518 - DEBUG - Player 1 is_loser: False
+2024-10-11 15:27:26,518 - DEBUG - Player 1 power output: 200
+2024-10-11 15:27:26,518 - DEBUG - Player 1 power drain: 0
+2024-10-11 15:27:26,518 - DEBUG - Player 1 total power: 200
+2024-10-11 15:27:26,518 - DEBUG - Initialized unit array pointer: 50244816
+2024-10-11 15:27:26,518 - DEBUG - Initialized building array pointer: 314367560
+2024-10-11 15:27:26,518 - DEBUG - Initialized infantry array pointer: 0
+2024-10-11 15:27:26,518 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 15:27:26,518 - DEBUG - Initialized unit array pointer: 50244816
+2024-10-11 15:27:26,518 - DEBUG - Initialized building array pointer: 314367560
+2024-10-11 15:27:26,518 - DEBUG - Initialized infantry array pointer: 0
+2024-10-11 15:27:26,518 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 15:27:27,519 - DEBUG - Updating dynamic data for player 1
+2024-10-11 15:27:27,519 - DEBUG - Player 1 balance: 99200
+2024-10-11 15:27:27,519 - DEBUG - Player 1 spent credit: 800
+2024-10-11 15:27:27,519 - DEBUG - Player 1 is_winner: False
+2024-10-11 15:27:27,519 - DEBUG - Player 1 is_loser: False
+2024-10-11 15:27:27,519 - DEBUG - Player 1 power output: 200
+2024-10-11 15:27:27,519 - DEBUG - Player 1 power drain: 0
+2024-10-11 15:27:27,519 - DEBUG - Player 1 total power: 200
+2024-10-11 15:27:27,519 - DEBUG - Initialized unit array pointer: 50244816
+2024-10-11 15:27:27,519 - DEBUG - Initialized building array pointer: 314367560
+2024-10-11 15:27:27,519 - DEBUG - Initialized infantry array pointer: 0
+2024-10-11 15:27:27,519 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 15:27:27,520 - DEBUG - Initialized unit array pointer: 50244816
+2024-10-11 15:27:27,520 - DEBUG - Initialized building array pointer: 314367560
+2024-10-11 15:27:27,520 - DEBUG - Initialized infantry array pointer: 0
+2024-10-11 15:27:27,520 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-11 15:27:28,316 - INFO - Closing application...
+2024-10-11 15:27:28,521 - INFO - Emitted game_stopped signal.
+2024-10-11 15:27:29,521 - INFO - Data update thread has exited.
+2024-10-11 15:27:29,522 - INFO - Data update thread has finished.
