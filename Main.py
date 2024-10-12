@@ -26,18 +26,8 @@ from UnitCounter import UnitWindow
 from UnitSelectionWindow import UnitSelectionWindow
 from logging_config import setup_logging
 
-# Constants
-HUD_POSITION_FILE = 'hud_positions.json'
+from common import (HUD_POSITION_FILE, players, hud_windows, selected_units_dict, data_lock, hud_positions, process_handle, control_panel, data_update_thread, names, name_to_path)
 
-# Global variables
-players = []           # List to store player objects
-hud_windows = []       # List to store HUDWindow objects
-selected_units_dict = {}    # Dict to store units for the unitSelection HUD
-data_lock = threading.Lock()
-hud_positions = {}     # Dictionary to store HUD positions and settings
-process_handle = None  # Handle for the game process
-control_panel = None   # Reference to the ControlPanel instance
-data_update_thread = None  # Reference to the DataUpdateThread instance
 
 
 # Load HUD positions from file if it exists, otherwise create defaults
@@ -154,13 +144,15 @@ def create_hud_windows():
         logging.info("No valid players found. HUD will not be displayed.")
         return
 
+    index = 1
     for player in players:
         logging.info(f"Creating HUD for {player.username.value} with color {player.color}")
         unit_window = UnitWindow(player, len(players), hud_positions, selected_units_dict)
-        unit_window.setWindowTitle(f"Player {player.index} unit window")
+        unit_window.setWindowTitle(f"Player {index} unit window")
         resource_window = ResourceWindow(player, len(players), hud_positions)
-        resource_window.setWindowTitle(f"Player {player.index} resource window")
+        resource_window.setWindowTitle(f"Player {index} resource window")
         hud_windows.append((unit_window, resource_window))
+        index += 1
 
 
 # Update the HUDs with the latest data
