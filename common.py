@@ -30,7 +30,7 @@ names = {
             "SpySat",
             "Allied Naval Yard",
             "Allied Barracks",
-            "Chronosphere",
+            "ChronoSphere",
             "Allied Service Depot",
             "Gap Generator",
             "Grand Cannon",

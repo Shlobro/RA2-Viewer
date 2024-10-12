@@ -49,16 +49,43 @@ def load_hud_positions():
 
 # Save HUD positions and settings to file
 def save_hud_positions():
-    global control_panel, hud_positions
+    global control_panel, hud_positions, hud_windows
+
+    # Save HUD sizes from control panel spin boxes
     if control_panel:
-        # Update HUD sizes from control panel spin boxes
         if control_panel.counter_size_spinbox:
             hud_positions['unit_counter_size'] = control_panel.counter_size_spinbox.value()
         if control_panel.data_size_spinbox:
             hud_positions['data_counter_size'] = control_panel.data_size_spinbox.value()
 
+        # Save checkbox values
+        hud_positions['show_name'] = control_panel.name_checkbox.isChecked()
+        hud_positions['show_money'] = control_panel.money_checkbox.isChecked()
+        hud_positions['show_power'] = control_panel.power_checkbox.isChecked()
+        hud_positions['unit_layout'] = control_panel.layout_combo.currentText()
+
+    # Save the positions of all HUD windows
+    for unit_window, resource_window in hud_windows:
+        player_id = resource_window.player.index
+        player_id_str = str(player_id)
+
+        # Ensure the player's section exists in the hud_positions
+        if player_id_str not in hud_positions:
+            hud_positions[player_id_str] = {}
+
+        # Save positions for each individual window (name, money, power)
+        name_pos = resource_window.windows[0].pos()  # Name window
+        money_pos = resource_window.windows[1].pos()  # Money window
+        power_pos = resource_window.windows[2].pos()  # Power window
+
+        hud_positions[player_id_str]['name'] = {"x": name_pos.x(), "y": name_pos.y()}
+        hud_positions[player_id_str]['money'] = {"x": money_pos.x(), "y": money_pos.y()}
+        hud_positions[player_id_str]['power'] = {"x": power_pos.x(), "y": power_pos.y()}
+
+    # Write everything to the HUD position file
     with open(HUD_POSITION_FILE, 'w') as file:
         json.dump(hud_positions, file, indent=4)
+
 
 
 # Find the PID of a process by name
@@ -261,7 +288,7 @@ class ControlPanel(QMainWindow):
         self.power_checkbox.stateChanged.connect(self.toggle_power)
         layout.addWidget(self.power_checkbox)
 
-        self.separate_checkbox = QCheckBox("Separate info")
+        self.separate_checkbox = QCheckBox("Separate info (does not work)")
         self.separate_checkbox.setChecked(False)
         self.separate_checkbox.stateChanged.connect(self.toggle_separate)
         layout.addWidget(self.separate_checkbox)

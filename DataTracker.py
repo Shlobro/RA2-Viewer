@@ -1,6 +1,6 @@
 # Create a separate window for displaying resources (e.g., money and power)
 from PySide6.QtCore import Qt
-from PySide6.QtGui import QPixmap, QFont
+from PySide6.QtGui import QPixmap, QFont, QFontDatabase
 from PySide6.QtWidgets import QMainWindow, QFrame, QVBoxLayout, QHBoxLayout, QLabel, QWidget
 from DataWidget import DataWidget
 
@@ -39,10 +39,17 @@ class ResourceWindow(QMainWindow):
         resource_frame.setLayout(layout)
         self.setCentralWidget(resource_frame)  # Ensure that the frame is the central widget
 
-        # Create a bold, clear font for money
-        money_font = QFont("Arial Black", 18, QFont.Bold)  # Larger, bold font to emphasize financial values
+        # Load the font from a file
+        font_id = QFontDatabase.addApplicationFont("Other/Futured.ttf")
+        font_family = QFontDatabase.applicationFontFamilies(font_id)
 
-        # Create a modern, sleek font for power
+        # Check if the font was loaded successfully and apply it
+        if font_family:
+            money_font = QFont(font_family[0], 18, QFont.Bold)  # Set the size and weight
+        else:
+            money_font = QFont("Arial", 18, QFont.Bold)
+
+            # Create a modern, sleek font for power
         power_font = QFont("Impact", 18, QFont.Bold)  # Strong and bold font for power
 
         username_font = QFont("Roboto", 16, QFont.Bold)  # Change the font size and weight as needed
@@ -61,8 +68,8 @@ class ResourceWindow(QMainWindow):
         self.money_widget = DataWidget(
             image_path='dollar.png',
             data=self.player.balance,
-            image_color=Qt.green,
-            text_color=Qt.green,
+            image_color=Qt.white,
+            text_color=Qt.white,
             size=self.size,
             font=money_font  # Apply the custom font for money
         )
@@ -84,29 +91,39 @@ class ResourceWindow(QMainWindow):
 
         # TODO: make an if condition according to Main.py separate button
         # Create a window for the name widget
-        name_window = self.create_window_with_widget(f"Player {player_index} Name", self.name_widget, player_count, hud_positions)
-        name_window.show()
+        name_window = self.create_window_with_widget(f"Player {player_index} Name", self.name_widget, player_count, hud_positions, 'name', player_index)
+        if hud_positions['show_name']:
+            name_window.show()
+        else:
+            name_window.hide()
         # Create a window for the money widget
-        money_window = self.create_window_with_widget(f"Player {player_index} money", self.money_widget, player_count,                               hud_positions)
-        money_window.show()
+        money_window = self.create_window_with_widget(f"Player {player_index} money", self.money_widget, player_count, hud_positions, 'money', player_index)
+        if hud_positions['show_money']:
+            money_window.show()
+        else:
+            money_window.hide()
         # Create a window for the power widget
-        power_window = self.create_window_with_widget(f"Player {player_index} power", self.power_widget, player_count, hud_positions)
-        power_window.show()
+        power_window = self.create_window_with_widget(f"Player {player_index} power", self.power_widget, player_count, hud_positions, 'power', player_index)
+        if hud_positions['show_power']:
+            power_window.show()
+        else:
+            power_window.hide()
 
         self.windows = [name_window, money_window, power_window]
 
         self.show()
 
     # Function to create a new window with a widget
-    def create_window_with_widget(self, title, widget, player_count, hud_positions):
+    def create_window_with_widget(self, title, widget, player_count, hud_positions ,hud_type, player_id):
         """Create a new window for a given widget with a specified title."""
-
-        # TODO: save and load position of the windows
-
         window = QWidget()
         window.setWindowTitle(title)
         window.setWindowFlags(Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint | Qt.X11BypassWindowManagerHint)
         window.setAttribute(Qt.WA_TranslucentBackground)
+
+        # Get the initial position of the HUD
+        pos = self.get_default_position(player_id, hud_type, player_count, hud_positions)
+        window.setGeometry(pos['x'], pos['y'], widget.sizeHint().width(), widget.sizeHint().height())
 
         # Create layout and add widget
         layout = QVBoxLayout()
@@ -126,6 +143,7 @@ class ResourceWindow(QMainWindow):
                 x = event.globalX() - offset.x()
                 y = event.globalY() - offset.y()
                 window.move(x, y)
+                self.update_hud_position(player_id, hud_type, x, y, player_count, hud_positions)
 
         window.mousePressEvent = mouse_press_event
         window.mouseMoveEvent = mouse_move_event
@@ -163,27 +181,22 @@ class ResourceWindow(QMainWindow):
         self.mouseMoveEvent = mouse_move_event
 
     def get_default_position(self, player_id, hud_type, player_count, hud_positions):
-        player_id_str = str(player_id)
         player_count_str = str(player_count)
-
-        # Check if player_count exists, if not, create it
         if player_count_str not in hud_positions:
             hud_positions[player_count_str] = {}
-
-        # Check if player_id exists within player_count, if not, create it
-        if player_id_str not in hud_positions[player_count_str]:
-            hud_positions[player_count_str][player_id_str] = {}
-
-        # Check if hud_type exists for the player, if not, create default position for it
-        if hud_type not in hud_positions[player_count_str][player_id_str]:
-            # Set default x and y positions
-            default_position = {"x": 100 * player_id, "y": 100 * player_id}
-            hud_positions[player_count_str][player_id_str][hud_type] = default_position
+        if player_id not in hud_positions[player_count_str]:
+            hud_positions[player_count_str][player_id] = {}
+        if hud_type not in hud_positions[player_count_str][player_id]:
+            default_position = {"x": 100 * len(hud_positions[player_count_str]),
+                                "y": 100 * len(hud_positions[player_count_str])}
+            hud_positions[player_count_str][player_id][hud_type] = default_position
         else:
-            # If hud_type exists, return the stored position
-            default_position = hud_positions[player_count_str][player_id_str][hud_type]
+            default_position = hud_positions[player_count_str][player_id][hud_type]
 
-        # Return the position (either the one from JSON or the default one we created)
+        # Ensure the position values are integers
+        default_position['x'] = int(default_position['x'])
+        default_position['y'] = int(default_position['y'])
+
         return default_position
 
     def update_hud_position(self, player_id, hud_type, x, y, player_count, hud_positions):

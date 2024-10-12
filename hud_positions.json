@@ -1,30 +1,54 @@
 {
     "unit_counter_size": 100,
-    "data_counter_size": 16,
-    "show_name": true,
+    "data_counter_size": 33,
+    "show_name": false,
     "show_money": true,
     "show_power": true,
     "unit_layout": "Vertical",
     "1": {
-        "1": {
-            "unit": {
-                "x": 920,
-                "y": 123
-            },
-            "resource": {
-                "x": 810,
-                "y": 108
-            }
-        },
         "2": {
-            "unit": {
-                "x": 1273,
-                "y": 102
-            },
             "resource": {
+                "x": 300,
+                "y": 300
+            },
+            "unit": {
                 "x": 200,
                 "y": 200
             }
+        },
+        "pink": {
+            "name": {
+                "x": 2138,
+                "y": 201
+            },
+            "money": {
+                "x": 2220,
+                "y": 218
+            },
+            "power": {
+                "x": 2244,
+                "y": 156
+            }
+        },
+        "2": {
+            "resource": {
+                "x": 300,
+                "y": 300
+            }
+        }
+    },
+    "2": {
+        "name": {
+            "x": 2138,
+            "y": 201
+        },
+        "money": {
+            "x": 2220,
+            "y": 218
+        },
+        "power": {
+            "x": 2244,
+            "y": 156
         }
     }
 }
