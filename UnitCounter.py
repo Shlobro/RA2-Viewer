@@ -7,11 +7,12 @@ from PySide6.QtWidgets import QVBoxLayout
 
 
 class UnitWindow(QMainWindow):
-    def __init__(self, player, player_count, hud_pos, unit_json_file="unit_selection.json"):
+    def __init__(self, player, player_count, hud_pos, selected_units_dict):
         super().__init__()
         self.player = player
         self.player_count = player_count
-        self.unit_json_file = unit_json_file
+        self.selected_units_dict = selected_units_dict
+        self.selected_units = selected_units_dict['selected_units']
         self.layout_type = hud_pos.get('unit_layout', 'Vertical')  # Default to Vertical layout
         self.size = hud_pos.get('unit_counter_size', 100)
 
@@ -64,9 +65,7 @@ class UnitWindow(QMainWindow):
 
     def load_selected_units_and_create_counters(self):
         """Load selected units from JSON and create CounterWidgets for them."""
-        selected_units = self.load_selected_units_from_json()
-
-        for faction, unit_types in selected_units.items():
+        for faction, unit_types in self.selected_units.items():
             for unit_type, units in unit_types.items():
                 for unit_name, is_selected in units.items():
                     if is_selected:
@@ -83,24 +82,18 @@ class UnitWindow(QMainWindow):
 
     def get_unit_image_path(self, faction, unit_type, unit_name):
         """Fetch the image path for a given unit based on faction, unit type, and unit name."""
-        with open(self.unit_json_file, 'r') as file:
-            unit_data = json.load(file).get('units', {})
+        units_list = self.selected_units_dict["units"][faction][unit_type]
+        # logging.info(self.selected_units_dict["units"][faction][unit_type][0])
+        # name_to_image = {item['name'].lower(): item['image'] for category in units_list for item in category}
 
-            # Get the list of units for the specified faction and unit type
-            units_list = unit_data.get(faction, {}).get(unit_type, [])
+        # Iterate over the units to find the one with the matching name
+        for unit in units_list:
+            if unit.get('name') == unit_name:
+                return unit.get('image', '')
 
-            # Iterate over the units to find the one with the matching name
-            for unit in units_list:
-                if unit.get('name') == unit_name:
-                    return unit.get('image', '')
+        # Return an empty string if no match is found
+        return ''
 
-            # Return an empty string if no match is found
-            return ''
-
-    def load_selected_units_from_json(self):
-        """Load the selected units from the JSON file."""
-        with open(self.unit_json_file, 'r') as file:
-            return json.load(file).get('selected_units', {})
 
     def update_all_counters_size(self, new_size):
         """Update the size of all CounterWidgets in the UnitWindow."""
@@ -162,10 +155,9 @@ class UnitWindow(QMainWindow):
         """
         Return a list of (unit_name, unit_type) tuples for all the units in counters.
         """
-        selected_units = self.load_selected_units_from_json()  # Reload the selected units
         unit_names_and_types = []
 
-        for faction, unit_types in selected_units.items():
+        for faction, unit_types in self.selected_units.items():
             for unit_type, units in unit_types.items():
                 for unit_name, is_selected in units.items():
                     if is_selected:

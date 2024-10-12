@@ -1,16 +1,17 @@
 import json
+import logging
 import os
+from idlelib.debugger_r import frametable
 
 from PySide6.QtGui import QPixmap, QImage
 from PySide6.QtWidgets import QMainWindow, QWidget, QTabWidget, QVBoxLayout, QGridLayout, QPushButton, QLabel
 from PySide6.QtCore import Qt
 
 class UnitSelectionWindow(QMainWindow):
-    def __init__(self, json_file="unit_selection.json", parent=None):
+    def __init__(self, selected_units_dict, parent=None):
         super().__init__(parent)
-        self.json_file = json_file  # Reference the new unit selection JSON file
-        self.units_data = self.load_units_data()  # Load the units added so far
-        self.selected_units = self.load_selected_units()  # Load selected units (if any)
+        self.units_data = selected_units_dict['units']  # Load the units added so far
+        self.selected_units = selected_units_dict['selected_units']  # Load selected units (if any)
 
         self.setWindowTitle("Unit Selection")
         self.setGeometry(200, 200, 400, 300)
@@ -22,14 +23,9 @@ class UnitSelectionWindow(QMainWindow):
         self.tab_widget = QTabWidget()
         self.create_faction_tabs()
 
-        # Save button
-        save_button = QPushButton("Save")
-        save_button.clicked.connect(self.save_and_close)
-
         # Layout setup
         layout = QVBoxLayout(main_widget)
         layout.addWidget(self.tab_widget)
-        layout.addWidget(save_button)
 
 
     def create_faction_tabs(self):
@@ -104,6 +100,8 @@ class UnitSelectionWindow(QMainWindow):
         current_state = self.is_unit_selected(faction, unit_type, unit)
         new_state = not current_state
 
+        logging.debug(f'{unit} changed state to {new_state}')
+
         # Update the selection status
         if faction not in self.selected_units:
             self.selected_units[faction] = {}
@@ -135,32 +133,3 @@ class UnitSelectionWindow(QMainWindow):
             # Set the modified image back to the label
             label.setPixmap(QPixmap.fromImage(image))
 
-    def load_selected_units(self):
-        """Load the selected units from the JSON file."""
-        if os.path.exists(self.json_file):
-            with open(self.json_file, 'r') as file:
-                return json.load(file).get('selected_units', {})
-        return {}
-
-    def save_selected_units(self):
-        """Save the selected units to the JSON file."""
-        data = {}
-        if os.path.exists(self.json_file):
-            with open(self.json_file, 'r') as file:
-                data = json.load(file)
-
-        data['selected_units'] = self.selected_units
-
-        with open(self.json_file, 'w') as file:
-            json.dump(data, file, indent=4)
-
-    def load_units_data(self):
-        """Load units data from the JSON file (or return empty if not present)."""
-        if os.path.exists(self.json_file):
-            with open(self.json_file, 'r') as file:
-                return json.load(file).get('units', {})
-        return {}
-
-    def save_and_close(self):
-        self.save_selected_units()
-        self.close()

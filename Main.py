@@ -32,6 +32,7 @@ HUD_POSITION_FILE = 'hud_positions.json'
 # Global variables
 players = []           # List to store player objects
 hud_windows = []       # List to store HUDWindow objects
+selected_units_dict = {}    # Dict to store units for the unitSelection HUD
 data_lock = threading.Lock()
 hud_positions = {}     # Dictionary to store HUD positions and settings
 process_handle = None  # Handle for the game process
@@ -155,7 +156,7 @@ def create_hud_windows():
 
     for player in players:
         logging.info(f"Creating HUD for {player.username.value} with color {player.color}")
-        unit_window = UnitWindow(player, len(players), hud_positions)
+        unit_window = UnitWindow(player, len(players), hud_positions, selected_units_dict)
         unit_window.setWindowTitle(f"Player {player.index} unit window")
         resource_window = ResourceWindow(player, len(players), hud_positions)
         resource_window.setWindowTitle(f"Player {player.index} resource window")
@@ -213,6 +214,17 @@ def on_closing():
         logging.info("Data update thread has finished.")
     app.quit()
 
+
+def save_selected_units():
+    """Save the selected units to the JSON file."""
+    json_file = 'unit_selection.json'
+
+    with open(json_file, 'w') as file:
+        json.dump(selected_units_dict, file, indent=4)
+
+    logging.info("Saved selected units.")
+
+
 # Control Panel for HUD settings
 class ControlPanel(QMainWindow):
     def __init__(self):
@@ -226,6 +238,9 @@ class ControlPanel(QMainWindow):
         selection_button = QPushButton("Select Units")
         selection_button.clicked.connect(self.open_unit_selection)
         layout.addWidget(selection_button)
+
+        global selected_units_dict
+        selected_units_dict = self.load_selected_units()
 
         # Layout toggle (horizontal or vertical)
         self.layout_label = QLabel("Select Layout:")
@@ -323,9 +338,20 @@ class ControlPanel(QMainWindow):
     # Method to open the Unit Selection window
     def open_unit_selection(self):
         if self.unit_selection_window is None or not self.unit_selection_window.isVisible():
-            self.unit_selection_window = UnitSelectionWindow('unit_selection.json')
+            self.unit_selection_window = UnitSelectionWindow(selected_units_dict)
             logging.info("Opening Unit Selection window")
             self.unit_selection_window.show()
+
+    def load_selected_units(self):
+        """Load the selected units from the JSON file."""
+        json_file = 'unit_selection.json'
+        if os.path.exists(json_file):
+            with open(json_file, 'r') as file:
+                return json.load(file)
+        return {}
+
+
+
 
     # NOTE merged the toggle functions into one function
 
@@ -456,4 +482,5 @@ if __name__ == '__main__':
     # On application exit
     data_update_thread.stop_event.set()
     data_update_thread.wait()
+    save_selected_units()
     save_hud_positions()
