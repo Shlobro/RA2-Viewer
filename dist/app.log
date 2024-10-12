@@ -1,0 +1,162 @@
+2024-10-13 01:35:37,395 - INFO - Logging setup complete
+2024-10-13 01:35:37,475 - INFO - Waiting for the game to start and players to load...
+2024-10-13 01:35:37,476 - INFO - Waiting for the game to start...
+2024-10-13 01:35:37,887 - INFO - Game detected
+2024-10-13 01:35:37,888 - INFO - Skipping Player 0 as not fully initialized yet.
+2024-10-13 01:35:37,888 - INFO - Players loaded. Proceeding with players initialization.
+2024-10-13 01:35:37,888 - DEBUG - Initialized unit array pointer: 48801792
+2024-10-13 01:35:37,888 - DEBUG - Initialized building array pointer: 288434160
+2024-10-13 01:35:37,888 - DEBUG - Initialized infantry array pointer: 258744816
+2024-10-13 01:35:37,888 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-13 01:35:37,889 - INFO - Player 1 color: pink
+2024-10-13 01:35:37,889 - INFO - Player 1 country name: Arabs
+2024-10-13 01:35:37,889 - INFO - Player 1 name: QWERTYUIOP{}
+2024-10-13 01:35:37,889 - INFO - Number of valid players: 1
+2024-10-13 01:35:37,889 - DEBUG - Updating dynamic data for player 2
+2024-10-13 01:35:37,889 - DEBUG - Player 2 balance: 95400
+2024-10-13 01:35:37,889 - DEBUG - Player 2 spent credit: 4600
+2024-10-13 01:35:37,889 - DEBUG - Player 2 is_winner: False
+2024-10-13 01:35:37,889 - DEBUG - Player 2 is_loser: False
+2024-10-13 01:35:37,889 - DEBUG - Player 2 power output: 150
+2024-10-13 01:35:37,889 - DEBUG - Player 2 power drain: 10
+2024-10-13 01:35:37,889 - DEBUG - Player 2 total power: 140
+2024-10-13 01:35:37,890 - DEBUG - Initialized unit array pointer: 48801792
+2024-10-13 01:35:37,890 - INFO - Game started handler called
+2024-10-13 01:35:37,890 - DEBUG - Initialized building array pointer: 288434160
+2024-10-13 01:35:37,890 - INFO - Creating HUD for QWERTYUIOP{} with color pink
+2024-10-13 01:35:37,890 - DEBUG - Initialized infantry array pointer: 258744816
+2024-10-13 01:35:37,915 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-13 01:35:38,242 - DEBUG - updating all unit counters
+2024-10-13 01:35:38,919 - DEBUG - Updating dynamic data for player 2
+2024-10-13 01:35:38,919 - DEBUG - Player 2 balance: 95400
+2024-10-13 01:35:38,919 - DEBUG - Player 2 spent credit: 4600
+2024-10-13 01:35:38,919 - DEBUG - Player 2 is_winner: False
+2024-10-13 01:35:38,919 - DEBUG - Player 2 is_loser: False
+2024-10-13 01:35:38,919 - DEBUG - Player 2 power output: 150
+2024-10-13 01:35:38,919 - DEBUG - Player 2 power drain: 10
+2024-10-13 01:35:38,919 - DEBUG - Player 2 total power: 140
+2024-10-13 01:35:38,919 - DEBUG - Initialized unit array pointer: 48801792
+2024-10-13 01:35:38,919 - DEBUG - Initialized building array pointer: 288434160
+2024-10-13 01:35:38,919 - DEBUG - Initialized infantry array pointer: 258744816
+2024-10-13 01:35:38,919 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-13 01:35:38,919 - DEBUG - updating all unit counters
+2024-10-13 01:35:39,933 - DEBUG - Updating dynamic data for player 2
+2024-10-13 01:35:39,933 - DEBUG - Player 2 balance: 95400
+2024-10-13 01:35:39,933 - DEBUG - Player 2 spent credit: 4600
+2024-10-13 01:35:39,933 - DEBUG - Player 2 is_winner: False
+2024-10-13 01:35:39,933 - DEBUG - Player 2 is_loser: False
+2024-10-13 01:35:39,933 - DEBUG - Player 2 power output: 150
+2024-10-13 01:35:39,933 - DEBUG - Player 2 power drain: 10
+2024-10-13 01:35:39,933 - DEBUG - Player 2 total power: 140
+2024-10-13 01:35:39,934 - DEBUG - Initialized unit array pointer: 48801792
+2024-10-13 01:35:39,934 - DEBUG - Initialized building array pointer: 288434160
+2024-10-13 01:35:39,934 - DEBUG - Initialized infantry array pointer: 258744816
+2024-10-13 01:35:39,934 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-13 01:35:39,934 - DEBUG - updating all unit counters
+2024-10-13 01:35:40,947 - DEBUG - Updating dynamic data for player 2
+2024-10-13 01:35:40,947 - DEBUG - Player 2 balance: 95400
+2024-10-13 01:35:40,947 - DEBUG - Player 2 spent credit: 4600
+2024-10-13 01:35:40,947 - DEBUG - Player 2 is_winner: False
+2024-10-13 01:35:40,947 - DEBUG - Player 2 is_loser: False
+2024-10-13 01:35:40,947 - DEBUG - Player 2 power output: 150
+2024-10-13 01:35:40,947 - DEBUG - Player 2 power drain: 10
+2024-10-13 01:35:40,947 - DEBUG - Player 2 total power: 140
+2024-10-13 01:35:40,948 - DEBUG - Initialized unit array pointer: 48801792
+2024-10-13 01:35:40,948 - DEBUG - Initialized building array pointer: 288434160
+2024-10-13 01:35:40,948 - DEBUG - Initialized infantry array pointer: 258744816
+2024-10-13 01:35:40,948 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-13 01:35:40,948 - DEBUG - updating all unit counters
+2024-10-13 01:35:41,963 - DEBUG - Updating dynamic data for player 2
+2024-10-13 01:35:41,963 - DEBUG - Player 2 balance: 95400
+2024-10-13 01:35:41,963 - DEBUG - Player 2 spent credit: 4600
+2024-10-13 01:35:41,963 - DEBUG - Player 2 is_winner: False
+2024-10-13 01:35:41,963 - DEBUG - Player 2 is_loser: False
+2024-10-13 01:35:41,964 - DEBUG - Player 2 power output: 150
+2024-10-13 01:35:41,964 - DEBUG - Player 2 power drain: 10
+2024-10-13 01:35:41,964 - DEBUG - Player 2 total power: 140
+2024-10-13 01:35:41,964 - DEBUG - Initialized unit array pointer: 48801792
+2024-10-13 01:35:41,964 - DEBUG - Initialized building array pointer: 288434160
+2024-10-13 01:35:41,964 - DEBUG - Initialized infantry array pointer: 258744816
+2024-10-13 01:35:41,965 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-13 01:35:41,965 - DEBUG - updating all unit counters
+2024-10-13 01:35:42,979 - DEBUG - Updating dynamic data for player 2
+2024-10-13 01:35:42,979 - DEBUG - Player 2 balance: 95400
+2024-10-13 01:35:42,979 - DEBUG - Player 2 spent credit: 4600
+2024-10-13 01:35:42,979 - DEBUG - Player 2 is_winner: False
+2024-10-13 01:35:42,979 - DEBUG - Player 2 is_loser: False
+2024-10-13 01:35:42,979 - DEBUG - Player 2 power output: 150
+2024-10-13 01:35:42,979 - DEBUG - Player 2 power drain: 10
+2024-10-13 01:35:42,979 - DEBUG - Player 2 total power: 140
+2024-10-13 01:35:42,980 - DEBUG - Initialized unit array pointer: 48801792
+2024-10-13 01:35:42,980 - DEBUG - Initialized building array pointer: 288434160
+2024-10-13 01:35:42,980 - DEBUG - Initialized infantry array pointer: 258744816
+2024-10-13 01:35:42,980 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-13 01:35:42,980 - DEBUG - updating all unit counters
+2024-10-13 01:35:43,995 - DEBUG - Updating dynamic data for player 2
+2024-10-13 01:35:43,995 - DEBUG - Player 2 balance: 95400
+2024-10-13 01:35:43,995 - DEBUG - Player 2 spent credit: 4600
+2024-10-13 01:35:43,995 - DEBUG - Player 2 is_winner: False
+2024-10-13 01:35:43,995 - DEBUG - Player 2 is_loser: False
+2024-10-13 01:35:43,995 - DEBUG - Player 2 power output: 150
+2024-10-13 01:35:43,995 - DEBUG - Player 2 power drain: 10
+2024-10-13 01:35:43,995 - DEBUG - Player 2 total power: 140
+2024-10-13 01:35:43,995 - DEBUG - Initialized unit array pointer: 48801792
+2024-10-13 01:35:43,995 - DEBUG - Initialized building array pointer: 288434160
+2024-10-13 01:35:43,995 - DEBUG - Initialized infantry array pointer: 258744816
+2024-10-13 01:35:43,995 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-13 01:35:43,995 - DEBUG - updating all unit counters
+2024-10-13 01:35:45,009 - DEBUG - Updating dynamic data for player 2
+2024-10-13 01:35:45,009 - DEBUG - Player 2 balance: 95400
+2024-10-13 01:35:45,009 - DEBUG - Player 2 spent credit: 4600
+2024-10-13 01:35:45,009 - DEBUG - Player 2 is_winner: False
+2024-10-13 01:35:45,009 - DEBUG - Player 2 is_loser: False
+2024-10-13 01:35:45,009 - DEBUG - Player 2 power output: 150
+2024-10-13 01:35:45,009 - DEBUG - Player 2 power drain: 10
+2024-10-13 01:35:45,010 - DEBUG - Player 2 total power: 140
+2024-10-13 01:35:45,010 - DEBUG - Initialized unit array pointer: 48801792
+2024-10-13 01:35:45,011 - DEBUG - Initialized building array pointer: 288434160
+2024-10-13 01:35:45,011 - DEBUG - Initialized infantry array pointer: 258744816
+2024-10-13 01:35:45,011 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-13 01:35:45,011 - DEBUG - updating all unit counters
+2024-10-13 01:35:46,023 - DEBUG - Updating dynamic data for player 2
+2024-10-13 01:35:46,023 - DEBUG - Player 2 balance: 95400
+2024-10-13 01:35:46,023 - DEBUG - Player 2 spent credit: 4600
+2024-10-13 01:35:46,023 - DEBUG - Player 2 is_winner: False
+2024-10-13 01:35:46,023 - DEBUG - Player 2 is_loser: False
+2024-10-13 01:35:46,023 - DEBUG - Player 2 power output: 150
+2024-10-13 01:35:46,023 - DEBUG - Player 2 power drain: 10
+2024-10-13 01:35:46,023 - DEBUG - Player 2 total power: 140
+2024-10-13 01:35:46,024 - DEBUG - Initialized unit array pointer: 48801792
+2024-10-13 01:35:46,024 - DEBUG - Initialized building array pointer: 288434160
+2024-10-13 01:35:46,024 - DEBUG - Initialized infantry array pointer: 258744816
+2024-10-13 01:35:46,024 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-13 01:35:46,024 - DEBUG - updating all unit counters
+2024-10-13 01:35:47,040 - DEBUG - Updating dynamic data for player 2
+2024-10-13 01:35:47,040 - DEBUG - Player 2 balance: 95400
+2024-10-13 01:35:47,040 - DEBUG - Player 2 spent credit: 4600
+2024-10-13 01:35:47,040 - DEBUG - Player 2 is_winner: False
+2024-10-13 01:35:47,040 - DEBUG - Player 2 is_loser: False
+2024-10-13 01:35:47,040 - DEBUG - Player 2 power output: 150
+2024-10-13 01:35:47,040 - DEBUG - Player 2 power drain: 10
+2024-10-13 01:35:47,040 - DEBUG - Player 2 total power: 140
+2024-10-13 01:35:47,041 - DEBUG - Initialized unit array pointer: 48801792
+2024-10-13 01:35:47,041 - DEBUG - Initialized building array pointer: 288434160
+2024-10-13 01:35:47,041 - DEBUG - Initialized infantry array pointer: 258744816
+2024-10-13 01:35:47,041 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-13 01:35:47,041 - DEBUG - updating all unit counters
+2024-10-13 01:35:48,055 - DEBUG - Updating dynamic data for player 2
+2024-10-13 01:35:48,055 - DEBUG - Player 2 balance: 95400
+2024-10-13 01:35:48,055 - DEBUG - Player 2 spent credit: 4600
+2024-10-13 01:35:48,055 - DEBUG - Player 2 is_winner: False
+2024-10-13 01:35:48,055 - DEBUG - Player 2 is_loser: False
+2024-10-13 01:35:48,055 - DEBUG - Player 2 power output: 150
+2024-10-13 01:35:48,055 - DEBUG - Player 2 power drain: 10
+2024-10-13 01:35:48,055 - DEBUG - Player 2 total power: 140
+2024-10-13 01:35:48,056 - DEBUG - Initialized unit array pointer: 48801792
+2024-10-13 01:35:48,056 - DEBUG - Initialized building array pointer: 288434160
+2024-10-13 01:35:48,056 - DEBUG - Initialized infantry array pointer: 258744816
+2024-10-13 01:35:48,056 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-13 01:35:48,056 - DEBUG - updating all unit counters
+2024-10-13 01:35:49,069 - INFO - Emitted game_stopped signal.
+2024-10-13 01:35:50,070 - INFO - Data update thread has exited.
+2024-10-13 01:35:50,071 - INFO - Saved selected units.

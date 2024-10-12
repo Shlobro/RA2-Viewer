@@ -40,13 +40,14 @@ def load_hud_positions():
         hud_positions = {}
 
     # Set default values if not present
-    hud_positions.setdefault('unit_counter_size', 100)  # Default size is 100
-    hud_positions.setdefault('data_counter_size', 16)   # Default size is 16
+    hud_positions.setdefault('unit_counter_size', 75)  # Default size is 100
+    hud_positions.setdefault('data_counter_size', 50)   # Default size is 16
     hud_positions.setdefault('show_name', True)
     hud_positions.setdefault('show_money', True)
     hud_positions.setdefault('show_power', True)
     hud_positions.setdefault('unit_layout', 'Vertical')  # Default to Vertical layout
 
+# Save HUD positions and settings to file
 # Save HUD positions and settings to file
 def save_hud_positions():
     global control_panel, hud_positions, hud_windows
@@ -66,25 +67,27 @@ def save_hud_positions():
 
     # Save the positions of all HUD windows
     for unit_window, resource_window in hud_windows:
-        player_id = resource_window.player.index
-        player_id_str = str(player_id)
+        player_id = resource_window.player.color_name
 
         # Ensure the player's section exists in the hud_positions
-        if player_id_str not in hud_positions:
-            hud_positions[player_id_str] = {}
+        if player_id not in hud_positions:
+            hud_positions[player_id] = {}
 
         # Save positions for each individual window (name, money, power)
         name_pos = resource_window.windows[0].pos()  # Name window
         money_pos = resource_window.windows[1].pos()  # Money window
         power_pos = resource_window.windows[2].pos()  # Power window
+        unit_counter_pos = unit_window.pos()  # Unit counter window
 
-        hud_positions[player_id_str]['name'] = {"x": name_pos.x(), "y": name_pos.y()}
-        hud_positions[player_id_str]['money'] = {"x": money_pos.x(), "y": money_pos.y()}
-        hud_positions[player_id_str]['power'] = {"x": power_pos.x(), "y": power_pos.y()}
+        hud_positions[player_id]['name'] = {"x": name_pos.x(), "y": name_pos.y()}
+        hud_positions[player_id]['money'] = {"x": money_pos.x(), "y": money_pos.y()}
+        hud_positions[player_id]['power'] = {"x": power_pos.x(), "y": power_pos.y()}
+        hud_positions[player_id]['unit_counter'] = {"x": unit_counter_pos.x(), "y": unit_counter_pos.y()}
 
     # Write everything to the HUD position file
     with open(HUD_POSITION_FILE, 'w') as file:
         json.dump(hud_positions, file, indent=4)
+
 
 
 
@@ -208,14 +211,23 @@ def game_started_handler():
 
 
 # Handler for when the game stops
+# Handler for when the game stops
 def game_stopped_handler():
     logging.info("Game stopped handler called")
-    save_hud_positions()
+    save_hud_positions()  # Save the positions of HUD windows
+
+    # Close all HUD windows (unit window, resource window)
     for unit_window, resource_window in hud_windows:
+        # Close unit counter window
         unit_window.close()
-        resource_window.close()
-    hud_windows.clear()
-    players.clear()
+
+        # Close each individual resource window (name, money, power)
+        for window in resource_window.windows:
+            window.close()
+
+    hud_windows.clear()  # Clear the HUD windows list
+    players.clear()  # Clear the players list
+
 
 
 # Handle closing the application

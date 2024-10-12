@@ -26,7 +26,7 @@ class ResourceWindow(QMainWindow):
         self.size = hud_positions.get('data_counter_size', 16)  # Default size is 100 if not present
 
         # Get the initial position of the Resource HUD
-        pos = self.get_default_position(player.index, 'resource', player_count, hud_positions)
+        pos = self.get_default_position(self.player.color_name, 'resource', player_count, hud_positions)
         self.setGeometry(pos['x'], pos['y'], 250, 100)
         self.setWindowFlags(Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint | Qt.X11BypassWindowManagerHint)
         self.setAttribute(Qt.WA_TranslucentBackground)
@@ -175,23 +175,25 @@ class ResourceWindow(QMainWindow):
                 x = event.globalX() - self.offset.x()
                 y = event.globalY() - self.offset.y()
                 self.move(x, y)
-                self.update_hud_position(self.player.index, 'resource', x, y, player_count, hud_positions)
+                self.update_hud_position(self.player.color_name, 'resource', x, y, player_count, hud_positions)
 
         self.mousePressEvent = mouse_press_event
         self.mouseMoveEvent = mouse_move_event
 
-    def get_default_position(self, player_id, hud_type, player_count, hud_positions):
-        player_count_str = str(player_count)
-        if player_count_str not in hud_positions:
-            hud_positions[player_count_str] = {}
-        if player_id not in hud_positions[player_count_str]:
-            hud_positions[player_count_str][player_id] = {}
-        if hud_type not in hud_positions[player_count_str][player_id]:
-            default_position = {"x": 100 * len(hud_positions[player_count_str]),
-                                "y": 100 * len(hud_positions[player_count_str])}
-            hud_positions[player_count_str][player_id][hud_type] = default_position
+    def get_default_position(self, player_color, hud_type, player_count, hud_positions):
+        player_color_str = player_color  # Use player's color as the key
+
+        # Ensure the player's color section exists in hud_positions
+        if player_color_str not in hud_positions:
+            hud_positions[player_color_str] = {}
+
+        # Check if hud_type exists for the player, if not, create default position for it
+        if hud_type not in hud_positions[player_color_str]:
+            # Set default x and y positions
+            default_position = {"x": 100, "y": 100}
+            hud_positions[player_color_str][hud_type] = default_position
         else:
-            default_position = hud_positions[player_count_str][player_id][hud_type]
+            default_position = hud_positions[player_color_str][hud_type]
 
         # Ensure the position values are integers
         default_position['x'] = int(default_position['x'])
@@ -199,12 +201,15 @@ class ResourceWindow(QMainWindow):
 
         return default_position
 
-    def update_hud_position(self, player_id, hud_type, x, y, player_count, hud_positions):
-        if str(player_count) not in hud_positions:
-            hud_positions[str(player_count)] = {}
-        if str(player_id) not in hud_positions[str(player_count)]:
-            hud_positions[str(player_count)][str(player_id)] = {}
-        hud_positions[str(player_count)][str(player_id)][hud_type] = {"x": x, "y": y}
+    def update_hud_position(self, player_color, hud_type, x, y, player_count, hud_positions):
+        player_color_str = player_color  # Use player's color as the key
+
+        # Ensure the player's color section exists in hud_positions
+        if player_color_str not in hud_positions:
+            hud_positions[player_color_str] = {}
+
+        # Update the HUD position for this player and type
+        hud_positions[player_color_str][hud_type] = {"x": x, "y": y}
 
     def update_all_data_size(self, new_size):
         """Resize all DataWidgets in this ResourceWindow."""

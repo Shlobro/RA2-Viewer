@@ -18,7 +18,8 @@ class UnitWindow(QMainWindow):
         self.size = hud_pos.get('unit_counter_size', 100)
 
         # Set window geometry and flags
-        pos = self.get_default_position(player.index, 'unit', hud_pos)
+        # Example in UnitWindow or ResourceWindow instantiation
+        pos = self.get_default_position(self.player.color_name, 'unit_counter', hud_pos)
         self.setGeometry(pos['x'], pos['y'], 120, 120)
         self.setWindowFlags(Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint | Qt.X11BypassWindowManagerHint)
         self.setAttribute(Qt.WA_TranslucentBackground)
@@ -41,7 +42,6 @@ class UnitWindow(QMainWindow):
         self.layout = QVBoxLayout(self.unit_frame) if layout_type == 'Vertical' else QHBoxLayout(self.unit_frame)
         self.layout.setSpacing(0)
         self.layout.setContentsMargins(0, 0, 0, 0)
-
 
     def update_layout(self, layout_type):
         """Update the layout dynamically without deleting widgets."""
@@ -125,8 +125,6 @@ class UnitWindow(QMainWindow):
 
     def get_unit_count(self, unit_type, unit_name):
         """Determine the unit type and retrieve the unit count from the relevant section."""
-
-        # Check if the player or its counts are None (game may have ended)
         if self.player is None:
             logging.warning("The game ended while retrieving unit counts.")
             return 0  # Return 0 or any other default value
@@ -153,20 +151,6 @@ class UnitWindow(QMainWindow):
             logging.warning("Game likely ended while retrieving unit counts.")
             return 0  # Return a default value to avoid further errors
 
-    def get_unit_names_and_types(self):
-        """
-        Return a list of (unit_name, unit_type) tuples for all the units in counters.
-        """
-        unit_names_and_types = []
-
-        for faction, unit_types in self.selected_units.items():
-            for unit_type, units in unit_types.items():
-                for unit_name, is_selected in units.items():
-                    if is_selected:
-                        unit_names_and_types.append((unit_name, unit_type))
-
-        return unit_names_and_types
-
     def make_hud_movable(self, hud_positions):
         self.offset = None
 
@@ -179,59 +163,40 @@ class UnitWindow(QMainWindow):
                 x = event.globalX() - self.offset.x()
                 y = event.globalY() - self.offset.y()
                 self.move(x, y)
-                self.update_hud_position(hud_positions, self.player.index, 'unit', x, y)
+                self.update_hud_position(hud_positions, self.player.color_name, 'unit_counter', x, y)
 
         self.mousePressEvent = mouse_press_event
         self.mouseMoveEvent = mouse_move_event
 
-    def get_default_position(self, player_id, hud_type, hud_positions):
-        player_id_str = str(player_id)
-        player_count_str = str(self.player_count)
+    def get_default_position(self, player_color, hud_type, hud_positions):
+        player_color_str = player_color  # Use the color as the key
 
-        # Check if player_count exists, if not, create it
-        if player_count_str not in hud_positions:
-            hud_positions[player_count_str] = {}
-
-        # Check if player_id exists within player_count, if not, create it
-        if player_id_str not in hud_positions[player_count_str]:
-            hud_positions[player_count_str][player_id_str] = {}
+        # Ensure the player's color section exists in the hud_positions
+        if player_color_str not in hud_positions:
+            hud_positions[player_color_str] = {}
 
         # Check if hud_type exists for the player, if not, create default position for it
-        if hud_type not in hud_positions[player_count_str][player_id_str]:
+        if hud_type not in hud_positions[player_color_str]:
             # Set default x and y positions
-            default_position = {"x": 100 * player_id, "y": 100 * player_id}
-            hud_positions[player_count_str][player_id_str][hud_type] = default_position
+            default_position = {"x": 100, "y": 100}
+            hud_positions[player_color_str][hud_type] = default_position
         else:
             # If hud_type exists, return the stored position
-            default_position = hud_positions[player_count_str][player_id_str][hud_type]
+            default_position = hud_positions[player_color_str][hud_type]
 
-        # Return the position (either the one from JSON or the default one we created)
+        # Ensure x and y are integers before returning
+        default_position['x'] = int(default_position['x'])
+        default_position['y'] = int(default_position['y'])
+
         return default_position
 
-    def update_hud_position(self, hud_positions, player_id, hud_type, x, y):
-        player_id_str = str(player_id)
+    def update_hud_position(self, hud_positions, player_color, hud_type, x, y):
+        player_color_str = player_color  # Use the color as the key
 
-        # Ensure player count is correctly initialized in hud_positions
-        if str(self.player_count) not in hud_positions:
-            hud_positions[str(self.player_count)] = {}
+        # Ensure the player's section exists in hud_positions
+        if player_color_str not in hud_positions:
+            hud_positions[player_color_str] = {}
 
-        # Loop through all players to ensure each player has the complete structure
-        for pid in range(1, self.player_count + 1):
-            pid_str = str(pid)
-            if pid_str not in hud_positions[str(self.player_count)]:
-                # Initialize player entry with default positions
-                hud_positions[str(self.player_count)][pid_str] = {
-                    "x": 100 * pid,  # Default x position for player
-                    "y": 100 * pid,  # Default y position for player
-                    "unit": {  # Default unit position
-                        "x": 100 * pid,
-                        "y": 100 * pid
-                    },
-                    "resource": {  # Default resource position
-                        "x": 100 * pid + 50,
-                        "y": 100 * pid
-                    }
-                }
+        # Update the specific HUD position for this player and type
+        hud_positions[player_color_str][hud_type] = {"x": x, "y": y}
 
-        # Now update the specific HUD for the current player
-        hud_positions[str(self.player_count)][player_id_str][hud_type] = {"x": x, "y": y}

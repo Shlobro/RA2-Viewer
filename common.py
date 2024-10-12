@@ -150,7 +150,7 @@ names = {
             "Yuri MCV"
         ],
         "Naval": [
-            "Boomer Sub",
+            "Boomer",
             "Yuri Amphibious Transport"
         ],
         "Aircraft": []
