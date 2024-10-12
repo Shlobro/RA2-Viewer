@@ -229,6 +229,7 @@ def save_selected_units():
 class ControlPanel(QMainWindow):
     def __init__(self):
         super().__init__()
+
         self.setWindowTitle("HUD Control Panel")
         self.setGeometry(100, 100, 300, 250)
 
@@ -338,7 +339,7 @@ class ControlPanel(QMainWindow):
     # Method to open the Unit Selection window
     def open_unit_selection(self):
         if self.unit_selection_window is None or not self.unit_selection_window.isVisible():
-            self.unit_selection_window = UnitSelectionWindow(selected_units_dict)
+            self.unit_selection_window = UnitSelectionWindow(selected_units_dict, hud_windows)
             logging.info("Opening Unit Selection window")
             self.unit_selection_window.show()
 

@@ -8,10 +8,14 @@ from PySide6.QtWidgets import QMainWindow, QWidget, QTabWidget, QVBoxLayout, QGr
 from PySide6.QtCore import Qt
 
 class UnitSelectionWindow(QMainWindow):
-    def __init__(self, selected_units_dict, parent=None):
+    def __init__(self, selected_units_dict, hud_windows, parent=None):
         super().__init__(parent)
+
+        self.hud_windows = hud_windows
+
         self.units_data = selected_units_dict['units']  # Load the units added so far
         self.selected_units = selected_units_dict['selected_units']  # Load selected units (if any)
+
 
         self.setWindowTitle("Unit Selection")
         self.setGeometry(200, 200, 400, 300)
@@ -26,7 +30,6 @@ class UnitSelectionWindow(QMainWindow):
         # Layout setup
         layout = QVBoxLayout(main_widget)
         layout.addWidget(self.tab_widget)
-
 
     def create_faction_tabs(self):
         factions = ['Allied', 'Soviet', 'Yuri']
@@ -112,6 +115,10 @@ class UnitSelectionWindow(QMainWindow):
 
         # Update the image appearance
         self.update_image_selection(label, new_state)
+
+        # Update the widget
+        for unit_counter, _ in self.hud_windows:
+            unit_counter.update_selected_widgets(faction, unit_type, unit, new_state)
 
     def update_image_selection(self, label, is_selected):
         """Update the image appearance based on whether it's selected or not."""

@@ -29,7 +29,7 @@ class UnitWindow(QMainWindow):
         self.set_layout(self.layout_type)
 
         # List to hold all the counters
-        self.counters = []
+        self.counters = {}
         self.load_selected_units_and_create_counters()
 
         self.setCentralWidget(self.unit_frame)
@@ -77,8 +77,24 @@ class UnitWindow(QMainWindow):
 
                         # Add the widget to the current layout
                         self.layout.addWidget(unit_counter)
-                        self.counters.append(unit_counter)
+                        self.counters[unit_name] = (unit_counter, unit_type)
 
+    def update_selected_widgets(self, faction, unit_type, unit_name, state):
+        if state:
+            unit_count = self.get_unit_count(unit_type, unit_name)
+            unit_image_path = self.get_unit_image_path(faction, unit_type, unit_name)
+
+            unit_counter = CounterWidget(unit_count, unit_image_path, self.player.color, self.size)
+            unit_counter.hide()
+
+            # Add the widget to the current layout
+            self.layout.addWidget(unit_counter)
+            self.counters[unit_name] = (unit_counter, unit_type)
+
+        else:
+            self.layout.removeWidget(self.counters[unit_name][0])
+            self.counters[unit_name][0].deleteLater()
+            del self.counters[unit_name]
 
     def get_unit_image_path(self, faction, unit_type, unit_name):
         """Fetch the image path for a given unit based on faction, unit type, and unit name."""
@@ -98,7 +114,7 @@ class UnitWindow(QMainWindow):
     def update_all_counters_size(self, new_size):
         """Update the size of all CounterWidgets in the UnitWindow."""
         self.size = new_size  # Update the stored size for the window
-        for counter_widget in self.counters:
+        for _, (counter_widget, _) in self.counters.items():
             counter_widget.update_size(new_size)  # Resize each CounterWidget dynamically
 
         # Ensure the layout tightly packs the widgets after resizing
@@ -108,7 +124,7 @@ class UnitWindow(QMainWindow):
     def update_labels(self):
         """Loop through all counters and update the corresponding unit counts."""
         logging.debug("updating all unit counters")
-        for counter_widget, (unit_name, unit_type) in zip(self.counters, self.get_unit_names_and_types()):
+        for unit_name, (counter_widget, unit_type) in self.counters.items():
             # Get the latest unit count based on unit type
             unit_count = self.get_unit_count(unit_type, unit_name)
 
