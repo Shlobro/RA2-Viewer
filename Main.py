@@ -156,7 +156,9 @@ def create_hud_windows():
     for player in players:
         logging.info(f"Creating HUD for {player.username.value} with color {player.color}")
         unit_window = UnitWindow(player, len(players), hud_positions)
+        unit_window.setWindowTitle(f"Player {player.index} unit window")
         resource_window = ResourceWindow(player, len(players), hud_positions)
+        resource_window.setWindowTitle(f"Player {player.index} resource window")
         hud_windows.append((unit_window, resource_window))
 
 
