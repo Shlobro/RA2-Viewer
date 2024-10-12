@@ -144,15 +144,13 @@ def create_hud_windows():
         logging.info("No valid players found. HUD will not be displayed.")
         return
 
-    index = 1
     for player in players:
-        logging.info(f"Creating HUD for {player.username.value} with color {player.color}")
+        logging.info(f"Creating HUD for {player.username.value} with color {player.color_name}")
         unit_window = UnitWindow(player, len(players), hud_positions, selected_units_dict)
-        unit_window.setWindowTitle(f"Player {index} unit window")
-        resource_window = ResourceWindow(player, len(players), hud_positions)
-        resource_window.setWindowTitle(f"Player {index} resource window")
+        unit_window.setWindowTitle(f"Player {player.color_name} unit window")
+        resource_window = ResourceWindow(player, len(players), hud_positions, player.color_name)
+        resource_window.setWindowTitle(f"Player {player.color_name} resource window")
         hud_windows.append((unit_window, resource_window))
-        index += 1
 
 
 # Update the HUDs with the latest data
@@ -262,6 +260,11 @@ class ControlPanel(QMainWindow):
         self.power_checkbox.setChecked(hud_positions.get('show_power'))
         self.power_checkbox.stateChanged.connect(self.toggle_power)
         layout.addWidget(self.power_checkbox)
+
+        self.separate_checkbox = QCheckBox("Separate info")
+        self.separate_checkbox.setChecked(False)
+        self.separate_checkbox.stateChanged.connect(self.toggle_separate)
+        layout.addWidget(self.separate_checkbox)
 
         # Add the QSpinBox for resizing the UnitWindow
         self.size_label = QLabel("Set Unit Window Size: (25 - 250)")
@@ -373,6 +376,9 @@ class ControlPanel(QMainWindow):
     def toggle_power(self, state):
         self.toggle_hud_element('show_power', 'power_widget', state)
 
+    # TODO: connect the separate button to DataTracker.py and modify the toggle_hud_emelent function according to it
+    def toggle_separate(self, state):
+        self.toggle_hud_element('separate_info', 'separate_info', state)
 
 # Thread to continuously update player data
 class DataUpdateThread(QThread):

@@ -1,7 +1,7 @@
 # Create a separate window for displaying resources (e.g., money and power)
 from PySide6.QtCore import Qt
 from PySide6.QtGui import QPixmap, QFont
-from PySide6.QtWidgets import QMainWindow, QFrame, QVBoxLayout, QHBoxLayout, QLabel
+from PySide6.QtWidgets import QMainWindow, QFrame, QVBoxLayout, QHBoxLayout, QLabel, QWidget
 from DataWidget import DataWidget
 
 faction_to_flag = {
@@ -19,7 +19,7 @@ faction_to_flag = {
 
 
 class ResourceWindow(QMainWindow):
-    def __init__(self, player, player_count, hud_positions):
+    def __init__(self, player, player_count, hud_positions, player_index):
         super().__init__()
         self.player = player
 
@@ -69,6 +69,8 @@ class ResourceWindow(QMainWindow):
         layout.addWidget(self.money_widget)
         self.widgetList.append(self.money_widget)
 
+
+
         # Create DataWidget for power with the custom power font
         self.power_widget = DataWidget(
             image_path='bolt.png',
@@ -80,12 +82,56 @@ class ResourceWindow(QMainWindow):
         )
         self.widgetList.append(self.power_widget)
 
+        # TODO: make an if condition according to Main.py separate button
+        # Create a window for the name widget
+        name_window = self.create_window_with_widget(f"Player {player_index} Name", self.name_widget, player_count, hud_positions)
+        name_window.show()
+        # Create a window for the money widget
+        money_window = self.create_window_with_widget(f"Player {player_index} money", self.money_widget, player_count,                               hud_positions)
+        money_window.show()
+        # Create a window for the power widget
+        power_window = self.create_window_with_widget(f"Player {player_index} power", self.power_widget, player_count, hud_positions)
+        power_window.show()
 
-
-        for widget in self.widgetList:
-            layout.addWidget(widget)
+        self.windows = [name_window, money_window, power_window]
 
         self.show()
+
+    # Function to create a new window with a widget
+    def create_window_with_widget(self, title, widget, player_count, hud_positions):
+        """Create a new window for a given widget with a specified title."""
+
+        # TODO: save and load position of the windows
+
+        window = QWidget()
+        window.setWindowTitle(title)
+        window.setWindowFlags(Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint | Qt.X11BypassWindowManagerHint)
+        window.setAttribute(Qt.WA_TranslucentBackground)
+
+        # Create layout and add widget
+        layout = QVBoxLayout()
+        layout.addWidget(widget)
+        window.setLayout(layout)
+
+        # Implement movable functionality
+        offset = None
+
+        def mouse_press_event(event):
+            nonlocal offset
+            if event.button() == Qt.LeftButton:
+                offset = event.pos()
+
+        def mouse_move_event(event):
+            if offset is not None:
+                x = event.globalX() - offset.x()
+                y = event.globalY() - offset.y()
+                window.move(x, y)
+
+        window.mousePressEvent = mouse_press_event
+        window.mouseMoveEvent = mouse_move_event
+
+        window.show()  # Show the window immediately
+        return window
 
     def update_labels(self):
         # print("Updating the data Label")

@@ -8,6 +8,8 @@ from PySide6.QtCore import QThread
 from PySide6.QtGui import QColor
 import logging
 
+from common import COLOR_NAME_MAPPING
+
 MAXPLAYERS = 8
 INVALIDCLASS = 0xffffffff
 INFOFFSET = 0x557c
@@ -74,7 +76,7 @@ infantry_offsets = {
 tank_offsets = {
     0x0: "Allied MCV", 0x4: "War Miner", 0x8: "Apoc", 0x10: "Soviet Amphibious Transport", 0xc: "Rhino Tank",
     0x24: "Grizzly", 0x34: "Aircraft Carrier", 0x38: "V3 Rocket Launcher", 0x3c: "Kirov",
-    0x40: "terror drone", 0x44: "flak track", 0x48: "Destroyer", 0x4c: "Typhoon attack sub", 0x50: "Aegis Cruiser",
+    0x40: "terror drone", 0x44: "Flak Track", 0x48: "Destroyer", 0x4c: "Typhoon attack sub", 0x50: "Aegis Cruiser",
     0x54: "Allied Amphibious Transport", 0x58: "Dreadnought", 0x5c: "NightHawk Transport", 0x60: "Squid",
     0x64: "Dolphin", 0x68: "Soviet MCV", 0x6c: "Tank Destroyer", 0x7c: "Lasher", 0x84: "Chrono Miner",
     0x88: "Prism Tank", 0x90: "Sea Scorpion", 0x94: "Mirage Tank", 0x98: "IFV", 0xa4: "Demolition truck",
@@ -120,6 +122,7 @@ class Player:
 
         self.username = ctypes.create_unicode_buffer(0x20)
         self.color = ""
+        self.color_name = ''
         self.country_name = ctypes.create_string_buffer(0x40)
 
         self.is_winner = False
@@ -364,6 +367,9 @@ def get_color(color_scheme):
     """Returns a QColor object based on the color scheme value."""
     return COLOR_SCHEME_MAPPING.get(color_scheme, QColor("black"))
 
+def get_color_name(color_scheme):
+    """Returns a QColor object based on the color scheme value."""
+    return COLOR_NAME_MAPPING.get(color_scheme, "white")
 
 def detect_if_all_players_are_loaded(process_handle):
     """Wait for Player 0's MCV to be detected before proceeding with the full initialization."""
@@ -464,7 +470,8 @@ def initialize_players_after_loading(game_data, process_handle):
                 continue
             color_scheme_value = ctypes.c_uint32.from_buffer_copy(color_data).value
             player.color = get_color(color_scheme_value)
-            logging.info(f"Player {i} colorScheme: {player.color}")
+            player.color_name = get_color_name(color_scheme_value)
+            logging.info(f"Player {i} color: {player.color_name}")
 
             # Set the country name
             houseTypeClassBasePtr = realClassBase + HOUSETYPECLASSBASEOFFSET

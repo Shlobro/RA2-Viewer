@@ -98,6 +98,7 @@ names = {
         "Tank": [
             "Rhino Tank",
             "Terror Drone",
+            "Flak Track",
             "War Miner",
             "V3 Rocket Launcher",
             "Apoc",
@@ -154,6 +155,19 @@ names = {
         ],
         "Aircraft": []
     }
+}
+
+COLOR_NAME_MAPPING = {
+    3: "yellow",
+    5: "white",
+    7: "gray",
+    11: "red",
+    13: "orange",
+    15: "pink",
+    17: "purple",
+    21: "blue",
+    25: "cyan",
+    29: "green",
 }
 
 def name_to_path(name):
