@@ -4,6 +4,7 @@ from PySide6.QtWidgets import QMainWindow, QFrame, QVBoxLayout, QWidget, QHBoxLa
 from CounterWidget import CounterWidget
 import logging
 from PySide6.QtWidgets import QVBoxLayout
+from common import (name_to_path)
 
 
 class UnitWindow(QMainWindow):
@@ -70,7 +71,7 @@ class UnitWindow(QMainWindow):
                 for unit_name, is_selected in units.items():
                     if is_selected:
                         unit_count = self.get_unit_count(unit_type, unit_name)
-                        unit_image_path = self.get_unit_image_path(faction, unit_type, unit_name)
+                        unit_image_path = name_to_path(unit_name)
 
                         unit_counter = CounterWidget(unit_count, unit_image_path, self.player.color, self.size)
                         unit_counter.hide()
@@ -82,7 +83,7 @@ class UnitWindow(QMainWindow):
     def update_selected_widgets(self, faction, unit_type, unit_name, state):
         if state:
             unit_count = self.get_unit_count(unit_type, unit_name)
-            unit_image_path = self.get_unit_image_path(faction, unit_type, unit_name)
+            unit_image_path = name_to_path(unit_name)
 
             unit_counter = CounterWidget(unit_count, unit_image_path, self.player.color, self.size)
             unit_counter.hide()
@@ -95,21 +96,6 @@ class UnitWindow(QMainWindow):
             self.layout.removeWidget(self.counters[unit_name][0])
             self.counters[unit_name][0].deleteLater()
             del self.counters[unit_name]
-
-    def get_unit_image_path(self, faction, unit_type, unit_name):
-        """Fetch the image path for a given unit based on faction, unit type, and unit name."""
-        units_list = self.selected_units_dict["units"][faction][unit_type]
-        # logging.info(self.selected_units_dict["units"][faction][unit_type][0])
-        # name_to_image = {item['name'].lower(): item['image'] for category in units_list for item in category}
-
-        # Iterate over the units to find the one with the matching name
-        for unit in units_list:
-            if unit.get('name') == unit_name:
-                return unit.get('image', '')
-
-        # Return an empty string if no match is found
-        return ''
-
 
     def update_all_counters_size(self, new_size):
         """Update the size of all CounterWidgets in the UnitWindow."""

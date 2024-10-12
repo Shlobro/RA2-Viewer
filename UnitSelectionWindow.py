@@ -7,13 +7,15 @@ from PySide6.QtGui import QPixmap, QImage
 from PySide6.QtWidgets import QMainWindow, QWidget, QTabWidget, QVBoxLayout, QGridLayout, QPushButton, QLabel
 from PySide6.QtCore import Qt
 
+from common import (names, name_to_path)
+
+
 class UnitSelectionWindow(QMainWindow):
     def __init__(self, selected_units_dict, hud_windows, parent=None):
         super().__init__(parent)
 
         self.hud_windows = hud_windows
 
-        self.units_data = selected_units_dict['units']  # Load the units added so far
         self.selected_units = selected_units_dict['selected_units']  # Load selected units (if any)
 
 
@@ -53,32 +55,29 @@ class UnitSelectionWindow(QMainWindow):
             sub_layout.setAlignment(Qt.AlignTop)  # Align everything at the top of the tab
 
             # Check if there are any units defined for this faction and unit type
-            units = self.units_data.get(faction, {}).get(unit_type, [])
+            units = names[faction][unit_type]
 
             # Only add the units that have been defined (otherwise keep the tab empty)
             row = 0
             col = 0
             for unit in units:
-                if 'name' not in unit:
-                    continue  # Skip invalid entries
-
                 # Create a vertical layout for each unit (image acts as checkbox)
                 unit_layout = QVBoxLayout()
                 unit_layout.setAlignment(Qt.AlignTop | Qt.AlignHCenter)
 
                 # Create image label and set it as clickable
                 image_label = QLabel()
-                image_path = unit.get('image', '')  # Ensure image path is available
+                image_path = name_to_path(unit)  # Ensure image path is available
                 pixmap = QPixmap(image_path)
                 if not pixmap.isNull():
                     image_label.setPixmap(pixmap.scaled(50, 50, Qt.KeepAspectRatio))
 
                 # Set selection state and connect click event
-                is_selected = self.is_unit_selected(faction, unit_type, unit['name'])
+                is_selected = self.is_unit_selected(faction, unit_type, unit)
                 self.update_image_selection(image_label, is_selected)
 
                 # Add event handling to the label
-                image_label.mousePressEvent = lambda event, f=faction, ut=unit_type, u=unit['name'], label=image_label: self.toggle_unit_selection(f, ut, u, label)
+                image_label.mousePressEvent = lambda event, f=faction, ut=unit_type, u=unit, label=image_label: self.toggle_unit_selection(f, ut, u, label)
 
                 # Add the image label to the unit's layout
                 unit_layout.addWidget(image_label, alignment=Qt.AlignHCenter)
