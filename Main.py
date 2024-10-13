@@ -1,4 +1,5 @@
 # Standard library imports
+import configparser
 import ctypes
 import json
 import logging
@@ -12,7 +13,7 @@ from ctypes import wintypes
 import psutil
 from PySide6.QtWidgets import (
     QApplication, QWidget, QPushButton, QCheckBox, QVBoxLayout,
-    QMainWindow, QLabel, QSpinBox, QComboBox
+    QMainWindow, QLabel, QSpinBox, QComboBox, QFileDialog, QLineEdit, QHBoxLayout, QMessageBox
 )
 from PySide6.QtCore import QObject, Signal, QThread, Qt
 
@@ -65,6 +66,10 @@ def save_hud_positions():
         hud_positions['show_power'] = control_panel.power_checkbox.isChecked()
         hud_positions['unit_layout'] = control_panel.layout_combo.currentText()
 
+    # Save the game path from the QLineEdit
+    if control_panel.path_edit:
+        hud_positions['game_path'] = control_panel.path_edit.text()  # Save the game path
+
     # Save the positions of all HUD windows
     for unit_window, resource_window in hud_windows:
         player_id = resource_window.player.color_name
@@ -87,6 +92,8 @@ def save_hud_positions():
     # Write everything to the HUD position file
     with open(HUD_POSITION_FILE, 'w') as file:
         json.dump(hud_positions, file, indent=4)
+
+
 
 
 
@@ -164,7 +171,31 @@ def run_create_players_in_background(stop_event):
 # Create HUD windows for each player
 def create_hud_windows():
     global hud_windows
-    # Close any existing HUD windows
+
+    # Step 1: Get the game path and check for spawn.ini
+    game_path = hud_positions.get('game_path', '')
+    spawn_ini_path = os.path.join(game_path, 'spawn.ini')
+
+    logging.debug("spawn_ini_path")
+
+    if not os.path.exists(spawn_ini_path):
+        # Step 2: If spawn.ini does not exist, show a warning message
+        QMessageBox.warning(None, "Game Path Error", "Please choose a valid game file path.")
+        return
+
+    # Step 3: Parse the spawn.ini file
+    config = configparser.ConfigParser()
+    config.read(spawn_ini_path)
+
+    # Step 4: Check if 'IsSpectator' is set to 'True'
+    is_spectator = config.get('Settings', 'IsSpectator', fallback='False').lower() in ['true', 'yes']
+
+    if not is_spectator:
+        # Step 5: Show a warning if the player is not in spectator mode
+        QMessageBox.warning(None, "Spectator Mode Required", "You can only use the Unit counter in Spectator mode.")
+        return
+
+    # Step 6: Close any existing HUD windows before creating new ones
     for unit_window, resource_window in hud_windows:
         unit_window.close()
         resource_window.close()
@@ -174,6 +205,7 @@ def create_hud_windows():
         logging.info("No valid players found. HUD will not be displayed.")
         return
 
+    # Step 7: Create the HUD windows
     for player in players:
         logging.info(f"Creating HUD for {player.username.value} with color {player.color_name}")
         unit_window = UnitWindow(player, len(players), hud_positions, selected_units_dict)
@@ -260,7 +292,7 @@ class ControlPanel(QMainWindow):
         super().__init__()
 
         self.setWindowTitle("HUD Control Panel")
-        self.setGeometry(100, 100, 300, 250)
+        self.setGeometry(100, 100, 300, 300)
 
         layout = QVBoxLayout()
 
@@ -283,8 +315,7 @@ class ControlPanel(QMainWindow):
         self.layout_combo.currentTextChanged.connect(self.update_layout)
         layout.addWidget(self.layout_combo)
 
-        # NOTE we got rid of the default values since we create them when we load the json file
-
+        # Add checkboxes for showing elements
         self.name_checkbox = QCheckBox("Show Name")
         self.name_checkbox.setChecked(hud_positions.get('show_name'))
         self.name_checkbox.stateChanged.connect(self.toggle_name)
@@ -305,7 +336,7 @@ class ControlPanel(QMainWindow):
         self.separate_checkbox.stateChanged.connect(self.toggle_separate)
         layout.addWidget(self.separate_checkbox)
 
-        # Add the QSpinBox for resizing the UnitWindow
+        # Add QSpinBox for resizing the UnitWindow
         self.size_label = QLabel("Set Unit Window Size: (25 - 250)")
         layout.addWidget(self.size_label)
 
@@ -327,6 +358,30 @@ class ControlPanel(QMainWindow):
         self.data_size_spinbox.valueChanged.connect(self.update_data_window_size)
         layout.addWidget(self.data_size_spinbox)
 
+        # Add the Game Path section
+        self.path_label = QLabel("Game Path:")
+        layout.addWidget(self.path_label)
+
+        # Horizontal layout to hold the text box and the button next to each other
+        path_layout = QHBoxLayout()
+
+        # QLineEdit for showing the selected or manually entered path
+        self.path_edit = QLineEdit()
+
+        # Load the game path from JSON if it exists, otherwise leave it empty
+        game_path = hud_positions.get('game_path', '')
+        self.path_edit.setText(game_path)  # Load path if it exists
+        self.path_edit.setPlaceholderText("Enter or select the game path")
+        path_layout.addWidget(self.path_edit)
+
+        # Button to open folder selection dialog
+        self.path_button = QPushButton("Game Path")
+        self.path_button.clicked.connect(self.select_game_path)
+        path_layout.addWidget(self.path_button)
+
+        # Add the horizontal layout to the main layout
+        layout.addLayout(path_layout)
+
         quit_button = QPushButton("Quit")
         quit_button.clicked.connect(on_closing)
         layout.addWidget(quit_button)
@@ -337,6 +392,15 @@ class ControlPanel(QMainWindow):
 
         # Store the reference to the UnitSelectionWindow here
         self.unit_selection_window = None
+
+
+    def select_game_path(self):
+        # Open the folder selection dialog
+        folder_path = QFileDialog.getExistingDirectory(self, "Select Game Folder")
+        if folder_path:
+            # Set the folder path in the text box
+            self.path_edit.setText(folder_path)
+
 
     def update_layout(self, layout_type):
         """Update the layout of the UnitWindow between vertical and horizontal."""
