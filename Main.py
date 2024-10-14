@@ -475,7 +475,7 @@ class ControlPanel(QMainWindow):
         self.unit_selection_window = None
 
     def toggle_unit_frames(self, state):
-        hud_positions['show_unit_frames'] = (state == Qt.Checked)
+        hud_positions['show_unit_frames'] = (state == 0)
         logging.info(f"Toggled show_unit_frames to: {hud_positions['show_unit_frames']}")
 
         # Update all existing CounterWidgets
