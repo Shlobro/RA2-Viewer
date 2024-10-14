@@ -216,12 +216,29 @@ def create_hud_windows():
     # Step 7: Create the HUD windows
     for player in players:
         logging.info(f"Creating HUD for {player.username.value} with color {player.color_name}")
-        unit_window = UnitWindow(player, len(players), hud_positions, selected_units_dict)
-        unit_window.setWindowTitle(f"Player {player.color_name} unit window")
+
+        # Create a separate window for each unit
+        create_windows_for_all_units(player, hud_positions, selected_units_dict)
+
+        # Create the resource window as usual
         resource_window = ResourceWindow(player, len(players), hud_positions, player.color_name)
         resource_window.setWindowTitle(f"Player {player.color_name} resource window")
-        hud_windows.append((unit_window, resource_window))
 
+        # Append resource windows to hud_windows
+        hud_windows.append((None, resource_window))
+
+
+
+def create_windows_for_all_units(player, hud_pos, selected_units_dict):
+    selected_units = selected_units_dict['selected_units']
+    for faction, unit_types in selected_units.items():
+        for unit_type, units in unit_types.items():
+            for unit_name, is_selected in units.items():
+                if is_selected:
+                    # Create a separate UnitWindow for each unit
+                    unit_window = UnitWindow(player, hud_pos, unit_name, unit_type)
+                    unit_window.setWindowTitle(f"{unit_name} ({unit_type}) - {player.color_name}")
+                    hud_windows.append((None, unit_window))
 
 # Update the HUDs with the latest data
 def update_huds():
@@ -229,7 +246,7 @@ def update_huds():
         return  # No HUDs to update
     try:
         for unit_window, resource_window in hud_windows:
-            unit_window.update_labels()
+            # unit_window.update_labels()
             resource_window.update_labels()
     except Exception as e:
         logging.error(f"Exception in update_huds: {e}")

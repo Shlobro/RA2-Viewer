@@ -8,19 +8,16 @@ from common import (name_to_path)
 
 
 class UnitWindow(QMainWindow):
-    def __init__(self, player, player_count, hud_pos, selected_units_dict):
+    def __init__(self, player, hud_pos, unit_name, unit_type):
         super().__init__()
         self.player = player
-        self.player_count = player_count
-        self.selected_units_dict = selected_units_dict
-        self.selected_units = selected_units_dict['selected_units']
+        self.unit_name = unit_name
+        self.unit_type = unit_type
         self.layout_type = hud_pos.get('unit_layout', 'Vertical')  # Default to Vertical layout
         self.size = hud_pos.get('unit_counter_size', 100)
         self.show_unit_frames = hud_pos.get('show_unit_frames', True)  # Get the setting
 
-
         # Set window geometry and flags
-        # Example in UnitWindow or ResourceWindow instantiation
         pos = self.get_default_position(self.player.color_name, 'unit_counter', hud_pos)
         self.setGeometry(pos['x'], pos['y'], 120, 120)
         self.setWindowFlags(Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint | Qt.X11BypassWindowManagerHint)
@@ -32,9 +29,9 @@ class UnitWindow(QMainWindow):
         self.unit_frame = QFrame(self)
         self.set_layout(self.layout_type)
 
-        # List to hold all the counters
+        # Create and add the counter for this unit
         self.counters = {}
-        self.load_selected_units_and_create_counters()
+        self.load_selected_unit_and_create_counter(self.unit_name, self.unit_type)
 
         self.setCentralWidget(self.unit_frame)
         self.show()
@@ -72,27 +69,24 @@ class UnitWindow(QMainWindow):
             self.layout = new_layout  # Update the reference to the new layout
             self.updateGeometry()  # Force the window to update its geometry
 
-    def load_selected_units_and_create_counters(self):
-        """Load selected units from JSON and create CounterWidgets for them."""
-        for faction, unit_types in self.selected_units.items():
-            for unit_type, units in unit_types.items():
-                for unit_name, is_selected in units.items():
-                    if is_selected:
-                        unit_count = self.get_unit_count(unit_type, unit_name)
-                        unit_image_path = name_to_path(unit_name)
+    def load_selected_unit_and_create_counter(self, unit_name, unit_type):
+        """Load a specific unit and create a CounterWidget for it."""
+        unit_count = self.get_unit_count(unit_type, unit_name)
+        unit_image_path = name_to_path(unit_name)
 
-                        unit_counter = CounterWidget(
-                            unit_count,
-                            unit_image_path,
-                            self.player.color,
-                            self.size,
-                            show_frame=self.show_unit_frames  # Pass the setting
-                        )
-                        unit_counter.hide()
+        unit_counter = CounterWidget(
+            unit_count,
+            unit_image_path,
+            self.player.color,
+            self.size,
+            show_frame=self.show_unit_frames  # Pass the setting
+        )
+        unit_counter.hide()
 
-                        # Add the widget to the current layout
-                        self.layout.addWidget(unit_counter)
-                        self.counters[unit_name] = (unit_counter, unit_type)
+        # Add the widget to the layout
+        self.layout.addWidget(unit_counter)
+        self.counters[unit_name] = (unit_counter, unit_type)
+
 
     def update_selected_widgets(self, faction, unit_type, unit_name, state):
         if state:
