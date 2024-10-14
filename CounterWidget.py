@@ -3,12 +3,13 @@ from PySide6.QtWidgets import QLabel, QSizePolicy
 from PySide6.QtCore import Qt, QRect
 
 class CounterWidget(QLabel):
-    def __init__(self, count, image_path, color=Qt.red, size=100, parent=None):
+    def __init__(self, count, image_path, color=Qt.red, size=100, show_frame=True, parent=None):
         super().__init__(parent)
         self.count = count
         self.image_path = image_path
         self.color = self._convert_to_qcolor(color)  # Convert color to QColor
         self.size = size
+        self.show_frame = show_frame  # New attribute to control frame visibility
         self.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
 
         # Load the image and scale it dynamically
@@ -50,27 +51,33 @@ class CounterWidget(QLabel):
         painter.setPen(Qt.white)
         painter.drawText(text_x, text_y, str(self.count))
 
-        # Draw the colored frame around the image
-        pen = QPen(self.color)
-        pen.setWidth(int(self.size / 15))  # Set the width of the frame
-        painter.setPen(pen)
+        # Draw the colored frame around the image if show_frame is True
+        if self.show_frame:
+            pen = QPen(self.color)
+            pen.setWidth(int(self.size / 15))  # Set the width of the frame
+            painter.setPen(pen)
 
-        # Draw a rounded rectangle around the image
-        painter.drawRoundedRect(0, 0, self.scaled_pixmap.width(), self.scaled_pixmap.height(), 10, 10)
+            # Draw a rounded rectangle around the image
+            painter.drawRoundedRect(0, 0, self.scaled_pixmap.width(), self.scaled_pixmap.height(), 10, 10)
+
+    def update_show_frame(self, show_frame):
+        """Update the visibility of the frame."""
+        self.show_frame = show_frame
+        self.repaint()  # Force immediate redraw
 
     def update_count(self, new_count):
         self.count = new_count
-        self.update()  # Redraw the widget with the updated count
-
-    def update_color(self, new_color):
-        self.color = QColor(new_color)
-        self.update()  # Redraw the widget with the updated color
+        self.repaint()  # Redraw the widget with the updated count
 
     def update_size(self, new_size):
         """Dynamically update the widget and image size."""
         self.size = new_size
         self.update_image_size()
-        self.update()  # Redraw the widget with the updated size
+        self.repaint()  # Force immediate redraw
+
+    def update_color(self, new_color):
+        self.color = QColor(new_color)
+        self.update()  # Redraw the widget with the updated color
 
     def _convert_to_qcolor(self, color):
         """

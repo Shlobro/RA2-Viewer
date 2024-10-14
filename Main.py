@@ -50,7 +50,7 @@ def load_hud_positions():
     hud_positions.setdefault('money_color', 'Use player color')  # Default to player color
     hud_positions.setdefault('show_flag', True)
     hud_positions.setdefault('flag_widget_size', 50)
-
+    hud_positions.setdefault('show_unit_frames', True)
     # Set default sizes for individual widgets
     hud_positions.setdefault('name_widget_size', 50)
     hud_positions.setdefault('money_widget_size', 50)
@@ -79,7 +79,7 @@ def save_hud_positions():
         hud_positions['show_money'] = control_panel.money_checkbox.isChecked()
         hud_positions['show_power'] = control_panel.power_checkbox.isChecked()
         hud_positions['unit_layout'] = control_panel.layout_combo.currentText()
-
+        hud_positions['show_unit_frames'] = control_panel.unit_frame_checkbox.isChecked()
         # Save the selected color option
         hud_positions['money_color'] = control_panel.color_combo.currentText()
 
@@ -167,7 +167,7 @@ def run_create_players_in_background(stop_event):
                 ctypes.windll.kernel32.CloseHandle(process_handle)
                 process_handle = None
                 return None
-            QThread.msleep(1000)  # NOTE
+            QThread.msleep(1000)
 
         # Initialize players after loading
         valid_player_count = initialize_players_after_loading(game_data, process_handle)
@@ -255,7 +255,7 @@ def game_started_handler():
         for unit_window, resource_window in hud_windows:
             unit_window.show()
 
-# Handler for when the game stops
+
 # Handler for when the game stops
 def game_stopped_handler():
     logging.info("Game stopped handler called")
@@ -298,7 +298,6 @@ def save_selected_units():
     logging.info("Saved selected units.")
 
 
-
 # Control Panel for HUD settings
 class ControlPanel(QMainWindow):
     def __init__(self):
@@ -312,11 +311,30 @@ class ControlPanel(QMainWindow):
 
         main_layout = QVBoxLayout()
 
+        # Unit Window Settings Group
+        unit_group = QGroupBox("Unit Window Settings")
+        unit_layout = QFormLayout()
+
+        unit_size_label = QLabel("Unit Window Size:")
+        counter_size = hud_positions.get('unit_counter_size', 75)
+        self.counter_size_spinbox = QSpinBox()
+        self.counter_size_spinbox.setRange(25, 250)
+        self.counter_size_spinbox.setValue(counter_size)
+        self.counter_size_spinbox.valueChanged.connect(self.update_unit_window_size)
+        unit_layout.addRow(unit_size_label, self.counter_size_spinbox)
+
+        self.unit_frame_checkbox = QCheckBox("Show Unit Frames")
+        self.unit_frame_checkbox.setChecked(hud_positions.get('show_unit_frames', True))
+        self.unit_frame_checkbox.stateChanged.connect(self.toggle_unit_frames)
+        unit_layout.addRow(self.unit_frame_checkbox)
 
         # Unit Selection Section
         selection_button = QPushButton("Select Units")
         selection_button.clicked.connect(self.open_unit_selection)
-        main_layout.addWidget(selection_button)
+        unit_layout.addRow(selection_button)
+
+        unit_group.setLayout(unit_layout)
+        main_layout.addWidget(unit_group)
 
         # Layout Settings Group
         layout_group = QGroupBox("Layout Settings")
@@ -426,21 +444,6 @@ class ControlPanel(QMainWindow):
         power_group.setLayout(power_layout)
         main_layout.addWidget(power_group)
 
-        # Unit Window Settings Group
-        unit_group = QGroupBox("Unit Window Settings")
-        unit_layout = QFormLayout()
-
-        unit_size_label = QLabel("Unit Window Size:")
-        counter_size = hud_positions.get('unit_counter_size', 75)
-        self.counter_size_spinbox = QSpinBox()
-        self.counter_size_spinbox.setRange(25, 250)
-        self.counter_size_spinbox.setValue(counter_size)
-        self.counter_size_spinbox.valueChanged.connect(self.update_unit_window_size)
-        unit_layout.addRow(unit_size_label, self.counter_size_spinbox)
-
-        unit_group.setLayout(unit_layout)
-        main_layout.addWidget(unit_group)
-
         # Game Path Settings Group
         path_group = QGroupBox("Game Path Settings")
         path_layout = QHBoxLayout()
@@ -471,7 +474,14 @@ class ControlPanel(QMainWindow):
         # Store the reference to the UnitSelectionWindow here
         self.unit_selection_window = None
 
-    # Existing methods remain the same...
+    def toggle_unit_frames(self, state):
+        hud_positions['show_unit_frames'] = (state == Qt.Checked)
+        logging.info(f"Toggled show_unit_frames to: {hud_positions['show_unit_frames']}")
+
+        # Update all existing CounterWidgets
+        if hud_windows:
+            for unit_window, _ in hud_windows:
+                unit_window.update_show_unit_frames(hud_positions['show_unit_frames'])
 
     # Add methods for the flag widget
     def update_flag_widget_size(self):
@@ -596,12 +606,7 @@ class ControlPanel(QMainWindow):
                 return data  # Return the entire data
         return {}
 
-
-
     # Method to toggle the visibility of HUD elements
-
-
-
 
     # Then you can call this method for different elements
     def toggle_name(self, state):
@@ -615,7 +620,6 @@ class ControlPanel(QMainWindow):
 
     def toggle_separate(self, state):
         self.toggle_hud_element('separate_info', 'separate_info', state)
-
 
 
 # Thread to continuously update player data

@@ -16,6 +16,8 @@ class UnitWindow(QMainWindow):
         self.selected_units = selected_units_dict['selected_units']
         self.layout_type = hud_pos.get('unit_layout', 'Vertical')  # Default to Vertical layout
         self.size = hud_pos.get('unit_counter_size', 100)
+        self.show_unit_frames = hud_pos.get('show_unit_frames', True)  # Get the setting
+
 
         # Set window geometry and flags
         # Example in UnitWindow or ResourceWindow instantiation
@@ -42,6 +44,12 @@ class UnitWindow(QMainWindow):
         self.layout = QVBoxLayout(self.unit_frame) if layout_type == 'Vertical' else QHBoxLayout(self.unit_frame)
         self.layout.setSpacing(0)
         self.layout.setContentsMargins(0, 0, 0, 0)
+
+    def update_show_unit_frames(self, show_frame):
+        """Update the show_frame setting for all CounterWidgets."""
+        self.show_unit_frames = show_frame  # Update the stored setting
+        for _, (counter_widget, _) in self.counters.items():
+            counter_widget.update_show_frame(show_frame)
 
     def update_layout(self, layout_type):
         """Update the layout dynamically without deleting widgets."""
@@ -73,7 +81,13 @@ class UnitWindow(QMainWindow):
                         unit_count = self.get_unit_count(unit_type, unit_name)
                         unit_image_path = name_to_path(unit_name)
 
-                        unit_counter = CounterWidget(unit_count, unit_image_path, self.player.color, self.size)
+                        unit_counter = CounterWidget(
+                            unit_count,
+                            unit_image_path,
+                            self.player.color,
+                            self.size,
+                            show_frame=self.show_unit_frames  # Pass the setting
+                        )
                         unit_counter.hide()
 
                         # Add the widget to the current layout
@@ -118,10 +132,8 @@ class UnitWindow(QMainWindow):
             counter_widget.update_count(unit_count)
             if 0 < unit_count < 500:
                 counter_widget.show()
-                self.update_all_counters_size(self.size)
             else:
                 counter_widget.hide()
-                self.update_all_counters_size(self.size)
 
     def get_unit_count(self, unit_type, unit_name):
         """Determine the unit type and retrieve the unit count from the relevant section."""
