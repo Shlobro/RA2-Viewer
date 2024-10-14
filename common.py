@@ -12,6 +12,7 @@ hud_positions = {}     # Dictionary to store HUD positions and settings
 process_handle = None  # Handle for the game process
 control_panel = None   # Reference to the ControlPanel instance
 data_update_thread = None  # Reference to the DataUpdateThread instance
+game_path = None    # Game path
 names = {
     "Allied": {
         "Infantry": [

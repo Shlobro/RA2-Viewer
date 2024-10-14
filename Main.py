@@ -28,7 +28,7 @@ from UnitSelectionWindow import UnitSelectionWindow
 from logging_config import setup_logging
 
 from common import (HUD_POSITION_FILE, players, hud_windows, selected_units_dict, data_lock, hud_positions,
-                    process_handle, control_panel, data_update_thread, names, name_to_path)
+                    process_handle, control_panel, data_update_thread, names, name_to_path, game_path)
 
 
 # Load HUD positions from file if it exists, otherwise create defaults
@@ -188,15 +188,8 @@ def create_hud_windows():
     global hud_windows
 
     # Step 1: Get the game path and check for spawn.ini
-    game_path = hud_positions.get('game_path', '')
+    global game_path
     spawn_ini_path = os.path.join(game_path, 'spawn.ini')
-
-    logging.debug("spawn_ini_path")
-
-    if not os.path.exists(spawn_ini_path):
-        # Step 2: If spawn.ini does not exist, show a warning message
-        QMessageBox.warning(None, "Game Path Error", "Please choose a valid game file path.")
-        return
 
     # Step 3: Parse the spawn.ini file
     config = configparser.ConfigParser()
@@ -521,10 +514,12 @@ class ControlPanel(QMainWindow):
 
     def select_game_path(self):
         # Open the folder selection dialog
-        folder_path = QFileDialog.getExistingDirectory(self, "Select Game Folder")
-        if folder_path:
+        global game_path
+        game_path = QFileDialog.getExistingDirectory(self, "Select Game Folder")
+        if game_path:
             # Set the folder path in the text box
-            self.path_edit.setText(folder_path)
+            self.path_edit.setText(game_path)
+            hud_positions['game_path'] = control_panel.path_edit.text()  # Save the game path
 
     def update_money_color(self, color):
         """Update the selected money color."""
@@ -696,32 +691,61 @@ class DataUpdateThread(QThread):
                     process_handle = None
             logging.info("Data update thread has exited.")
 
+def wait_for_current_file_path():
+    # Wait until the user selects a valid file path
+    global  game_path
+    game_path = hud_positions.get('game_path', '')
+    spawn_ini_path = os.path.join(game_path, 'spawn.ini')
+
+    new = game_path
+    logging.debug("spawn_ini_path")
+    while not os.path.exists(spawn_ini_path) :
+        logging.debug(f"current files path: {game_path}")
+        old = new
+        QMessageBox.warning(None, "Game Path Error", "Please choose a valid game file path.")
+        while old == new:
+            logging.debug(f"current files path: {game_path}")
+            app.processEvents()  # Allows the GUI to keep running while waiting for input
+            game_path = hud_positions.get('game_path', '')
+            new = game_path
+            time.sleep(1)
+
+
+        spawn_ini_path = os.path.join(game_path, 'spawn.ini')
+
+
+    logging.info(f"Game path: {game_path}")
+
+
 
 # Main application logic
 if __name__ == '__main__':
-    app = QApplication([])
-    setup_logging()
-    # Load HUD positions
-    load_hud_positions()
+        app = QApplication([])
+        setup_logging()
 
-    # Initialize the control panel
-    control_panel = ControlPanel()
-    control_panel.show()
+        # Load HUD positions
+        load_hud_positions()
 
-    # Start the data update thread
-    data_update_thread = DataUpdateThread()
+        # Initialize the control panel
+        control_panel = ControlPanel()
+        control_panel.show()
 
-    # Connect signals from data_update_thread with Qt.QueuedConnection
-    data_update_thread.update_signal.connect(update_huds, Qt.QueuedConnection)
-    data_update_thread.game_started.connect(game_started_handler, Qt.QueuedConnection)
-    data_update_thread.game_stopped.connect(game_stopped_handler, Qt.QueuedConnection)
+        wait_for_current_file_path()
 
-    data_update_thread.start()
+        # Once a valid path is selected, continue with the rest of the logic
+        data_update_thread = DataUpdateThread()
 
-    app.exec()
+        # Connect signals from data_update_thread with Qt.QueuedConnection
+        data_update_thread.update_signal.connect(update_huds, Qt.QueuedConnection)
+        data_update_thread.game_started.connect(game_started_handler, Qt.QueuedConnection)
+        data_update_thread.game_stopped.connect(game_stopped_handler, Qt.QueuedConnection)
 
-    # On application exit
-    data_update_thread.stop_event.set()
-    data_update_thread.wait()
-    save_selected_units()
-    save_hud_positions()
+        data_update_thread.start()
+
+        app.exec()
+
+        # On application exit
+        data_update_thread.stop_event.set()
+        data_update_thread.wait()
+        save_selected_units()
+        save_hud_positions()
