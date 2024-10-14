@@ -54,7 +54,7 @@ class UnitWindow(QMainWindow):
             new_layout.setContentsMargins(0, 0, 0, 0)
 
             # Move existing widgets to the new layout
-            for counter_widget in self.counters:
+            for unit_name, (counter_widget, unit_type) in self.counters.items():
                 self.layout.removeWidget(counter_widget)  # Remove from the old layout
                 new_layout.addWidget(counter_widget)  # Add to the new layout
 
@@ -91,10 +91,10 @@ class UnitWindow(QMainWindow):
             # Add the widget to the current layout
             self.layout.addWidget(unit_counter)
             self.counters[unit_name] = (unit_counter, unit_type)
-
         else:
-            self.layout.removeWidget(self.counters[unit_name][0])
-            self.counters[unit_name][0].deleteLater()
+            counter_widget, _ = self.counters[unit_name]
+            self.layout.removeWidget(counter_widget)
+            counter_widget.deleteLater()
             del self.counters[unit_name]
 
     def update_all_counters_size(self, new_size):

@@ -1,75 +1,77 @@
 {
-    "unit_counter_size": 75,
+    "unit_counter_size": 80,
     "data_counter_size": 50,
     "show_name": true,
     "show_money": true,
     "show_power": true,
     "unit_layout": "Vertical",
-    "pink": {
-        "unit_counter": {
-            "x": 2015,
-            "y": 280
-        },
-        "resource": {
-            "x": 100,
-            "y": 100
-        },
-        "name": {
-            "x": 1828,
-            "y": 165
-        },
-        "money": {
-            "x": 1945,
-            "y": 118
-        },
-        "power": {
-            "x": 1980,
-            "y": 210
-        }
-    },
+    "money_color": "White",
+    "name_widget_size": 55,
+    "money_widget_size": 65,
+    "power_widget_size": 50,
     "game_path": "D:/ra2/Red Alert 2/Red Alert 2",
-    "orange": {
+    "purple": {
         "unit_counter": {
-            "x": 2279,
-            "y": 71
-        },
-        "resource": {
-            "x": 100,
-            "y": 100
+            "x": 30,
+            "y": 191
         },
         "name": {
-            "x": 770,
-            "y": 301
+            "x": 14,
+            "y": 5
         },
         "money": {
-            "x": 100,
-            "y": 100
+            "x": 31,
+            "y": 62
         },
         "power": {
-            "x": 220,
-            "y": 205
+            "x": 32,
+            "y": 107
         }
     },
     "red": {
         "unit_counter": {
-            "x": 36,
-            "y": 85
-        },
-        "resource": {
-            "x": 100,
-            "y": 100
+            "x": 2298,
+            "y": 192
         },
         "name": {
-            "x": 161,
-            "y": 257
+            "x": 2091,
+            "y": -8
         },
         "money": {
-            "x": 807,
-            "y": 234
+            "x": 2163,
+            "y": 54
         },
         "power": {
-            "x": 804,
-            "y": 178
+            "x": 2266,
+            "y": 102
+        },
+        "flag": {
+            "x": 2317,
+            "y": 9
         }
-    }
+    },
+    "yellow": {
+        "unit_counter": {
+            "x": 31,
+            "y": 176
+        },
+        "name": {
+            "x": 18,
+            "y": -3
+        },
+        "money": {
+            "x": 13,
+            "y": 55
+        },
+        "power": {
+            "x": 10,
+            "y": 107
+        },
+        "flag": {
+            "x": 251,
+            "y": 13
+        }
+    },
+    "show_flag": true,
+    "flag_widget_size": 53
 }

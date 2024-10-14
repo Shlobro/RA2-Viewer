@@ -13,7 +13,7 @@ from ctypes import wintypes
 import psutil
 from PySide6.QtWidgets import (
     QApplication, QWidget, QPushButton, QCheckBox, QVBoxLayout,
-    QMainWindow, QLabel, QSpinBox, QComboBox, QFileDialog, QLineEdit, QHBoxLayout, QMessageBox
+    QMainWindow, QLabel, QSpinBox, QComboBox, QFileDialog, QLineEdit, QHBoxLayout, QMessageBox, QGroupBox, QFormLayout
 )
 from PySide6.QtCore import QObject, Signal, QThread, Qt
 
@@ -27,8 +27,8 @@ from UnitCounter import UnitWindow
 from UnitSelectionWindow import UnitSelectionWindow
 from logging_config import setup_logging
 
-from common import (HUD_POSITION_FILE, players, hud_windows, selected_units_dict, data_lock, hud_positions, process_handle, control_panel, data_update_thread, names, name_to_path)
-
+from common import (HUD_POSITION_FILE, players, hud_windows, selected_units_dict, data_lock, hud_positions,
+                    process_handle, control_panel, data_update_thread, names, name_to_path)
 
 
 # Load HUD positions from file if it exists, otherwise create defaults
@@ -41,14 +41,22 @@ def load_hud_positions():
         hud_positions = {}
 
     # Set default values if not present
-    hud_positions.setdefault('unit_counter_size', 75)  # Default size is 100
-    hud_positions.setdefault('data_counter_size', 50)   # Default size is 16
+    hud_positions.setdefault('unit_counter_size', 75)  # Default size is 75
+    hud_positions.setdefault('data_counter_size', 50)  # Default size is 50
     hud_positions.setdefault('show_name', True)
     hud_positions.setdefault('show_money', True)
     hud_positions.setdefault('show_power', True)
     hud_positions.setdefault('unit_layout', 'Vertical')  # Default to Vertical layout
+    hud_positions.setdefault('money_color', 'Use player color')  # Default to player color
+    hud_positions.setdefault('show_flag', True)
+    hud_positions.setdefault('flag_widget_size', 50)
 
-# Save HUD positions and settings to file
+    # Set default sizes for individual widgets
+    hud_positions.setdefault('name_widget_size', 50)
+    hud_positions.setdefault('money_widget_size', 50)
+    hud_positions.setdefault('power_widget_size', 50)
+
+
 # Save HUD positions and settings to file
 def save_hud_positions():
     global control_panel, hud_positions, hud_windows
@@ -57,14 +65,23 @@ def save_hud_positions():
     if control_panel:
         if control_panel.counter_size_spinbox:
             hud_positions['unit_counter_size'] = control_panel.counter_size_spinbox.value()
-        if control_panel.data_size_spinbox:
-            hud_positions['data_counter_size'] = control_panel.data_size_spinbox.value()
+
+        # Save individual widget sizes
+        if control_panel.name_size_spinbox:
+            hud_positions['name_widget_size'] = control_panel.name_size_spinbox.value()
+        if control_panel.money_size_spinbox:
+            hud_positions['money_widget_size'] = control_panel.money_size_spinbox.value()
+        if control_panel.power_size_spinbox:
+            hud_positions['power_widget_size'] = control_panel.power_size_spinbox.value()
 
         # Save checkbox values
         hud_positions['show_name'] = control_panel.name_checkbox.isChecked()
         hud_positions['show_money'] = control_panel.money_checkbox.isChecked()
         hud_positions['show_power'] = control_panel.power_checkbox.isChecked()
         hud_positions['unit_layout'] = control_panel.layout_combo.currentText()
+
+        # Save the selected color option
+        hud_positions['money_color'] = control_panel.color_combo.currentText()
 
     # Save the game path from the QLineEdit
     if control_panel.path_edit:
@@ -83,7 +100,9 @@ def save_hud_positions():
         money_pos = resource_window.windows[1].pos()  # Money window
         power_pos = resource_window.windows[2].pos()  # Power window
         unit_counter_pos = unit_window.pos()  # Unit counter window
+        flag_pos = resource_window.windows[3].pos()  # Flag window
 
+        hud_positions[player_id]['flag'] = {"x": flag_pos.x(), "y": flag_pos.y()}
         hud_positions[player_id]['name'] = {"x": name_pos.x(), "y": name_pos.y()}
         hud_positions[player_id]['money'] = {"x": money_pos.x(), "y": money_pos.y()}
         hud_positions[player_id]['power'] = {"x": power_pos.x(), "y": power_pos.y()}
@@ -92,10 +111,6 @@ def save_hud_positions():
     # Write everything to the HUD position file
     with open(HUD_POSITION_FILE, 'w') as file:
         json.dump(hud_positions, file, indent=4)
-
-
-
-
 
 
 # Find the PID of a process by name
@@ -239,8 +254,6 @@ def game_started_handler():
         create_hud_windows()
         for unit_window, resource_window in hud_windows:
             unit_window.show()
-            resource_window.show()
-
 
 # Handler for when the game stops
 # Handler for when the game stops
@@ -259,7 +272,6 @@ def game_stopped_handler():
 
     hud_windows.clear()  # Clear the HUD windows list
     players.clear()  # Clear the players list
-
 
 
 # Handle closing the application
@@ -286,113 +298,216 @@ def save_selected_units():
     logging.info("Saved selected units.")
 
 
+
 # Control Panel for HUD settings
 class ControlPanel(QMainWindow):
     def __init__(self):
         super().__init__()
 
-        self.setWindowTitle("HUD Control Panel")
-        self.setGeometry(100, 100, 300, 300)
-
-        layout = QVBoxLayout()
-
-        # Add a button to open the Unit Selection window
-        selection_button = QPushButton("Select Units")
-        selection_button.clicked.connect(self.open_unit_selection)
-        layout.addWidget(selection_button)
-
         global selected_units_dict
         selected_units_dict = self.load_selected_units()
 
-        # Layout toggle (horizontal or vertical)
-        self.layout_label = QLabel("Select Layout:")
-        layout.addWidget(self.layout_label)
+        self.setWindowTitle("HUD Control Panel")
+        self.setGeometry(100, 100, 400, 600)  # Adjusted window size
+
+        main_layout = QVBoxLayout()
+
+
+        # Unit Selection Section
+        selection_button = QPushButton("Select Units")
+        selection_button.clicked.connect(self.open_unit_selection)
+        main_layout.addWidget(selection_button)
+
+        # Layout Settings Group
+        layout_group = QGroupBox("Layout Settings")
+        layout_group_layout = QVBoxLayout()
+
+        # Layout Type Selection
+        layout_type_layout = QHBoxLayout()
+        layout_label = QLabel("Select Unit Layout:")
+        layout_type_layout.addWidget(layout_label)
 
         self.layout_combo = QComboBox()
         self.layout_combo.addItems(["Vertical", "Horizontal"])
-        layout_type = hud_positions.get('unit_layout', 'Vertical')  # Default to Vertical
-        self.layout_combo.setCurrentText(layout_type)  # Set saved or default layout
+        layout_type = hud_positions.get('unit_layout', 'Vertical')
+        self.layout_combo.setCurrentText(layout_type)
         self.layout_combo.currentTextChanged.connect(self.update_layout)
-        layout.addWidget(self.layout_combo)
+        layout_type_layout.addWidget(self.layout_combo)
 
-        # Add checkboxes for showing elements
+        layout_group_layout.addLayout(layout_type_layout)
+        layout_group.setLayout(layout_group_layout)
+        main_layout.addWidget(layout_group)
+
+        # Name Widget Settings Group
+        name_group = QGroupBox("Name Widget Settings")
+        name_layout = QFormLayout()
+
         self.name_checkbox = QCheckBox("Show Name")
         self.name_checkbox.setChecked(hud_positions.get('show_name'))
         self.name_checkbox.stateChanged.connect(self.toggle_name)
-        layout.addWidget(self.name_checkbox)
+        name_layout.addRow(self.name_checkbox)
+
+        name_size_label = QLabel("Name Widget Size:")
+        name_size = hud_positions.get('name_widget_size', 50)
+        self.name_size_spinbox = QSpinBox()
+        self.name_size_spinbox.setRange(10, 100)
+        self.name_size_spinbox.setValue(name_size)
+        self.name_size_spinbox.valueChanged.connect(self.update_name_widget_size)
+        name_layout.addRow(name_size_label, self.name_size_spinbox)
+
+        name_group.setLayout(name_layout)
+        main_layout.addWidget(name_group)
+
+        # Flag Widget Settings Group
+        flag_group = QGroupBox("Flag Widget Settings")
+        flag_layout = QFormLayout()
+
+        self.flag_checkbox = QCheckBox("Show Flag")
+        self.flag_checkbox.setChecked(hud_positions.get('show_flag', True))
+        self.flag_checkbox.stateChanged.connect(self.toggle_flag)
+        flag_layout.addRow(self.flag_checkbox)
+
+        flag_size_label = QLabel("Flag Widget Size:")
+        flag_size = hud_positions.get('flag_widget_size', 50)
+        self.flag_size_spinbox = QSpinBox()
+        self.flag_size_spinbox.setRange(10, 100)
+        self.flag_size_spinbox.setValue(flag_size)
+        self.flag_size_spinbox.valueChanged.connect(self.update_flag_widget_size)
+        flag_layout.addRow(flag_size_label, self.flag_size_spinbox)
+
+        flag_group.setLayout(flag_layout)
+        main_layout.addWidget(flag_group)
+
+        # Money Widget Settings Group
+        money_group = QGroupBox("Money Widget Settings")
+        money_layout = QFormLayout()
 
         self.money_checkbox = QCheckBox("Show Money")
         self.money_checkbox.setChecked(hud_positions.get('show_money'))
         self.money_checkbox.stateChanged.connect(self.toggle_money)
-        layout.addWidget(self.money_checkbox)
+        money_layout.addRow(self.money_checkbox)
+
+        money_size_label = QLabel("Money Widget Size:")
+        money_size = hud_positions.get('money_widget_size', 50)
+        self.money_size_spinbox = QSpinBox()
+        self.money_size_spinbox.setRange(10, 100)
+        self.money_size_spinbox.setValue(money_size)
+        self.money_size_spinbox.valueChanged.connect(self.update_money_widget_size)
+        money_layout.addRow(money_size_label, self.money_size_spinbox)
+
+        money_color_label = QLabel("Money Text Color:")
+        self.color_combo = QComboBox()
+        self.color_combo.addItems(["Use player color", "White"])
+        money_color = hud_positions.get('money_color', 'Use player color')
+        self.color_combo.setCurrentText(money_color)
+        self.color_combo.currentTextChanged.connect(self.update_money_color)
+        money_layout.addRow(money_color_label, self.color_combo)
+
+        money_group.setLayout(money_layout)
+        main_layout.addWidget(money_group)
+
+        # Power Widget Settings Group
+        power_group = QGroupBox("Power Widget Settings")
+        power_layout = QFormLayout()
 
         self.power_checkbox = QCheckBox("Show Power")
         self.power_checkbox.setChecked(hud_positions.get('show_power'))
         self.power_checkbox.stateChanged.connect(self.toggle_power)
-        layout.addWidget(self.power_checkbox)
+        power_layout.addRow(self.power_checkbox)
 
-        self.separate_checkbox = QCheckBox("Separate info (does not work)")
-        self.separate_checkbox.setChecked(False)
-        self.separate_checkbox.stateChanged.connect(self.toggle_separate)
-        layout.addWidget(self.separate_checkbox)
+        power_size_label = QLabel("Power Widget Size:")
+        power_size = hud_positions.get('power_widget_size', 50)
+        self.power_size_spinbox = QSpinBox()
+        self.power_size_spinbox.setRange(10, 100)
+        self.power_size_spinbox.setValue(power_size)
+        self.power_size_spinbox.valueChanged.connect(self.update_power_widget_size)
+        power_layout.addRow(power_size_label, self.power_size_spinbox)
 
-        # Add QSpinBox for resizing the UnitWindow
-        self.size_label = QLabel("Set Unit Window Size: (25 - 250)")
-        layout.addWidget(self.size_label)
+        power_group.setLayout(power_layout)
+        main_layout.addWidget(power_group)
 
-        counter_size = hud_positions.get('unit_counter_size')
+        # Unit Window Settings Group
+        unit_group = QGroupBox("Unit Window Settings")
+        unit_layout = QFormLayout()
+
+        unit_size_label = QLabel("Unit Window Size:")
+        counter_size = hud_positions.get('unit_counter_size', 75)
         self.counter_size_spinbox = QSpinBox()
         self.counter_size_spinbox.setRange(25, 250)
         self.counter_size_spinbox.setValue(counter_size)
         self.counter_size_spinbox.valueChanged.connect(self.update_unit_window_size)
-        layout.addWidget(self.counter_size_spinbox)
+        unit_layout.addRow(unit_size_label, self.counter_size_spinbox)
 
-        # Add QSpinBox for resizing the ResourceWindow (DataWindow)
-        self.data_size_label = QLabel("Set Data Window Size: (10 - 100)")
-        layout.addWidget(self.data_size_label)
+        unit_group.setLayout(unit_layout)
+        main_layout.addWidget(unit_group)
 
-        data_size = hud_positions.get('data_counter_size')
-        self.data_size_spinbox = QSpinBox()
-        self.data_size_spinbox.setRange(10, 100)
-        self.data_size_spinbox.setValue(data_size)
-        self.data_size_spinbox.valueChanged.connect(self.update_data_window_size)
-        layout.addWidget(self.data_size_spinbox)
-
-        # Add the Game Path section
-        self.path_label = QLabel("Game Path:")
-        layout.addWidget(self.path_label)
-
-        # Horizontal layout to hold the text box and the button next to each other
+        # Game Path Settings Group
+        path_group = QGroupBox("Game Path Settings")
         path_layout = QHBoxLayout()
 
-        # QLineEdit for showing the selected or manually entered path
         self.path_edit = QLineEdit()
-
-        # Load the game path from JSON if it exists, otherwise leave it empty
         game_path = hud_positions.get('game_path', '')
-        self.path_edit.setText(game_path)  # Load path if it exists
+        self.path_edit.setText(game_path)
         self.path_edit.setPlaceholderText("Enter or select the game path")
         path_layout.addWidget(self.path_edit)
 
-        # Button to open folder selection dialog
-        self.path_button = QPushButton("Game Path")
+        self.path_button = QPushButton("Browse")
         self.path_button.clicked.connect(self.select_game_path)
         path_layout.addWidget(self.path_button)
 
-        # Add the horizontal layout to the main layout
-        layout.addLayout(path_layout)
+        path_group.setLayout(path_layout)
+        main_layout.addWidget(path_group)
 
+        # Quit Button
         quit_button = QPushButton("Quit")
         quit_button.clicked.connect(on_closing)
-        layout.addWidget(quit_button)
+        main_layout.addWidget(quit_button)
 
+        # Set the main layout
         container = QWidget()
-        container.setLayout(layout)
+        container.setLayout(main_layout)
         self.setCentralWidget(container)
 
         # Store the reference to the UnitSelectionWindow here
         self.unit_selection_window = None
 
+    # Existing methods remain the same...
+
+    # Add methods for the flag widget
+    def update_flag_widget_size(self):
+        new_size = self.flag_size_spinbox.value()
+        hud_positions['flag_widget_size'] = new_size
+        logging.info(f"Updated flag widget size in hud_positions: {new_size}")
+
+        # If HUD windows exist, update their sizes as well
+        if hud_windows:
+            for _, resource_window in hud_windows:
+                resource_window.flag_widget.update_data_size(new_size)
+
+    def toggle_flag(self, state):
+        self.toggle_hud_element('show_flag', 'flag_widget', state)
+
+    # Update toggle_hud_element to include the flag_widget
+    def toggle_hud_element(self, element, widget_name, state):
+        hud_positions[element] = (state == 2)
+        logging.info(f"Toggled {element} state to: {hud_positions[element]}")
+
+        # If HUD windows exist, toggle visibility of the specified widget
+        if hud_windows:
+            index_mapping = {
+                'name_widget': 0,
+                'money_widget': 1,
+                'power_widget': 2,
+                'flag_widget': 3  # Add the flag widget index
+            }
+            index = index_mapping.get(widget_name)
+            if index is not None:
+                for _, resource_window in hud_windows:
+                    window = resource_window.windows[index]
+                    if state == 2:
+                        window.show()
+                    else:
+                        window.hide()
 
     def select_game_path(self):
         # Open the folder selection dialog
@@ -401,6 +516,17 @@ class ControlPanel(QMainWindow):
             # Set the folder path in the text box
             self.path_edit.setText(folder_path)
 
+    def update_money_color(self, color):
+        """Update the selected money color."""
+        color = color.strip()
+        hud_positions['money_color'] = color
+        logging.info(f"HUD money color updated to: '{color}'")
+
+        # If HUD windows exist, update their money widget colors
+        if hud_windows:
+            for _, resource_window in hud_windows:
+                logging.debug(f"Updating money widget color for player {resource_window.player.username.value}")
+                resource_window.update_money_widget_color()
 
     def update_layout(self, layout_type):
         """Update the layout of the UnitWindow between vertical and horizontal."""
@@ -424,15 +550,35 @@ class ControlPanel(QMainWindow):
             for unit_window, _ in hud_windows:
                 unit_window.update_all_counters_size(new_size)
 
-    def update_data_window_size(self):
-        new_size = self.data_size_spinbox.value()
-        hud_positions['data_counter_size'] = new_size
-        logging.info(f"Updated data window size in hud_positions: {new_size}")
+    def update_name_widget_size(self):
+        new_size = self.name_size_spinbox.value()
+        hud_positions['name_widget_size'] = new_size
+        logging.info(f"Updated name widget size in hud_positions: {new_size}")
 
         # If HUD windows exist, update their sizes as well
         if hud_windows:
             for _, resource_window in hud_windows:
-                resource_window.update_all_data_size(new_size)
+                resource_window.name_widget.update_data_size(new_size)
+
+    def update_money_widget_size(self):
+        new_size = self.money_size_spinbox.value()
+        hud_positions['money_widget_size'] = new_size
+        logging.info(f"Updated money widget size in hud_positions: {new_size}")
+
+        # If HUD windows exist, update their sizes as well
+        if hud_windows:
+            for _, resource_window in hud_windows:
+                resource_window.money_widget.update_data_size(new_size)
+
+    def update_power_widget_size(self):
+        new_size = self.power_size_spinbox.value()
+        hud_positions['power_widget_size'] = new_size
+        logging.info(f"Updated power widget size in hud_positions: {new_size}")
+
+        # If HUD windows exist, update their sizes as well
+        if hud_windows:
+            for _, resource_window in hud_windows:
+                resource_window.power_widget.update_data_size(new_size)
 
     # Method to open the Unit Selection window
     def open_unit_selection(self):
@@ -446,28 +592,16 @@ class ControlPanel(QMainWindow):
         json_file = 'unit_selection.json'
         if os.path.exists(json_file):
             with open(json_file, 'r') as file:
-                return json.load(file)
+                data = json.load(file)
+                return data  # Return the entire data
         return {}
 
 
 
+    # Method to toggle the visibility of HUD elements
 
-    # NOTE merged the toggle functions into one function
 
 
-    # Method to toggle the visibility of Name
-    def toggle_hud_element(self, element, widget_name, state):
-        hud_positions[element] = (state == 2)
-        logging.info(f"Toggled {element} state to: {hud_positions[element]}")
-
-        # If HUD windows exist, toggle visibility of the specified widget
-        if hud_windows:
-            for _, resource_window in hud_windows:
-                widget = getattr(resource_window, widget_name)
-                if state == 2:
-                    widget.show()
-                else:
-                    widget.hide()
 
     # Then you can call this method for different elements
     def toggle_name(self, state):
@@ -479,9 +613,10 @@ class ControlPanel(QMainWindow):
     def toggle_power(self, state):
         self.toggle_hud_element('show_power', 'power_widget', state)
 
-    # TODO: connect the separate button to DataTracker.py and modify the toggle_hud_emelent function according to it
     def toggle_separate(self, state):
         self.toggle_hud_element('separate_info', 'separate_info', state)
+
+
 
 # Thread to continuously update player data
 class DataUpdateThread(QThread):

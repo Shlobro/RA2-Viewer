@@ -16,7 +16,12 @@ class UnitSelectionWindow(QMainWindow):
 
         self.hud_windows = hud_windows
 
-        self.selected_units = selected_units_dict['selected_units']  # Load selected units (if any)
+        # Ensure 'selected_units' key exists
+        if 'selected_units' not in selected_units_dict:
+            selected_units_dict['selected_units'] = {}
+        self.selected_units = selected_units_dict['selected_units']  # Both refer to the same dict
+
+        self.selected_units = selected_units_dict
 
 
         self.setWindowTitle("Unit Selection")

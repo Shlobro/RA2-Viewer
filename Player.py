@@ -230,45 +230,45 @@ class Player:
             balance_data = read_process_memory(self.process_handle, balance_ptr, 4)
             if balance_data:
                 self.balance = ctypes.c_uint32.from_buffer_copy(balance_data).value
-                logging.debug(f"Player {self.index} balance: {self.balance}")
+                #logging.debug(f"Player {self.index} balance: {self.balance}")
 
             # Spent credit
             spent_credit_ptr = self.real_class_base + CREDITSPENT_OFFSET
             spent_credit_data = read_process_memory(self.process_handle, spent_credit_ptr, 4)
             if spent_credit_data:
                 self.spent_credit = ctypes.c_uint32.from_buffer_copy(spent_credit_data).value
-                logging.debug(f"Player {self.index} spent credit: {self.spent_credit}")
+                #logging.debug(f"Player {self.index} spent credit: {self.spent_credit}")
 
             # IsWinner
             is_winner_ptr = self.real_class_base + ISWINNEROFFSET
             is_winner_data = read_process_memory(self.process_handle, is_winner_ptr, 1)
             if is_winner_data:
                 self.is_winner = bool(ctypes.c_uint8.from_buffer_copy(is_winner_data).value)
-                logging.debug(f"Player {self.index} is_winner: {self.is_winner}")
+                #logging.debug(f"Player {self.index} is_winner: {self.is_winner}")
 
             # IsLoser
             is_loser_ptr = self.real_class_base + ISLOSEROFFSET
             is_loser_data = read_process_memory(self.process_handle, is_loser_ptr, 1)
             if is_loser_data:
                 self.is_loser = bool(ctypes.c_uint8.from_buffer_copy(is_loser_data).value)
-                logging.debug(f"Player {self.index} is_loser: {self.is_loser}")
+                #logging.debug(f"Player {self.index} is_loser: {self.is_loser}")
 
             # Power output
             power_output_ptr = self.real_class_base + POWEROUTPUTOFFSET
             power_output_data = read_process_memory(self.process_handle, power_output_ptr, 4)
             if power_output_data:
                 self.power_output = ctypes.c_uint32.from_buffer_copy(power_output_data).value
-                logging.debug(f"Player {self.index} power output: {self.power_output}")
+                #logging.debug(f"Player {self.index} power output: {self.power_output}")
 
             # Power drain
             power_drain_ptr = self.real_class_base + POWERDRAINOFFSET
             power_drain_data = read_process_memory(self.process_handle, power_drain_ptr, 4)
             if power_drain_data:
                 self.power_drain = ctypes.c_uint32.from_buffer_copy(power_drain_data).value
-                logging.debug(f"Player {self.index} power drain: {self.power_drain}")
+                #logging.debug(f"Player {self.index} power drain: {self.power_drain}")
 
             self.power = self.power_output - self.power_drain
-            logging.debug(f"Player {self.index} total power: {self.power}")
+            #logging.debug(f"Player {self.index} total power: {self.power}")
 
             # Update infantry, tank, and building counts
             if self.infantry_array_ptr == 0:

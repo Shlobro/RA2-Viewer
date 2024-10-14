@@ -142,5 +142,85 @@
             },
             "Aircraft": {}
         }
+    },
+    "Allied": {
+        "Infantry": {
+            "GI": true,
+            "GGI": true,
+            "Allied Dog": true
+        },
+        "Structure": {
+            "Allied War Factory": true,
+            "Allied Ore Refinery": true,
+            "Allied Barracks": true
+        },
+        "Tank": {
+            "Grizzly": true,
+            "IFV": true,
+            "Prism Tank": true,
+            "Mirage Tank": true,
+            "Chrono Miner": true
+        },
+        "Naval": {
+            "Agis Cruiser": true,
+            "Aircraft Carrier": true,
+            "Destroyer": true,
+            "Dolphin": true
+        },
+        "Aircraft": {
+            "Black Eagle": true,
+            "Harrier": true
+        }
+    },
+    "Soviet": {
+        "Infantry": {
+            "conscript": true,
+            "Desolator": true,
+            "Soviet Dog": true
+        },
+        "Structure": {
+            "Soviet War Factory": true,
+            "Sov Ore Ref": true,
+            "Soviet Barracks": true
+        },
+        "Tank": {
+            "Rhino Tank": true,
+            "Siege Chopper": true,
+            "Kirov": true,
+            "Apoc": true,
+            "Flak Track": true,
+            "War Miner": true,
+            "Terror Drone": true
+        },
+        "Naval": {
+            "Dreadnought": true,
+            "Squid": true,
+            "Soviet Amphibious Transport": true,
+            "Typhoon attack sub": true,
+            "Sea Scorpion": true
+        }
+    },
+    "Yuri": {
+        "Infantry": {
+            "Initiate": true,
+            "Brute": true
+        },
+        "Structure": {
+            "Yuri War Factory": true,
+            "Grinder": false,
+            "Slave Miner Deployed": true,
+            "Yuri Radar": false,
+            "Yuri Barracks": true
+        },
+        "Tank": {
+            "Gattling Tank": true,
+            "Mastermind": true,
+            "Disc": true,
+            "Magnetron": true,
+            "Lasher": true
+        },
+        "Naval": {
+            "Boomer": true
+        }
     }
 }
