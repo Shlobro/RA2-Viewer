@@ -2,7 +2,7 @@ import logging
 import sys
 
 
-def setup_logging(log_to_console=True):
+def setup_logging(log_to_console=False):
     """
     Sets up logging for the application. Outputs to the console by default.
     To switch to file logging, set log_to_console=False.
@@ -16,7 +16,7 @@ def setup_logging(log_to_console=True):
         console_handler.setFormatter(logging.Formatter(log_format))
 
         logging.basicConfig(
-            level=logging.DEBUG,  # Adjust the level as needed
+            level=logging.INFO,  # Adjust the level as needed
             handlers=[console_handler],
             format=log_format
         )
