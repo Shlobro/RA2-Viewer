@@ -134,6 +134,7 @@ class UnitWindow(QMainWindow):
                 counter_widget.show()
             else:
                 counter_widget.hide()
+            self.update_all_counters_size(self.size)
 
     def get_unit_count(self, unit_type, unit_name):
         """Determine the unit type and retrieve the unit count from the relevant section."""

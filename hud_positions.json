@@ -1,7 +1,7 @@
 {
     "unit_counter_size": 80,
     "data_counter_size": 50,
-    "show_name": false,
+    "show_name": true,
     "show_money": false,
     "show_power": false,
     "unit_layout": "Vertical",
@@ -30,8 +30,8 @@
     },
     "red": {
         "unit_counter": {
-            "x": 2298,
-            "y": 192
+            "x": 2277,
+            "y": 70
         },
         "name": {
             "x": 2091,
@@ -52,8 +52,8 @@
     },
     "yellow": {
         "unit_counter": {
-            "x": 31,
-            "y": 176
+            "x": 28,
+            "y": 72
         },
         "name": {
             "x": 18,
