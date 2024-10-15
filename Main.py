@@ -23,7 +23,9 @@ from Player import (
     GameData, initialize_players_after_loading,
     detect_if_all_players_are_loaded, ProcessExitedException
 )
-from UnitCounter import UnitWindow
+from UnitCounterWithImages import UnitWindowWithImages
+from UnitCounterNumbersOnly import UnitCounterNumbersOnly
+from UnitCounterImagesOnly import UnitWindowImagesOnly
 from UnitSelectionWindow import UnitSelectionWindow
 from logging_config import setup_logging
 
@@ -216,7 +218,7 @@ def create_hud_windows():
     # Step 7: Create the HUD windows
     for player in players:
         logging.info(f"Creating HUD for {player.username.value} with color {player.color_name}")
-        unit_window = UnitWindow(player, len(players), hud_positions, selected_units_dict)
+        unit_window = UnitWindowWithImages(player, len(players), hud_positions, selected_units_dict)
         unit_window.setWindowTitle(f"Player {player.color_name} unit window")
         resource_window = ResourceWindow(player, len(players), hud_positions, player.color_name)
         resource_window.setWindowTitle(f"Player {player.color_name} resource window")

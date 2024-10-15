@@ -1,3 +1,5 @@
+import logging
+
 from PySide6.QtGui import QPixmap, QPainter, QFont, QPen, QColor
 from PySide6.QtWidgets import QLabel, QSizePolicy
 from PySide6.QtCore import Qt, QRect
@@ -49,6 +51,7 @@ class CounterWidget(QLabel):
 
         # Draw the white text on top
         painter.setPen(Qt.white)
+
         painter.drawText(text_x, text_y, str(self.count))
 
         # Draw the colored frame around the image if show_frame is True

@@ -1,13 +1,12 @@
 import json
-from PySide6.QtCore import Qt
-from PySide6.QtWidgets import QMainWindow, QFrame, QVBoxLayout, QWidget, QHBoxLayout
-from CounterWidget import CounterWidget
+from PySide6.QtCore import QObject, Signal, QThread, Qt
+from PySide6.QtWidgets import QMainWindow, QVBoxLayout, QWidget, QHBoxLayout, QFrame
 import logging
-from PySide6.QtWidgets import QVBoxLayout
-from common import (name_to_path)
+from common import name_to_path
+from CounterWidgetNumberOnly import CounterWidget
 
 
-class UnitWindow(QMainWindow):
+class UnitCounterNumbersOnly(QMainWindow):
     def __init__(self, player, player_count, hud_pos, selected_units_dict):
         super().__init__()
         self.player = player
@@ -16,8 +15,6 @@ class UnitWindow(QMainWindow):
         self.selected_units = selected_units_dict['selected_units']
         self.layout_type = hud_pos.get('unit_layout', 'Vertical')  # Default to Vertical layout
         self.size = hud_pos.get('unit_counter_size', 100)
-        self.show_unit_frames = hud_pos.get('show_unit_frames', True)  # Get the setting
-
 
         # Set window geometry and flags
         # Example in UnitWindow or ResourceWindow instantiation
@@ -83,10 +80,8 @@ class UnitWindow(QMainWindow):
 
                         unit_counter = CounterWidget(
                             unit_count,
-                            unit_image_path,
                             self.player.color,
                             self.size,
-                            show_frame=self.show_unit_frames  # Pass the setting
                         )
                         unit_counter.hide()
 
@@ -99,7 +94,7 @@ class UnitWindow(QMainWindow):
             unit_count = self.get_unit_count(unit_type, unit_name)
             unit_image_path = name_to_path(unit_name)
 
-            unit_counter = CounterWidget(unit_count, unit_image_path, self.player.color, self.size)
+            unit_counter = CounterWidget(unit_count, self.player.color, self.size)
             unit_counter.hide()
 
             # Add the widget to the current layout
@@ -134,6 +129,7 @@ class UnitWindow(QMainWindow):
                 counter_widget.show()
             else:
                 counter_widget.hide()
+            self.update_all_counters_size(self.size)
 
     def get_unit_count(self, unit_type, unit_name):
         """Determine the unit type and retrieve the unit count from the relevant section."""
@@ -211,4 +207,3 @@ class UnitWindow(QMainWindow):
 
         # Update the specific HUD position for this player and type
         hud_positions[player_color_str][hud_type] = {"x": x, "y": y}
-
