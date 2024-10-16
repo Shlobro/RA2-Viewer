@@ -438,7 +438,7 @@ class ControlPanel(QMainWindow):
         distance_label = QLabel("Distance Between Numbers:")
         distance = hud_positions.get('distance_between_numbers', 0)
         self.distance_spinbox = QSpinBox()
-        self.distance_spinbox.setRange(0, 50)
+        self.distance_spinbox.setRange(0, 150)
         self.distance_spinbox.setValue(distance)
         self.distance_spinbox.valueChanged.connect(self.update_distance_between_numbers)
         unit_layout.addRow(distance_label, self.distance_spinbox)
