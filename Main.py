@@ -297,7 +297,6 @@ def create_hud_windows():
     create_unit_windows_in_current_mode()
 
 
-
 # Update the HUDs with the latest data
 def update_huds():
     if len(hud_windows) == 0:
@@ -316,7 +315,6 @@ def update_huds():
     except Exception as e:
         logging.error(f"Exception in update_huds: {e}")
         traceback.print_exc()
-
 
 
 # Handler for when the game starts
@@ -338,8 +336,6 @@ def game_started_handler():
                     unit_window.show()
             # Do NOT call resource_window.show()
             # resource_window.show()
-
-
 
 
 # Handler for when the game stops
@@ -365,7 +361,6 @@ def game_stopped_handler():
     players.clear()  # Clear the players list
 
 
-
 # Handle closing the application
 def on_closing():
     global data_update_thread
@@ -381,8 +376,11 @@ def on_closing():
 
 
 def save_selected_units():
+    global selected_units_dict
     """Save the selected units to the JSON file."""
     json_file = 'unit_selection.json'
+
+    # Create the structure with "selected_units" as the top key
 
     with open(json_file, 'w') as file:
         json.dump(selected_units_dict, file, indent=4)
@@ -471,8 +469,6 @@ class ControlPanel(QMainWindow):
         unit_group.setLayout(unit_layout)
         main_layout.addWidget(unit_group)
 
-
-
         # Name Widget Settings Group
         name_group = QGroupBox("Name Widget Settings")
         name_layout = QFormLayout()
@@ -485,7 +481,7 @@ class ControlPanel(QMainWindow):
         name_size_label = QLabel("Name Widget Size:")
         name_size = hud_positions.get('name_widget_size', 50)
         self.name_size_spinbox = QSpinBox()
-        self.name_size_spinbox.setRange(10, 100)
+        self.name_size_spinbox.setRange(10, 500)
         self.name_size_spinbox.setValue(name_size)
         self.name_size_spinbox.valueChanged.connect(self.update_name_widget_size)
         name_layout.addRow(name_size_label, self.name_size_spinbox)
@@ -505,7 +501,7 @@ class ControlPanel(QMainWindow):
         flag_size_label = QLabel("Flag Widget Size:")
         flag_size = hud_positions.get('flag_widget_size', 50)
         self.flag_size_spinbox = QSpinBox()
-        self.flag_size_spinbox.setRange(10, 100)
+        self.flag_size_spinbox.setRange(10, 500)
         self.flag_size_spinbox.setValue(flag_size)
         self.flag_size_spinbox.valueChanged.connect(self.update_flag_widget_size)
         flag_layout.addRow(flag_size_label, self.flag_size_spinbox)
@@ -525,7 +521,7 @@ class ControlPanel(QMainWindow):
         money_size_label = QLabel("Money Widget Size:")
         money_size = hud_positions.get('money_widget_size', 50)
         self.money_size_spinbox = QSpinBox()
-        self.money_size_spinbox.setRange(10, 100)
+        self.money_size_spinbox.setRange(10, 500)
         self.money_size_spinbox.setValue(money_size)
         self.money_size_spinbox.valueChanged.connect(self.update_money_widget_size)
         money_layout.addRow(money_size_label, self.money_size_spinbox)
@@ -553,7 +549,7 @@ class ControlPanel(QMainWindow):
         power_size_label = QLabel("Power Widget Size:")
         power_size = hud_positions.get('power_widget_size', 50)
         self.power_size_spinbox = QSpinBox()
-        self.power_size_spinbox.setRange(10, 100)
+        self.power_size_spinbox.setRange(10, 500)
         self.power_size_spinbox.setValue(power_size)
         self.power_size_spinbox.valueChanged.connect(self.update_power_widget_size)
         power_layout.addRow(power_size_label, self.power_size_spinbox)
@@ -666,7 +662,6 @@ class ControlPanel(QMainWindow):
                             uw.show()
                     else:
                         unit_window.show()
-
 
     def update_image_size(self):
         new_size = self.image_size_spinbox.value()
@@ -931,15 +926,16 @@ class DataUpdateThread(QThread):
                     process_handle = None
             logging.info("Data update thread has exited.")
 
+
 def wait_for_current_file_path():
     # Wait until the user selects a valid file path
-    global  game_path
+    global game_path
     game_path = hud_positions.get('game_path', '')
     spawn_ini_path = os.path.join(game_path, 'spawn.ini')
 
     new = game_path
     logging.debug("spawn_ini_path")
-    while not os.path.exists(spawn_ini_path) :
+    while not os.path.exists(spawn_ini_path):
         logging.debug(f"current files path: {game_path}")
         old = new
         QMessageBox.warning(None, "Game Path Error", "Please choose a valid game file path.")
@@ -950,42 +946,39 @@ def wait_for_current_file_path():
             new = game_path
             time.sleep(1)
 
-
         spawn_ini_path = os.path.join(game_path, 'spawn.ini')
-
 
     logging.info(f"Game path: {game_path}")
 
 
-
 # Main application logic
 if __name__ == '__main__':
-        app = QApplication([])
-        setup_logging()
+    app = QApplication([])
+    setup_logging()
 
-        # Load HUD positions
-        load_hud_positions()
+    # Load HUD positions
+    load_hud_positions()
 
-        # Initialize the control panel
-        control_panel = ControlPanel()
-        control_panel.show()
+    # Initialize the control panel
+    control_panel = ControlPanel()
+    control_panel.show()
 
-        wait_for_current_file_path()
+    wait_for_current_file_path()
 
-        # Once a valid path is selected, continue with the rest of the logic
-        data_update_thread = DataUpdateThread()
+    # Once a valid path is selected, continue with the rest of the logic
+    data_update_thread = DataUpdateThread()
 
-        # Connect signals from data_update_thread with Qt.QueuedConnection
-        data_update_thread.update_signal.connect(update_huds, Qt.QueuedConnection)
-        data_update_thread.game_started.connect(game_started_handler, Qt.QueuedConnection)
-        data_update_thread.game_stopped.connect(game_stopped_handler, Qt.QueuedConnection)
+    # Connect signals from data_update_thread with Qt.QueuedConnection
+    data_update_thread.update_signal.connect(update_huds, Qt.QueuedConnection)
+    data_update_thread.game_started.connect(game_started_handler, Qt.QueuedConnection)
+    data_update_thread.game_stopped.connect(game_stopped_handler, Qt.QueuedConnection)
 
-        data_update_thread.start()
+    data_update_thread.start()
 
-        app.exec()
+    app.exec()
 
-        # On application exit
-        data_update_thread.stop_event.set()
-        data_update_thread.wait()
-        save_selected_units()
-        save_hud_positions()
+    # On application exit
+    data_update_thread.stop_event.set()
+    data_update_thread.wait()
+    save_selected_units()
+    save_hud_positions()

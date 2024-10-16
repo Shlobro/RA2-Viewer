@@ -413,7 +413,7 @@ def detect_if_all_players_are_loaded(process_handle):
                 if data and int.from_bytes(data, byteorder='little') == value:
                     loaded += 1
 
-            if loaded == 3:
+            if loaded >= 2:
                 logging.info("Players loaded. Proceeding with players initialization.")
                 return True
         return False

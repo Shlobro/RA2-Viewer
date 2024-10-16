@@ -1,0 +1,108 @@
+{
+    "unit_counter_size": 75,
+    "image_size": 75,
+    "number_size": 75,
+    "distance_between_numbers": 0,
+    "show_name": true,
+    "show_money": true,
+    "show_power": true,
+    "unit_layout": "Vertical",
+    "money_color": "Use player color",
+    "show_flag": true,
+    "flag_widget_size": 50,
+    "show_unit_frames": true,
+    "name_widget_size": 50,
+    "money_widget_size": 50,
+    "power_widget_size": 50,
+    "separate_unit_counters": false,
+    "game_path": "D:/ra2/Red Alert 2/Red Alert 2",
+    "yellow": {
+        "name": {
+            "x": 100,
+            "y": 100
+        },
+        "flag": {
+            "x": 100,
+            "y": 100
+        },
+        "money": {
+            "x": 100,
+            "y": 100
+        },
+        "power": {
+            "x": 100,
+            "y": 100
+        },
+        "unit_counter_combined": {
+            "x": 100,
+            "y": 100
+        }
+    },
+    "red": {
+        "name": {
+            "x": 84,
+            "y": 413
+        },
+        "flag": {
+            "x": 100,
+            "y": 100
+        },
+        "money": {
+            "x": 88,
+            "y": 341
+        },
+        "power": {
+            "x": 817,
+            "y": 166
+        },
+        "unit_counter_combined": {
+            "x": 100,
+            "y": 100
+        }
+    },
+    "pink": {
+        "name": {
+            "x": 1876,
+            "y": 111
+        },
+        "flag": {
+            "x": 100,
+            "y": 100
+        },
+        "money": {
+            "x": 1919,
+            "y": 181
+        },
+        "power": {
+            "x": 1694,
+            "y": 120
+        },
+        "unit_counter_combined": {
+            "x": 386,
+            "y": 82
+        }
+    },
+    "data_counter_size": 50,
+    "blue": {
+        "name": {
+            "x": 100,
+            "y": 100
+        },
+        "flag": {
+            "x": 100,
+            "y": 100
+        },
+        "money": {
+            "x": 100,
+            "y": 100
+        },
+        "power": {
+            "x": 100,
+            "y": 100
+        },
+        "unit_counter_combined": {
+            "x": 100,
+            "y": 100
+        }
+    }
+}

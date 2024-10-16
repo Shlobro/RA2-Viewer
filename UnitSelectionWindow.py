@@ -21,9 +21,6 @@ class UnitSelectionWindow(QMainWindow):
             selected_units_dict['selected_units'] = {}
         self.selected_units = selected_units_dict['selected_units']  # Both refer to the same dict
 
-        self.selected_units = selected_units_dict
-
-
         self.setWindowTitle("Unit Selection")
         self.setGeometry(200, 200, 400, 300)
 

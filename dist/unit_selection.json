@@ -2,7 +2,7 @@
     "selected_units": {
         "Allied": {
             "Infantry": {
-                "GI": true,
+                "GI": false,
                 "Allied Dog": false,
                 "GGI": false,
                 "Allied Engineer": false,
