@@ -43,8 +43,10 @@ def load_hud_positions():
         hud_positions = {}
 
     # Set default values if not present
-    hud_positions.setdefault('unit_counter_size', 75)  # Default size is 75
-    hud_positions.setdefault('data_counter_size', 50)  # Default size is 50
+    hud_positions.setdefault('unit_counter_size', 75)
+    hud_positions.setdefault('image_size', 75)
+    hud_positions.setdefault('number_size', 75)
+    hud_positions.setdefault('distance_between_numbers', 0)
     hud_positions.setdefault('show_name', True)
     hud_positions.setdefault('show_money', True)
     hud_positions.setdefault('show_power', True)
@@ -53,10 +55,10 @@ def load_hud_positions():
     hud_positions.setdefault('show_flag', True)
     hud_positions.setdefault('flag_widget_size', 50)
     hud_positions.setdefault('show_unit_frames', True)
-    # Set default sizes for individual widgets
     hud_positions.setdefault('name_widget_size', 50)
     hud_positions.setdefault('money_widget_size', 50)
     hud_positions.setdefault('power_widget_size', 50)
+    hud_positions.setdefault('separate_unit_counters', False)
 
 
 # Save HUD positions and settings to file
@@ -67,6 +69,11 @@ def save_hud_positions():
     if control_panel:
         if control_panel.counter_size_spinbox:
             hud_positions['unit_counter_size'] = control_panel.counter_size_spinbox.value()
+
+        # Save new settings
+        hud_positions['image_size'] = control_panel.image_size_spinbox.value()
+        hud_positions['number_size'] = control_panel.number_size_spinbox.value()
+        hud_positions['distance_between_numbers'] = control_panel.distance_spinbox.value()
 
         # Save individual widget sizes
         if control_panel.name_size_spinbox:
@@ -84,6 +91,7 @@ def save_hud_positions():
         hud_positions['show_unit_frames'] = control_panel.unit_frame_checkbox.isChecked()
         # Save the selected color option
         hud_positions['money_color'] = control_panel.color_combo.currentText()
+        hud_positions['separate_unit_counters'] = control_panel.separate_units_checkbox.isChecked()
 
     # Save the game path from the QLineEdit
     if control_panel.path_edit:
@@ -101,18 +109,71 @@ def save_hud_positions():
         name_pos = resource_window.windows[0].pos()  # Name window
         money_pos = resource_window.windows[1].pos()  # Money window
         power_pos = resource_window.windows[2].pos()  # Power window
-        unit_counter_pos = unit_window.pos()  # Unit counter window
         flag_pos = resource_window.windows[3].pos()  # Flag window
 
         hud_positions[player_id]['flag'] = {"x": flag_pos.x(), "y": flag_pos.y()}
         hud_positions[player_id]['name'] = {"x": name_pos.x(), "y": name_pos.y()}
         hud_positions[player_id]['money'] = {"x": money_pos.x(), "y": money_pos.y()}
         hud_positions[player_id]['power'] = {"x": power_pos.x(), "y": power_pos.y()}
-        hud_positions[player_id]['unit_counter'] = {"x": unit_counter_pos.x(), "y": unit_counter_pos.y()}
+
+        # Save positions of unit windows based on mode
+        separate = hud_positions.get('separate_unit_counters', False)
+        if separate:
+            # Unit windows are separate
+            unit_window_images, unit_window_numbers = unit_window
+            unit_images_pos = unit_window_images.pos()
+            unit_numbers_pos = unit_window_numbers.pos()
+            hud_positions[player_id]['unit_counter_images'] = {"x": unit_images_pos.x(), "y": unit_images_pos.y()}
+            hud_positions[player_id]['unit_counter_numbers'] = {"x": unit_numbers_pos.x(), "y": unit_numbers_pos.y()}
+        else:
+            # Unit window is combined
+            unit_counter_pos = unit_window.pos()
+            hud_positions[player_id]['unit_counter_combined'] = {"x": unit_counter_pos.x(), "y": unit_counter_pos.y()}
 
     # Write everything to the HUD position file
     with open(HUD_POSITION_FILE, 'w') as file:
         json.dump(hud_positions, file, indent=4)
+
+
+def create_unit_windows_in_current_mode():
+    global hud_windows
+
+    # Create unit windows according to the current mode
+    separate = hud_positions.get('separate_unit_counters', False)
+
+    # For each player in hud_windows
+    for i, (unit_window, resource_window) in enumerate(hud_windows):
+        player = resource_window.player  # Assuming resource_window has a 'player' attribute
+        if separate:
+            # Close existing unit_window if any
+            if unit_window:
+                if isinstance(unit_window, tuple):
+                    for uw in unit_window:
+                        uw.close()
+                else:
+                    unit_window.close()
+
+            # Create separate windows for images and numbers
+            unit_window_images = UnitWindowImagesOnly(player, len(players), hud_positions, selected_units_dict)
+            unit_window_numbers = UnitCounterNumbersOnly(player, len(players), hud_positions, selected_units_dict)
+            unit_window_images.setWindowTitle(f"Player {player.color_name} unit images window")
+            unit_window_numbers.setWindowTitle(f"Player {player.color_name} unit numbers window")
+            # Update hud_windows entry
+            hud_windows[i] = ((unit_window_images, unit_window_numbers), resource_window)
+        else:
+            # Close existing unit_window if any
+            if unit_window:
+                if isinstance(unit_window, tuple):
+                    for uw in unit_window:
+                        uw.close()
+                else:
+                    unit_window.close()
+
+            # Create combined unit window
+            unit_window = UnitWindowWithImages(player, len(players), hud_positions, selected_units_dict)
+            unit_window.setWindowTitle(f"Player {player.color_name} unit window")
+            # Update hud_windows entry
+            hud_windows[i] = (unit_window, resource_window)
 
 
 # Find the PID of a process by name
@@ -207,22 +268,34 @@ def create_hud_windows():
 
     # Step 6: Close any existing HUD windows before creating new ones
     for unit_window, resource_window in hud_windows:
-        unit_window.close()
-        resource_window.close()
+        if unit_window:
+            if isinstance(unit_window, tuple):
+                for uw in unit_window:
+                    uw.close()
+            else:
+                unit_window.close()
+        # Close each individual resource window (name, money, power, flag)
+        for window in resource_window.windows:
+            window.close()
+        # No need to call resource_window.close()
+
     hud_windows = []
 
     if len(players) == 0:
         logging.info("No valid players found. HUD will not be displayed.")
         return
 
-    # Step 7: Create the HUD windows
+    # Step 7: Create the resource windows and placeholders for unit windows
     for player in players:
         logging.info(f"Creating HUD for {player.username.value} with color {player.color_name}")
-        unit_window = UnitWindowWithImages(player, len(players), hud_positions, selected_units_dict)
-        unit_window.setWindowTitle(f"Player {player.color_name} unit window")
         resource_window = ResourceWindow(player, len(players), hud_positions, player.color_name)
-        resource_window.setWindowTitle(f"Player {player.color_name} resource window")
-        hud_windows.append((unit_window, resource_window))
+        # Do NOT set window title on resource_window
+        # resource_window.setWindowTitle(f"Player {player.color_name} resource window")
+        hud_windows.append((None, resource_window))  # Will set unit_window later
+
+    # Create unit windows according to the current mode
+    create_unit_windows_in_current_mode()
+
 
 
 # Update the HUDs with the latest data
@@ -231,11 +304,19 @@ def update_huds():
         return  # No HUDs to update
     try:
         for unit_window, resource_window in hud_windows:
-            unit_window.update_labels()
+            # Update unit windows
+            if unit_window:
+                if isinstance(unit_window, tuple):
+                    for uw in unit_window:
+                        uw.update_labels()
+                else:
+                    unit_window.update_labels()
+            # Update resource windows
             resource_window.update_labels()
     except Exception as e:
         logging.error(f"Exception in update_huds: {e}")
         traceback.print_exc()
+
 
 
 # Handler for when the game starts
@@ -248,7 +329,17 @@ def game_started_handler():
         # Create HUD windows
         create_hud_windows()
         for unit_window, resource_window in hud_windows:
-            unit_window.show()
+            # Show unit windows
+            if unit_window:
+                if isinstance(unit_window, tuple):
+                    for uw in unit_window:
+                        uw.show()
+                else:
+                    unit_window.show()
+            # Do NOT call resource_window.show()
+            # resource_window.show()
+
+
 
 
 # Handler for when the game stops
@@ -259,14 +350,20 @@ def game_stopped_handler():
     # Close all HUD windows (unit window, resource window)
     for unit_window, resource_window in hud_windows:
         # Close unit counter window
-        unit_window.close()
+        if unit_window:
+            if isinstance(unit_window, tuple):
+                for uw in unit_window:
+                    uw.close()
+            else:
+                unit_window.close()
 
-        # Close each individual resource window (name, money, power)
+        # Close each individual resource window (name, money, power, flag)
         for window in resource_window.windows:
             window.close()
 
     hud_windows.clear()  # Clear the HUD windows list
     players.clear()  # Clear the players list
+
 
 
 # Handle closing the application
@@ -318,10 +415,53 @@ class ControlPanel(QMainWindow):
         self.counter_size_spinbox.valueChanged.connect(self.update_unit_window_size)
         unit_layout.addRow(unit_size_label, self.counter_size_spinbox)
 
+        # Add new settings for separate mode
+        # Image Size
+        image_size_label = QLabel("Image Size:")
+        image_size = hud_positions.get('image_size', 75)
+        self.image_size_spinbox = QSpinBox()
+        self.image_size_spinbox.setRange(25, 250)
+        self.image_size_spinbox.setValue(image_size)
+        self.image_size_spinbox.valueChanged.connect(self.update_image_size)
+        unit_layout.addRow(image_size_label, self.image_size_spinbox)
+
+        # Number Size
+        number_size_label = QLabel("Number Size:")
+        number_size = hud_positions.get('number_size', 75)
+        self.number_size_spinbox = QSpinBox()
+        self.number_size_spinbox.setRange(25, 250)
+        self.number_size_spinbox.setValue(number_size)
+        self.number_size_spinbox.valueChanged.connect(self.update_number_size)
+        unit_layout.addRow(number_size_label, self.number_size_spinbox)
+
+        # Distance Between Numbers
+        distance_label = QLabel("Distance Between Numbers:")
+        distance = hud_positions.get('distance_between_numbers', 0)
+        self.distance_spinbox = QSpinBox()
+        self.distance_spinbox.setRange(0, 50)
+        self.distance_spinbox.setValue(distance)
+        self.distance_spinbox.valueChanged.connect(self.update_distance_between_numbers)
+        unit_layout.addRow(distance_label, self.distance_spinbox)
+
         self.unit_frame_checkbox = QCheckBox("Show Unit Frames")
         self.unit_frame_checkbox.setChecked(hud_positions.get('show_unit_frames', True))
         self.unit_frame_checkbox.stateChanged.connect(self.toggle_unit_frames)
         unit_layout.addRow(self.unit_frame_checkbox)
+
+        # Separate Unit Counters Checkbox
+        self.separate_units_checkbox = QCheckBox("Separate Unit Counters")
+        self.separate_units_checkbox.setChecked(hud_positions.get('separate_unit_counters', False))
+        self.separate_units_checkbox.stateChanged.connect(self.toggle_separate_unit_counters)
+        unit_layout.addRow(self.separate_units_checkbox)
+
+        # Layout Type Selection
+        layout_label = QLabel("Select Unit Layout:")
+        self.layout_combo = QComboBox()
+        self.layout_combo.addItems(["Vertical", "Horizontal"])
+        layout_type = hud_positions.get('unit_layout', 'Vertical')
+        self.layout_combo.setCurrentText(layout_type)
+        self.layout_combo.currentTextChanged.connect(self.update_layout)
+        unit_layout.addRow(layout_label, self.layout_combo)
 
         # Unit Selection Section
         selection_button = QPushButton("Select Units")
@@ -331,25 +471,7 @@ class ControlPanel(QMainWindow):
         unit_group.setLayout(unit_layout)
         main_layout.addWidget(unit_group)
 
-        # Layout Settings Group
-        layout_group = QGroupBox("Layout Settings")
-        layout_group_layout = QVBoxLayout()
 
-        # Layout Type Selection
-        layout_type_layout = QHBoxLayout()
-        layout_label = QLabel("Select Unit Layout:")
-        layout_type_layout.addWidget(layout_label)
-
-        self.layout_combo = QComboBox()
-        self.layout_combo.addItems(["Vertical", "Horizontal"])
-        layout_type = hud_positions.get('unit_layout', 'Vertical')
-        self.layout_combo.setCurrentText(layout_type)
-        self.layout_combo.currentTextChanged.connect(self.update_layout)
-        layout_type_layout.addWidget(self.layout_combo)
-
-        layout_group_layout.addLayout(layout_type_layout)
-        layout_group.setLayout(layout_group_layout)
-        main_layout.addWidget(layout_group)
 
         # Name Widget Settings Group
         name_group = QGroupBox("Name Widget Settings")
@@ -469,6 +591,23 @@ class ControlPanel(QMainWindow):
         # Store the reference to the UnitSelectionWindow here
         self.unit_selection_window = None
 
+        # Initialize control states based on separate_unit_counters
+        if hud_positions.get('separate_unit_counters', False):
+            # Separate mode: enable image_size, number_size, distance_between_numbers
+            self.image_size_spinbox.setEnabled(True)
+            self.number_size_spinbox.setEnabled(True)
+            self.distance_spinbox.setEnabled(True)
+            # Disable unit window size
+            self.counter_size_spinbox.setEnabled(False)
+        else:
+            # Combined mode: disable image_size, number_size, distance_between_numbers
+            self.image_size_spinbox.setEnabled(False)
+            self.number_size_spinbox.setEnabled(False)
+            self.distance_spinbox.setEnabled(False)
+            # Enable unit window size
+            self.counter_size_spinbox.setEnabled(True)
+        self.update_distance_between_numbers()
+
     def toggle_unit_frames(self, state):
         hud_positions['show_unit_frames'] = (state != 0)
         logging.info(f"Toggled show_unit_frames to: {hud_positions['show_unit_frames']}")
@@ -476,7 +615,95 @@ class ControlPanel(QMainWindow):
         # Update all existing CounterWidgets
         if hud_windows:
             for unit_window, _ in hud_windows:
-                unit_window.update_show_unit_frames(hud_positions['show_unit_frames'])
+                if unit_window:
+                    if isinstance(unit_window, tuple):
+                        for uw in unit_window:
+                            uw.update_show_unit_frames(hud_positions['show_unit_frames'])
+                    else:
+                        unit_window.update_show_unit_frames(hud_positions['show_unit_frames'])
+
+    def toggle_separate_unit_counters(self, state):
+        hud_positions['separate_unit_counters'] = (state != 0)
+        logging.info(f"Toggled separate_unit_counters to: {hud_positions['separate_unit_counters']}")
+
+        # Enable/disable controls based on the state
+        if hud_positions['separate_unit_counters']:
+            # Separate mode: enable image_size, number_size, distance_between_numbers
+            self.image_size_spinbox.setEnabled(True)
+            self.number_size_spinbox.setEnabled(True)
+            self.distance_spinbox.setEnabled(True)
+            # Disable unit window size
+            self.counter_size_spinbox.setEnabled(False)
+        else:
+            # Combined mode: disable image_size, number_size, distance_between_numbers
+            self.image_size_spinbox.setEnabled(False)
+            self.number_size_spinbox.setEnabled(False)
+            self.distance_spinbox.setEnabled(False)
+            # Enable unit window size
+            self.counter_size_spinbox.setEnabled(True)
+
+        # Recreate HUD windows if a game is running
+        if len(hud_windows) > 0:
+            # Close existing unit windows
+            for unit_window, _ in hud_windows:
+                if unit_window:
+                    if isinstance(unit_window, tuple):
+                        for uw in unit_window:
+                            uw.close()
+                    else:
+                        unit_window.close()
+            # Update hud_windows to remove unit windows
+            hud_windows[:] = [(None, resource_window) for unit_window, resource_window in hud_windows]
+
+            # Create new unit windows in the new mode
+            create_unit_windows_in_current_mode()
+
+            # Show the new unit windows
+            for unit_window, _ in hud_windows:
+                if unit_window:
+                    if isinstance(unit_window, tuple):
+                        for uw in unit_window:
+                            uw.show()
+                    else:
+                        unit_window.show()
+
+
+    def update_image_size(self):
+        new_size = self.image_size_spinbox.value()
+        hud_positions['image_size'] = new_size
+        logging.info(f"Updated image size in hud_positions: {new_size}")
+
+        # If HUD windows exist, update their sizes
+        if hud_windows:
+            for unit_window, _ in hud_windows:
+                if unit_window and isinstance(unit_window, tuple):
+                    unit_window_images, _ = unit_window
+                    unit_window_images.update_all_counters_size(new_size)
+
+    def update_number_size(self):
+        new_size = self.number_size_spinbox.value()
+        hud_positions['number_size'] = new_size
+        logging.info(f"Updated number size in hud_positions: {new_size}")
+
+        # If HUD windows exist, update their sizes
+        if hud_windows:
+            for unit_window, _ in hud_windows:
+                if unit_window and isinstance(unit_window, tuple):
+                    _, unit_window_numbers = unit_window
+                    unit_window_numbers.update_all_counters_size(new_size)
+
+    def update_distance_between_numbers(self):
+        new_distance = self.distance_spinbox.value()
+        hud_positions['distance_between_numbers'] = new_distance
+        logging.info(f"Updated distance between numbers in hud_positions: {new_distance}")
+
+        # If HUD windows exist, update their spacing
+        if hud_windows:
+            for unit_window, _ in hud_windows:
+                if unit_window:
+                    if isinstance(unit_window, tuple):
+                        unit_window_numbers = unit_window[1]
+                        unit_window_numbers.update_spacing(new_distance)
 
     # Add methods for the flag widget
     def update_flag_widget_size(self):
@@ -543,9 +770,15 @@ class ControlPanel(QMainWindow):
         # If HUD windows exist, update their layouts as well
         if hud_windows:
             for unit_window, _ in hud_windows:
-                unit_window.update_layout(layout_type)
+                if unit_window:
+                    if isinstance(unit_window, tuple):
+                        for uw in unit_window:
+                            uw.update_layout(layout_type)
+                    else:
+                        unit_window.update_layout(layout_type)
         else:
             logging.info("HUD windows do not exist yet, storing the layout for later.")
+        self.update_distance_between_numbers()
 
     def update_unit_window_size(self):
         new_size = self.counter_size_spinbox.value()
@@ -555,7 +788,12 @@ class ControlPanel(QMainWindow):
         # If HUD windows exist, update their sizes as well
         if hud_windows:
             for unit_window, _ in hud_windows:
-                unit_window.update_all_counters_size(new_size)
+                if unit_window:
+                    if isinstance(unit_window, tuple):
+                        for uw in unit_window:
+                            uw.update_all_counters_size(new_size)
+                    else:
+                        unit_window.update_all_counters_size(new_size)
 
     def update_name_widget_size(self):
         new_size = self.name_size_spinbox.value()

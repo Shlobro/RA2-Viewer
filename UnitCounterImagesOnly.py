@@ -10,19 +10,21 @@ from common import (name_to_path)
 class UnitWindowImagesOnly(QMainWindow):
     def __init__(self, player, player_count, hud_pos, selected_units_dict):
         super().__init__()
+        self.hud_pos = hud_pos
         self.player = player
         self.player_count = player_count
         self.selected_units_dict = selected_units_dict
         self.selected_units = selected_units_dict['selected_units']
         self.layout_type = hud_pos.get('unit_layout', 'Vertical')  # Default to Vertical layout
-        self.size = hud_pos.get('unit_counter_size', 100)
+        self.size = hud_pos.get('image_size', 75)
         self.show_unit_frames = hud_pos.get('show_unit_frames', True)  # Get the setting
 
 
         # Set window geometry and flags
         # Example in UnitWindow or ResourceWindow instantiation
-        pos = self.get_default_position(self.player.color_name, 'unit_counter', hud_pos)
+        pos = self.get_default_position(self.player.color_name, 'unit_counter_images', hud_pos)
         self.setGeometry(pos['x'], pos['y'], 120, 120)
+
         self.setWindowFlags(Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint | Qt.X11BypassWindowManagerHint)
         self.setAttribute(Qt.WA_TranslucentBackground)
 
@@ -174,7 +176,7 @@ class UnitWindowImagesOnly(QMainWindow):
                 x = event.globalX() - self.offset.x()
                 y = event.globalY() - self.offset.y()
                 self.move(x, y)
-                self.update_hud_position(hud_positions, self.player.color_name, 'unit_counter', x, y)
+                self.update_hud_position(hud_positions, self.player.color_name, 'unit_counter_images', x, y)
 
         self.mousePressEvent = mouse_press_event
         self.mouseMoveEvent = mouse_move_event

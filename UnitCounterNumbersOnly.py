@@ -1,6 +1,6 @@
 import json
-from PySide6.QtCore import QObject, Signal, QThread, Qt
-from PySide6.QtWidgets import QMainWindow, QVBoxLayout, QWidget, QHBoxLayout, QFrame
+from PySide6.QtCore import Qt
+from PySide6.QtWidgets import QMainWindow, QVBoxLayout, QWidget, QHBoxLayout, QFrame, QLayout
 import logging
 from common import name_to_path
 from CounterWidgetNumberOnly import CounterWidget
@@ -9,17 +9,18 @@ from CounterWidgetNumberOnly import CounterWidget
 class UnitCounterNumbersOnly(QMainWindow):
     def __init__(self, player, player_count, hud_pos, selected_units_dict):
         super().__init__()
+        self.hud_pos = hud_pos
         self.player = player
         self.player_count = player_count
         self.selected_units_dict = selected_units_dict
         self.selected_units = selected_units_dict['selected_units']
-        self.layout_type = hud_pos.get('unit_layout', 'Vertical')  # Default to Vertical layout
-        self.size = hud_pos.get('unit_counter_size', 100)
+        self.layout_type = hud_pos.get('unit_layout', 'Vertical')
+        self.size = hud_pos.get('number_size', 75)
 
         # Set window geometry and flags
-        # Example in UnitWindow or ResourceWindow instantiation
-        pos = self.get_default_position(self.player.color_name, 'unit_counter', hud_pos)
+        pos = self.get_default_position(self.player.color_name, 'unit_counter_numbers', hud_pos)
         self.setGeometry(pos['x'], pos['y'], 120, 120)
+
         self.setWindowFlags(Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint | Qt.X11BypassWindowManagerHint)
         self.setAttribute(Qt.WA_TranslucentBackground)
 
@@ -34,19 +35,26 @@ class UnitCounterNumbersOnly(QMainWindow):
         self.load_selected_units_and_create_counters()
 
         self.setCentralWidget(self.unit_frame)
+        self.update_spacing(hud_pos['distance_between_numbers'])
         self.show()
 
     def set_layout(self, layout_type):
         """Set the layout based on the provided layout type."""
-        self.layout = QVBoxLayout(self.unit_frame) if layout_type == 'Vertical' else QHBoxLayout(self.unit_frame)
-        self.layout.setSpacing(0)
+        self.layout = QVBoxLayout() if layout_type == 'Vertical' else QHBoxLayout()
+        self.layout.setSpacing(0)  # Ensure spacing is zero
         self.layout.setContentsMargins(0, 0, 0, 0)
+        self.layout.setSizeConstraint(QLayout.SetFixedSize)
+        self.unit_frame.setLayout(self.layout)
 
     def update_show_unit_frames(self, show_frame):
         """Update the show_frame setting for all CounterWidgets."""
         self.show_unit_frames = show_frame  # Update the stored setting
         for _, (counter_widget, _) in self.counters.items():
             counter_widget.update_show_frame(show_frame)
+
+    def update_spacing(self, new_spacing):
+        self.layout.setSpacing(new_spacing)
+        self.updateGeometry()
 
     def update_layout(self, layout_type):
         """Update the layout dynamically without deleting widgets."""
@@ -57,6 +65,7 @@ class UnitCounterNumbersOnly(QMainWindow):
             new_layout = QVBoxLayout() if layout_type == 'Vertical' else QHBoxLayout()
             new_layout.setSpacing(0)
             new_layout.setContentsMargins(0, 0, 0, 0)
+            new_layout.setSizeConstraint(QLayout.SetFixedSize)
 
             # Move existing widgets to the new layout
             for unit_name, (counter_widget, unit_type) in self.counters.items():
@@ -76,7 +85,6 @@ class UnitCounterNumbersOnly(QMainWindow):
                 for unit_name, is_selected in units.items():
                     if is_selected:
                         unit_count = self.get_unit_count(unit_type, unit_name)
-                        unit_image_path = name_to_path(unit_name)
 
                         unit_counter = CounterWidget(
                             unit_count,
@@ -92,7 +100,6 @@ class UnitCounterNumbersOnly(QMainWindow):
     def update_selected_widgets(self, faction, unit_type, unit_name, state):
         if state:
             unit_count = self.get_unit_count(unit_type, unit_name)
-            unit_image_path = name_to_path(unit_name)
 
             unit_counter = CounterWidget(unit_count, self.player.color, self.size)
             unit_counter.hide()
@@ -113,7 +120,7 @@ class UnitCounterNumbersOnly(QMainWindow):
             counter_widget.update_size(new_size)  # Resize each CounterWidget dynamically
 
         # Ensure the layout tightly packs the widgets after resizing
-        self.layout.setSizeConstraint(QVBoxLayout.SetFixedSize)
+        self.layout.setSizeConstraint(QLayout.SetFixedSize)
         self.updateGeometry()  # Force the window to update its geometry
 
     def update_labels(self):
@@ -129,7 +136,7 @@ class UnitCounterNumbersOnly(QMainWindow):
                 counter_widget.show()
             else:
                 counter_widget.hide()
-            self.update_all_counters_size(self.size)
+            # No need to call update_all_counters_size here
 
     def get_unit_count(self, unit_type, unit_name):
         """Determine the unit type and retrieve the unit count from the relevant section."""
@@ -171,7 +178,7 @@ class UnitCounterNumbersOnly(QMainWindow):
                 x = event.globalX() - self.offset.x()
                 y = event.globalY() - self.offset.y()
                 self.move(x, y)
-                self.update_hud_position(hud_positions, self.player.color_name, 'unit_counter', x, y)
+                self.update_hud_position(hud_positions, self.player.color_name, 'unit_counter_numbers', x, y)
 
         self.mousePressEvent = mouse_press_event
         self.mouseMoveEvent = mouse_move_event

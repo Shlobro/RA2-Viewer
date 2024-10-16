@@ -11,30 +11,29 @@ class CounterWidget(QLabel):
         self.color = self._convert_to_qcolor(color)  # Convert color to QColor
         self.size = size
         self.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
-        self.setFixedSize(size, size)  # Set fixed size for the widget
-
-        # Make the background transparent
         self.setAttribute(Qt.WA_TranslucentBackground)
+        self.update_size(size)
 
     def paintEvent(self, event):
         painter = QPainter(self)
 
-
         # Set the font for the text
-        font_size = int(self.size / 3)  # Text should take up about 25% of the widget
+        font_size = self.size  # Use the size as font size
         painter.setFont(QFont("Arial", font_size, QFont.Bold))
 
-        # Define padding based on widget size
-        padding_x = max(5, int(self.size * 0.05))
-        padding_y = max(5, int(self.size * 0.05))
+        # Calculate text size
+        text_metrics = painter.fontMetrics()
+        text_width = text_metrics.horizontalAdvance(str(self.count))
+        text_height = text_metrics.height()
+        self.setFixedSize(text_width, text_height)
 
-        # Calculate the x and y position for the bottom-left corner
-        text_x = padding_x
-        text_y = self.height() - padding_y
+        # Calculate text position
+        text_x = 0
+        text_y = text_height - text_metrics.descent()
 
         # Draw the black outline for the text
         painter.setPen(Qt.black)  # Outline color
-        outline_thickness = 2  # Thicker outline
+        outline_thickness = 1  # Adjust as needed
         for dx in range(-outline_thickness, outline_thickness + 1):
             for dy in range(-outline_thickness, outline_thickness + 1):
                 if dx != 0 or dy != 0:
@@ -49,9 +48,8 @@ class CounterWidget(QLabel):
         self.repaint()  # Redraw the widget with the updated count
 
     def update_size(self, new_size):
-        """Dynamically update the widget size."""
+        """Dynamically update the font size."""
         self.size = new_size
-        self.setFixedSize(new_size, new_size)  # Set the widget size
         self.repaint()  # Force immediate redraw
 
     def update_color(self, new_color):

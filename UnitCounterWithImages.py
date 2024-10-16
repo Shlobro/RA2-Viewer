@@ -21,8 +21,9 @@ class UnitWindowWithImages(QMainWindow):
 
         # Set window geometry and flags
         # Example in UnitWindow or ResourceWindow instantiation
-        pos = self.get_default_position(self.player.color_name, 'unit_counter', hud_pos)
+        pos = self.get_default_position(self.player.color_name, 'unit_counter_combined', hud_pos)
         self.setGeometry(pos['x'], pos['y'], 120, 120)
+
         self.setWindowFlags(Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint | Qt.X11BypassWindowManagerHint)
         self.setAttribute(Qt.WA_TranslucentBackground)
 
@@ -176,7 +177,7 @@ class UnitWindowWithImages(QMainWindow):
                 x = event.globalX() - self.offset.x()
                 y = event.globalY() - self.offset.y()
                 self.move(x, y)
-                self.update_hud_position(hud_positions, self.player.color_name, 'unit_counter', x, y)
+                self.update_hud_position(hud_positions, self.player.color_name, 'unit_counter_combined', x, y)
 
         self.mousePressEvent = mouse_press_event
         self.mouseMoveEvent = mouse_move_event
