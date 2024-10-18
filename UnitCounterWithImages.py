@@ -93,7 +93,7 @@ class UnitWindowWithImages(QMainWindow):
 
                         # Add the widget to the current layout
                         self.layout.addWidget(unit_counter)
-                        self.counters[unit_name] = (unit_counter, unit_type)
+                        self.counters[unit_name] = (unit_counter, unit_type, faction)
 
     def update_selected_widgets(self, faction, unit_type, unit_name, state):
         if state:
@@ -115,7 +115,7 @@ class UnitWindowWithImages(QMainWindow):
     def update_all_counters_size(self, new_size):
         """Update the size of all CounterWidgets in the UnitWindow."""
         self.size = new_size  # Update the stored size for the window
-        for _, (counter_widget, _) in self.counters.items():
+        for _, (counter_widget, _, _) in self.counters.items():
             counter_widget.update_size(new_size)  # Resize each CounterWidget dynamically
 
         # Ensure the layout tightly packs the widgets after resizing
@@ -125,13 +125,13 @@ class UnitWindowWithImages(QMainWindow):
     def update_labels(self):
         """Loop through all counters and update the corresponding unit counts."""
         logging.debug("updating all unit counters")
-        for unit_name, (counter_widget, unit_type) in self.counters.items():
+        for unit_name, (counter_widget, unit_type, faction) in self.counters.items():
             # Get the latest unit count based on unit type
             unit_count = self.get_unit_count(unit_type, unit_name)
 
             # Update the counter widget with the latest unit count
             counter_widget.update_count(unit_count)
-            if 0 < unit_count < 500:
+            if 0 < unit_count < 500 or self.selected_units[faction][unit_type][unit_name]['lock']:
                 counter_widget.show()
             else:
                 counter_widget.hide()

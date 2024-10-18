@@ -4,7 +4,7 @@ import os
 from idlelib.debugger_r import frametable
 
 from PySide6.QtGui import QPixmap, QImage
-from PySide6.QtWidgets import QMainWindow, QWidget, QTabWidget, QVBoxLayout, QGridLayout, QPushButton, QLabel
+from PySide6.QtWidgets import QMainWindow, QWidget, QTabWidget, QVBoxLayout, QGridLayout, QPushButton, QLabel, QCheckBox
 from PySide6.QtCore import Qt
 
 from common import (names, name_to_path)
@@ -59,7 +59,6 @@ class UnitSelectionWindow(QMainWindow):
             # Check if there are any units defined for this faction and unit type
             units = names[faction][unit_type]
 
-            # Only add the units that have been defined (otherwise keep the tab empty)
             row = 0
             col = 0
             for unit in units:
@@ -81,23 +80,38 @@ class UnitSelectionWindow(QMainWindow):
                 # Add event handling to the label
                 image_label.mousePressEvent = lambda event, f=faction, ut=unit_type, u=unit, label=image_label: self.toggle_unit_selection(f, ut, u, label)
 
-                # Add the image label to the unit's layout
+                # Create checkbox for lock status
+                lock_status = self.selected_units[faction][unit_type][unit]['lock']
+                lock_checkbox = QCheckBox()
+                lock_checkbox.setChecked(lock_status)
+                lock_checkbox.setEnabled(True)
+                lock_checkbox.stateChanged.connect(
+                    lambda state=lock_status, f=faction, ut=unit_type, u=unit: self.toggle_lock_status(f, ut, u, state))
+
+                # Add the image label and checkbox to the unit's layout
                 unit_layout.addWidget(image_label, alignment=Qt.AlignHCenter)
+                unit_layout.addWidget(lock_checkbox, alignment=Qt.AlignHCenter)
 
                 # Add the unit layout to the grid layout
                 sub_layout.addLayout(unit_layout, row, col)
-
-                # Update row and column for the grid (e.g., 3 columns per row)
                 col += 1
-                if col >= 3:  # You can adjust the number of columns here
+                if col >= 3:
                     col = 0
                     row += 1
-
             sub_tab_widget.addTab(sub_tab, unit_type)
+
+    def toggle_lock_status(self, faction, unit_type, unit, state):
+        """Toggle the lock status of a unit."""
+        lock_state = (state == 2)
+
+        # Update the lock status in selected_units
+        if faction in self.selected_units and unit_type in self.selected_units[faction]:
+            logging.debug(f'{unit} changed lock state to {lock_state}')
+            self.selected_units[faction][unit_type][unit]['lock'] = lock_state
 
     def is_unit_selected(self, faction, unit_type, unit):
         """Check if a unit is already selected."""
-        return self.selected_units.get(faction, {}).get(unit_type, {}).get(unit, False)
+        return self.selected_units.get(faction, {}).get(unit_type, {}).get(unit, {}).get('active', False)
 
     def toggle_unit_selection(self, faction, unit_type, unit, label):
         """Toggle unit selection and update the appearance."""
@@ -112,7 +126,7 @@ class UnitSelectionWindow(QMainWindow):
         if unit_type not in self.selected_units[faction]:
             self.selected_units[faction][unit_type] = {}
 
-        self.selected_units[faction][unit_type][unit] = new_state
+        self.selected_units[faction][unit_type][unit]['active'] = new_state
 
         # Update the image appearance
         self.update_image_selection(label, new_state)
