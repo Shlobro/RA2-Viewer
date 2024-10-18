@@ -1,44 +1,47 @@
 import logging
 
 from PySide6.QtCore import Qt, QPropertyAnimation
-from PySide6.QtGui import QPixmap, QColor, QPainter, QFont
+from PySide6.QtGui import QPixmap, QColor, QPainter, QFont, QFontMetrics
 from PySide6.QtWidgets import QWidget, QLabel, QHBoxLayout
 
 class BaseDataWidget(QWidget):
-    def __init__(self, data=None, text_color=Qt.black, size=16, font=None, parent=None):
+    def __init__(self, data=None, text_color=Qt.black, size=16, font=None, use_fixed_width=False, max_digits=8, parent=None):
         super().__init__(parent)
         self.size = size
         self.value = data if data is not None else 0
         self.custom_font = font if font else QFont()
         self.text_color = text_color
+        self.use_fixed_width = use_fixed_width
+        self.max_digits = max_digits
+
+        # Create QLabel for the data (text or number)
+        self.data_label = QLabel(str(self.value), self)
+        if self.use_fixed_width:
+            self.data_label.setAlignment(Qt.AlignCenter)  # Center the text
+        self.data_label.setStyleSheet(f"color: {QColor(self.text_color).name()}; margin-top: -2px;")  # Adjust text position
+
+        # Apply the custom font or dynamically adjust the font size
+        self.update_font_size()
+
+        if self.use_fixed_width:
+            # Compute fixed width
+            self.compute_fixed_width()
+            # Set fixed size for the data_label
+            self.data_label.setFixedWidth(self.fixed_width)
 
         # Create the layout
         self.layout = QHBoxLayout(self)
         self.layout.setContentsMargins(0, 0, 0, 0)  # Remove margins
         self.layout.setSpacing(1)  # Reduce the space between elements
-
-        # Create QLabel for the data (text or number)
-        self.data_label = QLabel(str(self.value), self)
-        self.data_label.setStyleSheet(f"color: {QColor(self.text_color).name()}; margin-top: -2px;")  # Adjust text position
-
         self.layout.addWidget(self.data_label, alignment=Qt.AlignVCenter)
 
-        # Apply the custom font or dynamically adjust the font size
-        self.update_font_size()
-
-    def update_data_size(self, new_size):
-        """Adjust the text size."""
-        self.size = new_size
-
-        # Update the font size based on the new size
-        self.update_font_size()
-
-        # Recalculate the widget size after resizing
-        self.adjust_size()
-
-    def adjust_size(self):
-        """Recalculate the widget size based on the image and text."""
-        self.setFixedSize(self.data_label.width() + 1, self.data_label.height())
+    def compute_fixed_width(self):
+        # Adjust the point size proportionally to the widget size
+        font = self.custom_font
+        font.setPointSize(int(self.size * 0.6))  # Adjust font size proportionally to image size
+        fm = QFontMetrics(font)
+        max_number = '8' * self.max_digits
+        self.fixed_width = fm.horizontalAdvance(max_number)
 
     def update_font_size(self):
         """Dynamically resize the font based on the image size, even with custom fonts."""
@@ -48,14 +51,30 @@ class BaseDataWidget(QWidget):
         self.data_label.setFont(font)
         self.data_label.adjustSize()
 
-    def update_data(self, new_data):
-        """Smoothly update the data using QPropertyAnimation."""
-        self.animation = QPropertyAnimation(self, b"value")
-        self.animation.setDuration(500)
-        self.animation.setStartValue(self.value)
-        self.animation.setEndValue(new_data)
-        self.animation.valueChanged.connect(self.on_value_changed)
-        self.animation.start()
+    def update_data_size(self, new_size):
+        """Adjust the text size."""
+        self.size = new_size
+
+        # Update the font size based on the new size
+        self.update_font_size()
+
+        if self.use_fixed_width:
+            # Recompute fixed width with the new size
+            self.compute_fixed_width()
+            self.data_label.setFixedWidth(self.fixed_width)
+
+        # Recalculate the widget size after resizing
+        self.adjust_size()
+
+    def adjust_size(self):
+        """Recalculate the widget size based on the image and text."""
+        if self.use_fixed_width:
+            # Width is fixed, so we use fixed_width
+            total_width = self.data_label.width() + 1
+        else:
+            total_width = self.data_label.width() + 1
+
+        self.setFixedSize(total_width, self.data_label.height())
 
     def on_value_changed(self, value):
         self.value = value
@@ -72,10 +91,19 @@ class BaseDataWidget(QWidget):
             self.data_label.adjustSize()
             self.adjust_size()
 
+    def update_data(self, new_data):
+        """Smoothly update the data using QPropertyAnimation."""
+        self.animation = QPropertyAnimation(self, b"value")
+        self.animation.setDuration(500)
+        self.animation.setStartValue(self.value)
+        self.animation.setEndValue(new_data)
+        self.animation.valueChanged.connect(self.on_value_changed)
+        self.animation.start()
+
 
 class MoneyWidget(BaseDataWidget):
     def __init__(self, data=None, text_color=Qt.white, size=16, font=None, parent=None):
-        super().__init__(data=data, text_color=text_color, size=size, font=font, parent=parent)
+        super().__init__(data=data, text_color=text_color, size=size, font=font, use_fixed_width=True, max_digits=8, parent=parent)
         self.update_data_label()
 
     def on_value_changed(self, value):
@@ -87,9 +115,10 @@ class MoneyWidget(BaseDataWidget):
     def update_data_label(self):
         self.data_label.setText(f"${int(self.value)}")
 
+
 class PowerWidget(BaseDataWidget):
     def __init__(self, data=None, image_path='bolt.png', image_color=Qt.green, text_color=Qt.green, size=16, font=None, parent=None):
-        super().__init__(data=data, text_color=text_color, size=size, font=font, parent=parent)
+        super().__init__(data=data, text_color=text_color, size=size, font=font, use_fixed_width=False, parent=parent)
         self.image_path = image_path
         self.image_color = image_color
 
@@ -99,8 +128,14 @@ class PowerWidget(BaseDataWidget):
 
         # Insert the icon_label before the data_label
         self.layout.insertWidget(0, self.icon_label, alignment=Qt.AlignVCenter)
+        self.layout.setSpacing(0)  # Remove space between icon and label
 
+        # Adjust data_label alignment to left
+        self.data_label.setAlignment(Qt.AlignLeft | Qt.AlignVCenter)
+
+        # Update font size and adjust sizes
         self.update_font_size()
+        self.adjust_size()
 
     def load_and_set_image(self):
         pixmap = QPixmap(self.image_path).scaled(self.size, self.size, Qt.KeepAspectRatio, Qt.SmoothTransformation)
@@ -125,7 +160,15 @@ class PowerWidget(BaseDataWidget):
 
     def adjust_size(self):
         """Recalculate the widget size based on the image and text."""
-        self.setFixedSize(self.icon_label.width() + self.data_label.width() + 1, max(self.icon_label.height(), self.data_label.height()))
+        total_width = self.icon_label.width() + self.data_label.width()
+        total_height = max(self.icon_label.height(), self.data_label.height())
+        self.setFixedSize(total_width, total_height)
+
+    def on_value_changed(self, value):
+        self.value = value
+        self.data_label.setText(str(int(value)))  # Display integer for a clean update
+        self.data_label.adjustSize()
+        self.adjust_size()
 
     def update_color(self, new_image_color=None, new_text_color=None):
         """Update the color of the image and the text."""
@@ -136,6 +179,8 @@ class PowerWidget(BaseDataWidget):
 
         # Update the text color using the method from the base class
         super().update_color(new_text_color=new_text_color)
+
+
 
 
 class NameWidget(BaseDataWidget):
@@ -152,6 +197,9 @@ class NameWidget(BaseDataWidget):
             self.layout.insertWidget(0, self.icon_label, alignment=Qt.AlignVCenter)
 
         self.update_font_size()
+
+
+
 
     def load_and_set_image(self):
         pixmap = QPixmap(self.image_path).scaled(self.size, self.size, Qt.KeepAspectRatio, Qt.SmoothTransformation)

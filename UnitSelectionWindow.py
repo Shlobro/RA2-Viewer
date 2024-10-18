@@ -140,4 +140,3 @@ class UnitSelectionWindow(QMainWindow):
 
             # Set the modified image back to the label
             label.setPixmap(QPixmap.fromImage(image))
-

@@ -1,6 +1,6 @@
 import logging
 
-from PySide6.QtGui import QPixmap, QPainter, QFont, QPen, QColor
+from PySide6.QtGui import QPixmap, QPainter, QFont, QPen, QColor, QFontDatabase
 from PySide6.QtWidgets import QLabel, QSizePolicy
 from PySide6.QtCore import Qt, QRect
 
@@ -31,7 +31,16 @@ class CounterWidget(QLabel):
 
         # Set the font for the text to take about 1/4th of the widget
         font_size = int(self.size / 3)  # Text should take up about 25% of the widget
-        painter.setFont(QFont("Arial", font_size, QFont.Bold))
+        # load in the font
+        font_id = QFontDatabase.addApplicationFont("Other/Futured.ttf")
+        font_family = QFontDatabase.applicationFontFamilies(font_id)
+        if font_family:
+            number_font = QFont(font_family[0], font_size, QFont.Bold)
+        else:
+            number_font = QFont("Arial", font_size, QFont.Bold)
+
+        # Set the font for the text
+        painter.setFont(number_font)
 
         # Define dynamic padding based on widget size
         padding_x = max(5, int(self.size * 0.05))  # Slightly larger padding for bigger widgets
