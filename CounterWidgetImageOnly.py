@@ -4,7 +4,7 @@ from PySide6.QtGui import QPixmap, QPainter, QFont, QPen, QColor
 from PySide6.QtWidgets import QLabel, QSizePolicy
 from PySide6.QtCore import Qt, QRect
 
-class CounterWidget(QLabel):
+class CounterWidgetImageOnly(QLabel):
     def __init__(self, image_path, color=Qt.red, size=100, show_frame=True, parent=None):
         super().__init__(parent)
         self.image_path = image_path

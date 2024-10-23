@@ -5,7 +5,7 @@ from PySide6.QtWidgets import QLabel, QSizePolicy
 from PySide6.QtCore import Qt
 
 
-class CounterWidget(QLabel):
+class CounterWidgetNumberOnly(QLabel):
     def __init__(self, count, color=Qt.red, size=100, parent=None):
         super().__init__(parent)
         self.count = count

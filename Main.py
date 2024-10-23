@@ -23,10 +23,8 @@ from Player import (
     GameData, initialize_players_after_loading,
     detect_if_all_players_are_loaded, ProcessExitedException
 )
-from UnitCounterWithImages import UnitWindowWithImages
-from UnitCounterNumbersOnly import UnitCounterNumbersOnly
-from UnitCounterImagesOnly import UnitWindowImagesOnly
 from UnitSelectionWindow import UnitSelectionWindow
+from UnitWindow import (UnitWindowWithImages, UnitWindowNumbersOnly, UnitWindowImagesOnly)
 from logging_config import setup_logging
 
 from common import (HUD_POSITION_FILE, players, hud_windows, selected_units_dict, data_lock, hud_positions,
@@ -141,39 +139,26 @@ def create_unit_windows_in_current_mode():
     # Create unit windows according to the current mode
     separate = hud_positions.get('separate_unit_counters', False)
 
-    # For each player in hud_windows
     for i, (unit_window, resource_window) in enumerate(hud_windows):
-        player = resource_window.player  # Assuming resource_window has a 'player' attribute
-        if separate:
-            # Close existing unit_window if any
-            if unit_window:
-                if isinstance(unit_window, tuple):
-                    for uw in unit_window:
-                        uw.close()
-                else:
-                    unit_window.close()
+        player = resource_window.player
 
-            # Create separate windows for images and numbers
-            unit_window_images = UnitWindowImagesOnly(player, len(players), hud_positions, selected_units_dict)
-            unit_window_numbers = UnitCounterNumbersOnly(player, len(players), hud_positions, selected_units_dict)
-            unit_window_images.setWindowTitle(f"Player {player.color_name} unit images window")
-            unit_window_numbers.setWindowTitle(f"Player {player.color_name} unit numbers window")
-            # Update hud_windows entry
+        # Close existing unit_window if any
+        if unit_window:
+            if isinstance(unit_window, tuple):
+                for uw in unit_window:
+                    uw.close()
+            else:
+                unit_window.close()
+
+        # Create new unit windows based on mode
+        if separate:
+            unit_window_images = UnitWindowImagesOnly(player, hud_positions, selected_units_dict)
+            unit_window_numbers = UnitWindowNumbersOnly(player, hud_positions, selected_units_dict)
             hud_windows[i] = ((unit_window_images, unit_window_numbers), resource_window)
         else:
-            # Close existing unit_window if any
-            if unit_window:
-                if isinstance(unit_window, tuple):
-                    for uw in unit_window:
-                        uw.close()
-                else:
-                    unit_window.close()
-
-            # Create combined unit window
-            unit_window = UnitWindowWithImages(player, len(players), hud_positions, selected_units_dict)
-            unit_window.setWindowTitle(f"Player {player.color_name} unit window")
-            # Update hud_windows entry
+            unit_window = UnitWindowWithImages(player, hud_positions, selected_units_dict)
             hud_windows[i] = (unit_window, resource_window)
+
 
 
 # Find the PID of a process by name
@@ -595,6 +580,7 @@ class ControlPanel(QMainWindow):
             self.distance_spinbox.setEnabled(True)
             # Disable unit window size
             self.counter_size_spinbox.setEnabled(False)
+            self.update_distance_between_numbers()
         else:
             # Combined mode: disable image_size, number_size, distance_between_numbers
             self.image_size_spinbox.setEnabled(False)
@@ -602,7 +588,7 @@ class ControlPanel(QMainWindow):
             self.distance_spinbox.setEnabled(False)
             # Enable unit window size
             self.counter_size_spinbox.setEnabled(True)
-        self.update_distance_between_numbers()
+
 
     def toggle_unit_frames(self, state):
         hud_positions['show_unit_frames'] = (state != 0)
@@ -697,7 +683,8 @@ class ControlPanel(QMainWindow):
             for unit_window, _ in hud_windows:
                 if unit_window:
                     if isinstance(unit_window, tuple):
-                        unit_window_numbers = unit_window[1]
+                        # Assuming the numbers window is the second in the tuple
+                        _, unit_window_numbers = unit_window
                         unit_window_numbers.update_spacing(new_distance)
 
     # Add methods for the flag widget
