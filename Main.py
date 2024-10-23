@@ -28,7 +28,7 @@ from UnitWindow import (UnitWindowWithImages, UnitWindowNumbersOnly, UnitWindowI
 from logging_config import setup_logging
 
 from common import (HUD_POSITION_FILE, players, hud_windows, selected_units_dict, data_lock, hud_positions,
-                    process_handle, control_panel, data_update_thread, names, name_to_path, game_path)
+                    process_handle, control_panel, data_update_thread, names, name_to_path, game_path, admin)
 
 
 # Load HUD positions from file if it exists, otherwise create defaults
@@ -243,13 +243,15 @@ def create_hud_windows():
     config = configparser.ConfigParser()
     config.read(spawn_ini_path)
 
-    # Step 4: Check if 'IsSpectator' is set to 'True'
-    is_spectator = config.get('Settings', 'IsSpectator', fallback='False').lower() in ['true', 'yes']
 
-    if not is_spectator:
-        # Step 5: Show a warning if the player is not in spectator mode
-        QMessageBox.warning(None, "Spectator Mode Required", "You can only use the Unit counter in Spectator mode.")
-        return
+    if not admin:
+        # Step 4: Check if 'IsSpectator' is set to 'True'
+        is_spectator = config.get('Settings', 'IsSpectator', fallback='False').lower() in ['true', 'yes']
+
+        if not is_spectator:
+            # Step 5: Show a warning if the player is not in spectator mode
+            QMessageBox.warning(None, "Spectator Mode Required", "You can only use the Unit counter in Spectator mode.")
+            return
 
     # Step 6: Close any existing HUD windows before creating new ones
     for unit_window, resource_window in hud_windows:
@@ -360,17 +362,7 @@ def on_closing():
     app.quit()
 
 
-def save_selected_units():
-    global selected_units_dict
-    """Save the selected units to the JSON file."""
-    json_file = 'unit_selection.json'
 
-    # Create the structure with "selected_units" as the top key
-
-    with open(json_file, 'w') as file:
-        json.dump(selected_units_dict, file, indent=4)
-
-    logging.info("Saved selected units.")
 
 
 # Control Panel for HUD settings
@@ -820,8 +812,10 @@ class ControlPanel(QMainWindow):
         if os.path.exists(json_file):
             with open(json_file, 'r') as file:
                 data = json.load(file)
+                if 'selected_units' not in data:
+                    data['selected_units'] = {}
                 return data  # Return the entire data
-        return {}
+        return {'selected_units': {}}
 
     # Method to toggle the visibility of HUD elements
 
@@ -838,6 +832,15 @@ class ControlPanel(QMainWindow):
     def toggle_separate(self, state):
         self.toggle_hud_element('separate_info', 'separate_info', state)
 
+
+
+def save_selected_units():
+    global selected_units_dict
+    """Save the selected units to the JSON file."""
+    json_file = 'unit_selection.json'
+    with open(json_file, 'w') as file:
+        json.dump(selected_units_dict, file, indent=4)
+    logging.info("Saved selected units.")
 
 # Thread to continuously update player data
 class DataUpdateThread(QThread):

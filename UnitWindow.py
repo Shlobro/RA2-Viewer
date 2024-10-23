@@ -11,13 +11,19 @@ class UnitWindowBase(QMainWindow):
         super().__init__()
         self.player = player
         self.hud_pos = hud_pos
-        self.selected_units_dict = selected_units_dict
         self.selected_units = selected_units_dict['selected_units']
+        self.unit_info_by_name = {}
+        for faction, unit_types in self.selected_units.items():
+            for unit_type, units in unit_types.items():
+                for unit_name, unit_info in units.items():
+                    unit_info['unit_type'] = unit_type
+                    self.unit_info_by_name[unit_name] = unit_info
         self.layout_type = hud_pos.get('unit_layout', 'Vertical')
         self.size = self.get_default_size()
         self.show_unit_frames = hud_pos.get('show_unit_frames', True)
         self.counters = {}
         self.spacing = spacing  # Store the spacing
+
 
         # Set window geometry and flags
         pos = self.get_default_position()
@@ -32,6 +38,7 @@ class UnitWindowBase(QMainWindow):
         self.setCentralWidget(self.unit_frame)
         self.load_selected_units_and_create_counters()
         self.show()
+
 
     def get_default_size(self):
         raise NotImplementedError("Subclasses should implement this method.")
@@ -69,18 +76,30 @@ class UnitWindowBase(QMainWindow):
         self.layout.update()
 
     def load_selected_units_and_create_counters(self):
-        """Load selected units and create counters. To be implemented in subclasses."""
-        raise NotImplementedError("Subclasses should implement this method.")
+        for unit_name, unit_info in self.unit_info_by_name.items():
+            is_selected = unit_info.get('selected', False)
+            is_locked = unit_info.get('locked', False)
+            if is_selected or is_locked:
+                unit_type = unit_info.get('unit_type')
+                counter_widget = self.create_counter_widget(unit_name, 0, unit_type)
+                counter_widget.hide()
+                self.layout.addWidget(counter_widget)
+                self.counters[unit_name] = (counter_widget, unit_type)
 
     def update_selected_widgets(self, faction, unit_type, unit_name, state):
-        """Update selected widgets when unit selection changes."""
-        if state:
-            unit_count = self.get_unit_count(unit_type, unit_name)
-            counter_widget = self.create_counter_widget(unit_name, unit_count, unit_type)
-            counter_widget.hide()
-            self.layout.addWidget(counter_widget)
-            self.counters[unit_name] = (counter_widget, unit_type)
+        unit_info = self.selected_units.get(faction, {}).get(unit_type, {}).get(unit_name, {})
+        is_selected = unit_info.get('selected', False)
+        is_locked = unit_info.get('locked', False)
+        if is_selected or is_locked:
+            # Ensure the counter widget exists
+            if unit_name not in self.counters:
+                unit_type = unit_info.get('unit_type')
+                counter_widget = self.create_counter_widget(unit_name, 0, unit_type)
+                counter_widget.hide()
+                self.layout.addWidget(counter_widget)
+                self.counters[unit_name] = (counter_widget, unit_type)
         else:
+            # Remove the counter widget if it exists
             counter_widget, _ = self.counters.pop(unit_name, (None, None))
             if counter_widget:
                 self.layout.removeWidget(counter_widget)
@@ -97,11 +116,32 @@ class UnitWindowBase(QMainWindow):
         for unit_name, (counter_widget, unit_type) in self.counters.items():
             unit_count = self.get_unit_count(unit_type, unit_name)
             counter_widget.update_count(unit_count)
-            if 0 < unit_count < 500:
+            unit_info = self.unit_info_by_name.get(unit_name, {})
+            is_locked = unit_info.get('locked', False)
+            if (0 < unit_count < 500) or is_locked:
                 counter_widget.show()
             else:
                 counter_widget.hide()
         self.update_all_counters_size(self.size)
+
+    def update_locked_widgets(self, faction, unit_type, unit_name, state):
+        unit_info = self.selected_units.get(faction, {}).get(unit_type, {}).get(unit_name, {})
+        is_selected = unit_info.get('selected', False)
+        is_locked = unit_info.get('locked', False)
+        if is_selected or is_locked:
+            # Ensure the counter widget exists
+            if unit_name not in self.counters:
+                unit_type = unit_info.get('unit_type')
+                counter_widget = self.create_counter_widget(unit_name, 0, unit_type)
+                counter_widget.hide()
+                self.layout.addWidget(counter_widget)
+                self.counters[unit_name] = (counter_widget, unit_type)
+        else:
+            # Remove the counter widget if it exists
+            counter_widget, _ = self.counters.pop(unit_name, (None, None))
+            if counter_widget:
+                self.layout.removeWidget(counter_widget)
+                counter_widget.deleteLater()
 
     def get_unit_count(self, unit_type, unit_name):
         """Determine the unit type and retrieve the unit count from the relevant section."""
@@ -186,17 +226,6 @@ class UnitWindowWithImages(UnitWindowBase):
     def get_hud_type(self):
         return 'unit_counter_combined'
 
-    def load_selected_units_and_create_counters(self):
-        for faction, unit_types in self.selected_units.items():
-            for unit_type, units in unit_types.items():
-                for unit_name, is_selected in units.items():
-                    if is_selected:
-                        unit_count = self.get_unit_count(unit_type, unit_name)
-                        counter_widget = self.create_counter_widget(unit_name, unit_count, unit_type)
-                        counter_widget.hide()
-                        self.layout.addWidget(counter_widget)
-                        self.counters[unit_name] = (counter_widget, unit_type)
-
     def create_counter_widget(self, unit_name, unit_count, unit_type):
         unit_image_path = name_to_path(unit_name)
         return CounterWidgetImagesAndNumber(
@@ -208,23 +237,12 @@ class UnitWindowWithImages(UnitWindowBase):
         )
 
 
-
 class UnitWindowImagesOnly(UnitWindowBase):
     def get_default_size(self):
         return self.hud_pos.get('image_size', 75)
 
     def get_hud_type(self):
         return 'unit_counter_images'
-
-    def load_selected_units_and_create_counters(self):
-        for faction, unit_types in self.selected_units.items():
-            for unit_type, units in unit_types.items():
-                for unit_name, is_selected in units.items():
-                    if is_selected:
-                        counter_widget = self.create_counter_widget(unit_name, 0, unit_type)
-                        counter_widget.hide()
-                        self.layout.addWidget(counter_widget)
-                        self.counters[unit_name] = (counter_widget, unit_type)
 
     def create_counter_widget(self, unit_name, unit_count, unit_type):
         unit_image_path = name_to_path(unit_name)
@@ -234,7 +252,6 @@ class UnitWindowImagesOnly(UnitWindowBase):
             size=self.size,
             show_frame=self.show_unit_frames
         )
-
 
 
 class UnitWindowNumbersOnly(UnitWindowBase):
@@ -247,17 +264,6 @@ class UnitWindowNumbersOnly(UnitWindowBase):
 
     def get_hud_type(self):
         return 'unit_counter_numbers'
-
-    def load_selected_units_and_create_counters(self):
-        for faction, unit_types in self.selected_units.items():
-            for unit_type, units in unit_types.items():
-                for unit_name, is_selected in units.items():
-                    if is_selected:
-                        counter_widget = self.create_counter_widget(unit_name, 0, unit_type)
-                        counter_widget.hide()
-                        self.layout.addWidget(counter_widget)
-                        self.counters[unit_name] = (counter_widget, unit_type)
-
 
     def create_counter_widget(self, unit_name, unit_count, unit_type):
         return CounterWidgetNumberOnly(

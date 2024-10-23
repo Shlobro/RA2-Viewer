@@ -1,5 +1,7 @@
 import threading
 
+admin = True
+
 # Constants
 HUD_POSITION_FILE = 'hud_positions.json'
 

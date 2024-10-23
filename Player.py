@@ -12,21 +12,11 @@ from common import COLOR_NAME_MAPPING
 
 MAXPLAYERS = 8
 INVALIDCLASS = 0xffffffff
+
 INFOFFSET = 0x557c
 AIRCRAFTOFFSET = 0x5590
-
-ALLIDOGOFFSET = 0x1c
-SOVDOGOFFSET = 0x9
-
 TANKOFFSET = 0x5568
-ALLITANKOFFSET = 0x9
-SOVTANKOFFSET = 0x3
-ALLIMINEROFFSET = 0x84 // 4
-SOVMINEROFFSET = 0x4 // 4
-
 BUILDINGOFFSET = 0x5554
-ALLIWARFACTORYOFFSET = 0x1c // 4
-SOVWARFACTORYOFFSET = 0x38 // 4
 
 CREDITSPENT_OFFSET = 0x2dc
 BALANCEOFFSET = 0x30c
@@ -46,24 +36,6 @@ COUNTRYSTRINGOFFSET = 0x24
 COLOROFFSET = 0x56fC
 COLORSCHEMEOFFSET = 0x16054
 
-ROCKETEEROFFSET = 0x04
-SPIDEROFFSET = 0x10
-
-IFVOFFSET = 0x26
-FLAKTRACKOFFSET = 0x11
-
-CONSCRIPTOFFSET = 0x01
-GIOFFSET = 0x0
-
-SUBMARINEOFFSET = 0x13
-DESTROYEROFFSET = 0x12
-
-DOPHINOFFSET = 0x19
-SQUIDOFFSET = 0x18
-
-CVOFFSET = 0x0d  # aircraft carrier
-DREADNOUGHTOFFSET = 0x16  # SOV
-
 # Define the mappings of offsets to unit, infantry, and building names
 infantry_offsets = {
     0x0: "GI", 0x4: "conscript", 0x8: "tesla trooper", 0xc: "Allied Engineer", 0x10: "Rocketeer",
@@ -81,7 +53,7 @@ tank_offsets = {
     0x64: "Dolphin", 0x68: "Soviet MCV", 0x6c: "Tank Destroyer", 0x7c: "Lasher", 0x84: "Chrono Miner",
     0x88: "Prism Tank", 0x90: "Sea Scorpion", 0x94: "Mirage Tank", 0x98: "IFV", 0xa4: "Demolition truck",
     0xdc: "Yuri Amphibious Transport", 0xe0: "Yuri MCV", 0xe4: "Slave miner undeployed", 0xf0: "Gattling Tank",
-    0xf4: "Battle Fortress", 0xfc: "Chaos Drone", 0xf8: "Magnetron", 0x108: "Boomer", 0x10c: "Siege Chopper",
+    0xf4: "Battle Fortress", 0xfc: "Chaos Drone", 0xf8: "MagnetroTn", 0x108: "Boomer", 0x10c: "Siege Chopper",
     0x114: "Mastermind", 0x118: "Disc", 0x120: "Robot Tank",
 }
 
@@ -92,13 +64,13 @@ structure_offsets = {
     0x3c: "Sov Ore Ref", 0x48: "Yuri Radar", 0x50: "Sentry Gun", 0x54: "Patriot Missile",
     0x5c: "Allied Naval Yard", 0x60: "Iron Curtain", 0x64: "sov con yard", 0x68: "Sov Service Depot",
     0x6c: "ChronoSphere", 0x74: "Weather Controller", 0xd4: "Tesla Coil", 0xd8: "Nuclear Missile Launcher",
-    0xf4: "Sov Naval Yard", 0xf8: "SpySat Uplink", 0xfc: "Gap Generator", 0x104: "Nuclear Reactor",
-    0x108: "PillBox", 0x10c: "Flak Cannon", 0x11c: "Oil", 0x120: "Cloning Vats", 0x124: "Ore Purifier",
-    0x1a4: "Allied AFC", 0x21c: "American AFC", 0x4b0: "Yuri Con Yard", 0x4b4: "Bio Reactor",
-    0x4b8: "Yuri Barracks", 0x4bc: "Yuri War Factory", 0x4c0: "Yuri Naval Yard", 0x4c8: "Yuri Battle Lab",
-    0x4d0: "Gattling Cannon", 0x4d4: "Psychic Tower", 0x4d8: "Industrial Plant", 0x4dc: "Grinder",
-    0x4e0: "Genetic Mutator", 0x4ec: "Psychic dominator", 0x558: "Tank Bunker", 0x590: "Robot Control Center",
-    0x594: "Slave Miner Deployed", 0x59c: "Battle Bunker",
+    0xf4: "Sov Naval Yard", 0xf8: "SpySat Uplink", 0xfc: "Gap Generator", 0x100: "Grand Cannon",
+    0x104: "Nuclear Reactor", 0x108: "PillBox", 0x10c: "Flak Cannon", 0x11c: "Oil", 0x120: "Cloning Vats",
+    0x124: "Ore Purifier", 0x1a4: "Allied AFC", 0x21c: "American AFC", 0x2dc: "Blitz oil (psychic sensor)",
+    0x4b0: "Yuri Con Yard", 0x4b4: "Bio Reactor", 0x4b8: "Yuri Barracks", 0x4bc: "Yuri War Factory",
+    0x4c0: "Yuri Naval Yard", 0x4c8: "Yuri Battle Lab", 0x4d0: "Gattling Cannon", 0x4d4: "Psychic Tower",
+    0x4d8: "Industrial Plant", 0x4dc: "Grinder", 0x4e0: "Genetic Mutator", 0x4ec: "Psychic dominator",
+    0x558: "Tank Bunker", 0x590: "Robot Control Center", 0x594: "Slave Miner Deployed", 0x59c: "Battle Bunker",
 }
 
 aircraft_offsets = {
@@ -208,7 +180,7 @@ class Player:
                 if count_data and test_data:  # Check if both are not None
                     count = int.from_bytes(count_data, byteorder='little')
                     test = int.from_bytes(test_data, byteorder='little')
-                    if count <= test:
+                    if count <= test + 1: # TODO so I added 1 here to see if it deals with the bug of them not appearing sometimes.
                         counts[name] = count
                     else:
                         counts[name] = 0
