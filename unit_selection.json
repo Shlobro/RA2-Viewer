@@ -3,7 +3,7 @@
         "Allied": {
             "Infantry": {
                 "GI": {
-                    "selected": true,
+                    "selected": false,
                     "locked": true,
                     "unit_type": "Infantry",
                     "faction": "Allied"
@@ -39,19 +39,19 @@
                     "faction": "Allied"
                 },
                 "Rocketeer": {
-                    "selected": true,
-                    "locked": true,
-                    "unit_type": "Infantry",
-                    "faction": "Allied"
-                },
-                "Tanya": {
                     "selected": false,
                     "locked": false,
                     "unit_type": "Infantry",
                     "faction": "Allied"
                 },
+                "Tanya": {
+                    "selected": true,
+                    "locked": false,
+                    "unit_type": "Infantry",
+                    "faction": "Allied"
+                },
                 "Navy Seal": {
-                    "selected": false,
+                    "selected": true,
                     "locked": false,
                     "unit_type": "Infantry",
                     "faction": "Allied"
@@ -151,6 +151,12 @@
                 "Allied War Factory": {
                     "selected": false,
                     "locked": false,
+                    "unit_type": "Structure",
+                    "faction": "Allied"
+                },
+                "Blitz oil (psychic sensor)": {
+                    "selected": true,
+                    "locked": true,
                     "unit_type": "Structure",
                     "faction": "Allied"
                 }
@@ -411,6 +417,12 @@
                     "locked": false,
                     "unit_type": "Structure",
                     "faction": "Soviet"
+                },
+                "Blitz oil (psychic sensor)": {
+                    "selected": true,
+                    "locked": true,
+                    "unit_type": "Structure",
+                    "faction": "Soviet"
                 }
             },
             "Tank": {
@@ -612,6 +624,12 @@
                 "Yuri Naval Yard": {
                     "selected": false,
                     "locked": false,
+                    "unit_type": "Structure",
+                    "faction": "Yuri"
+                },
+                "Blitz oil (psychic sensor)": {
+                    "selected": true,
+                    "locked": true,
                     "unit_type": "Structure",
                     "faction": "Yuri"
                 }

@@ -1,15 +1,13 @@
 import ctypes
-import psutil
-from ctypes import wintypes
-import traceback
-
-from PySide6.QtCore import QThread
-from PySide6.QtGui import QColor
 import logging
+import traceback
+from ctypes import wintypes
+
+from PySide6.QtGui import QColor
 
 from common import COLOR_NAME_MAPPING, country_name_to_faction
 
-
+# Constants
 MAXPLAYERS = 8
 INVALIDCLASS = 0xffffffff
 
@@ -27,13 +25,9 @@ ISLOSEROFFSET = 0x1f8
 POWEROUTPUTOFFSET = 0x53a4
 POWERDRAINOFFSET = 0x53a8
 
-PRODUCINGBUILDINGINDEXOFFSET = 0x564c
-PRODUCINGUNITINDEXOFFSET = 0x5650
-
 HOUSETYPECLASSBASEOFFSET = 0x34
 COUNTRYSTRINGOFFSET = 0x24
 
-COLOROFFSET = 0x56fC
 COLORSCHEMEOFFSET = 0x16054
 
 # Define the mappings of offsets to unit, infantry, and building names
@@ -78,13 +72,9 @@ aircraft_offsets = {
     0x1c: "Black Eagle"
 }
 
-
-# Player.py
-
 class ProcessExitedException(Exception):
     """Custom exception to indicate that the game process has exited."""
     pass
-
 
 class Player:
     def __init__(self, index, process_handle, real_class_base):
@@ -182,7 +172,10 @@ class Player:
                 if count_data and test_data:  # Check if both are not None
                     count = int.from_bytes(count_data, byteorder='little')
                     test = int.from_bytes(test_data, byteorder='little')
-                    if count <= test + 1: # TODO so I added 1 here to see if it deals with the bug of them not appearing sometimes.
+                    # // TODO this if statement is dumb. why won't the test value work for the oils?
+                    if name == "Blitz oil (psychic sensor)" and 15 > count > 0:
+                        counts[name] = count
+                    elif count <= test + 1:
                         counts[name] = count
                     else:
                         counts[name] = 0
@@ -204,76 +197,73 @@ class Player:
             balance_data = read_process_memory(self.process_handle, balance_ptr, 4)
             if balance_data:
                 self.balance = ctypes.c_uint32.from_buffer_copy(balance_data).value
-                #logging.debug(f"Player {self.index} balance: {self.balance}")
 
             # Spent credit
             spent_credit_ptr = self.real_class_base + CREDITSPENT_OFFSET
             spent_credit_data = read_process_memory(self.process_handle, spent_credit_ptr, 4)
             if spent_credit_data:
                 self.spent_credit = ctypes.c_uint32.from_buffer_copy(spent_credit_data).value
-                #logging.debug(f"Player {self.index} spent credit: {self.spent_credit}")
 
             # IsWinner
             is_winner_ptr = self.real_class_base + ISWINNEROFFSET
             is_winner_data = read_process_memory(self.process_handle, is_winner_ptr, 1)
             if is_winner_data:
                 self.is_winner = bool(ctypes.c_uint8.from_buffer_copy(is_winner_data).value)
-                #logging.debug(f"Player {self.index} is_winner: {self.is_winner}")
 
             # IsLoser
             is_loser_ptr = self.real_class_base + ISLOSEROFFSET
             is_loser_data = read_process_memory(self.process_handle, is_loser_ptr, 1)
             if is_loser_data:
                 self.is_loser = bool(ctypes.c_uint8.from_buffer_copy(is_loser_data).value)
-                #logging.debug(f"Player {self.index} is_loser: {self.is_loser}")
 
             # Power output
             power_output_ptr = self.real_class_base + POWEROUTPUTOFFSET
             power_output_data = read_process_memory(self.process_handle, power_output_ptr, 4)
             if power_output_data:
                 self.power_output = ctypes.c_uint32.from_buffer_copy(power_output_data).value
-                #logging.debug(f"Player {self.index} power output: {self.power_output}")
 
             # Power drain
             power_drain_ptr = self.real_class_base + POWERDRAINOFFSET
             power_drain_data = read_process_memory(self.process_handle, power_drain_ptr, 4)
             if power_drain_data:
                 self.power_drain = ctypes.c_uint32.from_buffer_copy(power_drain_data).value
-                #logging.debug(f"Player {self.index} power drain: {self.power_drain}")
 
             self.power = self.power_output - self.power_drain
-            #logging.debug(f"Player {self.index} total power: {self.power}")
 
-            # Update infantry, tank, and building counts
+            # Update infantry, tank, building, and aircraft counts
             if self.infantry_array_ptr == 0:
                 self.initialize_pointers()
             else:
-                self.infantry_counts = self.read_and_store_inf_units_buildings(infantry_offsets,
-                                                                               self.infantry_array_ptr, "infantry")
+                self.infantry_counts = self.read_and_store_inf_units_buildings(
+                    infantry_offsets, self.infantry_array_ptr, "infantry"
+                )
 
             if self.unit_array_ptr == 0:
                 self.initialize_pointers()
             else:
-                self.tank_counts = self.read_and_store_inf_units_buildings(tank_offsets, self.unit_array_ptr, "unit")
+                self.tank_counts = self.read_and_store_inf_units_buildings(
+                    tank_offsets, self.unit_array_ptr, "unit"
+                )
 
             if self.building_array_ptr == 0:
                 self.initialize_pointers()
             else:
-                self.building_counts = self.read_and_store_inf_units_buildings(structure_offsets,
-                                                                               self.building_array_ptr, "building")
+                self.building_counts = self.read_and_store_inf_units_buildings(
+                    structure_offsets, self.building_array_ptr, "building"
+                )
 
             if self.aircraft_array_ptr == 0:
                 self.initialize_pointers()
             else:
-                self.aircraft_counts = self.read_and_store_inf_units_buildings(aircraft_offsets,
-                                                                               self.aircraft_array_ptr, "aircraft")
+                self.aircraft_counts = self.read_and_store_inf_units_buildings(
+                    aircraft_offsets, self.aircraft_array_ptr, "aircraft"
+                )
 
         except ProcessExitedException:
             raise  # Propagate the exception to be handled by the caller
         except Exception as e:
             logging.error(f"Exception in update_dynamic_data for player {self.username.value}: {e}")
             traceback.print_exc()
-
 
 class GameData:
     def __init__(self):
@@ -285,16 +275,6 @@ class GameData:
     def update_all_players(self):
         for player in self.players:
             player.update_dynamic_data()
-
-
-def find_pid_by_name(name):
-    for proc in psutil.process_iter(['pid', 'name']):
-        if proc.info['name'] == name:
-            return proc.info['pid']
-    return None
-
-
-# Player.py
 
 def read_process_memory(process_handle, address, size):
     buffer = ctypes.create_string_buffer(size)
@@ -320,7 +300,6 @@ def read_process_memory(process_handle, address, size):
         logging.error(f"Exception in read_process_memory: {e}")
         raise ProcessExitedException("Process has exited.")
 
-
 # Define the mapping of color scheme values to actual color names
 COLOR_SCHEME_MAPPING = {
     3: QColor("yellow"),
@@ -335,47 +314,47 @@ COLOR_SCHEME_MAPPING = {
     29: QColor("green"),
 }
 
-
-# Function to convert color scheme number to color name
 def get_color(color_scheme):
     """Returns a QColor object based on the color scheme value."""
     return COLOR_SCHEME_MAPPING.get(color_scheme, QColor("black"))
 
 def get_color_name(color_scheme):
-    """Returns a QColor object based on the color scheme value."""
+    """Returns a color name based on the color scheme value."""
     return COLOR_NAME_MAPPING.get(color_scheme, "white")
 
 def detect_if_all_players_are_loaded(process_handle):
-    """Wait for Player 0's MCV to be detected before proceeding with the full initialization."""
+    """Wait for players to be fully loaded before proceeding with initialization."""
     try:
-        fixedPoint = 0xa8b230  # this is where the pointer
+        fixedPoint = 0xa8b230
         classBaseArrayPtr = 0xa8022c
 
         fixedPointData = read_process_memory(process_handle, fixedPoint, 4)
         if fixedPointData is None:
             logging.error("Failed to read memory at fixedPoint.")
-            return False  # Early exit if memory can't be read
+            return False
 
         fixedPointValue = ctypes.c_uint32.from_buffer_copy(fixedPointData).value
-        classBaseArray = ctypes.c_uint32.from_buffer_copy(read_process_memory(process_handle, classBaseArrayPtr, 4)).value
-        classBasePlayer = fixedPointValue + 1120 * 4  # Address for Player 0's class base
+        classBaseArray = ctypes.c_uint32.from_buffer_copy(
+            read_process_memory(process_handle, classBaseArrayPtr, 4)
+        ).value
+        classBasePlayer = fixedPointValue + 1120 * 4
 
         for i in range(MAXPLAYERS):
             player_data = read_process_memory(process_handle, classBasePlayer, 4)
             classBasePlayer += 4
             if player_data is None:
-                logging.warning("Skipping Player 0 due to incomplete memory read.")
+                logging.warning(f"Skipping Player {i} due to incomplete memory read.")
                 continue
 
             classBasePtr = ctypes.c_uint32.from_buffer_copy(player_data).value
             if classBasePtr == INVALIDCLASS:
-                logging.info("Skipping Player 0 as not fully initialized yet.")
+                logging.info(f"Skipping Player {i} as not fully initialized yet.")
                 continue
 
             realClassBasePtr = classBasePtr * 4 + classBaseArray
             realClassBaseData = read_process_memory(process_handle, realClassBasePtr, 4)
             if realClassBaseData is None:
-                continue  # Memory not ready
+                continue
 
             realClassBase = ctypes.c_uint32.from_buffer_copy(realClassBaseData).value
 
@@ -397,9 +376,8 @@ def detect_if_all_players_are_loaded(process_handle):
         traceback.print_exc()
         return False
 
-
 def initialize_players_after_loading(game_data, process_handle):
-    """Initialize all players after detecting Player 0's MCV."""
+    """Initialize all players after detecting they are loaded."""
     game_data.players.clear()
 
     fixedPoint = 0xa8b230
@@ -408,10 +386,12 @@ def initialize_players_after_loading(game_data, process_handle):
     fixedPointData = read_process_memory(process_handle, fixedPoint, 4)
     if fixedPointData is None:
         logging.error("Failed to read memory at fixedPoint.")
-        return 0  # Exit early
+        return 0
 
     fixedPointValue = ctypes.c_uint32.from_buffer_copy(fixedPointData).value
-    classBaseArray = ctypes.c_uint32.from_buffer_copy(read_process_memory(process_handle, classBaseArrayPtr, 4)).value
+    classBaseArray = ctypes.c_uint32.from_buffer_copy(
+        read_process_memory(process_handle, classBaseArrayPtr, 4)
+    ).value
     classbasearray = fixedPointValue + 1120 * 4
     valid_player_count = 0
 
@@ -480,53 +460,3 @@ def initialize_players_after_loading(game_data, process_handle):
 
     logging.info(f"Number of valid players: {valid_player_count}")
     return valid_player_count
-
-
-def ra2_main():
-    game_data = GameData()
-
-    while True:
-        # Loop until the game process is detected
-        while True:
-            pid = find_pid_by_name("gamemd-spawn.exe")
-            if pid is not None:
-                break
-            logging.info("Waiting for the game to start...")
-            QThread.msleep(1000)
-
-        # Obtain the process handle
-        process_handle = ctypes.windll.kernel32.OpenProcess(
-            wintypes.DWORD(0x0010 | 0x0020 | 0x0008 | 0x0010), False, pid
-        )
-
-        if not process_handle:
-            logging.error("Failed to obtain process handle.")
-            return  # Exit or handle the error gracefully
-
-        # Wait for Player 0's MCV to be detected
-        while True:
-            if detect_if_all_players_are_loaded(process_handle):
-                break
-            logging.info("Waiting for the game to load...")
-            QThread.msleep(1000)
-
-        # Once Player 0's MCV is detected, initialize all players
-        valid_player_count = initialize_players_after_loading(game_data, process_handle)
-        if valid_player_count > 0:
-            logging.info(f"Successfully initialized {valid_player_count} players.")
-
-        # Read dynamic data continuously
-        while True:
-            if find_pid_by_name("gamemd-spawn.exe") is None:
-                logging.info("Game process ended.")
-                break
-
-            game_data.update_all_players()
-            QThread.msleep(1000)
-
-        ctypes.windll.kernel32.CloseHandle(process_handle)
-        logging.info("Waiting for the game to start again...")
-
-
-if __name__ == "__main__":
-    ra2_main()

@@ -44,7 +44,8 @@ names = {
             "Robot Control Center",
             "Allied Ore Refinery",
             "Weather Controller",
-            "Allied War Factory"
+            "Allied War Factory",
+            "Blitz oil (psychic sensor)"
         ],
         "Tank": [
             "Grizzly",
@@ -96,7 +97,8 @@ names = {
             "Sov Service Depot",
             "Sov Ore Ref",
             "Tesla Coil",
-            "Sov Naval Yard"
+            "Sov Naval Yard",
+            "Blitz oil (psychic sensor)"
         ],
         "Tank": [
             "Rhino Tank",
@@ -141,7 +143,8 @@ names = {
             "Slave Miner Deployed",
             "Bio Reactor",
             "Yuri Battle Lab",
-            "Yuri Naval Yard"
+            "Yuri Naval Yard",
+            "Blitz oil (psychic sensor)"
         ],
         "Tank": [
             "Gattling Tank",
