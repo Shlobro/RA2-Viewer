@@ -3,8 +3,8 @@ import logging
 from PySide6.QtCore import Qt
 from PySide6.QtWidgets import QMainWindow, QFrame, QWidget, QVBoxLayout, QHBoxLayout, QLayout
 
-from common import name_to_path
 from CounterWidget import (CounterWidgetImagesAndNumber, CounterWidgetNumberOnly, CounterWidgetImageOnly)
+from common import name_to_path, country_name_to_faction
 
 class UnitWindowBase(QMainWindow):
     def __init__(self, player, hud_pos, selected_units_dict, spacing=0):
@@ -18,6 +18,7 @@ class UnitWindowBase(QMainWindow):
                 for unit_name, unit_info in units.items():
                     unit_info['unit_type'] = unit_type
                     self.unit_info_by_name[unit_name] = unit_info
+                    unit_info['faction'] = faction
         self.layout_type = hud_pos.get('unit_layout', 'Vertical')
         self.size = self.get_default_size()
         self.show_unit_frames = hud_pos.get('show_unit_frames', True)
@@ -113,12 +114,17 @@ class UnitWindowBase(QMainWindow):
         self.updateGeometry()
 
     def update_labels(self):
+        # Get the player's faction
+        player_faction = self.player.faction
         for unit_name, (counter_widget, unit_type) in self.counters.items():
             unit_count = self.get_unit_count(unit_type, unit_name)
             counter_widget.update_count(unit_count)
             unit_info = self.unit_info_by_name.get(unit_name, {})
             is_locked = unit_info.get('locked', False)
-            if (0 < unit_count < 500) or is_locked:
+            unit_faction = unit_info.get('faction', None)
+            if (0 < unit_count < 500):
+                counter_widget.show()
+            elif is_locked and unit_faction == player_faction:
                 counter_widget.show()
             else:
                 counter_widget.hide()

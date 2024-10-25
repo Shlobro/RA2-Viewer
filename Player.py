@@ -1,6 +1,5 @@
 import ctypes
 import psutil
-import time
 from ctypes import wintypes
 import traceback
 
@@ -8,7 +7,8 @@ from PySide6.QtCore import QThread
 from PySide6.QtGui import QColor
 import logging
 
-from common import COLOR_NAME_MAPPING
+from common import COLOR_NAME_MAPPING, country_name_to_faction
+
 
 MAXPLAYERS = 8
 INVALIDCLASS = 0xffffffff
@@ -96,6 +96,8 @@ class Player:
         self.color = ""
         self.color_name = ''
         self.country_name = ctypes.create_string_buffer(0x40)
+
+        self.faction = 'Unknown'  # Add this attribute
 
         self.is_winner = False
         self.is_loser = False
@@ -458,7 +460,12 @@ def initialize_players_after_loading(game_data, process_handle):
                 logging.warning(f"Skipping country name assignment for player {i} due to incomplete memory read.")
                 continue
             ctypes.memmove(player.country_name, country_data, 25)
-            logging.info(f"Player {i} country name: {player.country_name.value.decode('utf-8')}")
+            country_name_str = player.country_name.value.decode('utf-8').strip('\x00')
+            logging.info(f"Player {i} country name: {country_name_str}")
+
+            # Set the faction based on the country name
+            player.faction = country_name_to_faction(country_name_str)
+            logging.info(f"Player {i} faction: {player.faction}")
 
             # Set the username
             userNamePtr = realClassBase + USERNAMEOFFSET

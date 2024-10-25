@@ -176,3 +176,12 @@ COLOR_NAME_MAPPING = {
 def name_to_path(name):
     return 'cameos/png/' + name + '.png'
 
+def country_name_to_faction(country_name):
+    if country_name in ['Americans', 'Alliance', 'French', 'Germans', 'British']:
+        return 'Allied'
+    elif country_name in ['Africans', 'Arabs', 'Confederation', 'Russians']:
+        return 'Soviet'
+    elif country_name == 'YuriCountry':
+        return 'Yuri'
+    else:
+        return 'Unknown'
