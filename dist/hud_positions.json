@@ -1,14 +1,14 @@
 {
-    "unit_counter_size": 75,
+    "unit_counter_size": 87,
     "image_size": 75,
-    "number_size": 75,
-    "distance_between_numbers": 0,
-    "show_name": true,
-    "show_money": true,
-    "show_power": true,
+    "number_size": 25,
+    "distance_between_numbers": 30,
+    "show_name": false,
+    "show_money": false,
+    "show_power": false,
     "unit_layout": "Vertical",
     "money_color": "Use player color",
-    "show_flag": true,
+    "show_flag": false,
     "flag_widget_size": 50,
     "show_unit_frames": true,
     "name_widget_size": 50,
@@ -16,7 +16,37 @@
     "power_widget_size": 50,
     "separate_unit_counters": false,
     "game_path": "D:/ra2/Red Alert 2/Red Alert 2",
-    "yellow": {
+    "red": {
+        "name": {
+            "x": 189,
+            "y": 89
+        },
+        "flag": {
+            "x": 1858,
+            "y": 66
+        },
+        "money": {
+            "x": 64,
+            "y": 148
+        },
+        "power": {
+            "x": 51,
+            "y": 186
+        },
+        "unit_counter_combined": {
+            "x": 54,
+            "y": 45
+        },
+        "unit_counter_images": {
+            "x": 242,
+            "y": 276
+        },
+        "unit_counter_numbers": {
+            "x": 128,
+            "y": 274
+        }
+    },
+    "purple": {
         "name": {
             "x": 100,
             "y": 100
@@ -34,59 +64,112 @@
             "y": 100
         },
         "unit_counter_combined": {
+            "x": 567,
+            "y": 118
+        },
+        "unit_counter_images": {
+            "x": 369,
+            "y": 82
+        },
+        "unit_counter_numbers": {
             "x": 100,
             "y": 100
         }
     },
-    "red": {
+    "blue": {
         "name": {
-            "x": 84,
-            "y": 413
+            "x": 2142,
+            "y": 13
         },
         "flag": {
             "x": 100,
             "y": 100
         },
         "money": {
-            "x": 88,
-            "y": 341
+            "x": 1931,
+            "y": 20
         },
         "power": {
-            "x": 817,
-            "y": 166
+            "x": 110,
+            "y": 179
         },
         "unit_counter_combined": {
+            "x": 2260,
+            "y": 182
+        },
+        "unit_counter_images": {
+            "x": 176,
+            "y": 141
+        },
+        "unit_counter_numbers": {
             "x": 100,
             "y": 100
         }
     },
     "pink": {
         "name": {
-            "x": 1876,
-            "y": 111
+            "x": 2158,
+            "y": 5
         },
         "flag": {
-            "x": 100,
-            "y": 100
+            "x": 154,
+            "y": 183
         },
         "money": {
-            "x": 1919,
-            "y": 181
+            "x": 2142,
+            "y": 67
         },
         "power": {
-            "x": 1694,
-            "y": 120
+            "x": 2203,
+            "y": 115
         },
         "unit_counter_combined": {
-            "x": 386,
-            "y": 82
+            "x": 240,
+            "y": 135
+        },
+        "unit_counter_images": {
+            "x": 134,
+            "y": 232
+        },
+        "unit_counter_numbers": {
+            "x": 100,
+            "y": 100
         }
     },
-    "data_counter_size": 50,
-    "blue": {
+    "yellow": {
         "name": {
+            "x": 1716,
+            "y": 113
+        },
+        "flag": {
             "x": 100,
             "y": 100
+        },
+        "money": {
+            "x": 1718,
+            "y": 172
+        },
+        "power": {
+            "x": 1750,
+            "y": 58
+        },
+        "unit_counter_combined": {
+            "x": 2185,
+            "y": 79
+        },
+        "unit_counter_images": {
+            "x": 2158,
+            "y": 303
+        },
+        "unit_counter_numbers": {
+            "x": 2108,
+            "y": 318
+        }
+    },
+    "cyan": {
+        "name": {
+            "x": 90,
+            "y": 39
         },
         "flag": {
             "x": 100,
@@ -97,10 +180,78 @@
             "y": 100
         },
         "power": {
+            "x": 170,
+            "y": 139
+        },
+        "unit_counter_images": {
+            "x": 2215,
+            "y": 192
+        },
+        "unit_counter_numbers": {
             "x": 100,
             "y": 100
         },
         "unit_counter_combined": {
+            "x": 50,
+            "y": 101
+        }
+    },
+    "green": {
+        "name": {
+            "x": 36,
+            "y": 25
+        },
+        "flag": {
+            "x": 114,
+            "y": 128
+        },
+        "money": {
+            "x": 21,
+            "y": 76
+        },
+        "power": {
+            "x": 2230,
+            "y": 86
+        },
+        "unit_counter_images": {
+            "x": 59,
+            "y": 329
+        },
+        "unit_counter_numbers": {
+            "x": 133,
+            "y": 343
+        },
+        "unit_counter_combined": {
+            "x": 33,
+            "y": 185
+        }
+    },
+    "orange": {
+        "name": {
+            "x": 2113,
+            "y": 129
+        },
+        "flag": {
+            "x": 2170,
+            "y": 96
+        },
+        "money": {
+            "x": 2132,
+            "y": 174
+        },
+        "power": {
+            "x": 21,
+            "y": 119
+        },
+        "unit_counter_combined": {
+            "x": 2008,
+            "y": 148
+        },
+        "unit_counter_images": {
+            "x": 100,
+            "y": 100
+        },
+        "unit_counter_numbers": {
             "x": 100,
             "y": 100
         }

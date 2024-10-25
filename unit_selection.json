@@ -4,7 +4,7 @@
             "Infantry": {
                 "GI": {
                     "selected": false,
-                    "locked": true,
+                    "locked": false,
                     "unit_type": "Infantry",
                     "faction": "Allied"
                 },
@@ -45,13 +45,13 @@
                     "faction": "Allied"
                 },
                 "Tanya": {
-                    "selected": true,
+                    "selected": false,
                     "locked": false,
                     "unit_type": "Infantry",
                     "faction": "Allied"
                 },
                 "Navy Seal": {
-                    "selected": true,
+                    "selected": false,
                     "locked": false,
                     "unit_type": "Infantry",
                     "faction": "Allied"
@@ -59,7 +59,7 @@
             },
             "Structure": {
                 "Allied Power Plant": {
-                    "selected": false,
+                    "selected": true,
                     "locked": false,
                     "unit_type": "Structure",
                     "faction": "Allied"
@@ -71,7 +71,7 @@
                     "faction": "Allied"
                 },
                 "SpySat": {
-                    "selected": false,
+                    "selected": true,
                     "locked": false,
                     "unit_type": "Structure",
                     "faction": "Allied"
@@ -285,8 +285,8 @@
                     "faction": "Soviet"
                 },
                 "conscript": {
-                    "selected": true,
-                    "locked": true,
+                    "selected": false,
+                    "locked": false,
                     "unit_type": "Infantry",
                     "faction": "Soviet"
                 },
@@ -330,7 +330,7 @@
             "Structure": {
                 "Soviet Barracks": {
                     "selected": false,
-                    "locked": false,
+                    "locked": true,
                     "unit_type": "Structure",
                     "faction": "Soviet"
                 },
@@ -341,14 +341,14 @@
                     "faction": "Soviet"
                 },
                 "Soviet War Factory": {
-                    "selected": false,
+                    "selected": true,
                     "locked": false,
                     "unit_type": "Structure",
                     "faction": "Soviet"
                 },
                 "Sov Ore Ref": {
-                    "selected": false,
-                    "locked": false,
+                    "selected": true,
+                    "locked": true,
                     "unit_type": "Structure",
                     "faction": "Soviet"
                 },
@@ -383,38 +383,38 @@
                     "faction": "Soviet"
                 },
                 "Sov Radar": {
-                    "selected": false,
+                    "selected": true,
                     "locked": false,
                     "unit_type": "Structure",
                     "faction": "Soviet"
                 },
                 "Nuclear Reactor": {
-                    "selected": false,
+                    "selected": true,
                     "locked": false,
                     "unit_type": "Structure",
                     "faction": "Soviet"
                 },
                 "Tesla Reactor": {
-                    "selected": true,
+                    "selected": false,
                     "locked": true,
                     "unit_type": "Structure",
                     "faction": "Soviet"
                 },
                 "Sov Service Depot": {
-                    "selected": false,
+                    "selected": true,
                     "locked": false,
                     "unit_type": "Structure",
                     "faction": "Soviet"
                 },
                 "Sov Naval Yard": {
-                    "selected": false,
+                    "selected": true,
                     "locked": false,
                     "unit_type": "Structure",
                     "faction": "Soviet"
                 },
                 "Tesla Coil": {
-                    "selected": false,
-                    "locked": false,
+                    "selected": true,
+                    "locked": true,
                     "unit_type": "Structure",
                     "faction": "Soviet"
                 },

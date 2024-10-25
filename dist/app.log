@@ -1,162 +1,1260 @@
-2024-10-13 01:35:37,395 - INFO - Logging setup complete
-2024-10-13 01:35:37,475 - INFO - Waiting for the game to start and players to load...
-2024-10-13 01:35:37,476 - INFO - Waiting for the game to start...
-2024-10-13 01:35:37,887 - INFO - Game detected
-2024-10-13 01:35:37,888 - INFO - Skipping Player 0 as not fully initialized yet.
-2024-10-13 01:35:37,888 - INFO - Players loaded. Proceeding with players initialization.
-2024-10-13 01:35:37,888 - DEBUG - Initialized unit array pointer: 48801792
-2024-10-13 01:35:37,888 - DEBUG - Initialized building array pointer: 288434160
-2024-10-13 01:35:37,888 - DEBUG - Initialized infantry array pointer: 258744816
-2024-10-13 01:35:37,888 - DEBUG - Initialized aircraft array pointer: 0
-2024-10-13 01:35:37,889 - INFO - Player 1 color: pink
-2024-10-13 01:35:37,889 - INFO - Player 1 country name: Arabs
-2024-10-13 01:35:37,889 - INFO - Player 1 name: QWERTYUIOP{}
-2024-10-13 01:35:37,889 - INFO - Number of valid players: 1
-2024-10-13 01:35:37,889 - DEBUG - Updating dynamic data for player 2
-2024-10-13 01:35:37,889 - DEBUG - Player 2 balance: 95400
-2024-10-13 01:35:37,889 - DEBUG - Player 2 spent credit: 4600
-2024-10-13 01:35:37,889 - DEBUG - Player 2 is_winner: False
-2024-10-13 01:35:37,889 - DEBUG - Player 2 is_loser: False
-2024-10-13 01:35:37,889 - DEBUG - Player 2 power output: 150
-2024-10-13 01:35:37,889 - DEBUG - Player 2 power drain: 10
-2024-10-13 01:35:37,889 - DEBUG - Player 2 total power: 140
-2024-10-13 01:35:37,890 - DEBUG - Initialized unit array pointer: 48801792
-2024-10-13 01:35:37,890 - INFO - Game started handler called
-2024-10-13 01:35:37,890 - DEBUG - Initialized building array pointer: 288434160
-2024-10-13 01:35:37,890 - INFO - Creating HUD for QWERTYUIOP{} with color pink
-2024-10-13 01:35:37,890 - DEBUG - Initialized infantry array pointer: 258744816
-2024-10-13 01:35:37,915 - DEBUG - Initialized aircraft array pointer: 0
-2024-10-13 01:35:38,242 - DEBUG - updating all unit counters
-2024-10-13 01:35:38,919 - DEBUG - Updating dynamic data for player 2
-2024-10-13 01:35:38,919 - DEBUG - Player 2 balance: 95400
-2024-10-13 01:35:38,919 - DEBUG - Player 2 spent credit: 4600
-2024-10-13 01:35:38,919 - DEBUG - Player 2 is_winner: False
-2024-10-13 01:35:38,919 - DEBUG - Player 2 is_loser: False
-2024-10-13 01:35:38,919 - DEBUG - Player 2 power output: 150
-2024-10-13 01:35:38,919 - DEBUG - Player 2 power drain: 10
-2024-10-13 01:35:38,919 - DEBUG - Player 2 total power: 140
-2024-10-13 01:35:38,919 - DEBUG - Initialized unit array pointer: 48801792
-2024-10-13 01:35:38,919 - DEBUG - Initialized building array pointer: 288434160
-2024-10-13 01:35:38,919 - DEBUG - Initialized infantry array pointer: 258744816
-2024-10-13 01:35:38,919 - DEBUG - Initialized aircraft array pointer: 0
-2024-10-13 01:35:38,919 - DEBUG - updating all unit counters
-2024-10-13 01:35:39,933 - DEBUG - Updating dynamic data for player 2
-2024-10-13 01:35:39,933 - DEBUG - Player 2 balance: 95400
-2024-10-13 01:35:39,933 - DEBUG - Player 2 spent credit: 4600
-2024-10-13 01:35:39,933 - DEBUG - Player 2 is_winner: False
-2024-10-13 01:35:39,933 - DEBUG - Player 2 is_loser: False
-2024-10-13 01:35:39,933 - DEBUG - Player 2 power output: 150
-2024-10-13 01:35:39,933 - DEBUG - Player 2 power drain: 10
-2024-10-13 01:35:39,933 - DEBUG - Player 2 total power: 140
-2024-10-13 01:35:39,934 - DEBUG - Initialized unit array pointer: 48801792
-2024-10-13 01:35:39,934 - DEBUG - Initialized building array pointer: 288434160
-2024-10-13 01:35:39,934 - DEBUG - Initialized infantry array pointer: 258744816
-2024-10-13 01:35:39,934 - DEBUG - Initialized aircraft array pointer: 0
-2024-10-13 01:35:39,934 - DEBUG - updating all unit counters
-2024-10-13 01:35:40,947 - DEBUG - Updating dynamic data for player 2
-2024-10-13 01:35:40,947 - DEBUG - Player 2 balance: 95400
-2024-10-13 01:35:40,947 - DEBUG - Player 2 spent credit: 4600
-2024-10-13 01:35:40,947 - DEBUG - Player 2 is_winner: False
-2024-10-13 01:35:40,947 - DEBUG - Player 2 is_loser: False
-2024-10-13 01:35:40,947 - DEBUG - Player 2 power output: 150
-2024-10-13 01:35:40,947 - DEBUG - Player 2 power drain: 10
-2024-10-13 01:35:40,947 - DEBUG - Player 2 total power: 140
-2024-10-13 01:35:40,948 - DEBUG - Initialized unit array pointer: 48801792
-2024-10-13 01:35:40,948 - DEBUG - Initialized building array pointer: 288434160
-2024-10-13 01:35:40,948 - DEBUG - Initialized infantry array pointer: 258744816
-2024-10-13 01:35:40,948 - DEBUG - Initialized aircraft array pointer: 0
-2024-10-13 01:35:40,948 - DEBUG - updating all unit counters
-2024-10-13 01:35:41,963 - DEBUG - Updating dynamic data for player 2
-2024-10-13 01:35:41,963 - DEBUG - Player 2 balance: 95400
-2024-10-13 01:35:41,963 - DEBUG - Player 2 spent credit: 4600
-2024-10-13 01:35:41,963 - DEBUG - Player 2 is_winner: False
-2024-10-13 01:35:41,963 - DEBUG - Player 2 is_loser: False
-2024-10-13 01:35:41,964 - DEBUG - Player 2 power output: 150
-2024-10-13 01:35:41,964 - DEBUG - Player 2 power drain: 10
-2024-10-13 01:35:41,964 - DEBUG - Player 2 total power: 140
-2024-10-13 01:35:41,964 - DEBUG - Initialized unit array pointer: 48801792
-2024-10-13 01:35:41,964 - DEBUG - Initialized building array pointer: 288434160
-2024-10-13 01:35:41,964 - DEBUG - Initialized infantry array pointer: 258744816
-2024-10-13 01:35:41,965 - DEBUG - Initialized aircraft array pointer: 0
-2024-10-13 01:35:41,965 - DEBUG - updating all unit counters
-2024-10-13 01:35:42,979 - DEBUG - Updating dynamic data for player 2
-2024-10-13 01:35:42,979 - DEBUG - Player 2 balance: 95400
-2024-10-13 01:35:42,979 - DEBUG - Player 2 spent credit: 4600
-2024-10-13 01:35:42,979 - DEBUG - Player 2 is_winner: False
-2024-10-13 01:35:42,979 - DEBUG - Player 2 is_loser: False
-2024-10-13 01:35:42,979 - DEBUG - Player 2 power output: 150
-2024-10-13 01:35:42,979 - DEBUG - Player 2 power drain: 10
-2024-10-13 01:35:42,979 - DEBUG - Player 2 total power: 140
-2024-10-13 01:35:42,980 - DEBUG - Initialized unit array pointer: 48801792
-2024-10-13 01:35:42,980 - DEBUG - Initialized building array pointer: 288434160
-2024-10-13 01:35:42,980 - DEBUG - Initialized infantry array pointer: 258744816
-2024-10-13 01:35:42,980 - DEBUG - Initialized aircraft array pointer: 0
-2024-10-13 01:35:42,980 - DEBUG - updating all unit counters
-2024-10-13 01:35:43,995 - DEBUG - Updating dynamic data for player 2
-2024-10-13 01:35:43,995 - DEBUG - Player 2 balance: 95400
-2024-10-13 01:35:43,995 - DEBUG - Player 2 spent credit: 4600
-2024-10-13 01:35:43,995 - DEBUG - Player 2 is_winner: False
-2024-10-13 01:35:43,995 - DEBUG - Player 2 is_loser: False
-2024-10-13 01:35:43,995 - DEBUG - Player 2 power output: 150
-2024-10-13 01:35:43,995 - DEBUG - Player 2 power drain: 10
-2024-10-13 01:35:43,995 - DEBUG - Player 2 total power: 140
-2024-10-13 01:35:43,995 - DEBUG - Initialized unit array pointer: 48801792
-2024-10-13 01:35:43,995 - DEBUG - Initialized building array pointer: 288434160
-2024-10-13 01:35:43,995 - DEBUG - Initialized infantry array pointer: 258744816
-2024-10-13 01:35:43,995 - DEBUG - Initialized aircraft array pointer: 0
-2024-10-13 01:35:43,995 - DEBUG - updating all unit counters
-2024-10-13 01:35:45,009 - DEBUG - Updating dynamic data for player 2
-2024-10-13 01:35:45,009 - DEBUG - Player 2 balance: 95400
-2024-10-13 01:35:45,009 - DEBUG - Player 2 spent credit: 4600
-2024-10-13 01:35:45,009 - DEBUG - Player 2 is_winner: False
-2024-10-13 01:35:45,009 - DEBUG - Player 2 is_loser: False
-2024-10-13 01:35:45,009 - DEBUG - Player 2 power output: 150
-2024-10-13 01:35:45,009 - DEBUG - Player 2 power drain: 10
-2024-10-13 01:35:45,010 - DEBUG - Player 2 total power: 140
-2024-10-13 01:35:45,010 - DEBUG - Initialized unit array pointer: 48801792
-2024-10-13 01:35:45,011 - DEBUG - Initialized building array pointer: 288434160
-2024-10-13 01:35:45,011 - DEBUG - Initialized infantry array pointer: 258744816
-2024-10-13 01:35:45,011 - DEBUG - Initialized aircraft array pointer: 0
-2024-10-13 01:35:45,011 - DEBUG - updating all unit counters
-2024-10-13 01:35:46,023 - DEBUG - Updating dynamic data for player 2
-2024-10-13 01:35:46,023 - DEBUG - Player 2 balance: 95400
-2024-10-13 01:35:46,023 - DEBUG - Player 2 spent credit: 4600
-2024-10-13 01:35:46,023 - DEBUG - Player 2 is_winner: False
-2024-10-13 01:35:46,023 - DEBUG - Player 2 is_loser: False
-2024-10-13 01:35:46,023 - DEBUG - Player 2 power output: 150
-2024-10-13 01:35:46,023 - DEBUG - Player 2 power drain: 10
-2024-10-13 01:35:46,023 - DEBUG - Player 2 total power: 140
-2024-10-13 01:35:46,024 - DEBUG - Initialized unit array pointer: 48801792
-2024-10-13 01:35:46,024 - DEBUG - Initialized building array pointer: 288434160
-2024-10-13 01:35:46,024 - DEBUG - Initialized infantry array pointer: 258744816
-2024-10-13 01:35:46,024 - DEBUG - Initialized aircraft array pointer: 0
-2024-10-13 01:35:46,024 - DEBUG - updating all unit counters
-2024-10-13 01:35:47,040 - DEBUG - Updating dynamic data for player 2
-2024-10-13 01:35:47,040 - DEBUG - Player 2 balance: 95400
-2024-10-13 01:35:47,040 - DEBUG - Player 2 spent credit: 4600
-2024-10-13 01:35:47,040 - DEBUG - Player 2 is_winner: False
-2024-10-13 01:35:47,040 - DEBUG - Player 2 is_loser: False
-2024-10-13 01:35:47,040 - DEBUG - Player 2 power output: 150
-2024-10-13 01:35:47,040 - DEBUG - Player 2 power drain: 10
-2024-10-13 01:35:47,040 - DEBUG - Player 2 total power: 140
-2024-10-13 01:35:47,041 - DEBUG - Initialized unit array pointer: 48801792
-2024-10-13 01:35:47,041 - DEBUG - Initialized building array pointer: 288434160
-2024-10-13 01:35:47,041 - DEBUG - Initialized infantry array pointer: 258744816
-2024-10-13 01:35:47,041 - DEBUG - Initialized aircraft array pointer: 0
-2024-10-13 01:35:47,041 - DEBUG - updating all unit counters
-2024-10-13 01:35:48,055 - DEBUG - Updating dynamic data for player 2
-2024-10-13 01:35:48,055 - DEBUG - Player 2 balance: 95400
-2024-10-13 01:35:48,055 - DEBUG - Player 2 spent credit: 4600
-2024-10-13 01:35:48,055 - DEBUG - Player 2 is_winner: False
-2024-10-13 01:35:48,055 - DEBUG - Player 2 is_loser: False
-2024-10-13 01:35:48,055 - DEBUG - Player 2 power output: 150
-2024-10-13 01:35:48,055 - DEBUG - Player 2 power drain: 10
-2024-10-13 01:35:48,055 - DEBUG - Player 2 total power: 140
-2024-10-13 01:35:48,056 - DEBUG - Initialized unit array pointer: 48801792
-2024-10-13 01:35:48,056 - DEBUG - Initialized building array pointer: 288434160
-2024-10-13 01:35:48,056 - DEBUG - Initialized infantry array pointer: 258744816
-2024-10-13 01:35:48,056 - DEBUG - Initialized aircraft array pointer: 0
-2024-10-13 01:35:48,056 - DEBUG - updating all unit counters
-2024-10-13 01:35:49,069 - INFO - Emitted game_stopped signal.
-2024-10-13 01:35:50,070 - INFO - Data update thread has exited.
-2024-10-13 01:35:50,071 - INFO - Saved selected units.
+2024-10-25 06:46:11,421 - INFO - Logging setup complete
+2024-10-25 06:46:11,491 - DEBUG - spawn_ini_path
+2024-10-25 06:46:11,491 - INFO - Game path: D:/ra2/Red Alert 2/Red Alert 2
+2024-10-25 06:46:11,492 - INFO - Waiting for the game to start and players to load...
+2024-10-25 06:46:11,492 - INFO - Waiting for the game to start...
+2024-10-25 06:46:31,082 - INFO - Game detected
+2024-10-25 06:46:31,083 - INFO - Skipping Player 0 as not fully initialized yet.
+2024-10-25 06:46:31,083 - INFO - Skipping Player 2 as not fully initialized yet.
+2024-10-25 06:46:31,083 - INFO - Skipping Player 3 as not fully initialized yet.
+2024-10-25 06:46:31,083 - INFO - Skipping Player 4 as not fully initialized yet.
+2024-10-25 06:46:31,083 - INFO - Skipping Player 5 as not fully initialized yet.
+2024-10-25 06:46:31,083 - INFO - Skipping Player 6 as not fully initialized yet.
+2024-10-25 06:46:31,083 - INFO - Skipping Player 7 as not fully initialized yet.
+2024-10-25 06:46:32,092 - INFO - Skipping Player 0 as not fully initialized yet.
+2024-10-25 06:46:32,092 - INFO - Skipping Player 2 as not fully initialized yet.
+2024-10-25 06:46:32,092 - INFO - Skipping Player 3 as not fully initialized yet.
+2024-10-25 06:46:32,092 - INFO - Skipping Player 4 as not fully initialized yet.
+2024-10-25 06:46:32,092 - INFO - Skipping Player 5 as not fully initialized yet.
+2024-10-25 06:46:32,092 - INFO - Skipping Player 6 as not fully initialized yet.
+2024-10-25 06:46:32,092 - INFO - Skipping Player 7 as not fully initialized yet.
+2024-10-25 06:46:33,107 - INFO - Skipping Player 0 as not fully initialized yet.
+2024-10-25 06:46:33,107 - INFO - Skipping Player 2 as not fully initialized yet.
+2024-10-25 06:46:33,107 - INFO - Skipping Player 3 as not fully initialized yet.
+2024-10-25 06:46:33,107 - INFO - Skipping Player 4 as not fully initialized yet.
+2024-10-25 06:46:33,107 - INFO - Skipping Player 5 as not fully initialized yet.
+2024-10-25 06:46:33,107 - INFO - Skipping Player 6 as not fully initialized yet.
+2024-10-25 06:46:33,107 - INFO - Skipping Player 7 as not fully initialized yet.
+2024-10-25 06:46:34,122 - INFO - Skipping Player 0 as not fully initialized yet.
+2024-10-25 06:46:34,122 - INFO - Players loaded. Proceeding with players initialization.
+2024-10-25 06:46:34,122 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:46:34,122 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:46:34,122 - DEBUG - Initialized infantry array pointer: 0
+2024-10-25 06:46:34,122 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:46:34,122 - INFO - Player 1 color: orange
+2024-10-25 06:46:34,122 - INFO - Player 1 country name: YuriCountry
+2024-10-25 06:46:34,122 - INFO - Player 1 faction: Yuri
+2024-10-25 06:46:34,122 - INFO - Player 1 name: Snark
+2024-10-25 06:46:34,122 - INFO - Number of valid players: 1
+2024-10-25 06:46:34,123 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:46:34,123 - INFO - Game started handler called
+2024-10-25 06:46:34,123 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:46:34,123 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:46:34,123 - DEBUG - Initialized infantry array pointer: 0
+2024-10-25 06:46:34,123 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:46:34,123 - INFO - Creating HUD for Snark with color orange
+2024-10-25 06:46:34,239 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:46:34,256 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:46:34,256 - DEBUG - Initialized infantry array pointer: 0
+2024-10-25 06:46:34,265 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:46:34,346 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:46:35,299 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:46:35,299 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:46:35,299 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:46:35,299 - DEBUG - Initialized infantry array pointer: 0
+2024-10-25 06:46:35,299 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:46:35,300 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:46:35,300 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:46:35,300 - DEBUG - Initialized infantry array pointer: 0
+2024-10-25 06:46:35,300 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:46:35,304 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:46:36,302 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:46:36,302 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:46:36,302 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:46:36,302 - DEBUG - Initialized infantry array pointer: 0
+2024-10-25 06:46:36,302 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:46:36,303 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:46:36,303 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:46:36,303 - DEBUG - Initialized infantry array pointer: 0
+2024-10-25 06:46:36,303 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:46:36,307 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:46:37,308 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:46:37,308 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:46:37,308 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:46:37,308 - DEBUG - Initialized infantry array pointer: 0
+2024-10-25 06:46:37,308 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:46:37,309 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:46:37,309 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:46:37,309 - DEBUG - Initialized infantry array pointer: 0
+2024-10-25 06:46:37,309 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:46:37,313 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:46:38,316 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:46:38,316 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:46:38,316 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:46:38,316 - DEBUG - Initialized infantry array pointer: 0
+2024-10-25 06:46:38,316 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:46:38,317 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:46:38,317 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:46:38,317 - DEBUG - Initialized infantry array pointer: 0
+2024-10-25 06:46:38,317 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:46:38,321 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:46:39,322 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:46:39,322 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:46:39,322 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:46:39,322 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:46:39,322 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:46:39,323 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:46:39,323 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:46:39,323 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:46:39,323 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:46:39,327 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:46:40,329 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:46:40,330 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:46:40,330 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:46:40,330 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:46:40,330 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:46:40,334 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:46:41,336 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:46:41,337 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:46:41,337 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:46:41,337 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:46:41,337 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:46:41,341 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:46:42,338 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:46:42,339 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:46:42,339 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:46:42,339 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:46:42,339 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:46:42,343 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:46:43,343 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:46:43,344 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:46:43,344 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:46:43,344 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:46:43,344 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:46:43,348 - INFO - Opening Unit Selection window
+2024-10-25 06:46:43,366 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:46:44,345 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:46:44,346 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:46:44,346 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:46:44,346 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:46:44,346 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:46:44,350 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:46:45,356 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:46:45,357 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:46:45,357 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:46:45,357 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:46:45,357 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:46:45,361 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:46:46,362 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:46:46,363 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:46:46,363 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:46:46,363 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:46:46,363 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:46:46,366 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:46:47,370 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:46:47,371 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:46:47,371 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:46:47,371 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:46:47,371 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:46:47,375 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:46:48,375 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:46:48,376 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:46:48,376 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:46:48,376 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:46:48,376 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:46:48,380 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:46:49,169 - DEBUG - Soviet Dog selection state changed to True
+2024-10-25 06:46:49,383 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:46:49,384 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:46:49,384 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:46:49,384 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:46:49,384 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:46:49,388 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:46:50,389 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:46:50,390 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:46:50,390 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:46:50,390 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:46:50,390 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:46:50,394 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:46:51,402 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:46:51,402 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:46:51,403 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:46:51,403 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:46:51,403 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:46:51,407 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:46:52,406 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:46:52,406 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:46:52,407 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:46:52,407 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:46:52,407 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:46:52,411 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:46:53,411 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:46:53,412 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:46:53,412 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:46:53,412 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:46:53,412 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:46:53,416 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:46:54,415 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:46:54,416 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:46:54,416 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:46:54,416 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:46:54,416 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:46:54,420 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:46:54,473 - DEBUG - Soviet Dog selection state changed to False
+2024-10-25 06:46:54,832 - DEBUG - Soviet Dog selection state changed to True
+2024-10-25 06:46:55,421 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:46:55,421 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:46:55,422 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:46:55,422 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:46:55,422 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:46:55,426 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:46:55,773 - DEBUG - conscript selection state changed to False
+2024-10-25 06:46:56,075 - DEBUG - conscript selection state changed to True
+2024-10-25 06:46:56,425 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:46:56,426 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:46:56,426 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:46:56,426 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:46:56,426 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:46:56,430 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:46:57,433 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:46:57,434 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:46:57,434 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:46:57,434 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:46:57,434 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:46:57,438 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:46:58,441 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:46:58,442 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:46:58,442 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:46:58,442 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:46:58,442 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:46:58,449 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:46:59,442 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:46:59,443 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:46:59,443 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:46:59,443 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:46:59,443 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:46:59,451 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:47:00,447 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:47:00,447 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:47:00,447 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:47:00,448 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:47:00,448 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:47:00,454 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:47:01,453 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:47:01,454 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:47:01,454 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:47:01,454 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:47:01,454 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:47:01,460 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:47:01,497 - DEBUG - Soviet Dog lock state changed to True
+2024-10-25 06:47:02,458 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:47:02,459 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:47:02,459 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:47:02,459 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:47:02,459 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:47:02,465 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:47:03,465 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:47:03,466 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:47:03,466 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:47:03,466 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:47:03,466 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:47:03,472 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:47:04,128 - DEBUG - Soviet Dog lock state changed to False
+2024-10-25 06:47:04,473 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:47:04,474 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:47:04,474 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:47:04,474 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:47:04,474 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:47:04,480 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:47:05,478 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:47:05,479 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:47:05,479 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:47:05,479 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:47:05,479 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:47:05,539 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:47:06,481 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:47:06,481 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:47:06,482 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:47:06,482 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:47:06,482 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:47:06,494 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:47:07,487 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:47:07,487 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:47:07,487 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:47:07,487 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:47:07,487 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:47:07,494 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:47:08,493 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:47:08,493 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:47:08,494 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:47:08,494 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:47:08,494 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:47:08,500 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:47:09,498 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:47:09,499 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:47:09,499 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:47:09,499 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:47:09,499 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:47:09,506 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:47:09,607 - INFO - Closing application...
+2024-10-25 06:47:10,500 - INFO - Emitted game_stopped signal.
+2024-10-25 06:47:11,501 - INFO - Data update thread has exited.
+2024-10-25 06:47:11,501 - INFO - Data update thread has finished.
+2024-10-25 06:47:11,508 - INFO - Saved selected units.
+2024-10-25 06:47:15,213 - INFO - Logging setup complete
+2024-10-25 06:47:15,274 - DEBUG - spawn_ini_path
+2024-10-25 06:47:15,275 - INFO - Game path: D:/ra2/Red Alert 2/Red Alert 2
+2024-10-25 06:47:15,276 - INFO - Waiting for the game to start and players to load...
+2024-10-25 06:47:15,276 - INFO - Waiting for the game to start...
+2024-10-25 06:47:15,625 - INFO - Game detected
+2024-10-25 06:47:15,626 - INFO - Skipping Player 0 as not fully initialized yet.
+2024-10-25 06:47:15,626 - INFO - Players loaded. Proceeding with players initialization.
+2024-10-25 06:47:15,626 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:47:15,626 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:47:15,626 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:47:15,626 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:47:15,626 - INFO - Player 1 color: orange
+2024-10-25 06:47:15,626 - INFO - Player 1 country name: YuriCountry
+2024-10-25 06:47:15,627 - INFO - Player 1 faction: Yuri
+2024-10-25 06:47:15,627 - INFO - Player 1 name: Snark
+2024-10-25 06:47:15,627 - INFO - Number of valid players: 1
+2024-10-25 06:47:15,627 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:47:15,628 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:47:15,628 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:47:15,628 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:47:15,628 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:47:15,633 - INFO - Game started handler called
+2024-10-25 06:47:15,633 - INFO - Creating HUD for Snark with color orange
+2024-10-25 06:47:15,803 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:47:16,634 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:47:16,635 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:47:16,635 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:47:16,635 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:47:16,635 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:47:16,642 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:47:17,639 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:47:17,640 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:47:17,640 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:47:17,640 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:47:17,640 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:47:17,646 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:47:18,646 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:47:18,646 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:47:18,647 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:47:18,647 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:47:18,647 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:47:18,653 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:47:19,654 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:47:19,655 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:47:19,655 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:47:19,655 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:47:19,655 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:47:19,661 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:47:20,662 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:47:20,662 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:47:20,663 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:47:20,663 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:47:20,663 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:47:20,669 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:47:21,667 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:47:21,668 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:47:21,668 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:47:21,668 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:47:21,668 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:47:21,674 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:47:22,674 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:47:22,674 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:47:22,675 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:47:22,675 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:47:22,675 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:47:22,681 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:47:23,680 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:47:23,681 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:47:23,681 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:47:23,681 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:47:23,681 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:47:23,687 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:47:24,687 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:47:24,687 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:47:24,688 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:47:24,688 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:47:24,688 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:47:24,694 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:47:25,693 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:47:25,693 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:47:25,694 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:47:25,694 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:47:25,694 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:47:25,700 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:47:26,700 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:47:26,701 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:47:26,701 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:47:26,701 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:47:26,701 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:47:26,707 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:47:27,707 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:47:27,708 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:47:27,708 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:47:27,708 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:47:27,708 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:47:27,714 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:47:28,715 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:47:28,715 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:47:28,715 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:47:28,715 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:47:28,716 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:47:28,721 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:47:29,716 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:47:29,717 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:47:29,717 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:47:29,717 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:47:29,717 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:47:30,093 - INFO - Opening Unit Selection window
+2024-10-25 06:47:30,113 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:47:30,719 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:47:30,720 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:47:30,720 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:47:30,720 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:47:30,720 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:47:30,726 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:47:31,735 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:47:31,736 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:47:31,736 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:47:31,736 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:47:31,736 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:47:31,742 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:47:32,738 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:47:32,738 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:47:32,739 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:47:32,739 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:47:32,739 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:47:32,745 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:47:33,742 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:47:33,742 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:47:33,743 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:47:33,743 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:47:33,743 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:47:33,750 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:47:34,748 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:47:34,748 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:47:34,749 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:47:34,749 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:47:34,749 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:47:34,755 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:47:35,754 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:47:35,755 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:47:35,755 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:47:35,755 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:47:35,755 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:47:35,761 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:47:35,775 - DEBUG - Blitz oil (psychic sensor) lock state changed to False
+2024-10-25 06:47:36,133 - DEBUG - Blitz oil (psychic sensor) selection state changed to False
+2024-10-25 06:47:36,757 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:47:36,758 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:47:36,758 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:47:36,758 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:47:36,758 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:47:36,762 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:47:36,858 - DEBUG - Blitz oil (psychic sensor) selection state changed to True
+2024-10-25 06:47:37,763 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:47:37,764 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:47:37,764 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:47:37,764 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:47:37,764 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:47:37,769 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:47:38,768 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:47:38,769 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:47:38,769 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:47:38,769 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:47:38,769 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:47:38,775 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:47:39,568 - DEBUG - Blitz oil (psychic sensor) lock state changed to True
+2024-10-25 06:47:39,774 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:47:39,775 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:47:39,775 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:47:39,775 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:47:39,775 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:47:39,781 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:47:40,782 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:47:40,782 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:47:40,783 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:47:40,783 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:47:40,783 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:47:40,789 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:47:40,824 - DEBUG - Blitz oil (psychic sensor) lock state changed to False
+2024-10-25 06:47:41,789 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:47:41,790 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:47:41,790 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:47:41,790 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:47:41,790 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:47:41,796 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:47:42,806 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:47:42,806 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:47:42,807 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:47:42,807 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:47:42,807 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:47:42,813 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:47:43,807 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:47:43,808 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:47:43,808 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:47:43,808 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:47:43,808 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:47:43,814 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:47:44,813 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:47:44,813 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:47:44,814 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:47:44,814 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:47:44,814 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:47:44,820 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:47:45,820 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:47:45,820 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:47:45,821 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:47:45,821 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:47:45,821 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:47:45,826 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:47:46,827 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:47:46,828 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:47:46,828 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:47:46,828 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:47:46,828 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:47:46,834 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:47:47,834 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:47:47,834 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:47:47,834 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:47:47,834 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:47:47,835 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:47:47,840 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:47:48,837 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:47:48,837 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:47:48,838 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:47:48,838 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:47:48,838 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:47:48,843 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:47:49,842 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:47:49,843 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:47:49,843 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:47:49,843 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:47:49,843 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:47:49,849 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:47:50,850 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:47:50,851 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:47:50,851 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:47:50,851 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:47:50,851 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:47:50,857 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:47:51,851 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:47:51,851 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:47:51,852 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:47:51,852 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:47:51,852 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:47:51,858 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:47:52,863 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:47:52,864 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:47:52,864 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:47:52,864 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:47:52,864 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:47:52,869 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:47:53,870 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:47:53,871 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:47:53,871 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:47:53,871 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:47:53,871 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:47:53,877 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:47:54,872 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:47:54,873 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:47:54,873 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:47:54,873 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:47:54,873 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:47:54,880 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:47:55,883 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:47:55,883 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:47:55,884 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:47:55,884 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:47:55,884 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:47:55,889 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:47:56,786 - INFO - Opening Unit Selection window
+2024-10-25 06:47:56,885 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:47:56,886 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:47:56,886 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:47:56,886 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:47:56,886 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:47:56,892 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:47:57,887 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:47:57,888 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:47:57,888 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:47:57,888 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:47:57,888 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:47:57,894 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:47:58,900 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:47:58,901 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:47:58,901 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:47:58,901 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:47:58,901 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:47:58,907 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:47:59,907 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:47:59,908 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:47:59,908 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:47:59,908 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:47:59,908 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:47:59,914 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:48:00,910 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:48:00,911 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:48:00,911 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:48:00,911 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:48:00,911 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:48:00,916 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:48:01,915 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:48:01,915 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:48:01,915 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:48:01,916 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:48:01,916 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:48:01,921 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:48:02,919 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:48:02,920 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:48:02,920 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:48:02,920 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:48:02,920 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:48:02,925 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:48:03,926 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:48:03,927 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:48:03,927 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:48:03,927 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:48:03,927 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:48:03,932 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:48:04,932 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:48:04,933 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:48:04,933 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:48:04,933 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:48:04,933 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:48:04,938 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:48:05,716 - DEBUG - Tesla Reactor lock state changed to False
+2024-10-25 06:48:05,933 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:48:05,933 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:48:05,934 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:48:05,934 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:48:05,934 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:48:05,939 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:48:06,056 - DEBUG - Tesla Reactor selection state changed to False
+2024-10-25 06:48:06,386 - DEBUG - Tesla Reactor selection state changed to True
+2024-10-25 06:48:06,947 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:48:06,948 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:48:06,948 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:48:06,948 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:48:06,948 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:48:06,953 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:48:07,952 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:48:07,952 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:48:07,953 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:48:07,953 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:48:07,953 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:48:07,958 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:48:08,956 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:48:08,956 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:48:08,957 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:48:08,957 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:48:08,957 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:48:08,962 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:48:09,961 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:48:09,962 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:48:09,962 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:48:09,962 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:48:09,962 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:48:09,968 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:48:10,968 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:48:10,969 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:48:10,969 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:48:10,969 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:48:10,969 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:48:10,974 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:48:11,974 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:48:11,975 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:48:11,975 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:48:11,975 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:48:11,975 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:48:11,988 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:48:12,978 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:48:12,979 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:48:12,979 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:48:12,979 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:48:12,979 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:48:12,987 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:48:13,179 - INFO - Closing application...
+2024-10-25 06:48:13,980 - INFO - Emitted game_stopped signal.
+2024-10-25 06:48:14,982 - INFO - Data update thread has exited.
+2024-10-25 06:48:14,982 - INFO - Data update thread has finished.
+2024-10-25 06:48:14,989 - INFO - Saved selected units.
+2024-10-25 06:48:19,651 - INFO - Logging setup complete
+2024-10-25 06:48:19,711 - DEBUG - spawn_ini_path
+2024-10-25 06:48:19,711 - INFO - Game path: D:/ra2/Red Alert 2/Red Alert 2
+2024-10-25 06:48:19,712 - INFO - Waiting for the game to start and players to load...
+2024-10-25 06:48:19,712 - INFO - Waiting for the game to start...
+2024-10-25 06:48:20,049 - INFO - Game detected
+2024-10-25 06:48:20,049 - INFO - Skipping Player 0 as not fully initialized yet.
+2024-10-25 06:48:20,049 - INFO - Players loaded. Proceeding with players initialization.
+2024-10-25 06:48:20,050 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:48:20,050 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:48:20,050 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:48:20,050 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:48:20,050 - INFO - Player 1 color: orange
+2024-10-25 06:48:20,050 - INFO - Player 1 country name: YuriCountry
+2024-10-25 06:48:20,050 - INFO - Player 1 faction: Yuri
+2024-10-25 06:48:20,050 - INFO - Player 1 name: Snark
+2024-10-25 06:48:20,050 - INFO - Number of valid players: 1
+2024-10-25 06:48:20,050 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:48:20,051 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:48:20,051 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:48:20,051 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:48:20,051 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:48:20,057 - INFO - Game started handler called
+2024-10-25 06:48:20,057 - INFO - Creating HUD for Snark with color orange
+2024-10-25 06:48:20,221 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:48:21,062 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:48:21,063 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:48:21,063 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:48:21,063 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:48:21,063 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:48:21,071 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:48:22,071 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:48:22,072 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:48:22,072 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:48:22,072 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:48:22,072 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:48:22,079 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:48:22,947 - INFO - Opening Unit Selection window
+2024-10-25 06:48:23,072 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:48:23,073 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:48:23,073 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:48:23,073 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:48:23,073 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:48:23,080 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:48:24,075 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:48:24,075 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:48:24,076 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:48:24,076 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:48:24,076 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:48:24,083 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:48:25,085 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:48:25,086 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:48:25,086 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:48:25,086 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:48:25,086 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:48:25,093 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:48:25,898 - DEBUG - GI lock state changed to False
+2024-10-25 06:48:26,092 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:48:26,093 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:48:26,093 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:48:26,093 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:48:26,093 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:48:26,100 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:48:27,097 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:48:27,098 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:48:27,098 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:48:27,098 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:48:27,098 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:48:27,105 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:48:28,101 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:48:28,102 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:48:28,102 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:48:28,102 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:48:28,102 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:48:28,109 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:48:29,107 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:48:29,108 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:48:29,108 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:48:29,108 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:48:29,108 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:48:29,115 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:48:30,123 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:48:30,124 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:48:30,124 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:48:30,124 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:48:30,124 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:48:30,131 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:48:31,024 - DEBUG - Desolator lock state changed to True
+2024-10-25 06:48:31,139 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:48:31,140 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:48:31,140 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:48:31,140 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:48:31,140 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:48:31,147 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:48:32,153 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:48:32,154 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:48:32,154 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:48:32,154 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:48:32,154 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:48:32,161 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:48:32,184 - DEBUG - Desolator selection state changed to True
+2024-10-25 06:48:33,156 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:48:33,156 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:48:33,157 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:48:33,157 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:48:33,157 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:48:33,164 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:48:33,750 - DEBUG - Desolator lock state changed to False
+2024-10-25 06:48:34,158 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:48:34,159 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:48:34,159 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:48:34,159 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:48:34,159 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:48:34,166 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:48:34,445 - DEBUG - Desolator selection state changed to False
+2024-10-25 06:48:34,795 - DEBUG - Desolator selection state changed to True
+2024-10-25 06:48:35,171 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:48:35,172 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:48:35,172 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:48:35,172 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:48:35,172 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:48:35,179 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:48:35,597 - DEBUG - Desolator selection state changed to False
+2024-10-25 06:48:35,951 - DEBUG - Desolator selection state changed to True
+2024-10-25 06:48:36,179 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:48:36,180 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:48:36,180 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:48:36,180 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:48:36,180 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:48:36,187 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:48:37,186 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:48:37,187 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:48:37,187 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:48:37,187 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:48:37,187 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:48:37,194 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:48:38,193 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:48:38,194 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:48:38,194 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:48:38,194 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:48:38,194 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:48:38,201 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:48:39,199 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:48:39,199 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:48:39,200 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:48:39,200 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:48:39,200 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:48:39,207 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:48:40,204 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:48:40,205 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:48:40,205 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:48:40,205 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:48:40,205 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:48:40,213 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:48:41,211 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:48:41,212 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:48:41,212 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:48:41,212 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:48:41,212 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:48:41,219 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:48:42,216 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:48:42,216 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:48:42,217 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:48:42,217 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:48:42,217 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:48:42,224 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:48:43,224 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:48:43,225 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:48:43,225 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:48:43,225 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:48:43,225 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:48:43,236 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:48:44,076 - DEBUG - Desolator selection state changed to False
+2024-10-25 06:48:44,228 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:48:44,228 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:48:44,229 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:48:44,229 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:48:44,229 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:48:44,236 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:48:44,666 - DEBUG - Desolator selection state changed to True
+2024-10-25 06:48:45,236 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:48:45,237 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:48:45,237 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:48:45,237 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:48:45,237 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:48:45,249 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:48:45,811 - DEBUG - Desolator selection state changed to False
+2024-10-25 06:48:46,241 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:48:46,242 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:48:46,242 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:48:46,242 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:48:46,242 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:48:46,250 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:48:46,734 - DEBUG - conscript selection state changed to False
+2024-10-25 06:48:47,244 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:48:47,245 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:48:47,245 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:48:47,245 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:48:47,245 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:48:47,252 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:48:47,292 - DEBUG - Soviet Dog selection state changed to False
+2024-10-25 06:48:48,247 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:48:48,248 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:48:48,248 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:48:48,248 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:48:48,248 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:48:48,255 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:48:49,252 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:48:49,253 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:48:49,253 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:48:49,253 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:48:49,253 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:48:49,260 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:48:49,673 - DEBUG - conscript selection state changed to True
+2024-10-25 06:48:50,266 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:48:50,267 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:48:50,267 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:48:50,267 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:48:50,267 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:48:50,274 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:48:50,347 - DEBUG - conscript selection state changed to False
+2024-10-25 06:48:51,272 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:48:51,272 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:48:51,273 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:48:51,273 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:48:51,273 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:48:51,280 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:48:52,276 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:48:52,276 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:48:52,277 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:48:52,277 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:48:52,277 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:48:52,284 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:48:52,326 - DEBUG - Blitz oil (psychic sensor) selection state changed to False
+2024-10-25 06:48:53,198 - DEBUG - Blitz oil (psychic sensor) selection state changed to True
+2024-10-25 06:48:53,284 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:48:53,285 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:48:53,285 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:48:53,285 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:48:53,285 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:48:53,293 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:48:53,647 - DEBUG - Blitz oil (psychic sensor) selection state changed to False
+2024-10-25 06:48:54,288 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:48:54,289 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:48:54,289 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:48:54,289 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:48:54,289 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:48:54,294 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:48:55,293 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:48:55,294 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:48:55,294 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:48:55,294 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:48:55,294 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:48:55,299 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:48:55,481 - DEBUG - Tesla Reactor selection state changed to False
+2024-10-25 06:48:56,300 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:48:56,301 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:48:56,301 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:48:56,301 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:48:56,301 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:48:56,305 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:48:57,221 - DEBUG - conscript selection state changed to True
+2024-10-25 06:48:57,307 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:48:57,307 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:48:57,308 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:48:57,308 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:48:57,308 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:48:57,312 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:48:57,565 - DEBUG - Soviet Dog selection state changed to True
+2024-10-25 06:48:57,860 - DEBUG - Ivan selection state changed to True
+2024-10-25 06:48:58,305 - DEBUG - Terrorist selection state changed to True
+2024-10-25 06:48:58,312 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:48:58,312 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:48:58,312 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:48:58,313 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:48:58,313 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:48:58,317 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:48:58,651 - DEBUG - Soviet Engineer selection state changed to True
+2024-10-25 06:48:58,994 - DEBUG - Desolator selection state changed to True
+2024-10-25 06:48:59,317 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:48:59,317 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:48:59,318 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:48:59,318 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:48:59,318 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:48:59,324 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:49:00,064 - DEBUG - Boris selection state changed to True
+2024-10-25 06:49:00,323 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:49:00,324 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:49:00,324 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:49:00,324 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:49:00,324 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:49:00,330 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:49:00,353 - DEBUG - Flak Trooper selection state changed to True
+2024-10-25 06:49:01,325 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:49:01,326 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:49:01,326 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:49:01,326 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:49:01,326 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:49:01,333 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:49:01,473 - DEBUG - Terrorist selection state changed to False
+2024-10-25 06:49:01,770 - DEBUG - Ivan selection state changed to False
+2024-10-25 06:49:02,040 - DEBUG - Soviet Dog selection state changed to False
+2024-10-25 06:49:02,329 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:49:02,330 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:49:02,330 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:49:02,330 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:49:02,330 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:49:02,336 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:49:02,623 - DEBUG - Soviet Engineer selection state changed to False
+2024-10-25 06:49:02,934 - DEBUG - Flak Trooper selection state changed to False
+2024-10-25 06:49:03,193 - DEBUG - Boris selection state changed to False
+2024-10-25 06:49:03,336 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:49:03,337 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:49:03,337 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:49:03,337 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:49:03,337 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:49:03,343 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:49:03,439 - DEBUG - Desolator selection state changed to False
+2024-10-25 06:49:03,931 - DEBUG - conscript selection state changed to False
+2024-10-25 06:49:04,341 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:49:04,342 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:49:04,342 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:49:04,342 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:49:04,342 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:49:04,346 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:49:04,454 - DEBUG - conscript selection state changed to True
+2024-10-25 06:49:05,343 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:49:05,344 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:49:05,344 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:49:05,344 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:49:05,344 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:49:05,348 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:49:06,347 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:49:06,348 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:49:06,348 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:49:06,348 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:49:06,348 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:49:06,352 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:49:07,350 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:49:07,351 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:49:07,351 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:49:07,351 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:49:07,351 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:49:07,355 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:49:08,357 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:49:08,357 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:49:08,358 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:49:08,358 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:49:08,358 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:49:08,362 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:49:09,363 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:49:09,364 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:49:09,364 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:49:09,364 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:49:09,364 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:49:09,368 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:49:10,369 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:49:10,370 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:49:10,370 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:49:10,370 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:49:10,370 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:49:10,373 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:49:10,783 - DEBUG - conscript selection state changed to False
+2024-10-25 06:49:11,377 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:49:11,378 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:49:11,378 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:49:11,378 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:49:11,378 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:49:11,382 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:49:12,383 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:49:12,384 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:49:12,384 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:49:12,384 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:49:12,384 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:49:12,388 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:49:13,389 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:49:13,390 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:49:13,390 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:49:13,390 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:49:13,390 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:49:13,393 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:49:13,547 - INFO - Closing application...
+2024-10-25 06:49:14,391 - INFO - Emitted game_stopped signal.
+2024-10-25 06:49:15,391 - INFO - Data update thread has exited.
+2024-10-25 06:49:15,391 - INFO - Data update thread has finished.
+2024-10-25 06:49:15,398 - INFO - Saved selected units.
+2024-10-25 06:49:18,945 - INFO - Logging setup complete
+2024-10-25 06:49:19,007 - DEBUG - spawn_ini_path
+2024-10-25 06:49:19,007 - INFO - Game path: D:/ra2/Red Alert 2/Red Alert 2
+2024-10-25 06:49:19,008 - INFO - Waiting for the game to start and players to load...
+2024-10-25 06:49:19,008 - INFO - Waiting for the game to start...
+2024-10-25 06:49:19,341 - INFO - Game detected
+2024-10-25 06:49:19,342 - INFO - Skipping Player 0 as not fully initialized yet.
+2024-10-25 06:49:19,342 - INFO - Players loaded. Proceeding with players initialization.
+2024-10-25 06:49:19,342 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:49:19,342 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:49:19,342 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:49:19,342 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:49:19,342 - INFO - Player 1 color: orange
+2024-10-25 06:49:19,342 - INFO - Player 1 country name: YuriCountry
+2024-10-25 06:49:19,342 - INFO - Player 1 faction: Yuri
+2024-10-25 06:49:19,342 - INFO - Player 1 name: Snark
+2024-10-25 06:49:19,342 - INFO - Number of valid players: 1
+2024-10-25 06:49:19,342 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:49:19,343 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:49:19,343 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:49:19,343 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:49:19,343 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:49:19,349 - INFO - Game started handler called
+2024-10-25 06:49:19,349 - INFO - Creating HUD for Snark with color orange
+2024-10-25 06:49:19,517 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:49:20,352 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:49:20,353 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:49:20,353 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:49:20,353 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:49:20,353 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:49:20,360 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:49:21,358 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:49:21,359 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:49:21,359 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:49:21,359 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:49:21,359 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:49:21,364 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:49:22,359 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:49:22,360 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:49:22,360 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:49:22,360 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:49:22,360 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:49:22,365 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:49:23,364 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:49:23,365 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:49:23,365 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:49:23,365 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:49:23,365 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:49:23,370 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:49:24,370 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:49:24,371 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:49:24,371 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:49:24,371 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:49:24,371 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:49:24,378 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:49:25,376 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:49:25,376 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:49:25,377 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:49:25,377 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:49:25,377 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:49:25,382 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:49:26,381 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:49:26,382 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:49:26,382 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:49:26,382 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:49:26,382 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:49:26,387 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:49:27,389 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:49:27,390 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:49:27,390 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:49:27,390 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:49:27,390 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:49:27,396 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:49:28,396 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:49:28,397 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:49:28,397 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:49:28,397 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:49:28,397 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:49:28,403 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:49:29,410 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:49:29,411 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:49:29,411 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:49:29,411 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:49:29,411 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:49:29,417 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:49:30,413 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:49:30,413 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:49:30,414 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:49:30,414 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:49:30,414 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:49:30,419 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:49:31,419 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:49:31,420 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:49:31,420 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:49:31,420 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:49:31,420 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:49:31,426 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:49:32,424 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:49:32,425 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:49:32,425 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:49:32,425 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:49:32,425 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:49:32,430 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:49:33,431 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:49:33,432 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:49:33,432 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:49:33,432 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:49:33,432 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:49:33,439 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:49:34,440 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:49:34,441 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:49:34,441 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:49:34,441 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:49:34,441 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:49:34,446 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:49:35,446 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:49:35,446 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:49:35,447 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:49:35,447 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:49:35,447 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:49:35,454 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:49:36,451 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:49:36,451 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:49:36,452 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:49:36,452 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:49:36,452 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:49:36,457 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:49:37,459 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:49:37,460 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:49:37,460 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:49:37,460 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:49:37,460 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:49:37,465 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:49:38,463 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:49:38,464 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:49:38,464 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:49:38,464 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:49:38,464 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:49:38,469 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:49:39,470 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:49:39,471 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:49:39,471 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:49:39,471 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:49:39,471 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:49:39,476 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:49:40,473 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:49:40,474 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:49:40,474 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:49:40,474 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:49:40,474 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:49:40,479 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:49:41,479 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:49:41,480 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:49:41,480 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:49:41,480 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:49:41,480 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:49:41,486 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:49:42,484 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:49:42,485 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:49:42,485 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:49:42,485 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:49:42,485 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:49:42,490 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:49:43,490 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:49:43,491 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:49:43,491 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:49:43,491 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:49:43,491 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:49:43,496 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:49:44,196 - INFO - Opening Unit Selection window
+2024-10-25 06:49:44,492 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:49:44,493 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:49:44,493 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:49:44,493 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:49:44,493 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:49:44,498 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:49:45,504 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:49:45,504 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:49:45,505 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:49:45,505 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:49:45,505 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:49:45,510 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:49:46,512 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:49:46,513 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:49:46,513 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:49:46,513 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:49:46,513 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:49:46,518 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:49:47,517 - DEBUG - Updating dynamic data for player 2
+2024-10-25 06:49:47,517 - DEBUG - Initialized unit array pointer: 283116832
+2024-10-25 06:49:47,518 - DEBUG - Initialized building array pointer: 290657712
+2024-10-25 06:49:47,518 - DEBUG - Initialized infantry array pointer: 206125376
+2024-10-25 06:49:47,518 - DEBUG - Initialized aircraft array pointer: 0
+2024-10-25 06:49:47,523 - DEBUG - update_color called with new_text_color: #00ff00
+2024-10-25 06:49:48,069 - INFO - Closing application...
+2024-10-25 06:49:48,519 - INFO - Emitted game_stopped signal.
+2024-10-25 06:49:49,521 - INFO - Data update thread has exited.
+2024-10-25 06:49:49,521 - INFO - Data update thread has finished.
+2024-10-25 06:49:49,527 - INFO - Saved selected units.

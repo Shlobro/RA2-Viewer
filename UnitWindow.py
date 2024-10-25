@@ -80,7 +80,7 @@ class UnitWindowBase(QMainWindow):
         for unit_name, unit_info in self.unit_info_by_name.items():
             is_selected = unit_info.get('selected', False)
             is_locked = unit_info.get('locked', False)
-            if is_selected or is_locked:
+            if is_selected:
                 unit_type = unit_info.get('unit_type')
                 counter_widget = self.create_counter_widget(unit_name, 0, unit_type)
                 counter_widget.hide()
@@ -91,7 +91,7 @@ class UnitWindowBase(QMainWindow):
         unit_info = self.selected_units.get(faction, {}).get(unit_type, {}).get(unit_name, {})
         is_selected = unit_info.get('selected', False)
         is_locked = unit_info.get('locked', False)
-        if is_selected or is_locked:
+        if is_selected:
             # Ensure the counter widget exists
             if unit_name not in self.counters:
                 unit_type = unit_info.get('unit_type')
@@ -122,9 +122,11 @@ class UnitWindowBase(QMainWindow):
             unit_info = self.unit_info_by_name.get(unit_name, {})
             is_locked = unit_info.get('locked', False)
             unit_faction = unit_info.get('faction', None)
+            is_selected = unit_info.get('selected', False)
             if (0 < unit_count < 500):
                 counter_widget.show()
-            elif is_locked and unit_faction == player_faction:
+            # TODO do i really need another condition just for the blitz oil??
+            elif is_locked and is_selected and (unit_faction == player_faction or unit_name == "Blitz oil (psychic sensor)"):
                 counter_widget.show()
             else:
                 counter_widget.hide()
@@ -134,7 +136,7 @@ class UnitWindowBase(QMainWindow):
         unit_info = self.selected_units.get(faction, {}).get(unit_type, {}).get(unit_name, {})
         is_selected = unit_info.get('selected', False)
         is_locked = unit_info.get('locked', False)
-        if is_selected or is_locked:
+        if is_selected:
             # Ensure the counter widget exists
             if unit_name not in self.counters:
                 unit_type = unit_info.get('unit_type')

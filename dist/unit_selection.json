@@ -2,145 +2,704 @@
     "selected_units": {
         "Allied": {
             "Infantry": {
-                "GI": false,
-                "Allied Dog": false,
-                "GGI": false,
-                "Allied Engineer": false,
-                "Chrono Legionnaire": true,
-                "Spy": true,
-                "Rocketeer": true,
-                "Tanya": true,
-                "Navy Seal": true
+                "GI": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Infantry",
+                    "faction": "Allied"
+                },
+                "Allied Dog": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Infantry",
+                    "faction": "Allied"
+                },
+                "GGI": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Infantry",
+                    "faction": "Allied"
+                },
+                "Allied Engineer": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Infantry",
+                    "faction": "Allied"
+                },
+                "Chrono Legionnaire": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Infantry",
+                    "faction": "Allied"
+                },
+                "Spy": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Infantry",
+                    "faction": "Allied"
+                },
+                "Rocketeer": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Infantry",
+                    "faction": "Allied"
+                },
+                "Tanya": {
+                    "selected": true,
+                    "locked": false,
+                    "unit_type": "Infantry",
+                    "faction": "Allied"
+                },
+                "Navy Seal": {
+                    "selected": true,
+                    "locked": false,
+                    "unit_type": "Infantry",
+                    "faction": "Allied"
+                }
             },
             "Structure": {
-                "Allied Power Plant": false,
-                "Allied Barracks": false,
-                "SpySat": false,
-                "Allied Naval Yard": false,
-                "Chronoshpere": false,
-                "Allied Service Depot": false,
-                "Gap Generator": false,
-                "Grand Cannon": false,
-                "Ore Purifier": false,
-                "Allied AFC": false,
-                "PillBox": false,
-                "Allied Battle Lab": false,
-                "Robot Control Center": false,
-                "Allied Ore Refinery": false,
-                "Weather Controller": false,
-                "Allied War Factory": true
+                "Allied Power Plant": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Structure",
+                    "faction": "Allied"
+                },
+                "Allied Barracks": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Structure",
+                    "faction": "Allied"
+                },
+                "SpySat": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Structure",
+                    "faction": "Allied"
+                },
+                "Allied Naval Yard": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Structure",
+                    "faction": "Allied"
+                },
+                "Chronoshpere": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Structure",
+                    "faction": "Allied"
+                },
+                "Allied Service Depot": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Structure",
+                    "faction": "Allied"
+                },
+                "Gap Generator": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Structure",
+                    "faction": "Allied"
+                },
+                "Grand Cannon": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Structure",
+                    "faction": "Allied"
+                },
+                "Ore Purifier": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Structure",
+                    "faction": "Allied"
+                },
+                "Allied AFC": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Structure",
+                    "faction": "Allied"
+                },
+                "PillBox": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Structure",
+                    "faction": "Allied"
+                },
+                "Allied Battle Lab": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Structure",
+                    "faction": "Allied"
+                },
+                "Robot Control Center": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Structure",
+                    "faction": "Allied"
+                },
+                "Allied Ore Refinery": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Structure",
+                    "faction": "Allied"
+                },
+                "Weather Controller": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Structure",
+                    "faction": "Allied"
+                },
+                "Allied War Factory": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Structure",
+                    "faction": "Allied"
+                },
+                "Blitz oil (psychic sensor)": {
+                    "selected": true,
+                    "locked": true,
+                    "unit_type": "Structure",
+                    "faction": "Allied"
+                }
             },
             "Tank": {
-                "Grizzly": true,
-                "IFV": true,
-                "Chrono Miner": true,
-                "Battle Fortress": false,
-                "Allied MCV": false,
-                "Allied Amphibious Transport": false,
-                "Prism Tank": true,
-                "Tank Destroyer": false,
-                "Robot Tank": false,
-                "NightHawk Transport": false,
-                "Mirage Tank": true
+                "Grizzly": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Tank",
+                    "faction": "Allied"
+                },
+                "IFV": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Tank",
+                    "faction": "Allied"
+                },
+                "Chrono Miner": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Tank",
+                    "faction": "Allied"
+                },
+                "Battle Fortress": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Tank",
+                    "faction": "Allied"
+                },
+                "Allied MCV": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Tank",
+                    "faction": "Allied"
+                },
+                "Allied Amphibious Transport": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Tank",
+                    "faction": "Allied"
+                },
+                "Prism Tank": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Tank",
+                    "faction": "Allied"
+                },
+                "Tank Destroyer": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Tank",
+                    "faction": "Allied"
+                },
+                "Robot Tank": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Tank",
+                    "faction": "Allied"
+                },
+                "NightHawk Transport": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Tank",
+                    "faction": "Allied"
+                },
+                "Mirage Tank": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Tank",
+                    "faction": "Allied"
+                }
             },
             "Naval": {
-                "Agis Cruiser": false,
-                "Aircraft Carrier": true,
-                "Destroyer": true,
-                "Dolphin": true,
-                "Allied Amphibious Transport": false
+                "Agis Cruiser": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Naval",
+                    "faction": "Allied"
+                },
+                "Aircraft Carrier": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Naval",
+                    "faction": "Allied"
+                },
+                "Destroyer": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Naval",
+                    "faction": "Allied"
+                },
+                "Dolphin": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Naval",
+                    "faction": "Allied"
+                },
+                "Allied Amphibious Transport": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Naval",
+                    "faction": "Allied"
+                }
             },
             "Aircraft": {
-                "Black Eagle": true,
-                "Harrier": true
+                "Black Eagle": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Aircraft",
+                    "faction": "Allied"
+                },
+                "Harrier": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Aircraft",
+                    "faction": "Allied"
+                }
             }
         },
         "Soviet": {
             "Infantry": {
-                "Desolator": false,
-                "conscript": false,
-                "Boris": false,
-                "Flak Trooper": false,
-                "Soviet Engineer": false,
-                "Soviet Dog": true,
-                "Ivan": false,
-                "Terrorist": false
+                "Desolator": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Infantry",
+                    "faction": "Soviet"
+                },
+                "conscript": {
+                    "selected": false,
+                    "locked": true,
+                    "unit_type": "Infantry",
+                    "faction": "Soviet"
+                },
+                "Boris": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Infantry",
+                    "faction": "Soviet"
+                },
+                "Flak Trooper": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Infantry",
+                    "faction": "Soviet"
+                },
+                "Soviet Engineer": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Infantry",
+                    "faction": "Soviet"
+                },
+                "Soviet Dog": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Infantry",
+                    "faction": "Soviet"
+                },
+                "Ivan": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Infantry",
+                    "faction": "Soviet"
+                },
+                "Terrorist": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Infantry",
+                    "faction": "Soviet"
+                }
             },
             "Structure": {
-                "Soviet Barracks": false,
-                "Battle Bunker": false,
-                "Soviet War Factory": true,
-                "Sov Ore Ref": false,
-                "Flak Cannon": false,
-                "Iron Curtain": false,
-                "Sentry Gun": false,
-                "Industrial Plant": false,
-                "Nuclear Missile Launcher": false,
-                "Sov Radar": false,
-                "Nuclear Reactor": false,
-                "Tesla Reactor": false,
-                "Sov Service Depot": false,
-                "Sov Naval Yard": false,
-                "Tesla Coil": false
+                "Soviet Barracks": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Structure",
+                    "faction": "Soviet"
+                },
+                "Battle Bunker": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Structure",
+                    "faction": "Soviet"
+                },
+                "Soviet War Factory": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Structure",
+                    "faction": "Soviet"
+                },
+                "Sov Ore Ref": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Structure",
+                    "faction": "Soviet"
+                },
+                "Flak Cannon": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Structure",
+                    "faction": "Soviet"
+                },
+                "Iron Curtain": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Structure",
+                    "faction": "Soviet"
+                },
+                "Sentry Gun": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Structure",
+                    "faction": "Soviet"
+                },
+                "Industrial Plant": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Structure",
+                    "faction": "Soviet"
+                },
+                "Nuclear Missile Launcher": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Structure",
+                    "faction": "Soviet"
+                },
+                "Sov Radar": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Structure",
+                    "faction": "Soviet"
+                },
+                "Nuclear Reactor": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Structure",
+                    "faction": "Soviet"
+                },
+                "Tesla Reactor": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Structure",
+                    "faction": "Soviet"
+                },
+                "Sov Service Depot": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Structure",
+                    "faction": "Soviet"
+                },
+                "Sov Naval Yard": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Structure",
+                    "faction": "Soviet"
+                },
+                "Tesla Coil": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Structure",
+                    "faction": "Soviet"
+                },
+                "Blitz oil (psychic sensor)": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Structure",
+                    "faction": "Soviet"
+                }
             },
             "Tank": {
-                "Rhino Tank": true,
-                "Apoc": false,
-                "Terror Drone": true,
-                "Siege Chopper": false,
-                "Kirov": false,
-                "War Miner": true,
-                "V3 Rocket Launcher": false,
-                "Soviet MCV": false,
-                "Demolition truck": false
+                "Rhino Tank": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Tank",
+                    "faction": "Soviet"
+                },
+                "Apoc": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Tank",
+                    "faction": "Soviet"
+                },
+                "Terror Drone": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Tank",
+                    "faction": "Soviet"
+                },
+                "Siege Chopper": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Tank",
+                    "faction": "Soviet"
+                },
+                "Kirov": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Tank",
+                    "faction": "Soviet"
+                },
+                "War Miner": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Tank",
+                    "faction": "Soviet"
+                },
+                "V3 Rocket Launcher": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Tank",
+                    "faction": "Soviet"
+                },
+                "Soviet MCV": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Tank",
+                    "faction": "Soviet"
+                },
+                "Demolition truck": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Tank",
+                    "faction": "Soviet"
+                }
             },
             "Naval": {
-                "Dreadnought": true,
-                "Squid": true,
-                "Typhoon attack sub": true,
-                "Sea Scorpion": false
+                "Dreadnought": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Naval",
+                    "faction": "Soviet"
+                },
+                "Squid": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Naval",
+                    "faction": "Soviet"
+                },
+                "Typhoon attack sub": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Naval",
+                    "faction": "Soviet"
+                },
+                "Sea Scorpion": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Naval",
+                    "faction": "Soviet"
+                }
             },
             "Aircraft": {}
         },
         "Yuri": {
             "Infantry": {
-                "Initiate": false,
-                "Virus": false,
-                "Yuri Clone": false,
-                "Yuri Engineer": false,
-                "Yuri Prime": false,
-                "Brute": true
+                "Initiate": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Infantry",
+                    "faction": "Yuri"
+                },
+                "Virus": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Infantry",
+                    "faction": "Yuri"
+                },
+                "Yuri Clone": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Infantry",
+                    "faction": "Yuri"
+                },
+                "Yuri Engineer": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Infantry",
+                    "faction": "Yuri"
+                },
+                "Yuri Prime": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Infantry",
+                    "faction": "Yuri"
+                },
+                "Brute": {
+                    "selected": true,
+                    "locked": false,
+                    "unit_type": "Infantry",
+                    "faction": "Yuri"
+                }
             },
             "Structure": {
-                "Yuri War Factory": true,
-                "Yuri Barracks": false,
-                "Cloning Vats": false,
-                "Tank Bunker": false,
-                "Gattling Cannon": false,
-                "Grinder": false,
-                "Yuri Radar": false,
-                "Psychic Tower": false,
-                "Psychic dominator": false,
-                "Yuri Battle Lab": false,
-                "Bio Reactor": false,
-                "Slave Miner Deployed": true,
-                "Yuri Naval Yard": false
+                "Yuri War Factory": {
+                    "selected": true,
+                    "locked": false,
+                    "unit_type": "Structure",
+                    "faction": "Yuri"
+                },
+                "Yuri Barracks": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Structure",
+                    "faction": "Yuri"
+                },
+                "Cloning Vats": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Structure",
+                    "faction": "Yuri"
+                },
+                "Tank Bunker": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Structure",
+                    "faction": "Yuri"
+                },
+                "Gattling Cannon": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Structure",
+                    "faction": "Yuri"
+                },
+                "Grinder": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Structure",
+                    "faction": "Yuri"
+                },
+                "Yuri Radar": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Structure",
+                    "faction": "Yuri"
+                },
+                "Psychic Tower": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Structure",
+                    "faction": "Yuri"
+                },
+                "Psychic dominator": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Structure",
+                    "faction": "Yuri"
+                },
+                "Yuri Battle Lab": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Structure",
+                    "faction": "Yuri"
+                },
+                "Bio Reactor": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Structure",
+                    "faction": "Yuri"
+                },
+                "Slave Miner Deployed": {
+                    "selected": true,
+                    "locked": false,
+                    "unit_type": "Structure",
+                    "faction": "Yuri"
+                },
+                "Yuri Naval Yard": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Structure",
+                    "faction": "Yuri"
+                },
+                "Blitz oil (psychic sensor)": {
+                    "selected": true,
+                    "locked": true,
+                    "unit_type": "Structure",
+                    "faction": "Yuri"
+                }
             },
             "Tank": {
-                "Gattling Tank": true,
-                "Chaos Drone": false,
-                "Disc": true,
-                "Magnetron": true,
-                "Mastermind": true,
-                "Lasher": true,
-                "Yuri Amphibious Transport": false,
-                "Yuri MCV": false
+                "Gattling Tank": {
+                    "selected": true,
+                    "locked": false,
+                    "unit_type": "Tank",
+                    "faction": "Yuri"
+                },
+                "Chaos Drone": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Tank",
+                    "faction": "Yuri"
+                },
+                "Disc": {
+                    "selected": true,
+                    "locked": false,
+                    "unit_type": "Tank",
+                    "faction": "Yuri"
+                },
+                "Magnetron": {
+                    "selected": true,
+                    "locked": false,
+                    "unit_type": "Tank",
+                    "faction": "Yuri"
+                },
+                "Mastermind": {
+                    "selected": true,
+                    "locked": false,
+                    "unit_type": "Tank",
+                    "faction": "Yuri"
+                },
+                "Lasher": {
+                    "selected": true,
+                    "locked": false,
+                    "unit_type": "Tank",
+                    "faction": "Yuri"
+                },
+                "Yuri Amphibious Transport": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Tank",
+                    "faction": "Yuri"
+                },
+                "Yuri MCV": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Tank",
+                    "faction": "Yuri"
+                }
             },
             "Naval": {
-                "Boomer Sub": true,
-                "Yuri Amphibious Transport": false
+                "Boomer Sub": {
+                    "selected": true,
+                    "locked": false,
+                    "unit_type": "Naval",
+                    "faction": "Yuri"
+                },
+                "Yuri Amphibious Transport": {
+                    "selected": false,
+                    "locked": false,
+                    "unit_type": "Naval",
+                    "faction": "Yuri"
+                }
             },
             "Aircraft": {}
         }
-    }
+    },
+    "units": {}
 }

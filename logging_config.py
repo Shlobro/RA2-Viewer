@@ -2,7 +2,7 @@ import logging
 import sys
 
 
-def setup_logging(log_to_console=True):
+def setup_logging(log_to_console=False):
     """
     Sets up logging for the application. Outputs to the console by default.
     To switch to file logging, set log_to_console=False.
