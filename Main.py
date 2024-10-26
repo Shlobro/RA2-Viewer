@@ -154,10 +154,13 @@ def create_unit_windows_in_current_mode():
         # Create new unit windows based on mode
         if separate:
             unit_window_images = UnitWindowImagesOnly(player, hud_positions, selected_units_dict)
+            unit_window_images.setWindowTitle(f"Player {player.color_name} unit images window")
             unit_window_numbers = UnitWindowNumbersOnly(player, hud_positions, selected_units_dict)
+            unit_window_numbers.setWindowTitle(f"Player {player.color_name} unit numbers window")
             hud_windows[i] = ((unit_window_images, unit_window_numbers), resource_window)
         else:
             unit_window = UnitWindowWithImages(player, hud_positions, selected_units_dict)
+            unit_window.setWindowTitle(f"Player {player.color_name} unit window")
             hud_windows[i] = (unit_window, resource_window)
 
 
