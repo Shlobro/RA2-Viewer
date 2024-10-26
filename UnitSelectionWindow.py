@@ -8,7 +8,7 @@ from PySide6.QtGui import QPixmap, QImage, QAction, QPainter
 from PySide6.QtWidgets import QMainWindow, QWidget, QTabWidget, QVBoxLayout, QGridLayout, QPushButton, QLabel, QMenu
 from PySide6.QtCore import Qt
 
-from common import (names, name_to_path)
+from common import (names, name_to_path, factions, unit_types)
 
 
 class UnitSelectionWindow(QMainWindow):
@@ -39,7 +39,6 @@ class UnitSelectionWindow(QMainWindow):
         layout.addWidget(self.tab_widget)
 
     def create_faction_tabs(self):
-        factions = ['Allied', 'Soviet', 'Yuri']
         for faction in factions:
             faction_tab = QWidget()
             faction_layout = QVBoxLayout(faction_tab)
@@ -53,7 +52,6 @@ class UnitSelectionWindow(QMainWindow):
 
     def create_sub_tabs(self, faction, sub_tab_widget):
         """Create sub-tabs and populate them with units if available."""
-        unit_types = ['Infantry', 'Structure', 'Tank', 'Naval', 'Aircraft']
         for unit_type in unit_types:
             sub_tab = QWidget()
             sub_layout = QGridLayout(sub_tab)  # Use QGridLayout for grid arrangement

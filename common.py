@@ -160,6 +160,15 @@ names = {
             "Yuri Amphibious Transport"
         ],
         "Aircraft": []
+    },
+    "Other":{
+        "Infantry": [],
+        "Structure": [
+            "Blitz oil (psychic sensor)"
+        ],
+        "Tank": [],
+        "Naval": [],
+        "Aircraft": [],
     }
 }
 
@@ -175,6 +184,11 @@ COLOR_NAME_MAPPING = {
     25: "cyan",
     29: "green",
 }
+
+factions = ['Allied', 'Soviet', 'Yuri', 'Other']
+
+unit_types = ['Infantry', 'Structure', 'Tank', 'Naval', 'Aircraft']
+
 
 def name_to_path(name):
     return 'cameos/png/' + name + '.png'
