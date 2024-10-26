@@ -79,25 +79,31 @@ class UnitWindowBase(QMainWindow):
     def load_selected_units_and_create_counters(self):
         for unit_name, unit_info in self.unit_info_by_name.items():
             is_selected = unit_info.get('selected', False)
-            is_locked = unit_info.get('locked', False)
+            position = unit_info.get('position', -1) # -1 means at the end
             if is_selected:
                 unit_type = unit_info.get('unit_type')
                 counter_widget = self.create_counter_widget(unit_name, 0, unit_type)
                 counter_widget.hide()
-                self.layout.addWidget(counter_widget)
+                if self.layout.count() < position:
+                    self.layout.addWidget(counter_widget)
+                else:
+                    self.layout.insertWidget(position, counter_widget)
                 self.counters[unit_name] = (counter_widget, unit_type)
 
     def update_selected_widgets(self, faction, unit_type, unit_name, state):
         unit_info = self.selected_units.get(faction, {}).get(unit_type, {}).get(unit_name, {})
         is_selected = unit_info.get('selected', False)
-        is_locked = unit_info.get('locked', False)
+        position = unit_info.get('position', -1) # -1 means at the end
         if is_selected:
             # Ensure the counter widget exists
             if unit_name not in self.counters:
                 unit_type = unit_info.get('unit_type')
                 counter_widget = self.create_counter_widget(unit_name, 0, unit_type)
                 counter_widget.hide()
-                self.layout.addWidget(counter_widget)
+                if self.layout.count() < position:
+                    self.layout.addWidget(counter_widget)
+                else:
+                    self.layout.insertWidget(position, counter_widget)
                 self.counters[unit_name] = (counter_widget, unit_type)
         else:
             # Remove the counter widget if it exists
@@ -105,6 +111,24 @@ class UnitWindowBase(QMainWindow):
             if counter_widget:
                 self.layout.removeWidget(counter_widget)
                 counter_widget.deleteLater()
+
+    def update_position_widgets(self, faction, unit_type, unit_name):
+        unit_info = self.selected_units.get(faction, {}).get(unit_type, {}).get(unit_name, {})
+        is_selected = unit_info.get('selected', False)
+        position = unit_info.get('position', -1)  # -1 means at the end
+        if is_selected:
+            counter_widget, _ = self.counters.pop(unit_name, (None, None))
+            if counter_widget:
+                self.layout.removeWidget(counter_widget)
+                counter_widget.deleteLater()
+            unit_type = unit_info.get('unit_type')
+            counter_widget = self.create_counter_widget(unit_name, 0, unit_type)
+            counter_widget.hide()
+            if self.layout.count() < position:
+                self.layout.addWidget(counter_widget)
+            else:
+                self.layout.insertWidget(position, counter_widget)
+            self.counters[unit_name] = (counter_widget, unit_type)
 
     def update_all_counters_size(self, new_size):
         self.size = new_size
