@@ -34,7 +34,9 @@ class CounterWidgetBase(QLabel):
         else:
             return QColor(Qt.red)  # Default color
 
-
+    def update_show_frame(self, show_frame):
+        self.show_frame = show_frame
+        self.repaint()
 
 class CounterWidgetImageOnly(CounterWidgetBase):
     def __init__(self, image_path, color=Qt.red, size=100, show_frame=True, parent=None):
@@ -57,9 +59,6 @@ class CounterWidgetImageOnly(CounterWidgetBase):
             painter.setPen(pen)
             painter.drawRoundedRect(0, 0, self.scaled_pixmap.width(), self.scaled_pixmap.height(), 10, 10)
 
-    def update_show_frame(self, show_frame):
-        self.show_frame = show_frame
-        self.repaint()
 
     def update_size(self, new_size):
         super().update_size(new_size)
