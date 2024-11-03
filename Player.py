@@ -1,7 +1,6 @@
 import ctypes
 import logging
 import traceback
-from ctypes import wintypes
 
 from PySide6.QtGui import QColor
 
@@ -35,7 +34,7 @@ infantry_offsets = {
     0x0: "GI", 0x4: "conscript", 0x8: "tesla trooper", 0xc: "Allied Engineer", 0x10: "Rocketeer",
     0x14: "Navy Seal", 0x18: "Yuri Clone", 0x1c: "Ivan", 0x20: "Desolator", 0x24: "Soviet Dog",
     0x3c: "Chrono Legionnaire", 0x40: "Spy", 0x50: "Yuri Prime", 0x54: "Sniper", 0x60: "Tanya",
-    0x6c: "sov engi", 0x68: "Terrorist", 0x70: "Allied Dog", 0xb4: "Yuri Engineer",
+    0x6c: "Soviet Engineer", 0x68: "Terrorist", 0x70: "Allied Dog", 0xb4: "Yuri Engineer",
     0xb8: "GGI", 0xbc: "Initiate", 0xc0: "Boris", 0xc4: "Brute", 0xc8: "Virus",
 }
 
@@ -47,7 +46,7 @@ tank_offsets = {
     0x64: "Dolphin", 0x68: "Soviet MCV", 0x6c: "Tank Destroyer", 0x7c: "Lasher", 0x84: "Chrono Miner",
     0x88: "Prism Tank", 0x90: "Sea Scorpion", 0x94: "Mirage Tank", 0x98: "IFV", 0xa4: "Demolition truck",
     0xdc: "Yuri Amphibious Transport", 0xe0: "Yuri MCV", 0xe4: "Slave miner undeployed", 0xf0: "Gattling Tank",
-    0xf4: "Battle Fortress", 0xfc: "Chaos Drone", 0xf8: "MagnetroTn", 0x108: "Boomer", 0x10c: "Siege Chopper",
+    0xf4: "Battle Fortress", 0xfc: "Chaos Drone", 0xf8: "Magnetron", 0x108: "Boomer", 0x10c: "Siege Chopper",
     0x114: "Mastermind", 0x118: "Disc", 0x120: "Robot Tank",
 }
 
@@ -75,6 +74,7 @@ aircraft_offsets = {
 class ProcessExitedException(Exception):
     """Custom exception to indicate that the game process has exited."""
     pass
+
 
 class Player:
     def __init__(self, index, process_handle, real_class_base):
@@ -175,10 +175,14 @@ class Player:
                     # // TODO this if statement is dumb. why won't the test value work for the oils?
                     if name == "Blitz oil (psychic sensor)" and 15 > count > 0:
                         counts[name] = count
-                    elif count <= test + 1:
+                    elif name == "Oil":
+                        counts[name] = count
+                        self.write_oil_count_to_file(count)
+                    elif count <= test:
                         counts[name] = count
                     else:
                         counts[name] = 0
+
                 else:
                     logging.warning(f"Failed to read memory for {name}, count_data or test_data is None.")
             return counts
@@ -187,6 +191,17 @@ class Player:
         except Exception as e:
             logging.error(f"Exception in read_and_store_inf_units_buildings for player {self.username.value}: {e}")
             traceback.print_exc()
+
+    def write_oil_count_to_file(self, oil_count):
+        try:
+            # Construct the filename based on the player's color
+            filename = f"{self.color_name}_oil_count.txt"
+            # Open the file in write mode (this will create the file if it doesn't exist)
+            with open(filename, 'w') as file:
+                file.write(str(oil_count))
+            logging.debug(f"Wrote oil count {oil_count} to file {filename}")
+        except Exception as e:
+            logging.error(f"Failed to write oil count to file: {e}")
 
     def update_dynamic_data(self):
         try:

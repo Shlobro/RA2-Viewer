@@ -344,8 +344,8 @@
                     "position": -1
                 },
                 "Soviet Engineer": {
-                    "selected": false,
-                    "locked": false,
+                    "selected": true,
+                    "locked": true,
                     "unit_type": "Infantry",
                     "faction": "Soviet",
                     "position": -1
@@ -723,7 +723,7 @@
                     "position": -1
                 },
                 "Chaos Drone": {
-                    "selected": false,
+                    "selected": true,
                     "locked": false,
                     "unit_type": "Tank",
                     "faction": "Yuri",
@@ -738,10 +738,10 @@
                 },
                 "Magnetron": {
                     "selected": true,
-                    "locked": false,
+                    "locked": true,
                     "unit_type": "Tank",
                     "faction": "Yuri",
-                    "position": -1
+                    "position": 0
                 },
                 "Mastermind": {
                     "selected": true,
@@ -794,7 +794,7 @@
             "Structure": {
                 "Blitz oil (psychic sensor)": {
                     "selected": true,
-                    "locked": true,
+                    "locked": false,
                     "unit_type": "Structure",
                     "faction": "Other",
                     "position": -1
