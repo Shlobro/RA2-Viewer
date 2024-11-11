@@ -1,50 +1,41 @@
-#UnitSelectionWindow.py
-import json
+# UnitSelectionWindow.py
 import logging
-import os
-from idlelib.debugger_r import frametable
-
-from PySide6.QtGui import QPixmap, QImage, QAction, QPainter, QFont
-from PySide6.QtWidgets import QMainWindow, QWidget, QTabWidget, QVBoxLayout, QGridLayout, QPushButton, QLabel, QMenu, \
-    QInputDialog
+from PySide6.QtGui import QPixmap, QAction, QPainter, QFont
+from PySide6.QtWidgets import QMainWindow, QWidget, QTabWidget, QVBoxLayout, QGridLayout, QLabel, QMenu, QInputDialog
 from PySide6.QtCore import Qt
 
-from common import (names, name_to_path, factions, unit_types)
+from common import name_to_path, factions, unit_types
 
 
 class UnitSelectionWindow(QMainWindow):
-    def __init__(self, selected_units_dict, hud_windows, parent=None):
+    """A window for selecting units across factions and types, with options to lock, position, and visually update units."""
+
+    def __init__(self, unit_data, hud_windows, parent=None):
         super().__init__(parent)
         self.hud_windows = hud_windows
-
-        # Ensure 'selected_units' key exists in selected_units_dict
-        if 'selected_units' not in selected_units_dict:
-            selected_units_dict['selected_units'] = {}
-        self.units_data = selected_units_dict['selected_units']
-
-        # Migrate units data to new format if necessary
-        self.migrate_units_data()
+        self.units_data = unit_data.selected_units
 
         self.setWindowTitle("Unit Selection")
         self.setGeometry(200, 200, 400, 300)
 
+        # Main widget and layout
         main_widget = QWidget(self)
         self.setCentralWidget(main_widget)
-
-        # Create tabs for factions
-        self.tab_widget = QTabWidget()
-        self.create_faction_tabs()
-
-        # Layout setup
         layout = QVBoxLayout(main_widget)
+
+        # Tab widget for factions
+        self.tab_widget = QTabWidget()
         layout.addWidget(self.tab_widget)
 
+        # Create tabs for each faction
+        self.create_faction_tabs()
+
     def create_faction_tabs(self):
+        """Creates main tabs for each faction, and adds sub-tabs by unit type."""
         for faction in factions:
             faction_tab = QWidget()
             faction_layout = QVBoxLayout(faction_tab)
 
-            # Create sub-tabs (Infantry, Structure, Tank, Naval, Aircraft)
             sub_tab_widget = QTabWidget()
             self.create_sub_tabs(faction, sub_tab_widget)
 
@@ -52,106 +43,81 @@ class UnitSelectionWindow(QMainWindow):
             self.tab_widget.addTab(faction_tab, faction)
 
     def create_sub_tabs(self, faction, sub_tab_widget):
-        """Create sub-tabs and populate them with units if available."""
+        """Creates sub-tabs for each unit type within a faction, displaying unit options."""
         for unit_type in unit_types:
             sub_tab = QWidget()
-            sub_layout = QGridLayout(sub_tab)  # Use QGridLayout for grid arrangement
-            sub_layout.setAlignment(Qt.AlignTop)  # Align everything at the top of the tab
+            sub_layout = QGridLayout(sub_tab)
+            sub_layout.setAlignment(Qt.AlignTop)
 
-            # Check if there are any units defined for this faction and unit type
-            units = names[faction][unit_type]
-
-            # Only add the units that have been defined (otherwise keep the tab empty)
-            row = 0
-            col = 0
+            units = list(self.units_data.get(faction, {}).get(unit_type, {}).keys())
+            row, col = 0, 0
             for unit in units:
-                # Create a vertical layout for each unit (image acts as checkbox)
-                unit_layout = QVBoxLayout()
-                unit_layout.setAlignment(Qt.AlignTop | Qt.AlignHCenter)
-
-                # Create image label and set it as clickable
-                image_label = QLabel()
-                image_path = name_to_path(unit)  # Ensure image path is available
-                image_label.setProperty("image_path", image_path)  # Store the image path
-                pixmap = QPixmap(image_path)
-                if not pixmap.isNull():
-                    image_label.setPixmap(pixmap.scaled(50, 50, Qt.KeepAspectRatio))
-
-                # Set selection state and connect click event
-                is_selected = self.is_unit_selected(faction, unit_type, unit)
-                is_locked = self.is_unit_locked(faction, unit_type, unit)
-                position = self.get_unit_position(faction, unit_type, unit)
-                self.update_image_selection(image_label, is_selected, is_locked, position)
-
-                # Add event handling to the label
-                image_label.mousePressEvent = lambda event, f=faction, ut=unit_type, u=unit, label=image_label: self.unit_image_mousePressEvent(event, f, ut, u, label)
-
-
-                # Add the image label to the unit's layout
-                unit_layout.addWidget(image_label, alignment=Qt.AlignHCenter)
-
-                # Add the unit layout to the grid layout
+                unit_layout = self.create_unit_layout(faction, unit_type, unit)
                 sub_layout.addLayout(unit_layout, row, col)
 
-                # Update row and column for the grid (e.g., 3 columns per row)
                 col += 1
-                if col >= 3:  # You can adjust the number of columns here
+                if col >= 3:
                     col = 0
                     row += 1
 
             sub_tab_widget.addTab(sub_tab, unit_type)
 
+    def create_unit_layout(self, faction, unit_type, unit):
+        """Creates a layout for each unit option with an image label."""
+        unit_layout = QVBoxLayout()
+        unit_layout.setAlignment(Qt.AlignTop | Qt.AlignHCenter)
+
+        # Set up the image label with selection and event handling
+        image_label = QLabel()
+        image_label.setProperty("image_path", name_to_path(unit))
+        pixmap = QPixmap(image_label.property("image_path"))
+        if not pixmap.isNull():
+            image_label.setPixmap(pixmap.scaled(50, 50, Qt.KeepAspectRatio))
+
+        # Update initial selection and lock state, and add click handling
+        is_selected = self.is_unit_selected(faction, unit_type, unit)
+        is_locked = self.is_unit_locked(faction, unit_type, unit)
+        position = self.get_unit_position(faction, unit_type, unit)
+        self.update_image_selection(image_label, is_selected, is_locked, position)
+
+        image_label.mousePressEvent = lambda event, f=faction, ut=unit_type, u=unit,
+                                             label=image_label: self.unit_image_mousePressEvent(event, f, ut, u, label)
+        unit_layout.addWidget(image_label, alignment=Qt.AlignHCenter)
+        return unit_layout
+
+    # Helper Methods for Unit Properties
+    # ------------------------------------------------------------------------
+
     def is_unit_selected(self, faction, unit_type, unit):
-        unit_info = self.units_data.get(faction, {}).get(unit_type, {}).get(unit, {})
-
-        # Check if unit_info is a boolean (old format)
-        if isinstance(unit_info, bool):
-            # Convert to new format
-            unit_info = {'selected': unit_info, 'locked': False}
-            self.units_data[faction][unit_type][unit] = unit_info
-
-        return unit_info.get('selected', False)
+        return self.units_data.get(faction, {}).get(unit_type, {}).get(unit, {}).get('selected', False)
 
     def get_unit_position(self, faction, unit_type, unit):
-        unit_info = self.units_data.get(faction, {}).get(unit_type, {}).get(unit, {})
-        return unit_info.get('position', -1)
+        return self.units_data.get(faction, {}).get(unit_type, {}).get(unit, {}).get('position', -1)
 
     def is_unit_locked(self, faction, unit_type, unit):
-        unit_info = self.units_data.get(faction, {}).get(unit_type, {}).get(unit, {})
+        return self.units_data.get(faction, {}).get(unit_type, {}).get(unit, {}).get('locked', False)
 
-        # Check if unit_info is a boolean (old format)
-        if isinstance(unit_info, bool):
-            # Convert to new format
-            unit_info = {'selected': unit_info, 'locked': False}
-            self.units_data[faction][unit_type][unit] = unit_info
-
-        return unit_info.get('locked', False)
-
-    def migrate_units_data(self):
-        for faction, unit_types in self.units_data.items():
-            for unit_type, units in unit_types.items():
-                for unit_name, unit_info in units.items():
-                    if isinstance(unit_info, bool):
-                        # Convert to new format
-                        self.units_data[faction][unit_type][unit_name] = {'selected': unit_info, 'locked': False}
+    # Event Handling for Unit Selection
+    # ------------------------------------------------------------------------
 
     def unit_image_mousePressEvent(self, event, faction, unit_type, unit_name, label):
+        """Handles left-click selection and right-click context menu for units."""
         if event.button() == Qt.LeftButton:
-            # Toggle selection
             self.toggle_unit_selection(faction, unit_type, unit_name, label)
         elif event.button() == Qt.RightButton:
-            # Show context menu
             self.show_unit_context_menu(event, faction, unit_type, unit_name, label)
 
     def show_unit_context_menu(self, event, faction, unit_type, unit_name, label):
+        """Displays a context menu for locking and setting unit position."""
         menu = QMenu(self)
+
+        # Toggle lock/unlock action
         is_locked = self.is_unit_locked(faction, unit_type, unit_name)
-        action_text = "Unlock Unit" if is_locked else "Lock Unit"
-        lock_action = QAction(action_text, self)
+        lock_action = QAction("Unlock Unit" if is_locked else "Lock Unit", self)
         lock_action.triggered.connect(lambda: self.toggle_unit_lock(faction, unit_type, unit_name, label))
         menu.addAction(lock_action)
 
-        # Add option to specify a positive position
+        # Set position action
         position_action = QAction("Set Position", self)
         position_action.triggered.connect(lambda: self.set_position(faction, unit_type, unit_name, label))
         menu.addAction(position_action)
@@ -159,109 +125,40 @@ class UnitSelectionWindow(QMainWindow):
         menu.exec(event.globalPos())
 
     def set_position(self, faction, unit_type, unit_name, label):
-        # Prompt user for a positive integer position
+        """Prompt the user to set a position for the unit, updating HUDs as needed."""
         unit_info = self.units_data.setdefault(faction, {}).setdefault(unit_type, {}).setdefault(unit_name, {})
-        position, ok = QInputDialog.getInt(self, "Set Position " + unit_name, "Enter a positive position (default -1):", unit_info['position'])
+        position, ok = QInputDialog.getInt(self, f"Set Position for {unit_name}", "Enter a positive position:",
+                                           unit_info.get('position', -1))
         if ok:
-            # Perform your operation with the specified position
             self.handle_position_change(position, faction, unit_type, unit_name, label)
 
     def handle_position_change(self, position, faction, unit_type, unit_name, label):
-        try:
-            unit_info = self.units_data.setdefault(faction, {}).setdefault(unit_type, {}).setdefault(unit_name, {})
-            unit_info['position'] = position
-            print(f"Position of {unit_name} in {unit_type} ({faction}) set to: {position}")
-            # Update the image appearance
-            self.update_image_selection(label, self.is_unit_selected(faction, unit_type, unit_name), self.is_unit_locked(faction, unit_type, unit_name), self.get_unit_position(faction, unit_type, unit_name))
-
-            # Update the widget
-            for unit_counter, _ in self.hud_windows:
-                if isinstance(unit_counter, tuple):
-                    for uc in unit_counter:
-                        uc.update_position_widgets(faction, unit_type, unit_name)
-                else:
-                    unit_counter.update_position_widgets(faction, unit_type, unit_name)
-
-        except KeyError:
-            print(f"Error: Unit '{unit_name}' of type '{unit_type}' in faction '{faction}' not found.")
-
-
-    def update_image_selection(self, label, is_selected, is_locked, position):
-        # Get the image path from the label's property
-        image_path = label.property("image_path")
-        if not image_path:
-            return
-        # Load the original pixmap
-        pixmap = QPixmap(image_path)
-        if pixmap.isNull():
-            return
-        # Modify the pixmap
-        image = pixmap.toImage()
-        # Modify brightness based on selection
-        for x in range(image.width()):
-            for y in range(image.height()):
-                color = image.pixelColor(x, y)
-                color = color.lighter(150) if is_selected else color.darker(150)
-                image.setPixelColor(x, y, color)
-        # Overlay a lock icon if locked
-        if is_locked:
-            painter = QPainter()
-            painter.begin(image)
-            lock_icon = QPixmap('lock_icon.png')  # Ensure this path is correct
-            lock_icon = lock_icon.scaled(20, 20, Qt.KeepAspectRatio, Qt.SmoothTransformation)
-            painter.drawPixmap(0, 0, lock_icon)
-            painter.end()
-
-        # Overlay a lock icon if locked
-        if position > -1:
-            painter = QPainter(image)  # Pass the image to QPainter directly
-            painter.setFont(QFont('Arial', 14))  # Set the font and size
-
-            if is_selected:
-                painter.setPen(Qt.black)  # Set the text color
-            else:
-                painter.setPen(Qt.white)  # Set the text color
-
-
-            # Draw the position value
-            painter.drawText(1, image.height()-1, str(position))  # Adjust the position as needed
-
-            painter.end()  # Finalize the drawing
-        label.setPixmap(QPixmap.fromImage(image))
-
-    def toggle_unit_lock(self, faction, unit_type, unit_name, label):
+        """Updates unit position and reflects changes in HUD widgets."""
         unit_info = self.units_data.setdefault(faction, {}).setdefault(unit_type, {}).setdefault(unit_name, {})
-        current_state = unit_info.get('locked', False)
-        new_state = not current_state
-        unit_info['locked'] = new_state
-        logging.debug(f'{unit_name} lock state changed to {new_state}')
-        # Update the image appearance
-        self.update_image_selection(label, self.is_unit_selected(faction, unit_type, unit_name), new_state, self.get_unit_position(faction, unit_type, unit_name))
-        # Update the unit counters
+        unit_info['position'] = position
+        self.update_image_selection(label, self.is_unit_selected(faction, unit_type, unit_name),
+                                    self.is_unit_locked(faction, unit_type, unit_name), position)
+
+        # Update HUD widgets
         for unit_counter, _ in self.hud_windows:
             if isinstance(unit_counter, tuple):
                 for uc in unit_counter:
-                    uc.update_locked_widgets(faction, unit_type, unit_name, new_state)
+                    uc.update_position_widgets(faction, unit_type, unit_name)
             else:
-                unit_counter.update_locked_widgets(faction, unit_type, unit_name, new_state)
+                unit_counter.update_position_widgets(faction, unit_type, unit_name)
 
     def toggle_unit_selection(self, faction, unit_type, unit_name, label):
         """Toggle unit selection and update the appearance."""
         current_state = self.is_unit_selected(faction, unit_type, unit_name)
         new_state = not current_state
-
-        logging.debug(f'{unit_name} selection state changed to {new_state}')
-
-        # Update the selection status
         unit_info = self.units_data.setdefault(faction, {}).setdefault(unit_type, {}).setdefault(unit_name, {})
         unit_info['selected'] = new_state
 
-        # Update the image appearance
-        is_locked = self.is_unit_locked(faction, unit_type, unit_name)
-        position = self.get_unit_position(faction, unit_type, unit_name)
-        self.update_image_selection(label, new_state, is_locked, position)
+        logging.debug(f'{unit_name} selection state changed to {new_state}')
+        self.update_image_selection(label, new_state, self.is_unit_locked(faction, unit_type, unit_name),
+                                    self.get_unit_position(faction, unit_type, unit_name))
 
-        # Update the widget
+        # Update HUD widgets
         for unit_counter, _ in self.hud_windows:
             if isinstance(unit_counter, tuple):
                 for uc in unit_counter:
@@ -269,4 +166,68 @@ class UnitSelectionWindow(QMainWindow):
             else:
                 unit_counter.update_selected_widgets(faction, unit_type, unit_name, new_state)
 
+    def toggle_unit_lock(self, faction, unit_type, unit_name, label):
+        """Toggle the lock status of a unit and update HUDs as needed."""
+        unit_info = self.units_data.setdefault(faction, {}).setdefault(unit_type, {}).setdefault(unit_name, {})
+        new_state = not unit_info.get('locked', False)
+        unit_info['locked'] = new_state
 
+        logging.debug(f'{unit_name} lock state changed to {new_state}')
+        self.update_image_selection(label, self.is_unit_selected(faction, unit_type, unit_name), new_state,
+                                    self.get_unit_position(faction, unit_type, unit_name))
+
+        # Update HUD widgets
+        for unit_counter, _ in self.hud_windows:
+            if isinstance(unit_counter, tuple):
+                for uc in unit_counter:
+                    uc.update_locked_widgets(faction, unit_type, unit_name, new_state)
+            else:
+                unit_counter.update_locked_widgets(faction, unit_type, unit_name, new_state)
+
+    # Visual Update of Unit Image Selection
+    # ------------------------------------------------------------------------
+
+    def update_image_selection(self, label, is_selected, is_locked, position):
+        """Updates the unit image based on selection, lock, and position state."""
+        image_path = label.property("image_path")
+        pixmap = QPixmap(image_path)
+        if pixmap.isNull():
+            return
+
+        image = pixmap.toImage()
+
+        # Adjust brightness for selection
+        self.adjust_image_brightness(image, is_selected)
+
+        # Overlay lock icon if locked
+        if is_locked:
+            self.overlay_lock_icon(image)
+
+        # Display position if set
+        if position > -1:
+            self.overlay_position(image, position, is_selected)
+
+        label.setPixmap(QPixmap.fromImage(image))
+
+    def adjust_image_brightness(self, image, is_selected):
+        """Adjust image brightness based on selection status."""
+        brightness_modifier = 150 if is_selected else -150
+        for x in range(image.width()):
+            for y in range(image.height()):
+                color = image.pixelColor(x, y).lighter(150) if is_selected else color.darker(150)
+                image.setPixelColor(x, y, color)
+
+    def overlay_lock_icon(self, image):
+        """Overlay a lock icon on the image."""
+        painter = QPainter(image)
+        lock_icon = QPixmap('lock_icon.png').scaled(20, 20, Qt.KeepAspectRatio, Qt.SmoothTransformation)
+        painter.drawPixmap(0, 0, lock_icon)
+        painter.end()
+
+    def overlay_position(self, image, position, is_selected):
+        """Overlay the unit's position on the image."""
+        painter = QPainter(image)
+        painter.setFont(QFont('Arial', 14))
+        painter.setPen(Qt.black if is_selected else Qt.white)
+        painter.drawText(1, image.height() - 1, str(position))
+        painter.end()

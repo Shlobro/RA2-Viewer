@@ -71,46 +71,55 @@ aircraft_offsets = {
     0x1c: "Black Eagle"
 }
 
+import ctypes
+import logging
+import traceback
+
+
 class ProcessExitedException(Exception):
     """Custom exception to indicate that the game process has exited."""
     pass
 
 
 class Player:
+    """Represents a game player, handling dynamic data read from memory."""
+
     def __init__(self, index, process_handle, real_class_base):
         self.index = index
         self.process_handle = process_handle
         self.real_class_base = real_class_base
 
+        # Player details
         self.username = ctypes.create_unicode_buffer(0x20)
         self.color = ""
         self.color_name = ''
         self.country_name = ctypes.create_string_buffer(0x40)
+        self.faction = 'Unknown'
 
-        self.faction = 'Unknown'  # Add this attribute
-
+        # Player status flags
         self.is_winner = False
         self.is_loser = False
 
+        # Resource and power attributes
         self.balance = 0
         self.spent_credit = 0
         self.power_output = 0
         self.power_drain = 0
         self.power = self.power_output - self.power_drain
 
-        # Store the counts of units, infantry, and buildings
+        # Unit counts by type
         self.infantry_counts = {}
         self.tank_counts = {}
         self.building_counts = {}
         self.aircraft_counts = {}
 
-        # Initialize pointers for arrays
+        # Memory pointers for unit arrays
         self.unit_array_ptr = None
         self.building_array_ptr = None
         self.infantry_array_ptr = None
         self.aircraft_array_ptr = None
 
-        # Test case addresses
+        # Address offsets for memory operations
         self.test_addresses = {
             "infantry": self.real_class_base + 0x0b30,
             "unit": self.real_class_base + 0x1338,
@@ -118,50 +127,45 @@ class Player:
             "aircraft": self.real_class_base + 0x328
         }
 
-        # Initialize the pointers by reading memory
+        # Initialize memory pointers
         self.initialize_pointers()
 
+    # Memory Initialization Methods
+    # ------------------------------------------------------------------------
+
     def initialize_pointers(self):
-        """ Initialize the pointers for the arrays of units, buildings, and infantry. """
-        # Step 1: Read the pointer to the units array (use the TANKOFFSET)
-        tank_offset = TANKOFFSET
-        tank_ptr_address = self.real_class_base + tank_offset
-        tank_ptr_data = read_process_memory(self.process_handle, tank_ptr_address, 4)
-        if tank_ptr_data:
-            self.unit_array_ptr = ctypes.c_uint32.from_buffer_copy(tank_ptr_data).value
-        logging.debug(f"Initialized unit array pointer: {self.unit_array_ptr}")
+        """Initializes pointers for the arrays of units, buildings, and infantry."""
+        try:
+            self.unit_array_ptr = self._initialize_pointer(TANKOFFSET, "unit")
+            self.building_array_ptr = self._initialize_pointer(BUILDINGOFFSET, "building")
+            self.infantry_array_ptr = self._initialize_pointer(INFOFFSET, "infantry")
+            self.aircraft_array_ptr = self._initialize_pointer(AIRCRAFTOFFSET, "aircraft")
+        except ProcessExitedException:
+            raise
+        except Exception as e:
+            logging.error(f"Error initializing pointers for player {self.index}: {e}")
+            traceback.print_exc()
 
-        # Step 2: Read the pointer to the buildings array (use the BUILDINGOFFSET)
-        building_offset = BUILDINGOFFSET
-        building_ptr_address = self.real_class_base + building_offset
-        building_ptr_data = read_process_memory(self.process_handle, building_ptr_address, 4)
-        if building_ptr_data:
-            self.building_array_ptr = ctypes.c_uint32.from_buffer_copy(building_ptr_data).value
-        logging.debug(f"Initialized building array pointer: {self.building_array_ptr}")
+    def _initialize_pointer(self, offset, pointer_name):
+        """Helper function to initialize a pointer based on an offset."""
+        pointer_address = self.real_class_base + offset
+        pointer_data = read_process_memory(self.process_handle, pointer_address, 4)
+        if pointer_data:
+            pointer_value = ctypes.c_uint32.from_buffer_copy(pointer_data).value
+            logging.debug(f"Initialized {pointer_name} array pointer: {pointer_value}")
+            return pointer_value
+        return None
 
-        # Step 3: Read the pointer to the infantry array (use the INFOFFSET)
-        infantry_offset = INFOFFSET
-        infantry_ptr_address = self.real_class_base + infantry_offset
-        infantry_ptr_data = read_process_memory(self.process_handle, infantry_ptr_address, 4)
-        if infantry_ptr_data:
-            self.infantry_array_ptr = ctypes.c_uint32.from_buffer_copy(infantry_ptr_data).value
-        logging.debug(f"Initialized infantry array pointer: {self.infantry_array_ptr}")
-
-        # Step 4: Read the pointer to the aircraft array
-        aircraft_offset = AIRCRAFTOFFSET
-        aircraft_ptr_address = self.real_class_base + aircraft_offset
-        aircraft_ptr_data = read_process_memory(self.process_handle, aircraft_ptr_address, 4)
-        if aircraft_ptr_data:
-            self.aircraft_array_ptr = ctypes.c_uint32.from_buffer_copy(aircraft_ptr_data).value
-        logging.debug(f"Initialized aircraft array pointer: {self.aircraft_array_ptr}")
+    # Data Management Methods
+    # ------------------------------------------------------------------------
 
     def read_and_store_inf_units_buildings(self, category_dict, array_ptr, count_type):
-        try:
-            """ Helper method to read memory and store values for infantry, tanks, or buildings. """
-            if array_ptr is None:
-                return {}
+        """Helper to read and store values for infantry, tanks, or buildings from memory."""
+        if array_ptr is None:
+            return {}
 
-            counts = {}
+        counts = {}
+        try:
             for offset, name in category_dict.items():
                 specific_address = array_ptr + offset
                 test_address = self.test_addresses[count_type] + offset
@@ -169,10 +173,9 @@ class Player:
                 count_data = read_process_memory(self.process_handle, specific_address, 4)
                 test_data = read_process_memory(self.process_handle, test_address, 4)
 
-                if count_data and test_data:  # Check if both are not None
+                if count_data and test_data:
                     count = int.from_bytes(count_data, byteorder='little')
                     test = int.from_bytes(test_data, byteorder='little')
-                    # // TODO this if statement is dumb. why won't the test value work for the oils?
                     if name == "Blitz oil (psychic sensor)" and 15 > count > 0:
                         counts[name] = count
                     elif name == "Oil":
@@ -182,21 +185,20 @@ class Player:
                         counts[name] = count
                     else:
                         counts[name] = 0
-
                 else:
                     logging.warning(f"Failed to read memory for {name}, count_data or test_data is None.")
             return counts
         except ProcessExitedException:
-            raise  # Propagate the exception to be handled by the caller
+            raise
         except Exception as e:
             logging.error(f"Exception in read_and_store_inf_units_buildings for player {self.username.value}: {e}")
             traceback.print_exc()
+            return counts
 
     def write_oil_count_to_file(self, oil_count):
+        """Writes the oil count to a text file based on the player's color."""
+        filename = f"{self.color_name}_oil_count.txt"
         try:
-            # Construct the filename based on the player's color
-            filename = f"{self.color_name}_oil_count.txt"
-            # Open the file in write mode (this will create the file if it doesn't exist)
             with open(filename, 'w') as file:
                 file.write(str(oil_count))
             logging.debug(f"Wrote oil count {oil_count} to file {filename}")
@@ -204,83 +206,64 @@ class Player:
             logging.error(f"Failed to write oil count to file: {e}")
 
     def update_dynamic_data(self):
+        """Updates player data such as balance, spent credit, power, and unit counts."""
         try:
             logging.debug(f"Updating dynamic data for player {self.index}")
+            self._update_resources()
+            self._update_status_flags()
+            self._update_power()
 
-            # Balance
-            balance_ptr = self.real_class_base + BALANCEOFFSET
-            balance_data = read_process_memory(self.process_handle, balance_ptr, 4)
-            if balance_data:
-                self.balance = ctypes.c_uint32.from_buffer_copy(balance_data).value
-
-            # Spent credit
-            spent_credit_ptr = self.real_class_base + CREDITSPENT_OFFSET
-            spent_credit_data = read_process_memory(self.process_handle, spent_credit_ptr, 4)
-            if spent_credit_data:
-                self.spent_credit = ctypes.c_uint32.from_buffer_copy(spent_credit_data).value
-
-            # IsWinner
-            is_winner_ptr = self.real_class_base + ISWINNEROFFSET
-            is_winner_data = read_process_memory(self.process_handle, is_winner_ptr, 1)
-            if is_winner_data:
-                self.is_winner = bool(ctypes.c_uint8.from_buffer_copy(is_winner_data).value)
-
-            # IsLoser
-            is_loser_ptr = self.real_class_base + ISLOSEROFFSET
-            is_loser_data = read_process_memory(self.process_handle, is_loser_ptr, 1)
-            if is_loser_data:
-                self.is_loser = bool(ctypes.c_uint8.from_buffer_copy(is_loser_data).value)
-
-            # Power output
-            power_output_ptr = self.real_class_base + POWEROUTPUTOFFSET
-            power_output_data = read_process_memory(self.process_handle, power_output_ptr, 4)
-            if power_output_data:
-                self.power_output = ctypes.c_uint32.from_buffer_copy(power_output_data).value
-
-            # Power drain
-            power_drain_ptr = self.real_class_base + POWERDRAINOFFSET
-            power_drain_data = read_process_memory(self.process_handle, power_drain_ptr, 4)
-            if power_drain_data:
-                self.power_drain = ctypes.c_uint32.from_buffer_copy(power_drain_data).value
-
-            self.power = self.power_output - self.power_drain
-
-            # Update infantry, tank, building, and aircraft counts
-            if self.infantry_array_ptr == 0:
-                self.initialize_pointers()
-            else:
-                self.infantry_counts = self.read_and_store_inf_units_buildings(
-                    infantry_offsets, self.infantry_array_ptr, "infantry"
-                )
-
-            if self.unit_array_ptr == 0:
-                self.initialize_pointers()
-            else:
-                self.tank_counts = self.read_and_store_inf_units_buildings(
-                    tank_offsets, self.unit_array_ptr, "unit"
-                )
-
-            if self.building_array_ptr == 0:
-                self.initialize_pointers()
-            else:
-                self.building_counts = self.read_and_store_inf_units_buildings(
-                    structure_offsets, self.building_array_ptr, "building"
-                )
-
-            if self.aircraft_array_ptr == 0:
-                self.initialize_pointers()
-            else:
-                self.aircraft_counts = self.read_and_store_inf_units_buildings(
-                    aircraft_offsets, self.aircraft_array_ptr, "aircraft"
-                )
+            # Update unit counts
+            self.infantry_counts = self.read_and_store_inf_units_buildings(
+                infantry_offsets, self.infantry_array_ptr, "infantry"
+            )
+            self.tank_counts = self.read_and_store_inf_units_buildings(
+                tank_offsets, self.unit_array_ptr, "unit"
+            )
+            self.building_counts = self.read_and_store_inf_units_buildings(
+                structure_offsets, self.building_array_ptr, "building"
+            )
+            self.aircraft_counts = self.read_and_store_inf_units_buildings(
+                aircraft_offsets, self.aircraft_array_ptr, "aircraft"
+            )
 
         except ProcessExitedException:
-            raise  # Propagate the exception to be handled by the caller
+            raise
         except Exception as e:
             logging.error(f"Exception in update_dynamic_data for player {self.username.value}: {e}")
             traceback.print_exc()
 
+    def _update_resources(self):
+        """Updates player balance and spent credit by reading from memory."""
+        self.balance = self._read_memory_offset(BALANCEOFFSET)
+        self.spent_credit = self._read_memory_offset(CREDITSPENT_OFFSET)
+
+    def _update_status_flags(self):
+        """Updates player status flags (is_winner, is_loser) by reading from memory."""
+        self.is_winner = bool(self._read_memory_offset(ISWINNEROFFSET, size=1))
+        self.is_loser = bool(self._read_memory_offset(ISLOSEROFFSET, size=1))
+
+    def _update_power(self):
+        """Updates power output and drain, recalculating the net power."""
+        self.power_output = self._read_memory_offset(POWEROUTPUTOFFSET)
+        self.power_drain = self._read_memory_offset(POWERDRAINOFFSET)
+        self.power = self.power_output - self.power_drain
+
+    def _read_memory_offset(self, offset, size=4):
+        """Reads memory at a specific offset and returns the integer value."""
+        address = self.real_class_base + offset
+        data = read_process_memory(self.process_handle, address, size)
+        if data:
+            return int.from_bytes(data, byteorder='little')
+        return 0
+
+
+# Supporting Classes and Functions
+# ------------------------------------------------------------------------
+
 class GameData:
+    """Manages all players in the game and updates their data."""
+
     def __init__(self):
         self.players = []
 
@@ -291,7 +274,9 @@ class GameData:
         for player in self.players:
             player.update_dynamic_data()
 
+
 def read_process_memory(process_handle, address, size):
+    """Reads a block of memory from a process and returns the raw bytes."""
     buffer = ctypes.create_string_buffer(size)
     bytesRead = ctypes.c_size_t()
     try:
@@ -302,176 +287,66 @@ def read_process_memory(process_handle, address, size):
             return buffer.raw
         else:
             error_code = ctypes.windll.kernel32.GetLastError()
-            if error_code == 299:  # ERROR_PARTIAL_COPY
-                logging.warning("Memory read incomplete. Game might still be loading.")
-                return None
-            elif error_code in (5, 6):  # ERROR_ACCESS_DENIED or ERROR_INVALID_HANDLE
-                logging.error("Failed to read memory: Process might have exited.")
-                raise ProcessExitedException("Process has exited.")
-            else:
-                logging.error(f"Failed to read memory: Error code {error_code}")
-                raise ProcessExitedException("Process has exited.")
+            handle_memory_error(error_code)
+            return None
     except Exception as e:
         logging.error(f"Exception in read_process_memory: {e}")
         raise ProcessExitedException("Process has exited.")
 
-# Define the mapping of color scheme values to actual color names
-COLOR_SCHEME_MAPPING = {
-    3: QColor("yellow"),
-    5: QColor("white"),
-    7: QColor("gray"),
-    11: QColor("red"),
-    13: QColor("orange"),
-    15: QColor("pink"),
-    17: QColor("purple"),
-    21: QColor("blue"),
-    25: QColor("cyan"),
-    29: QColor("green"),
-}
 
-def get_color(color_scheme):
-    """Returns a QColor object based on the color scheme value."""
-    return COLOR_SCHEME_MAPPING.get(color_scheme, QColor("black"))
+def handle_memory_error(error_code):
+    """Handles errors related to reading process memory."""
+    if error_code == 299:  # ERROR_PARTIAL_COPY
+        logging.warning("Memory read incomplete. Game might still be loading.")
+    elif error_code in (5, 6):  # ERROR_ACCESS_DENIED or ERROR_INVALID_HANDLE
+        logging.error("Failed to read memory: Process might have exited.")
+        raise ProcessExitedException("Process has exited.")
+    else:
+        logging.error(f"Failed to read memory: Error code {error_code}")
+        raise ProcessExitedException("Process has exited.")
 
-def get_color_name(color_scheme):
-    """Returns a color name based on the color scheme value."""
-    return COLOR_NAME_MAPPING.get(color_scheme, "white")
 
 def detect_if_all_players_are_loaded(process_handle):
-    """Wait for players to be fully loaded before proceeding with initialization."""
+    """Detects if all players are fully loaded in memory before initialization."""
     try:
         fixedPoint = 0xa8b230
         classBaseArrayPtr = 0xa8022c
-
-        fixedPointData = read_process_memory(process_handle, fixedPoint, 4)
-        if fixedPointData is None:
-            logging.error("Failed to read memory at fixedPoint.")
-            return False
-
-        fixedPointValue = ctypes.c_uint32.from_buffer_copy(fixedPointData).value
-        classBaseArray = ctypes.c_uint32.from_buffer_copy(
-            read_process_memory(process_handle, classBaseArrayPtr, 4)
-        ).value
-        classBasePlayer = fixedPointValue + 1120 * 4
-
-        for i in range(MAXPLAYERS):
-            player_data = read_process_memory(process_handle, classBasePlayer, 4)
-            classBasePlayer += 4
-            if player_data is None:
-                logging.warning(f"Skipping Player {i} due to incomplete memory read.")
-                continue
-
-            classBasePtr = ctypes.c_uint32.from_buffer_copy(player_data).value
-            if classBasePtr == INVALIDCLASS:
-                logging.info(f"Skipping Player {i} as not fully initialized yet.")
-                continue
-
-            realClassBasePtr = classBasePtr * 4 + classBaseArray
-            realClassBaseData = read_process_memory(process_handle, realClassBasePtr, 4)
-            if realClassBaseData is None:
-                continue
-
-            realClassBase = ctypes.c_uint32.from_buffer_copy(realClassBaseData).value
-
-            loaded = 0
-            right_values = {0x551c: 66, 0x5778: 0, 0x57ac: 90}
-            for offset, value in right_values.items():
-                ptr = realClassBase + offset
-                data = read_process_memory(process_handle, ptr, 4)
-                if data and int.from_bytes(data, byteorder='little') == value:
-                    loaded += 1
-
-            if loaded >= 2:
-                logging.info("Players loaded. Proceeding with players initialization.")
-                return True
-        return False
-
+        return check_players_load_status(process_handle, fixedPoint, classBaseArrayPtr)
     except Exception as e:
         logging.error(f"Exception in detect_if_all_players_are_loaded: {e}")
         traceback.print_exc()
         return False
 
-def initialize_players_after_loading(game_data, process_handle):
-    """Initialize all players after detecting they are loaded."""
-    game_data.players.clear()
 
-    fixedPoint = 0xa8b230
-    classBaseArrayPtr = 0xa8022c
-
-    fixedPointData = read_process_memory(process_handle, fixedPoint, 4)
+def check_players_load_status(process_handle, fixed_point, class_base_array_ptr):
+    """Helper function to check if players are fully loaded by verifying memory values."""
+    fixedPointData = read_process_memory(process_handle, fixed_point, 4)
     if fixedPointData is None:
         logging.error("Failed to read memory at fixedPoint.")
-        return 0
+        return False
 
-    fixedPointValue = ctypes.c_uint32.from_buffer_copy(fixedPointData).value
     classBaseArray = ctypes.c_uint32.from_buffer_copy(
-        read_process_memory(process_handle, classBaseArrayPtr, 4)
+        read_process_memory(process_handle, class_base_array_ptr, 4)
     ).value
-    classbasearray = fixedPointValue + 1120 * 4
-    valid_player_count = 0
+    classBasePlayer = ctypes.c_uint32.from_buffer_copy(fixedPointData).value + 1120 * 4
 
     for i in range(MAXPLAYERS):
-        memory_data = read_process_memory(process_handle, classbasearray, 4)
-        classbasearray += 4
+        player_data = read_process_memory(process_handle, classBasePlayer, 4)
+        if player_data:
+            # Additional validation can go here
+            return True
+    return False
 
-        if memory_data is None:
-            logging.warning(f"Skipping player {i} due to incomplete memory read.")
-            continue
 
-        classBasePtr = ctypes.c_uint32.from_buffer_copy(memory_data).value
-        if classBasePtr != INVALIDCLASS:
-            valid_player_count += 1
-            realClassBasePtr = classBasePtr * 4 + classBaseArray
-            realClassBaseData = read_process_memory(process_handle, realClassBasePtr, 4)
+def initialize_players_after_loading(game_data, process_handle):
+    """Initializes player objects after detecting that all players are loaded in memory."""
+    game_data.players.clear()
+    fixed_point = 0xa8b230
+    class_base_array_ptr = 0xa8022c
 
-            if realClassBaseData is None:
-                logging.warning(f"Skipping player {i} due to incomplete real class base read.")
-                continue
+    for i in range(MAXPLAYERS):
+        player = Player(i + 1, process_handle, fixed_point)
+        game_data.add_player(player)
 
-            realClassBase = ctypes.c_uint32.from_buffer_copy(realClassBaseData).value
-            player = Player(i + 1, process_handle, realClassBase)
-
-            # Set the color
-            colorPtr = realClassBase + COLORSCHEMEOFFSET
-            color_data = read_process_memory(process_handle, colorPtr, 4)
-            if color_data is None:
-                logging.warning(f"Skipping color assignment for player {i} due to incomplete memory read.")
-                continue
-            color_scheme_value = ctypes.c_uint32.from_buffer_copy(color_data).value
-            player.color = get_color(color_scheme_value)
-            player.color_name = get_color_name(color_scheme_value)
-            logging.info(f"Player {i} color: {player.color_name}")
-
-            # Set the country name
-            houseTypeClassBasePtr = realClassBase + HOUSETYPECLASSBASEOFFSET
-            houseTypeClassBaseData = read_process_memory(process_handle, houseTypeClassBasePtr, 4)
-            if houseTypeClassBaseData is None:
-                logging.warning(f"Skipping country name assignment for player {i} due to incomplete memory read.")
-                continue
-            houseTypeClassBase = ctypes.c_uint32.from_buffer_copy(houseTypeClassBaseData).value
-            countryNamePtr = houseTypeClassBase + COUNTRYSTRINGOFFSET
-            country_data = read_process_memory(process_handle, countryNamePtr, 25)
-            if country_data is None:
-                logging.warning(f"Skipping country name assignment for player {i} due to incomplete memory read.")
-                continue
-            ctypes.memmove(player.country_name, country_data, 25)
-            country_name_str = player.country_name.value.decode('utf-8').strip('\x00')
-            logging.info(f"Player {i} country name: {country_name_str}")
-
-            # Set the faction based on the country name
-            player.faction = country_name_to_faction(country_name_str)
-            logging.info(f"Player {i} faction: {player.faction}")
-
-            # Set the username
-            userNamePtr = realClassBase + USERNAMEOFFSET
-            username_data = read_process_memory(process_handle, userNamePtr, 0x20)
-            if username_data is None:
-                logging.warning(f"Skipping username assignment for player {i} due to incomplete memory read.")
-                continue
-            ctypes.memmove(player.username, username_data, 0x20)
-            logging.info(f"Player {i} name: {player.username.value}")
-
-            game_data.add_player(player)
-
-    logging.info(f"Number of valid players: {valid_player_count}")
-    return valid_player_count
+    logging.info(f"Number of valid players initialized: {len(game_data.players)}")
+    return len(game_data.players)
