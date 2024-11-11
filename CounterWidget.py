@@ -1,3 +1,5 @@
+#CounterWidget.py
+
 from PySide6.QtGui import QColor, QPixmap, QPainter, QPen, QFontDatabase, QFont, QFontMetrics
 from PySide6.QtWidgets import QLabel, QSizePolicy
 from PySide6.QtCore import Qt

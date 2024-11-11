@@ -818,7 +818,7 @@ class ControlPanel(QMainWindow):
                 data = json.load(file)
                 if 'selected_units' not in data:
                     data['selected_units'] = {}
-                return data  # Return the entire data
+                return data  # Return the entire data, including positions
         return {'selected_units': {}}
 
     # Method to toggle the visibility of HUD elements
@@ -845,6 +845,7 @@ def save_selected_units():
     with open(json_file, 'w') as file:
         json.dump(selected_units_dict, file, indent=4)
     logging.info("Saved selected units.")
+
 
 # Thread to continuously update player data
 class DataUpdateThread(QThread):

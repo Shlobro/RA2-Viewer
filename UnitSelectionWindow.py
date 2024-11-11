@@ -104,10 +104,13 @@ class UnitSelectionWindow(QMainWindow):
     def is_unit_selected(self, faction, unit_type, unit):
         unit_info = self.units_data.get(faction, {}).get(unit_type, {}).get(unit, {})
 
-        # Check if unit_info is a boolean (old format)
         if isinstance(unit_info, bool):
-            # Convert to new format
-            unit_info = {'selected': unit_info, 'locked': False}
+            # Convert to new format with default position -1
+            unit_info = {
+                'selected': unit_info,
+                'locked': False,
+                'position': -1
+            }
             self.units_data[faction][unit_type][unit] = unit_info
 
         return unit_info.get('selected', False)
@@ -119,10 +122,12 @@ class UnitSelectionWindow(QMainWindow):
     def is_unit_locked(self, faction, unit_type, unit):
         unit_info = self.units_data.get(faction, {}).get(unit_type, {}).get(unit, {})
 
-        # Check if unit_info is a boolean (old format)
         if isinstance(unit_info, bool):
-            # Convert to new format
-            unit_info = {'selected': unit_info, 'locked': False}
+            unit_info = {
+                'selected': unit_info,
+                'locked': False,
+                'position': -1
+            }
             self.units_data[faction][unit_type][unit] = unit_info
 
         return unit_info.get('locked', False)
@@ -132,8 +137,16 @@ class UnitSelectionWindow(QMainWindow):
             for unit_type, units in unit_types.items():
                 for unit_name, unit_info in units.items():
                     if isinstance(unit_info, bool):
-                        # Convert to new format
-                        self.units_data[faction][unit_type][unit_name] = {'selected': unit_info, 'locked': False}
+                        # Convert to new format with default position -1
+                        self.units_data[faction][unit_type][unit_name] = {
+                            'selected': unit_info,
+                            'locked': False,
+                            'position': -1  # Default position
+                        }
+                    else:
+                        # Ensure 'position' is present
+                        if 'position' not in unit_info:
+                            unit_info['position'] = -1
 
     def unit_image_mousePressEvent(self, event, faction, unit_type, unit_name, label):
         if event.button() == Qt.LeftButton:

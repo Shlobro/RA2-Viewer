@@ -3,9 +3,9 @@
     "image_size": 75,
     "number_size": 25,
     "distance_between_numbers": 30,
-    "show_name": false,
-    "show_money": false,
-    "show_power": false,
+    "show_name": true,
+    "show_money": true,
+    "show_power": true,
     "unit_layout": "Vertical",
     "money_color": "Use player color",
     "show_flag": false,
@@ -18,24 +18,24 @@
     "game_path": "D:/ra2/Red Alert 2/Red Alert 2",
     "red": {
         "name": {
-            "x": 189,
-            "y": 89
+            "x": 52,
+            "y": 0
         },
         "flag": {
             "x": 1858,
             "y": 66
         },
         "money": {
-            "x": 64,
-            "y": 148
+            "x": -17,
+            "y": 50
         },
         "power": {
-            "x": 51,
-            "y": 186
+            "x": 36,
+            "y": 89
         },
         "unit_counter_combined": {
-            "x": 54,
-            "y": 45
+            "x": 3,
+            "y": 168
         },
         "unit_counter_images": {
             "x": 242,
@@ -64,8 +64,8 @@
             "y": 100
         },
         "unit_counter_combined": {
-            "x": 567,
-            "y": 118
+            "x": 92,
+            "y": 57
         },
         "unit_counter_images": {
             "x": 369,
@@ -124,8 +124,8 @@
             "y": 115
         },
         "unit_counter_combined": {
-            "x": 240,
-            "y": 135
+            "x": 311,
+            "y": 162
         },
         "unit_counter_images": {
             "x": 134,
@@ -138,24 +138,24 @@
     },
     "yellow": {
         "name": {
-            "x": 1716,
-            "y": 113
+            "x": 2222,
+            "y": 19
         },
         "flag": {
             "x": 100,
             "y": 100
         },
         "money": {
-            "x": 1718,
-            "y": 172
+            "x": 2168,
+            "y": 68
         },
         "power": {
-            "x": 1750,
-            "y": 58
+            "x": 2227,
+            "y": 107
         },
         "unit_counter_combined": {
-            "x": 2185,
-            "y": 79
+            "x": 2306,
+            "y": 192
         },
         "unit_counter_images": {
             "x": 2158,
@@ -244,8 +244,8 @@
             "y": 119
         },
         "unit_counter_combined": {
-            "x": 2008,
-            "y": 148
+            "x": 2280,
+            "y": 30
         },
         "unit_counter_images": {
             "x": 100,

@@ -79,12 +79,12 @@ class UnitWindowBase(QMainWindow):
     def load_selected_units_and_create_counters(self):
         for unit_name, unit_info in self.unit_info_by_name.items():
             is_selected = unit_info.get('selected', False)
-            position = unit_info.get('position', -1) # -1 means at the end
+            position = unit_info.get('position', -1)  # -1 means at the end
             if is_selected:
                 unit_type = unit_info.get('unit_type')
                 counter_widget = self.create_counter_widget(unit_name, 0, unit_type)
                 counter_widget.hide()
-                if self.layout.count() < position:
+                if position == -1 or position >= self.layout.count():
                     self.layout.addWidget(counter_widget)
                 else:
                     self.layout.insertWidget(position, counter_widget)
@@ -117,6 +117,7 @@ class UnitWindowBase(QMainWindow):
         is_selected = unit_info.get('selected', False)
         position = unit_info.get('position', -1)  # -1 means at the end
         if is_selected:
+            # Remove the existing widget
             counter_widget, _ = self.counters.pop(unit_name, (None, None))
             if counter_widget:
                 self.layout.removeWidget(counter_widget)
@@ -124,7 +125,7 @@ class UnitWindowBase(QMainWindow):
             unit_type = unit_info.get('unit_type')
             counter_widget = self.create_counter_widget(unit_name, 0, unit_type)
             counter_widget.hide()
-            if self.layout.count() < position:
+            if position == -1 or position >= self.layout.count():
                 self.layout.addWidget(counter_widget)
             else:
                 self.layout.insertWidget(position, counter_widget)
