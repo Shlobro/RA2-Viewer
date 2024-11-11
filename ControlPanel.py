@@ -72,12 +72,16 @@ class ControlPanel(QMainWindow):
         unit_layout = QFormLayout()
 
         # Unit window size
-        unit_layout.addRow("Unit Window Size:", self._create_spinbox("unit_counter_size", 5, 250, self.update_unit_window_size))
+        self.counter_size_spinbox = self._create_spinbox("unit_counter_size", 5, 250, self.update_unit_window_size)
+        unit_layout.addRow("Unit Window Size:", self.counter_size_spinbox)
 
         # Image Size, Number Size, and Distance for separate mode
-        unit_layout.addRow("Image Size:", self._create_spinbox("image_size", 5, 250, self.update_image_size))
-        unit_layout.addRow("Number Size:", self._create_spinbox("number_size", 5, 250, self.update_number_size))
-        unit_layout.addRow("Distance Between Numbers:", self._create_spinbox("distance_between_numbers", 0, 150, self.update_distance_between_numbers))
+        self.image_size_spinbox = self._create_spinbox("image_size", 5, 250, self.update_image_size)
+        unit_layout.addRow("Image Size:", self.image_size_spinbox)
+        self.number_size_spinbox = self._create_spinbox("number_size", 5, 250, self.update_number_size)
+        unit_layout.addRow("Number Size:", self.number_size_spinbox)
+        self.distance_spinbox = self._create_spinbox("distance_between_numbers", 0, 150, self.update_distance_between_numbers)
+        unit_layout.addRow("Distance Between Numbers:", self.distance_spinbox)
 
         # Checkboxes
         unit_layout.addRow(self._create_checkbox("Show Unit Frames", "show_unit_frames", self.toggle_unit_frames))
@@ -105,7 +109,8 @@ class ControlPanel(QMainWindow):
         name_layout = QFormLayout()
 
         name_layout.addRow(self._create_checkbox("Show Name", "show_name", self.toggle_name))
-        name_layout.addRow("Name Widget Size:", self._create_spinbox("name_widget_size", 5, 500, self.update_name_widget_size))
+        self.name_size_spinbox = self._create_spinbox("name_widget_size", 5, 500, self.update_name_widget_size)
+        name_layout.addRow("Name Widget Size:", self.name_size_spinbox)
 
         name_group.setLayout(name_layout)
         return name_group
@@ -116,7 +121,8 @@ class ControlPanel(QMainWindow):
         flag_layout = QFormLayout()
 
         flag_layout.addRow(self._create_checkbox("Show Flag", "show_flag", self.toggle_flag))
-        flag_layout.addRow("Flag Widget Size:", self._create_spinbox("flag_widget_size", 5, 500, self.update_flag_widget_size))
+        self.flag_size_spinbox = self._create_spinbox("flag_widget_size", 5, 500, self.update_flag_widget_size)
+        flag_layout.addRow("Flag Widget Size:", self.flag_size_spinbox)
 
         flag_group.setLayout(flag_layout)
         return flag_group
@@ -127,7 +133,8 @@ class ControlPanel(QMainWindow):
         money_layout = QFormLayout()
 
         money_layout.addRow(self._create_checkbox("Show Money", "show_money", self.toggle_money))
-        money_layout.addRow("Money Widget Size:", self._create_spinbox("money_widget_size", 5, 500, self.update_money_widget_size))
+        self.money_size_spinbox = self._create_spinbox("money_widget_size", 5, 500, self.update_money_widget_size)
+        money_layout.addRow("Money Widget Size:", self.money_size_spinbox)
 
         money_color_label = QLabel("Money Text Color:")
         self.color_combo = QComboBox()
@@ -145,7 +152,8 @@ class ControlPanel(QMainWindow):
         power_layout = QFormLayout()
 
         power_layout.addRow(self._create_checkbox("Show Power", "show_power", self.toggle_power))
-        power_layout.addRow("Power Widget Size:", self._create_spinbox("power_widget_size", 5, 500, self.update_power_widget_size))
+        self.power_size_spinbox = self._create_spinbox("power_widget_size", 5, 500, self.update_power_widget_size)
+        power_layout.addRow("Power Widget Size:", self.power_size_spinbox)
 
         power_group.setLayout(power_layout)
         return power_group
@@ -171,7 +179,8 @@ class ControlPanel(QMainWindow):
     # Utility Methods for UI Component Creation
     # ------------------------------------------------------------------------
 
-    def _create_spinbox(self, setting_key, min_value, max_value, change_handler):
+    @staticmethod
+    def _create_spinbox(setting_key, min_value, max_value, change_handler):
         """Creates a QSpinBox initialized from settings with a handler for value change."""
         spinbox = QSpinBox()
         spinbox.setRange(min_value, max_value)
@@ -179,7 +188,8 @@ class ControlPanel(QMainWindow):
         spinbox.valueChanged.connect(change_handler)
         return spinbox
 
-    def _create_checkbox(self, label, setting_key, change_handler):
+    @staticmethod
+    def _create_checkbox(label, setting_key, change_handler):
         """Creates a QCheckBox initialized from settings with a handler for state change."""
         checkbox = QCheckBox(label)
         checkbox.setChecked(app_state.settings.get(setting_key, False))
@@ -192,11 +202,11 @@ class ControlPanel(QMainWindow):
 
     def toggle_unit_frames(self, state):
         """Toggles the display of unit frames based on the checkbox state."""
-        self._update_setting("show_unit_frames", state)
+        self._update_setting("show_unit_frames", bool(state))
 
     def toggle_separate_unit_counters(self, state):
         """Enables or disables separate unit counters and adjusts related settings."""
-        self._update_setting("separate_unit_counters", state)
+        self._update_setting("separate_unit_counters", bool(state))
         try:
             self._initialize_counter_state()  # Reinitialize UI state
         except Exception as e:
@@ -204,6 +214,26 @@ class ControlPanel(QMainWindow):
                 f"Error initializing counter state: {e}")
             QMessageBox.critical(self, "Error",
                                  "Failed to update unit counter settings.")
+
+    def toggle_name(self, state):
+        """Toggles the display of the name widget."""
+        self._update_setting("show_name", bool(state))
+        logging.info(f"Toggled 'show_name' to: {bool(state)}")
+
+    def toggle_flag(self, state):
+        """Toggles the display of the flag widget."""
+        self._update_setting("show_flag", bool(state))
+        logging.info(f"Toggled 'show_flag' to: {bool(state)}")
+
+    def toggle_money(self, state):
+        """Toggles the display of the money widget."""
+        self._update_setting("show_money", bool(state))
+        logging.info(f"Toggled 'show_money' to: {bool(state)}")
+
+    def toggle_power(self, state):
+        """Toggles the display of the power widget."""
+        self._update_setting("show_power", bool(state))
+        logging.info(f"Toggled 'show_power' to: {bool(state)}")
 
     def update_image_size(self):
         self._update_setting("image_size", self.image_size_spinbox.value())
@@ -262,7 +292,8 @@ class ControlPanel(QMainWindow):
             self.unit_selection_window.raise_()  # bring window to front if already open
             self.unit_selection_window.activateWindow()  # give focus to the window
 
-    def on_closing(self):
+    @staticmethod
+    def on_closing():
         """Handles application closing tasks, ensuring a graceful shutdown with error handling."""
         logging.info("Closing application...")
         try:

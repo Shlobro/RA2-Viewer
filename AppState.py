@@ -13,7 +13,7 @@ class AppState:
         self.game_path = ''                    # Path to the game executable
         self.control_panel = None              # Reference to the control panel UI component
         self.data_update_thread = None         # Background thread for updating data
-        self.admin = False                     # Flag for administrative privileges, if needed
+        self.admin = True                     # Flag for administrative privileges, if needed
 
     def add_player(self, player):
         """Adds a player instance to the players list."""
